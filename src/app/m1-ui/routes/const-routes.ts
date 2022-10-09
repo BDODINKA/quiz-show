@@ -1,0 +1,6 @@
+export const login = '/Login'
+export const register = '/Register'
+export const profile = '/Profile'
+export const notPage = '/404'
+export const restorePass = '/RestorePage'
+export const newPass = '/NewPass'
