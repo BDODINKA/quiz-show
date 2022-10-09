@@ -1,4 +1,4 @@
-import {BrowserRouter, Navigate, NavLink, Route, Routes} from 'react-router-dom'
+import {HashRouter, Navigate, NavLink, Route, Routes} from 'react-router-dom'
 import {login, newPass, notPage, profile, register, restorePass} from '../../app/m1-ui/routes/const-routes'
 import PageNotFound from './common/c4-Page-404/PageNotFound'
 import SuperComponents from './SuperComponents'
@@ -8,7 +8,7 @@ import style from './testApp.module.css'
 
 export const TestApp = () => {
     return (
-            <BrowserRouter>
+            <HashRouter>
                 <div className={style.block}>
                     <NavLink to={login}>login</NavLink>
                     <NavLink to={register}>register</NavLink>
@@ -28,6 +28,6 @@ export const TestApp = () => {
                     <Route path={restorePass} element={<h1>Restore Password</h1>}/>
                     <Route path={newPass} element={<h1>Enter New Password</h1>}/>
                 </Routes>
-            </BrowserRouter>
+            </HashRouter>
     )
 }
