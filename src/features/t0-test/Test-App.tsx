@@ -1,4 +1,4 @@
-import {BrowserRouter, NavLink, Route, Routes} from 'react-router-dom'
+import {BrowserRouter, Navigate, NavLink, Route, Routes} from 'react-router-dom'
 import {login, newPass, notPage, profile, register, restorePass} from '../../app/m1-ui/routes/const-routes'
 import PageNotFound from './common/c4-Page-404/PageNotFound'
 import SuperComponents from './SuperComponents'
@@ -20,6 +20,7 @@ export const TestApp = () => {
                 </div>
                 <Routes>
                     <Route path={'/'} element={<SuperComponents/>}/>
+                    <Route path={'*'} element={<Navigate to={'/'}/>}/>
                     <Route path={login} element={<h1>Login</h1>}/>
                     <Route path={register} element={<h1>Register</h1>}/>
                     <Route path={profile} element={<h1>profile</h1>}/>
