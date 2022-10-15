@@ -1,4 +1,4 @@
-export const login = '/Login'
+export const login = '/Register'
 export const register = '/Register'
 export const profile = '/Profile'
 export const notPage = '/404'

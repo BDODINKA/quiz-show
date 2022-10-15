@@ -1,24 +1,24 @@
-import React, {ButtonHTMLAttributes, DetailedHTMLProps} from 'react'
+import React, { ButtonHTMLAttributes, DetailedHTMLProps } from 'react'
+
 import s from './SuperButton.module.css'
 
-
-type DefaultButtonPropsType = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
+type DefaultButtonPropsType = DetailedHTMLProps<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  HTMLButtonElement
+>
 
 type SuperButtonPropsType = DefaultButtonPropsType & {
-    red?: boolean
+  red?: boolean
 }
 
-const SuperButton: React.FC<SuperButtonPropsType> = (
-    {
-        red, className,
-        ...restProps
-    }
-) => {
-    const finalClassName = `${red ? s.red : s.default} ${className}`
+const SuperButton: React.FC<SuperButtonPropsType> = ({ red, className, ...restProps }) => {
+  const finalClassName = `${red ? s.red : s.default} ${className}`
 
-    return (
-        <button className={finalClassName}  {...restProps}>Submit</button>
-    )
+  return (
+    <button className={finalClassName} {...restProps}>
+      Submit
+    </button>
+  )
 }
 
 export default SuperButton

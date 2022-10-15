@@ -1,36 +1,41 @@
 .default {
-    width: 172px;
-    height: 56px;
-    background: #7A5CFA;
-    border-radius: 8px;
-    border:1px solid #7A5CFA;
-    color: #FFFFFF;
-    font-family: "Bookman Old Style";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 24px;
+  width: 172px;
+  height: 56px;
+
+  font-family: 'Bookman Old Style';
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 24px;
+  color: #ffffff;
+
+  background: #7a5cfa;
+  border: 1px solid #7a5cfa;
+  border-radius: 8px;
 }
 
 button:hover {
-    background: #FFFFFF;
-    border: 4px solid #7A5CFA;
-    border-radius: 8px;
-    color: #7A5CFA;
+  color: #7a5cfa;
+
+  background: #ffffff;
+  border: 4px solid #7a5cfa;
+  border-radius: 8px;
 }
 
 button:disabled {
-    background-color: darkgrey;
-    color: #7A5CFA;
-    border:#7A5CFA ;
+  color: #7a5cfa;
+
+  background-color: darkgrey;
+  border: #7a5cfa;
 }
 
 button:disabled:hover {
-    background-color: darkgrey;
-    color: #7A5CFA;
-    border: none;
+  color: #7a5cfa;
+
+  background-color: darkgrey;
+  border: none;
 }
 
 .red {
-    background: red;
+  background: red;
 }

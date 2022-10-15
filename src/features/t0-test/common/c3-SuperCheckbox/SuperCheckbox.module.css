@@ -1,25 +1,31 @@
 .checkbox {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    display: inline-block;
-    width: 24px;
-    height: 24px;
-    background: #FFFFFF;
-    border: 1px solid #CCCCCC;
-    border-radius: 8px;
-    cursor: pointer;
+  cursor: pointer;
+
+  display: inline-block;
+
+  width: 24px;
+  height: 24px;
+
+  background: #ffffff;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 .checkbox:checked {
-    color: #7A5CFA;
+  color: #7a5cfa;
 
-    background:url("../../assets/Vector.png") center no-repeat;
+  background: url('../../assets/Vector.png') center no-repeat;
 }
 
 .spanClassName {
-    appearance: none;
-    background: #FFFFFF;
-    border: 1px solid #CCCCCC;
-    border-radius: 8px;
-    color: #7A5CFA;
+  color: #7a5cfa;
+
+  background: #ffffff;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+
+  appearance: none;
 }
