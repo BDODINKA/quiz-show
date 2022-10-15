@@ -1,5 +1,5 @@
 export const login = '/Login'
-export const register = '/Register'
+export const registration = '/registration'
 export const profile = '/Profile'
 export const notPage = '/404'
 export const restorePass = '/RestorePage'
