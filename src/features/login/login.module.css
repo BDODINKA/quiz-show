@@ -1,0 +1,99 @@
+.login_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.navbar_form_container {
+    margin: 10px 0;
+    display: flex;
+    padding: 5px 0;
+    flex-direction: row;
+    border-bottom: 1px solid #eeebeb;
+    width: 100%;
+    box-shadow: 1px 2px 5px #a8a7a7;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.button_sign_in {
+    width: 100px;
+    height: 30px;
+    background-color: #0479fd;
+    border-radius: 20px;
+    color: white;
+    box-shadow: 1px 1px 2px #0479fd;
+    border: none;
+}
+
+.form_container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5%;
+    width: 400px;
+    border: 2px solid #efecec;
+    border-radius: 5px;
+    box-shadow: 2px 3px 3px grey;
+}
+
+.title_form {
+    font-size: 24px;
+    text-align: center;
+    font-weight: bold;
+    margin: 20px 0;
+    font-family: 'Bookman Old Style', cursive;
+
+}
+
+.input_block, .checkbox_block {
+    display: flex;
+    flex-direction: column;
+    height: 80px;
+    width: 80%;
+    margin-left: 10%;
+}
+
+.title_input {
+    color: grey;
+}
+
+.input_email, .password_block, .checkbox_block {
+    display: flex;
+    flex-direction: row;
+    outline: none;
+    border: none;
+    align-items: center;
+    border-bottom: 2px solid #c0bfbf;
+    height: 20px;
+    font-size: 14px;
+}
+
+.input_password {
+    border: none;
+    outline: none;
+    width: 280px;
+}
+
+.error_message {
+    color: red;
+
+}
+
+.visible_password {
+    display: flex;
+    align-items: center;
+    width: 20px;
+}
+
+.checkbox_block {
+    border: none;
+}
+.checkbox{
+    margin-left: 0;
+    margin-right: 10px;
+
+}
+.rememberMe{
+    font-size: 16px;
+    font-weight: 500;
+}
