@@ -15,9 +15,7 @@ const SuperButton: React.FC<SuperButtonPropsType> = ({ red, className, ...restPr
   const finalClassName = `${red ? s.red : s.default} ${className}`
 
   return (
-    <button className={finalClassName} {...restProps}>
-      Submit
-    </button>
+    <button className={finalClassName} {...restProps}/>
   )
 }
 
