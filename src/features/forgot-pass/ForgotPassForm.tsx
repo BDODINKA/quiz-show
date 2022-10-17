@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { AlertColor } from '@mui/material'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 
@@ -7,10 +8,10 @@ import { useAppDispatch } from '../../app/store'
 import SuperButton from '../../common/superButton/SuperButton'
 import SuperInput from '../../common/superInputText/SuperInput'
 
-import { SendStatus, SendForgotFormTC } from './forgot-password.reducer'
+import { SendStatusType, SendForgotFormTC } from './forgot-password.reducer'
 
 type PropsType = {
-  isSend: SendStatus
+  status: AlertColor
 }
 export const ForgotPassForm = (props: PropsType) => {
   const dispatch = useAppDispatch()
@@ -32,12 +33,11 @@ export const ForgotPassForm = (props: PropsType) => {
             placeholder={'Email'}
             {...formik.getFieldProps('email')}
             error={formik.touched && formik.errors.email}
-            disabled={props.isSend === SendStatus.inProgress}
           />
           <p>Enter your email address and we will send you further instructions </p>
           <SuperButton
             type={'submit'}
-            disabled={props.isSend === SendStatus.inProgress}
+            disabled={props.status === SendStatusType.inProgress}
           ></SuperButton>
         </form>
       )}

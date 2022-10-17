@@ -9,14 +9,14 @@ import { login } from '../../common/routes/const-routes'
 import SuperButton from '../../common/superButton/SuperButton'
 import SuperInput from '../../common/superInputText/SuperInput'
 
-import { SendNewPasswordFormTC, SendStatus } from './forgot-password.reducer'
+import { SendNewPasswordFormTC, SendStatusType } from './forgot-password.reducer'
 
 const CreateNewPassword = () => {
   const dispatch = useAppDispatch()
   const { token } = useParams()
-  const isSend: SendStatus = useAppSelector(state => state.forgotPass.isSend)
+  const { status } = useAppSelector(state => state.forgotPass.response)
 
-  if (isSend === SendStatus.success) {
+  if (status === SendStatusType.success) {
     return <Navigate to={login} />
   }
 
@@ -41,10 +41,13 @@ const CreateNewPassword = () => {
             placeholder={'Password'}
             {...formik.getFieldProps('password')}
             error={formik.touched && formik.errors.password}
-            disabled={isSend === SendStatus.inProgress}
+            disabled={status === SendStatusType.inProgress}
           />
           <p>Create new password and we will send you further instructions to email</p>
-          <SuperButton type={'submit'} disabled={isSend === SendStatus.inProgress}></SuperButton>
+          <SuperButton
+            type={'submit'}
+            disabled={status === SendStatusType.inProgress}
+          ></SuperButton>
         </form>
       )}
     </Formik>
