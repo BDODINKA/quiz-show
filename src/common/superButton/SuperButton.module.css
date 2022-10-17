@@ -1,4 +1,4 @@
-.default {
+default {
   width: 172px;
   height: 56px;
 
@@ -14,7 +14,7 @@
   border-radius: 8px;
 }
 
-button:hover {
+.button:hover {
   color: #7a5cfa;
 
   background: #ffffff;
@@ -22,14 +22,14 @@ button:hover {
   border-radius: 8px;
 }
 
-button:disabled {
+.button:disabled {
   color: #7a5cfa;
 
   background-color: darkgrey;
   border: #7a5cfa;
 }
 
-button:disabled:hover {
+.button:disabled:hover {
   color: #7a5cfa;
 
   background-color: darkgrey;

@@ -41,6 +41,7 @@ export const ForgotPassForm = (props: PropsType) => {
                 {...formik.getFieldProps('email')}
                 error={formik.touched && formik.errors.email}
                 className={props.style.input}
+                spanClassName={props.style.spanError}
               />
               <p className={props.style.description}>
                 Enter your email address and we will send you further instructions{' '}
@@ -50,7 +51,7 @@ export const ForgotPassForm = (props: PropsType) => {
                 disabled={props.status === SendStatusType.inProgress}
                 className={props.style.btn}
                 title={'Send Instructions'}
-              ></SuperButton>
+              />
               <p className={style.question}>Did you remember your password?</p>
               <NavLink to={login} className={style.link}>
                 Try logging in

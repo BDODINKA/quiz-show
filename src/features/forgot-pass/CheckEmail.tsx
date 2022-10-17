@@ -4,7 +4,7 @@ import { AlertColor } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 
 import { useAppDispatch, useAppSelector } from '../../app/store'
-import { AlertSnackBar } from '../../common/ErrorSnackBar/ErrorSnackBar'
+import { CustomAlertSnackBar } from '../../common/CustomSnackBar/CustomSnackBar'
 import { login } from '../../common/routes/const-routes'
 import SuperButton from '../../common/superButton/SuperButton'
 
@@ -21,6 +21,9 @@ const CheckEmail = () => {
     navigate(login)
     dispatch(SetResetStateTC())
   }
+  const closeHandlerSnackbar = () => {
+    dispatch(SetResetStateTC())
+  }
 
   return (
     <div className={style.container}>
@@ -29,7 +32,11 @@ const CheckEmail = () => {
         <div className={style.logo}></div>
         <p className={style.description}>We’ve sent an Email with instructions to {email}</p>
         <SuperButton onClick={GoToLogin} className={style.btn} title={'Back to login'} />
-        <AlertSnackBar message={message} status={status as AlertColor} />
+        <CustomAlertSnackBar
+          message={message}
+          status={status as AlertColor}
+          closeHandlerSnackbar={closeHandlerSnackbar}
+        />
       </div>
     </div>
   )

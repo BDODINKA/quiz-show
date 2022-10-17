@@ -55,13 +55,31 @@ export const forgotPasswordReducer = (
       }
     }
     case 'FORGOT-PASS/SET-STATUS-RESPONSE': {
-      return {
-        ...state,
-        response: {
-          ...state.response,
-          status: action.payload.status,
-          message: action.payload.status !== 'info' ? action.payload.status : 'info',
-        },
+      if (action.payload.status === 'info') {
+        return {
+          ...state,
+          response: {
+            ...state.response,
+            status: action.payload.status,
+          },
+        }
+      } else if (action.payload.status === 'warning') {
+        return {
+          ...state,
+          response: {
+            ...state.response,
+            status: action.payload.status,
+          },
+        }
+      } else {
+        return {
+          ...state,
+          response: {
+            ...state.response,
+            status: action.payload.status,
+            message: action.payload.status,
+          },
+        }
       }
     }
     case 'FORGOT-PASS/SET-ERROR': {
@@ -115,8 +133,6 @@ export const SendForgotFormTC =
     dispatch(SetStatusResponseAC(SendStatusType.inProgress))
     const data = getState().forgotPass.sendFormToEmail
 
-    console.log(data)
-
     forgotApi
       .sendFormToEmail(data)
       .then(response => {
@@ -153,5 +169,4 @@ export const SendNewPasswordFormTC =
           ServerErrorForgot(reason.message, dispatch)
         }
       })
-      .finally(() => dispatch(SetResetStateAC()))
   }
