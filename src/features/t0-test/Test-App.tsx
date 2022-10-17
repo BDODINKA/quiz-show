@@ -9,8 +9,8 @@ import {
   registration,
   restorePass,
 } from '../../common/routes/const-routes'
-import CreateNewPassword from '../forgot-pass/CreateNewPassword'
-import ForgotPass from '../forgot-pass/ForgotPass'
+import CreateNewPassword from '../forgot-pass/CreateNewPass/CreateNewPassword'
+import ForgotPass from '../forgot-pass/ForgotPass/ForgotPass'
 
 import SuperComponents from './SuperComponents'
 import style from './testApp.module.css'

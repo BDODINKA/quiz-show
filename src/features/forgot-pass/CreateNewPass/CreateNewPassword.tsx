@@ -3,13 +3,13 @@ import React from 'react'
 import { AlertColor } from '@mui/material'
 import { Navigate, useParams } from 'react-router-dom'
 
-import { useAppDispatch, useAppSelector } from '../../app/store'
-import { CustomAlertSnackBar } from '../../common/CustomSnackBar/CustomSnackBar'
-import { login } from '../../common/routes/const-routes'
+import { useAppDispatch, useAppSelector } from '../../../app/store'
+import { CustomAlertSnackBar } from '../../../common/CustomSnackBar/CustomSnackBar'
+import { login } from '../../../common/routes/const-routes'
+import { SendStatusType, SetResetStateTC } from '../forgot-password.reducer'
 
 import style from './CreateNewPassword.module.css'
 import CreateNewPasswordForm from './CreateNewPasswordForm'
-import { SendStatusType, SetResetStateTC } from './forgot-password.reducer'
 
 const CreateNewPassword = () => {
   const dispatch = useAppDispatch()

@@ -2,11 +2,11 @@ import React from 'react'
 
 import { AlertColor } from '@mui/material'
 
-import { useAppDispatch, useAppSelector } from '../../app/store'
-import { CustomAlertSnackBar } from '../../common/CustomSnackBar/CustomSnackBar'
+import { useAppDispatch, useAppSelector } from '../../../app/store'
+import { CustomAlertSnackBar } from '../../../common/CustomSnackBar/CustomSnackBar'
+import CheckEmail from '../CheckEmail/CheckEmail'
+import { SetResetStateTC } from '../forgot-password.reducer'
 
-import CheckEmail from './CheckEmail'
-import { SetResetStateTC } from './forgot-password.reducer'
 import { ForgotPassForm } from './ForgotPassForm'
 import style from './ForgotPasswordForm.module.css'
 

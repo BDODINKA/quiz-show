@@ -5,12 +5,12 @@ import { Formik } from 'formik'
 import { NavLink } from 'react-router-dom'
 import * as Yup from 'yup'
 
-import { useAppDispatch } from '../../app/store'
-import { login } from '../../common/routes/const-routes'
-import SuperButton from '../../common/superButton/SuperButton'
-import SuperInput from '../../common/superInputText/SuperInput'
+import { useAppDispatch } from '../../../app/store'
+import { login } from '../../../common/routes/const-routes'
+import SuperButton from '../../../common/superButton/SuperButton'
+import SuperInput from '../../../common/superInputText/SuperInput'
+import { SendStatusType, SendForgotFormTC } from '../forgot-password.reducer'
 
-import { SendStatusType, SendForgotFormTC } from './forgot-password.reducer'
 import style from './ForgotPasswordForm.module.css'
 
 type PropsType = {

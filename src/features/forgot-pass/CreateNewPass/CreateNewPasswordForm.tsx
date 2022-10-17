@@ -3,12 +3,12 @@ import React, { useState } from 'react'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 
-import { useAppDispatch } from '../../app/store'
-import SuperButton from '../../common/superButton/SuperButton'
-import SuperInput from '../../common/superInputText/SuperInput'
+import { useAppDispatch } from '../../../app/store'
+import SuperButton from '../../../common/superButton/SuperButton'
+import SuperInput from '../../../common/superInputText/SuperInput'
+import { SendNewPasswordFormTC, SendStatusType } from '../forgot-password.reducer'
 
 import style from './CreateNewPassword.module.css'
-import { SendNewPasswordFormTC, SendStatusType } from './forgot-password.reducer'
 
 type PropsType = {
   status: string
