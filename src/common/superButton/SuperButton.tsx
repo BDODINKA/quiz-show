@@ -9,6 +9,7 @@ type DefaultButtonPropsType = DetailedHTMLProps<
 
 type SuperButtonPropsType = DefaultButtonPropsType & {
   red?: boolean
+  title?: string
 }
 
 const SuperButton: React.FC<SuperButtonPropsType> = ({ red, className, ...restProps }) => {
@@ -16,7 +17,7 @@ const SuperButton: React.FC<SuperButtonPropsType> = ({ red, className, ...restPr
 
   return (
     <button className={finalClassName} {...restProps}>
-      Submit
+      {restProps.title}
     </button>
   )
 }

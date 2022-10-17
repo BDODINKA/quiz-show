@@ -8,11 +8,12 @@ import { AlertSnackBar } from '../../common/ErrorSnackBar/ErrorSnackBar'
 import { login } from '../../common/routes/const-routes'
 import SuperButton from '../../common/superButton/SuperButton'
 
+import style from './CheckEmail.module.css'
 import { SetResetStateTC } from './forgot-password.reducer'
 
 const CheckEmail = () => {
   const dispatch = useAppDispatch()
-  const email = useAppSelector(state => state.forgotPass.sendFormToEmail.email)
+  const { email } = useAppSelector(state => state.forgotPass.sendFormToEmail)
   const { message, status } = useAppSelector(state => state.forgotPass.response)
   const navigate = useNavigate()
 
@@ -22,12 +23,14 @@ const CheckEmail = () => {
   }
 
   return (
-    <div>
-      <h2>Check Email</h2>
-      <div></div>
-      <p>We’ve sent an Email with instructions to {email}</p>
-      <SuperButton onClick={GoToLogin} />
-      <AlertSnackBar message={message} status={status as AlertColor} />
+    <div className={style.container}>
+      <div className={style.card}>
+        <h2 className={style.title}>Check Email</h2>
+        <div className={style.logo}></div>
+        <p className={style.description}>We’ve sent an Email with instructions to {email}</p>
+        <SuperButton onClick={GoToLogin} className={style.btn} title={'Back to login'} />
+        <AlertSnackBar message={message} status={status as AlertColor} />
+      </div>
     </div>
   )
 }

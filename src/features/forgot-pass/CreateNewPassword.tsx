@@ -9,6 +9,7 @@ import { login } from '../../common/routes/const-routes'
 import SuperButton from '../../common/superButton/SuperButton'
 import SuperInput from '../../common/superInputText/SuperInput'
 
+import style from './CreateNewPassword.module.css'
 import { SendNewPasswordFormTC, SendStatusType } from './forgot-password.reducer'
 
 const CreateNewPassword = () => {
@@ -35,20 +36,29 @@ const CreateNewPassword = () => {
       }}
     >
       {formik => (
-        <form onSubmit={formik.handleSubmit}>
-          <SuperInput
-            type={'password'}
-            placeholder={'Password'}
-            {...formik.getFieldProps('password')}
-            error={formik.touched && formik.errors.password}
-            disabled={status === SendStatusType.inProgress}
-          />
-          <p>Create new password and we will send you further instructions to email</p>
-          <SuperButton
-            type={'submit'}
-            disabled={status === SendStatusType.inProgress}
-          ></SuperButton>
-        </form>
+        <div className={style.container}>
+          <form onSubmit={formik.handleSubmit} className={style.card}>
+            <h2 className={style.title}>Create new password</h2>
+            <SuperInput
+              type={'password'}
+              placeholder={'Password'}
+              {...formik.getFieldProps('password')}
+              error={formik.touched && formik.errors.password}
+              disabled={status === SendStatusType.inProgress}
+              className={style.input}
+            />
+            <div className={style.logo}></div>
+            <p className={style.description}>
+              Create new password and we will send you further instructions to email
+            </p>
+            <SuperButton
+              type={'submit'}
+              disabled={status === SendStatusType.inProgress}
+              className={style.btn}
+              title={'Create new password'}
+            />
+          </form>
+        </div>
       )}
     </Formik>
   )
