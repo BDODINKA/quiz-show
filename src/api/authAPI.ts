@@ -12,7 +12,7 @@ export type LoginFieldsType = {
 	 rememberMe: boolean
 }
 
-export const loginAPI = {
+export const authAPI = {
 	 login(data:LoginFieldsType){
 			return instance.post<LoginFieldsType>('auth/login', data)
 	 }
