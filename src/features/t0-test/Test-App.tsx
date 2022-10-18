@@ -9,6 +9,7 @@ import {
   registration,
   restorePass,
 } from '../../common/routes/const-routes'
+import { Profile } from '../profile/Profile'
 
 import SuperComponents from './SuperComponents'
 import style from './testApp.module.css'
@@ -30,7 +31,7 @@ export const TestApp = () => {
         <Route path={'*'} element={<Navigate to={'/'} />} />
         <Route path={login} element={<h1>Login</h1>} />
         <Route path={registration} element={<h1>Register</h1>} />
-        <Route path={profile} element={<h1>profile</h1>} />
+        <Route path={profile} element={<Profile />} />
         <Route path={notPage} element={<PageNotFound />} />
         <Route path={restorePass} element={<h1>Restore Password</h1>} />
         <Route path={newPass} element={<h1>Enter New Password</h1>} />
