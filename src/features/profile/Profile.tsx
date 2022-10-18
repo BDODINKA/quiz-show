@@ -21,9 +21,12 @@ export const Profile = () => {
 
   return (
     <div className={style.container}>
-      <NavLink to={PackCards} className={style.link}>
-        Back to Packs List
-      </NavLink>
+      <div className={style.backBlock}>
+        <NavLink to={PackCards} className={style.arrow} />
+        <NavLink to={PackCards} className={style.link}>
+          Back to Packs List
+        </NavLink>
+      </div>
       <div className={style.card}>
         <h2 className={style.title}>Personal Information</h2>
         <div className={style.avaGroup}>
@@ -31,12 +34,16 @@ export const Profile = () => {
           <div className={style.addAva}></div>
         </div>
         <EditableSpan
-          title={'name'}
-          className={style.span}
-          classNameInput={style.inputActive}
-          classNameSpan={style.spanActive}
+          titleBtn={'save'}
+          text={'name'}
+          classNameInput={style.input}
+          classNameSpan={style.span}
+          classNameBtn={style.saveBtn}
+          placeholder={'NickName'}
+          classPlaceholder={style.placeholder}
+          maxLength={25}
         />
-        <p className={style.email}>{email}</p>
+        <p className={style.email}>{'email'}</p>
         <SuperButton onClick={goToLogout} className={style.btn} title={'Log out'} />
       </div>
     </div>

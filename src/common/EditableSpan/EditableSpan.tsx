@@ -10,44 +10,68 @@ import SuperButton from '../superButton/SuperButton'
 import SuperInput from '../superInputText/SuperInput'
 
 type PropsType = {
-  title?: string
+  text?: string
   classNameInput?: string
   classNameSpan?: string
   classNameBtn?: string
+  classPlaceholder?: string
+  titleBtn?: string
 } & DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> &
   DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
 
 const EditableSpan = (props: PropsType) => {
-  const { className } = props
+  const {
+    classPlaceholder,
+    maxLength,
+    classNameSpan,
+    classNameInput,
+    classNameBtn,
+    titleBtn,
+    placeholder,
+  } = props
   const [editMode, setEditMode] = useState<boolean>(false)
-  const [title, setTitle] = useState<string | undefined>(props.title)
-
+  const [text, setText] = useState<string | undefined>(props.text)
+  const [touchCount, setTouchCount] = useState<number>(1)
   const editModeHandler = (value: boolean) => {
     setEditMode(value)
   }
   const editTitleHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setTitle(e.currentTarget.value)
+    setText(e.currentTarget.value)
+  }
+  const countTouchHandler = (count: number) => {
+    if (count === 2) {
+      setEditMode(true)
+      setTouchCount(1)
+    } else {
+      setTouchCount(touchCount + 1)
+    }
   }
 
-  const classNameBtn = className && editMode ? `${className}${props.classNameBtn}` : `${className}`
-  const classNameSpan = props.classNameSpan ? `${className}${props.className}` : `${className}`
-  const classNameInput =
-    props.classNameInput && editMode ? `${className}${props.className}` : `${className}`
-
   return editMode ? (
-    <div>
+    <>
+      <span className={classPlaceholder}>{placeholder}</span>
       <SuperInput
-        value={title}
+        value={text}
+        maxLength={maxLength}
         className={classNameInput}
         onChange={editTitleHandler}
-        onBlur={() => editModeHandler(false)}
+        // onBlur={() => editModeHandler(false)}
         autoFocus={true}
       />
-      <SuperButton title={'save'} className={classNameBtn} onClick={() => editModeHandler(false)} />
-    </div>
+      <SuperButton
+        title={titleBtn}
+        className={classNameBtn}
+        onClick={() => editModeHandler(false)}
+      />
+    </>
   ) : (
-    <span className={classNameSpan} onDoubleClick={() => editModeHandler(true)}>
-      {title}
+    <span
+      className={classNameSpan}
+      onDoubleClick={() => editModeHandler(true)}
+      onTouchStart={() => countTouchHandler(touchCount)}
+    >
+      {text}
+      <span></span>
     </span>
   )
 }

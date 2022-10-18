@@ -1,17 +1,67 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
+
 .container {
   display: flex;
+  justify-content: center;
+
+  padding-top: 60px;
 }
+.backBlock {
+  position: absolute;
+  top: 48px;
+  left: 13%;
+
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+
+  width: 158px;
+}
+.link {
+  position: absolute;
+  left: 24px;
+
+  display: flex;
+  align-items: center;
+
+  font-family: 'Montserrat';
+  font-size: 14px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 24px;
+  color: #000000;
+}
+
+.arrow {
+  position: absolute;
+  top: 7px;
+  left: 0;
+
+  width: 16px;
+  height: 11px;
+
+  background: url('../../assets/svg/arrowProfile.svg');
+}
+
 .card {
+  position: relative;
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 
-  max-width: 413px;
-  height: 360px;
+  width: 413px;
+  padding-bottom: 36px;
+
+  background: #ffffff;
+  border-radius: 2px;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1), -1px -1px 2px rgba(0, 0, 0, 0.1);
 }
+
 .title {
+  margin: 0;
+  padding: 27px 0 30px;
+
   font-family: 'Montserrat', sans-serif;
   font-size: 22px;
   font-weight: 600;
@@ -20,11 +70,13 @@
   color: #000000;
   text-align: center;
 }
+
 .avaGroup {
   position: relative;
 
   display: flex;
 }
+
 .ava {
   width: 96px;
   height: 96px;
@@ -32,6 +84,7 @@
   background: url('../../assets/ProfileAva.jpg') no-repeat;
   background-size: cover;
 }
+
 .addAva {
   position: absolute;
   right: 0;
@@ -44,157 +97,155 @@
   background-size: cover;
 }
 
-.name {
+.email {
   display: flex;
   align-items: center;
 
+  margin: 0;
+  margin-top: 14px;
+  padding: 0 0 29px;
+
   font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 24px;
+  color: #000000;
+
+  opacity: 0.5;
+}
+
+.span {
+  position: relative;
+
+  display: flex;
+  gap: 10px;
+  align-items: center;
+
+  padding: 17px 10px 0;
+
+  font-family: 'Montserrat';
   font-size: 20px;
   font-weight: 500;
   font-style: normal;
   line-height: 24px;
   color: #000000;
+  overflow-wrap: anywhere;
 }
-.email {
+.span:after {
+  content: url('../../assets/svg/pencilProfile.svg');
+
+  position: absolute;
+  top: 17px;
+  right: -10px;
+
+  width: 15px;
+  height: 15px;
+}
+button.btn {
+  position: relative;
+
   display: flex;
   align-items: center;
 
-  font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  font-style: normal;
-  line-height: 24px;
-  color: #000000;
+  width: 127px;
+  height: 36px;
 
-  opacity: 0.5;
-}
-
-.input {
-  max-width: 413px;
-  height: 45px;
-  padding: 0;
-
-  font-family: 'Montserrat', sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  font-style: normal;
-  line-height: 24px;
-  color: #000000;
-
-  opacity: 0.9;
-  background: #ffffff !important;
-  border: none;
-  border-bottom: 1.51px solid #000000;
-  border-radius: 0;
-
-  appearance: none;
-}
-
-.input:-webkit-autofill,
-.input:-webkit-autofill:hover,
-.input:-webkit-autofill:focus,
-.input:-webkit-autofill:active {
-  font-family: 'Montserrat', 'sans-serif';
-  font-size: 16px;
-  font-weight: 400;
-  font-style: normal;
-  line-height: 24px;
-  color: #000000;
-
-  opacity: 0.5;
-  background: #ffffff !important;
-  border: none;
-  border-bottom: 1.51px solid #000000;
-  border-radius: 0;
-  outline: none;
-  box-shadow: 0 0 0 30px #ffffff inset !important;
-
-  appearance: none;
-}
-.input:focus,
-.input:active,
-.input::placeholder {
-  display: flex;
-
-  font-family: 'Montserrat', 'sans-serif';
-  font-size: 16px;
-  font-weight: 400;
-  font-style: normal;
-  line-height: 24px;
-  color: #000000;
-
-  opacity: 0.5;
-  background: #ffffff !important;
-  border: none;
-
-  appearance: none;
-}
-.input:focus,
-.input:active {
-  border-bottom: 1.51px solid #000000;
-  border-radius: 0;
-  outline: none;
-}
-
-.btn,
-.btn:disabled,
-.btn:disabled:hover .btn:active,
-.btn:hover {
-  position: relative;
-
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat';
   font-size: 16px;
   font-weight: 500;
   font-style: normal;
   line-height: 20px;
   color: #000000;
-  text-align: center;
   letter-spacing: 0.01em;
 
   opacity: 0.8;
   background: #fcfcfc;
   border: none;
   border-radius: 30px;
-  box-shadow: 0 2px 10px rgba(109, 109, 109, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  outline: none;
+  box-shadow: 0px 2px 10px rgba(109, 109, 109, 0.25), inset 0px 1px 0px rgba(255, 255, 255, 0.3);
 }
-.btn:active,
-.btn:hover {
-  border-radius: 30px;
-  box-shadow: 0 2px 10px rgb(54, 110, 255), inset 0 1px 0 rgb(54, 110, 255);
-}
-.btn:disabled,
-.btn:disabled:hover .btn:active,
-.btn:hover {
-  cursor: auto;
+button.btn:hover {
+  cursor: pointer;
 
   color: #366eff;
 
-  background-color: #f1f1f1;
-  box-shadow: none;
-}
-.btn::before {
-  content: url('../../assets/svg/logoutBtn.svg');
-
-  position: absolute;
-  z-index: 3;
-  left: 0;
+  outline: none;
+  box-shadow: 0px 2px 10px rgb(54, 110, 255), inset 0px 1px 0px rgb(241, 241, 241);
 }
 
-.span {
-  max-width: 413px;
-  height: 45px;
-  padding: 0;
+button.btn::before {
+  content: url('../../assets/svg/logoutBtnProfile.svg');
 
-  font-family: 'Montserrat', sans-serif;
+  width: 16px;
+  height: 16px;
+  padding: 0 10px;
+}
+input.input {
+  display: flex;
+  align-items: center;
+
+  width: 347px;
+  height: 28px;
+
+  font-family: 'Montserrat';
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 500;
   font-style: normal;
   line-height: 24px;
   color: #000000;
 
-  opacity: 0.9;
-  background: #ffffff !important;
   border: none;
+  border-bottom: 1.58px solid rgba(0, 0, 0, 0.2);
+  outline: none;
 
   appearance: none;
+}
+
+.saveBtn {
+  position: absolute;
+  top: 235px;
+  right: 45px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 52px;
+  height: 24px;
+
+  font-family: 'Montserrat';
+  font-size: 12px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 24px;
+  color: #ffffff;
+
+  background: #366eff;
+  border: none;
+  border-radius: 2px;
+}
+.saveBtn:hover {
+  cursor: pointer;
+
+  color: #366eff;
+
+  background: #fcfcfc;
+  border: none;
+  border-radius: 2px;
+  box-shadow: 0 2px 10px rgb(54, 110, 255), inset 0 1px 0 rgb(241, 241, 241);
+}
+.placeholder {
+  width: 347px;
+  padding-top: 36px;
+
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 20px;
+  color: #000000;
+
+  opacity: 0.5;
 }
