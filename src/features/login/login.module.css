@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 10px;
 }
 
 .navbar_form_container {
@@ -24,6 +25,7 @@
     color: white;
     box-shadow: 1px 1px 2px #0479fd;
     border: none;
+    cursor: pointer;
 }
 
 .form_container {
@@ -43,7 +45,6 @@
     font-weight: bold;
     margin: 20px 0;
     font-family: 'Bookman Old Style', cursive;
-
 }
 
 .input_block,
@@ -85,24 +86,16 @@
 
 .error_message {
     color: red;
-
 }
 
 .visible_password {
     display: flex;
     align-items: center;
     width: 20px;
-}
-
-.checkbox_block,
-.forgot_password,
-.button_sign_in_form_block {
-    border: none;
-
+    cursor: pointer;
 }
 
 .checkbox {
-
 }
 
 .rememberMe {
@@ -116,6 +109,8 @@
     justify-content: end;
     font-size: 16px;
     font-weight: 500;
+    border: none;
+    text-decoration: none;
 }
 
 .button_sign_in_form_block {
@@ -133,7 +128,8 @@
     text-align: center;
     font-weight: 600;
 }
-.button_sign_up_form_block{
+
+.button_sign_up_form_block {
     display: flex;
     flex-direction: row;
     justify-content: center;
