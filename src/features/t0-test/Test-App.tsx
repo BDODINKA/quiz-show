@@ -1,15 +1,15 @@
 import { HashRouter, Navigate, NavLink, Route, Routes } from 'react-router-dom'
 
+import PageNotFound from '../../common/page-404/PageNotFound'
 import {
   login,
   newPass,
   notPage,
   profile,
-  register,
+  registration,
   restorePass,
-} from '../../app/m1-ui/routes/const-routes'
+} from '../../common/routes/const-routes'
 
-import PageNotFound from './common/c4-Page-404/PageNotFound'
 import SuperComponents from './SuperComponents'
 import style from './testApp.module.css'
 
@@ -18,7 +18,7 @@ export const TestApp = () => {
     <HashRouter>
       <div className={style.block}>
         <NavLink to={login}>login</NavLink>
-        <NavLink to={register}>register</NavLink>
+        <NavLink to={registration}>register</NavLink>
         <NavLink to={profile}>profile</NavLink>
         <NavLink to={notPage}>notPage</NavLink>
         <NavLink to={restorePass}>restorePass</NavLink>
@@ -29,7 +29,7 @@ export const TestApp = () => {
         <Route path={'/'} element={<SuperComponents />} />
         <Route path={'*'} element={<Navigate to={'/'} />} />
         <Route path={login} element={<h1>Login</h1>} />
-        <Route path={register} element={<h1>Register</h1>} />
+        <Route path={registration} element={<h1>Register</h1>} />
         <Route path={profile} element={<h1>profile</h1>} />
         <Route path={notPage} element={<PageNotFound />} />
         <Route path={restorePass} element={<h1>Restore Password</h1>} />

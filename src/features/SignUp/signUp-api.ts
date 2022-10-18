@@ -5,20 +5,32 @@ export const instance = axios.create({
   // baseURL: process.env.NODE_ENV === 'development' ? 'http://localhost:7542/2.0/' : 'https://neko-back.herokuapp.com/2.0/',
   withCredentials: true,
 });
-export type RegisterUserType = {
+export type SignUpUserType = {
   email: string;
   password: string;
 };
 export type ResponseType = {
-  addedUser: RegisterUserType;
+  addedUser: SignUpUserType;
   error?: string;
 };
 
-export const registerAPI = {
-  register(data: RegisterUserType) {
-    return instance.post<RegisterUserType, AxiosResponse<ResponseType>>(
+export const signUpAPI = {
+  signUp(data: SignUpUserType) {
+    return instance.post<SignUpUserType, AxiosResponse<ResponseType>>(
       "/auth/register",
       data
     );
   },
+
+/*  registr: async (payload: SignUpUserType) => {
+    try {
+      const result = await instance.post("/auth/register", payload)
+      console.log('result', result)
+      return result
+    } catch (e) {
+      console.log(e)
+    }
+  }*/
 };
+
+

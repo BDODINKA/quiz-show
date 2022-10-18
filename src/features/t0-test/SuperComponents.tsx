@@ -1,8 +1,8 @@
 import React from 'react'
 
-import SuperInput from './common/c1-SuperInputText/SuperInput'
-import SuperButton from './common/c2-SuperButton/SuperButton'
-import SuperCheckbox from './common/c3-SuperCheckbox/SuperCheckbox'
+import SuperButton from '../../common/superButton/SuperButton'
+import SuperCheckbox from '../../common/superCheckbox/SuperCheckbox'
+import SuperInput from '../../common/superInputText/SuperInput'
 
 const SuperComponents = () => {
   return (
