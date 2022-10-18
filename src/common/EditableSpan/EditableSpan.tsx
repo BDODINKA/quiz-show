@@ -29,17 +29,24 @@ const EditableSpan = (props: PropsType) => {
     setTitle(e.currentTarget.value)
   }
 
-  const classNameBtn = className ? `${className}${props.classNameBtn}` : `${className}`
+  const classNameBtn = className && editMode ? `${className}${props.classNameBtn}` : `${className}`
   const classNameSpan = props.classNameSpan ? `${className}${props.className}` : `${className}`
-  const classNameInput = props.classNameInput ? `${className}${props.className}` : `${className}`
+  const classNameInput =
+    props.classNameInput && editMode ? `${className}${props.className}` : `${className}`
 
   return editMode ? (
     <div>
-      <SuperInput value={title} className={classNameInput} onChange={editTitleHandler} />
+      <SuperInput
+        value={title}
+        className={classNameInput}
+        onChange={editTitleHandler}
+        onBlur={() => editModeHandler(false)}
+        autoFocus={true}
+      />
       <SuperButton title={'save'} className={classNameBtn} onClick={() => editModeHandler(false)} />
     </div>
   ) : (
-    <span className={classNameSpan} onClick={() => editModeHandler(true)}>
+    <span className={classNameSpan} onDoubleClick={() => editModeHandler(true)}>
       {title}
     </span>
   )

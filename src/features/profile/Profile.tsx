@@ -30,7 +30,12 @@ export const Profile = () => {
           <div className={style.ava}></div>
           <div className={style.addAva}></div>
         </div>
-        <EditableSpan title={'name'} />
+        <EditableSpan
+          title={'name'}
+          className={style.span}
+          classNameInput={style.inputActive}
+          classNameSpan={style.spanActive}
+        />
         <p className={style.email}>{email}</p>
         <SuperButton onClick={goToLogout} className={style.btn} title={'Log out'} />
       </div>
