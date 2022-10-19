@@ -1,12 +1,15 @@
 import React from "react";
-import { useAppDispatch } from "../../app/store";
+import {AppRootStateType, useAppDispatch} from "../../app/store";
 import * as Yup from "yup";
 import { Formik } from "formik";
 import SuperInput from "../../common/superInputText/SuperInput";
-import { signUpTC } from "./sign-up-reducer";
+import {signUpTC, SignUpType} from "./sign-up-reducer";
+import {useSelector} from "react-redux";
+import {Navigate} from "react-router-dom";
 
 export const SignUp = () => {
   const dispatch = useAppDispatch();
+  const isSignUp = useSelector<AppRootStateType, boolean>(state => state.reg.isSignUp)
 
   const SignupSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Required"),
@@ -19,9 +22,12 @@ export const SignUp = () => {
       "Passwords must match"
     ),
   });
-
+if (isSignUp) {
+    return <Navigate to={'/login'}/>
+}
   return (
     <Formik
+
       initialValues={{
         email: "",
         password: "",

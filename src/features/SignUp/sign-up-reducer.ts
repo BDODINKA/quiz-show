@@ -1,22 +1,30 @@
 import { Dispatch } from "redux";
 import { signUpAPI, SignUpUserType } from "./signUp-api";
-import {setAppErrorAC, SetAppErrorActionType, setAppStatusAC, SetAppStatusActionType} from "../../app/app-reducer";
+import {
+    RequestStatusType,
+    setAppErrorAC,
+    SetAppErrorActionType,
+    setAppStatusAC,
+    SetAppStatusActionType
+} from "../../app/app-reducer";
 import {AxiosError} from "axios";
+import {redirect} from "react-router-dom";
 
 const initialState = {
   //data: ResponseType,
   isSignUp: false,
 };
 
-type InitialStateType = typeof initialState;
+
+export type SignUpType = typeof initialState;
 
 export const signUpReducer = (
-  state: InitialStateType = initialState,
+  state: SignUpType = initialState,
   action: ActionsType
-): InitialStateType => {
+): SignUpType => {
   switch (action.type) {
     case "signUp/SET-IS-SIGN-UP":
-      return {...state, isSignUp: action.value}
+      return {...state, isSignUp: action.isSignUp}
     default:
       return state;
   }
@@ -27,8 +35,9 @@ type ActionsType =
   | SetAppStatusActionType
 | SetAppErrorActionType
 
-export const setIsSignUpAC = (value: boolean) => {
-  return { type: "signUp/SET-IS-SIGN-UP", value } as const;
+
+export const setIsSignUpAC = (isSignUp: boolean) => {
+  return { type: "signUp/SET-IS-SIGN-UP", isSignUp } as const;
 };
 
 
@@ -41,9 +50,12 @@ export const signUpTC =
        /* if (res.data.error) {
           dispatch(setAppErrorAC(res.data.error))
         }*/
+          dispatch(setIsSignUpAC(true))
         console.log(res);
         dispatch(setAppStatusAC('succeeded'))
+        if (res) {
 
+        }
       })
       .catch((e: AxiosError) => {
           const error = e.response
