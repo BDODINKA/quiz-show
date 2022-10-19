@@ -1,141 +1,149 @@
 .login_container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.navbar_form_container {
-    margin: 10px 0;
-    display: flex;
-    padding: 5px 0;
-    flex-direction: row;
-    border-bottom: 1px solid #eeebeb;
-    width: 100%;
-    box-shadow: 1px 2px 5px #a8a7a7;
-    justify-content: space-around;
-    align-items: center;
-}
+.button_sign_in_navbar,
+.button_sign_in_form {
+  cursor: pointer;
 
-.button_sign_in_navbar, .button_sign_in_form {
-    width: 100px;
-    height: 30px;
-    background-color: #0479fd;
-    border-radius: 20px;
-    color: white;
-    box-shadow: 1px 1px 2px #0479fd;
-    border: none;
-    cursor: pointer;
+  width: 100px;
+  height: 30px;
+
+  color: white;
+
+  background-color: #0479fd;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 1px 1px 2px #0479fd;
 }
 
 .form_container {
-    display: flex;
-    flex-direction: column;
-    margin-top: 30px;
-    width: 400px;
-    height: 530px;
-    border: 2px solid #efecec;
-    border-radius: 5px;
-    box-shadow: 2px 3px 3px grey;
+  display: flex;
+  flex-direction: column;
+
+  width: 400px;
+  height: 530px;
+  margin-top: 60px;
+
+  border: 2px solid #efecec;
+  border-radius: 5px;
+  box-shadow: 2px 3px 3px grey;
 }
 
 .title_form {
-    font-size: 24px;
-    text-align: center;
-    font-weight: bold;
-    margin: 20px 0;
-    font-family: 'Bookman Old Style', cursive;
+  margin: 20px 0;
+
+  font-family: 'Bookman Old Style', cursive;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
 }
 
 .input_block,
 .checkbox_block,
 .button_sign_in_form_block {
-    display: flex;
-    flex-direction: column;
-    height: 80px;
-    width: 80%;
-    margin-left: 10%;
+  display: flex;
+  flex-direction: column;
+
+  width: 80%;
+  height: 80px;
+  margin-left: 10%;
 }
 
-.title_input, .have_account {
-    color: grey;
+.title_input,
+.have_account {
+  color: grey;
 }
 
 .input_email,
 .password_block,
 .checkbox_block,
 .button_sign_in_form_block {
-    display: flex;
-    flex-direction: row;
-    outline: none;
-    border: none;
-    align-items: center;
-    border-bottom: 2px solid #c0bfbf;
-    height: 20px;
-    font-size: 14px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  height: 20px;
+
+  font-size: 14px;
+
+  border: none;
+  border-bottom: 2px solid #c0bfbf;
+  outline: none;
 }
 
 .input_password {
-    border: none;
-    outline: none;
-    width: 280px;
-    font-size: 14px;
+  width: 280px;
+
+  font-size: 14px;
+
+  border: none;
+  outline: none;
 }
 
 .error_message {
-    color: red;
+  color: red;
 }
 
 .visible_password {
-    display: block;
-    align-items: center;
-    width: 20px;
-    cursor: pointer;
+  cursor: pointer;
+
+  display: block;
+  align-items: center;
+
+  width: 20px;
 }
 
 .checkbox_block {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 .rememberMe {
-    font-size: 16px;
-    font-weight: 500;
-    margin-left: 15px;
+  margin-left: 15px;
+
+  font-size: 16px;
+  font-weight: 500;
 }
 
 .forgot_password {
-    display: flex;
-    margin-top: 30px;
-    justify-content: end;
-    font-size: 16px;
-    font-weight: 500;
-    text-decoration: none;
-    margin-right: 10%;
+  display: flex;
+  justify-content: end;
+
+  margin-top: 30px;
+  margin-right: 10%;
+
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
 }
 
 .button_sign_in_form_block {
-    margin-top: 60px;
-    margin-bottom: 40px;
+  margin-top: 60px;
+  margin-bottom: 40px;
 }
 
 .button_sign_in_form {
-    width: 100%;
-    height: 36px;
-    font-size: 18px;
+  width: 100%;
+  height: 36px;
+
+  font-size: 18px;
 }
 
 .have_account {
-    text-align: center;
-    font-weight: 600;
+  font-weight: 600;
+  text-align: center;
 }
 
 .button_sign_up_form_block {
-    text-align: center;
-    margin-top: 20px;
-}
+  margin-top: 20px;
 
+  text-align: center;
+}
 .sign_up_button {
-    text-align: center;
-    font-size: 22px;
-    color: #0479fd;
-    font-weight: bold;
+  font-size: 22px;
+  font-weight: bold;
+  color: #0479fd;
+  text-align: center;
 }

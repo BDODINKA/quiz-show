@@ -16,6 +16,7 @@ type PropsType = {
   classNameBtn?: string
   classPlaceholder?: string
   titleBtn?: string
+  changedText?: (text: string) => void
 } & DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> &
   DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
 
@@ -28,13 +29,16 @@ const EditableSpan = (props: PropsType) => {
     classNameBtn,
     titleBtn,
     placeholder,
+    changedText,
   } = props
   const [editMode, setEditMode] = useState<boolean>(false)
   const [text, setText] = useState<string | undefined>(props.text)
   const [touchCount, setTouchCount] = useState<number>(1)
   const editModeHandler = (value: boolean) => {
     setEditMode(value)
+    changedText && changedText(text as string)
   }
+
   const editTitleHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setText(e.currentTarget.value)
   }
@@ -55,7 +59,7 @@ const EditableSpan = (props: PropsType) => {
         maxLength={maxLength}
         className={classNameInput}
         onChange={editTitleHandler}
-        // onBlur={() => editModeHandler(false)}
+        onBlur={() => editModeHandler(false)}
         autoFocus={true}
       />
       <SuperButton
