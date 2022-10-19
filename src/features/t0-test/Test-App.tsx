@@ -13,6 +13,7 @@ import { Profile } from '../profile/Profile'
 
 import SuperComponents from './SuperComponents'
 import style from './testApp.module.css'
+import Login from "../login/Login";
 
 export const TestApp = () => {
   return (
@@ -29,7 +30,7 @@ export const TestApp = () => {
       <Routes>
         <Route path={'/'} element={<SuperComponents />} />
         <Route path={'*'} element={<Navigate to={'/'} />} />
-        <Route path={login} element={<h1>Login</h1>} />
+        <Route path={login} element={<Login/>} />
         <Route path={registration} element={<h1>Register</h1>} />
         <Route path={profile} element={<Profile />} />
         <Route path={notPage} element={<PageNotFound />} />
