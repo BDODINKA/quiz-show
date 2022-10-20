@@ -10,13 +10,15 @@ import { loginAC } from '../login/login-reducer'
 export type ProfileStateType = typeof initialState
 export type ProfileActionType =
   | ReturnType<typeof setProfileAC>
-  | ReturnType<typeof responseStatusAC>
+  | ReturnType<typeof statusAC>
   | ReturnType<typeof logOutAC>
   | ReturnType<typeof updateProfileAC>
+  | ReturnType<typeof ErrorAC>
 
 const initialState = {
   profile: null as null | ProfileType,
-  responseStatus: null as string | null,
+  status: null as string | null,
+  error: null as string | null,
 }
 
 export const ProfileReducer = (
@@ -27,8 +29,8 @@ export const ProfileReducer = (
     case 'PROFILE/SET-PROFILE': {
       return { ...state, profile: action.payload.profile }
     }
-    case 'PROFILE/SET-RESPONSE-STATUS': {
-      return { ...state, responseStatus: action.payload.status }
+    case 'PROFILE/SET-STATUS': {
+      return { ...state, status: action.payload.status }
     }
     case 'PROFILE/SET-LOGOUT': {
       return { ...state, profile: null }
@@ -38,6 +40,9 @@ export const ProfileReducer = (
         ...state,
         profile: action.payload,
       }
+    }
+    case 'PROFILE/SET-ERROR-MESSAGE': {
+      return { ...state, error: action.payload.message }
     }
 
     default: {
@@ -53,10 +58,16 @@ export const setProfileAC = (profile: ProfileType) => {
   } as const
 }
 
-const responseStatusAC = (status: string) => {
+const statusAC = (status: string) => {
   return {
-    type: 'PROFILE/SET-RESPONSE-STATUS',
+    type: 'PROFILE/SET-STATUS',
     payload: { status },
+  } as const
+}
+const ErrorAC = (message: string) => {
+  return {
+    type: 'PROFILE/SET-ERROR-MESSAGE',
+    payload: { message },
   } as const
 }
 const logOutAC = (data: null) => {
@@ -73,50 +84,62 @@ const updateProfileAC = (data: ProfileType) => {
 }
 
 export const authMeTC = (): AppThunk => (dispatch: Dispatch) => {
+  dispatch(statusAC('progress'))
   profileAPI
     .authMe()
     .then(res => {
       dispatch(setProfileAC(res.data))
       dispatch(loginAC(true))
+      dispatch(statusAC('success'))
     })
     .catch((reason: AxiosError<{ error: string }>) => {
       if (reason.response?.data.error) {
-        ServerError<string>(reason.response.data.error, responseStatusAC, dispatch)
+        ServerError<string>(reason.response.data.error, ErrorAC, dispatch)
+        dispatch(statusAC('error'))
       } else {
-        ServerError<string>(reason.message, responseStatusAC, dispatch)
+        ServerError<string>(reason.message, ErrorAC, dispatch)
+        dispatch(statusAC('error'))
       }
     })
 }
 export const LogOutTC = (): AppThunk => (dispatch: Dispatch) => {
+  dispatch(statusAC('progress'))
   profileAPI
     .logOut()
-    .then(res => {
+    .then(() => {
       dispatch(logOutAC(null))
       dispatch(loginAC(false))
+      dispatch(statusAC('success'))
     })
     .catch((reason: AxiosError<LogOutType>) => {
       if (reason.response?.data) {
-        ServerError<string>(reason.response.data.info, responseStatusAC, dispatch)
+        ServerError<string>(reason.response.data.info, ErrorAC, dispatch)
+        dispatch(statusAC('error'))
       } else {
-        ServerError<string>(reason.message, responseStatusAC, dispatch)
+        ServerError<string>(reason.message, ErrorAC, dispatch)
+        dispatch(statusAC('error'))
       }
     })
 }
 export const UpdateUserProfile =
   (data: ChangeProfileType): AppThunk =>
   (dispatch: Dispatch) => {
+    dispatch(statusAC('progress'))
     profileAPI
       .updateProfile(data)
       .then(res => {
         if (res.data.updatedUser) {
           dispatch(setProfileAC(res.data.updatedUser))
+          dispatch(statusAC('success'))
         }
       })
       .catch((reason: AxiosError<LogOutType>) => {
         if (reason.response?.data) {
-          ServerError<string>(reason.response.data.info, responseStatusAC, dispatch)
+          ServerError<string>(reason.response.data.info, ErrorAC, dispatch)
+          dispatch(statusAC('error'))
         } else {
-          ServerError<string>(reason.message, responseStatusAC, dispatch)
+          ServerError<string>(reason.message, ErrorAC, dispatch)
+          dispatch(statusAC('error'))
         }
       })
   }

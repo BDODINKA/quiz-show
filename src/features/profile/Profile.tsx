@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 
+import { LinearProgress } from '@mui/material'
 import { Navigate, NavLink } from 'react-router-dom'
 
 import { useAppDispatch, useAppSelector } from '../../app/store'
@@ -13,6 +14,7 @@ import { authMeTC, LogOutTC, ProfileStateType, UpdateUserProfile } from './profi
 export const Profile = () => {
   const dispatch = useAppDispatch()
   const { profile } = useAppSelector<ProfileStateType>(state => state.profile)
+  const status = useAppSelector(state => state.profile.status)
 
   useEffect(() => {
     if (profile === null) {
@@ -27,38 +29,46 @@ export const Profile = () => {
     dispatch(UpdateUserProfile({ name: name, avatar: '' }))
   }
 
-  console.log(profile)
   if (profile === null) {
     return <Navigate to={LoginPage} />
   }
+  console.log(status)
 
   return (
-    <div className={style.container}>
-      <div className={style.backBlock}>
-        <NavLink to={PackCardsPage} className={style.arrow} />
-        <NavLink to={PackCardsPage} className={style.link}>
-          Back to Packs List
-        </NavLink>
-      </div>
-      <div className={style.card}>
-        <h2 className={style.title}>Personal Information</h2>
-        <div className={style.avaGroup}>
-          <div className={style.ava}></div>
-          <div className={style.addAva}></div>
+    <div>
+      {status === 'progress' && <LinearProgress sx={{ width: '100%' }} />}
+      <div className={style.container}>
+        <div className={style.backBlock}>
+          <NavLink to={PackCardsPage} className={style.arrow} />
+          <NavLink to={PackCardsPage} className={style.link}>
+            Back to Packs List
+          </NavLink>
         </div>
-        <EditableSpan
-          titleBtn={'save'}
-          text={profile.name}
-          classNameInput={style.input}
-          classNameSpan={style.span}
-          classNameBtn={style.saveBtn}
-          placeholder={'NickName'}
-          classPlaceholder={style.placeholder}
-          maxLength={25}
-          changedText={name => changeName(name)}
-        />
-        <p className={style.email}>{profile.email}</p>
-        <SuperButton onClick={goToLogout} className={style.btn} title={'Log out'} />
+        <div className={style.card}>
+          <h2 className={style.title}>Personal Information</h2>
+          <div className={style.avaGroup}>
+            <div className={style.ava}></div>
+            <div className={style.addAva}></div>
+          </div>
+          <EditableSpan
+            titleBtn={'save'}
+            text={profile.name}
+            classNameInput={style.input}
+            classNameSpan={style.span}
+            classNameBtn={style.saveBtn}
+            placeholder={'NickName'}
+            classPlaceholder={style.placeholder}
+            maxLength={25}
+            changedText={name => changeName(name)}
+          />
+          <p className={style.email}>{profile.email}</p>
+          <SuperButton
+            onClick={goToLogout}
+            className={style.btn}
+            title={'Log out'}
+            disabled={status === 'progress'}
+          />
+        </div>
       </div>
     </div>
   )

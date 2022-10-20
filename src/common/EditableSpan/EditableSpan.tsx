@@ -36,7 +36,9 @@ const EditableSpan = (props: PropsType) => {
   const [touchCount, setTouchCount] = useState<number>(1)
   const editModeHandler = (value: boolean) => {
     setEditMode(value)
-    changedText && changedText(text as string)
+    if (!value) {
+      if (text) changedText && changedText(text)
+    }
   }
 
   const editTitleHandler = (e: ChangeEvent<HTMLInputElement>) => {

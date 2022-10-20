@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { LinearProgress } from '@mui/material'
 import { Navigate } from 'react-router-dom'
 
 import { useAppSelector } from '../../app/store'
@@ -11,6 +12,7 @@ import SingInForm from './SingInForm'
 
 const Login = () => {
   const login = useAppSelector(state => state.auth.isLoggedIn)
+  const status = useAppSelector(state => state.auth.status)
 
   if (login) {
     return <Navigate to={ProfilePage} />
@@ -18,6 +20,7 @@ const Login = () => {
 
   return (
     <div className={s.login_container}>
+      {status === 'progress' && <LinearProgress sx={{ width: '100%' }} />}
       <SingInForm />
       <ErrorSnackBar />
     </div>
