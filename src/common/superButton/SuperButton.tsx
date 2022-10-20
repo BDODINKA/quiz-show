@@ -12,12 +12,12 @@ type SuperButtonPropsType = DefaultButtonPropsType & {
   title?: string
 }
 
-const SuperButton: React.FC<SuperButtonPropsType> = ({ red, className, ...restProps }) => {
+const SuperButton: React.FC<SuperButtonPropsType> = ({ red, className, title, ...restProps }) => {
   const finalClassName = `${red ? s.red : s.default} ${className}`
 
   return (
     <button className={finalClassName} {...restProps}>
-      {restProps.title}
+      {title}
     </button>
   )
 }
