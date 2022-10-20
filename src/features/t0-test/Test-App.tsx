@@ -19,6 +19,7 @@ import { Profile } from '../profile/Profile'
 
 import SuperComponents from './SuperComponents'
 import style from './testApp.module.css'
+import SignUp from "../SignUp/SignUp";
 
 export const TestApp = () => {
   return (
@@ -37,7 +38,7 @@ export const TestApp = () => {
         <Route path={'/'} element={<SuperComponents />} />
         <Route path={'*'} element={<Navigate to={NotPage} />} />
         <Route path={LoginPage} element={<Login />} />
-        <Route path={RegistrationPage} element={<h1>Register</h1>} />
+        <Route path={RegistrationPage} element={<SignUp />} />
         <Route path={ProfilePage} element={<Profile />} />
         <Route path={NotPage} element={<PageNotFound />} />
         <Route path={RestorePassPage} element={<ForgotPass />} />
