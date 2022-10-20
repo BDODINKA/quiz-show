@@ -16,10 +16,10 @@ import ForgotPass from '../forgot-pass/ForgotPass/ForgotPass'
 import Header from '../header/Header'
 import Login from '../login/Login'
 import { Profile } from '../profile/Profile'
+import SignUp from '../SignUp/SignUp'
 
 import SuperComponents from './SuperComponents'
 import style from './testApp.module.css'
-import SignUp from "../SignUp/SignUp";
 
 export const TestApp = () => {
   return (
