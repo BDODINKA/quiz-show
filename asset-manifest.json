@@ -1,15 +1,23 @@
 {
   "files": {
-    "main.css": "/cards/static/css/main.2db4db56.css",
-    "main.js": "/cards/static/js/main.ac44b1fc.js",
+    "main.css": "/cards/static/css/main.1e70bf76.css",
+    "main.js": "/cards/static/js/main.3b63683d.js",
     "static/js/787.8517b185.chunk.js": "/cards/static/js/787.8517b185.chunk.js",
+    "static/media/ProfileAva.jpg": "/cards/static/media/ProfileAva.bc7a71f0299b27b44877.jpg",
+    "static/media/close_eye_password.png": "/cards/static/media/close_eye_password.4cefae3fcd16c05f2756.png",
+    "static/media/open_eye_password.png": "/cards/static/media/open_eye_password.16dcae1913da8f91070e.png",
+    "static/media/logo-Incubator.svg": "/cards/static/media/logo-Incubator.eb69407f5ef9e283c564e57b716d6291.svg",
+    "static/media/pencilProfile.svg": "/cards/static/media/pencilProfile.1241cb07d4b7fab769c1.svg",
+    "static/media/addProfileAva.svg": "/cards/static/media/addProfileAva.f44d951526acbd5ef97e.svg",
     "index.html": "/cards/index.html",
-    "main.2db4db56.css.map": "/cards/static/css/main.2db4db56.css.map",
-    "main.ac44b1fc.js.map": "/cards/static/js/main.ac44b1fc.js.map",
+    "static/media/logoutBtnProfile.svg": "/cards/static/media/logoutBtnProfile.4631dbd136b384a81188.svg",
+    "static/media/arrowProfile.svg": "/cards/static/media/arrowProfile.19c7bd8ee7d32ca8451f.svg",
+    "main.1e70bf76.css.map": "/cards/static/css/main.1e70bf76.css.map",
+    "main.3b63683d.js.map": "/cards/static/js/main.3b63683d.js.map",
     "787.8517b185.chunk.js.map": "/cards/static/js/787.8517b185.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.2db4db56.css",
-    "static/js/main.ac44b1fc.js"
+    "static/css/main.1e70bf76.css",
+    "static/js/main.3b63683d.js"
   ]
 }
