@@ -4,26 +4,24 @@ import { Formik } from 'formik'
 import { NavLink } from 'react-router-dom'
 import * as Yup from 'yup'
 
-import { useAppDispatch, useAppSelector } from '../../app/store'
+import { useAppDispatch } from '../../app/store'
 import hide_password from '../../assets/img/Login/close_eye_password.png'
 import show_password from '../../assets/img/Login/open_eye_password.png'
-import { RegistrationPage, RestorePassPage } from '../../common/routes/const-routes'
 import SuperButton from '../../common/superButton/SuperButton'
 import SuperCheckbox from '../../common/superCheckbox/SuperCheckbox'
 import SuperInput from '../../common/superInputText/SuperInput'
 
-import { AuthStateType, loginTC } from './login-reducer'
+import { loginTC } from './login-reducer'
 import s from './login.module.css'
 
 const SignInForm = () => {
-  const { status } = useAppSelector<AuthStateType>(state => state.auth)
   const [shown, setShown] = useState<boolean>(true)
 
   const dispatch = useAppDispatch()
 
   return (
     <div className={s.form_container}>
-      <div className={s.title_form}>Sign In</div>
+      <div className={s.title_form}>Sing In</div>
       <Formik
         initialValues={{ email: '', password: '', rememberMe: false }}
         validationSchema={Yup.object({
@@ -64,7 +62,7 @@ const SignInForm = () => {
                 <span onClick={() => setShown(!shown)}>
                   <img
                     className={s.visible_password}
-                    src={!shown ? show_password : hide_password}
+                    src={shown ? show_password : hide_password}
                     alt="password"
                   />
                 </span>
@@ -85,24 +83,20 @@ const SignInForm = () => {
                 <label htmlFor="rememberMe">Remember me</label>
               </div>
             </div>
-            <div className={s.blockBtn}>
-              <NavLink to={RestorePassPage} className={s.forgot_password}>
+            <div>
+              <NavLink to={'/RestorePage'} className={s.forgot_password}>
                 Forgot Password?
               </NavLink>
-
-              <SuperButton
-                type="submit"
-                className={s.button_sign_in_form}
-                title={'Sign In'}
-                disabled={status === 'progress'}
-              />
+              <div className={s.button_sign_in_form_block}>
+                <SuperButton type="submit" className={s.button_sign_in_form} title={'Sign In'} />
+              </div>
             </div>
             <div className={s.have_account}>Already have an account?</div>
           </form>
         )}
       </Formik>
       <div className={s.button_sign_up_form_block}>
-        <NavLink className={s.sign_up_button} to={RegistrationPage}>
+        <NavLink className={s.sign_up_button} to="/registration">
           Sign Up
         </NavLink>
       </div>

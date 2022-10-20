@@ -7,12 +7,11 @@ import { useAppSelector } from '../../app/store'
 import logo from '../../assets/svg/logo-Incubator.svg'
 import { LoginPage, ProfilePage } from '../../common/routes/const-routes'
 import SuperButton from '../../common/superButton/SuperButton'
-import { AuthStateType } from '../login/login-reducer'
 
 import style from './header.module.css'
 
 const Header = () => {
-  const { isLoggedIn } = useAppSelector<AuthStateType>(state => state.auth)
+  const isLogin = useAppSelector<boolean>(state => state.auth.isLoggedIn)
   const profile = useAppSelector<null | ProfileType>(state => state.profile.profile)
   const name = profile && profile.name
   const avatar = profile && profile.avatar
@@ -23,7 +22,7 @@ const Header = () => {
         <div>
           <img src={logo} alt="IT-Incubator" />
         </div>
-        {isLoggedIn ? (
+        {isLogin ? (
           <div className={style.profileBlock}>
             <NavLink className={style.profileName} to={ProfilePage}>
               {name}

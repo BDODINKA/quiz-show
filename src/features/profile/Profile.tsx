@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { LinearProgress } from '@mui/material'
 import { Navigate, NavLink } from 'react-router-dom'
@@ -9,11 +9,18 @@ import { LoginPage, PackCardsPage } from '../../common/routes/const-routes'
 import SuperButton from '../../common/superButton/SuperButton'
 
 import style from './profile.module.css'
-import { LogOutTC, ProfileStateType, UpdateUserProfile } from './profile.reducer'
+import { authMeTC, LogOutTC, ProfileStateType, UpdateUserProfile } from './profile.reducer'
 
 export const Profile = () => {
   const dispatch = useAppDispatch()
-  const { profile, status } = useAppSelector<ProfileStateType>(state => state.profile)
+  const { profile } = useAppSelector<ProfileStateType>(state => state.profile)
+  const status = useAppSelector(state => state.profile.status)
+
+  useEffect(() => {
+    if (profile === null) {
+      dispatch(authMeTC())
+    }
+  }, [])
 
   const goToLogout = () => {
     dispatch(LogOutTC())
@@ -25,6 +32,7 @@ export const Profile = () => {
   if (profile === null) {
     return <Navigate to={LoginPage} />
   }
+  console.log(status)
 
   return (
     <div>

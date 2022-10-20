@@ -5,7 +5,7 @@ import { ProfileType } from '../../api/authAPI'
 import { ChangeProfileType, LogOutType, profileAPI } from '../../api/profileAPI'
 import { AppThunk } from '../../app/store'
 import { ServerError } from '../../utils/ServerErrorHandler'
-import { loginAC, setStatusAC } from '../login/login-reducer'
+import { loginAC } from '../login/login-reducer'
 
 export type ProfileStateType = typeof initialState
 export type ProfileActionType =
@@ -85,24 +85,20 @@ const updateProfileAC = (data: ProfileType) => {
 
 export const authMeTC = (): AppThunk => (dispatch: Dispatch) => {
   dispatch(statusAC('progress'))
-  dispatch(setStatusAC('progress'))
   profileAPI
     .authMe()
     .then(res => {
       dispatch(setProfileAC(res.data))
       dispatch(loginAC(true))
       dispatch(statusAC('success'))
-      dispatch(setStatusAC('success'))
     })
     .catch((reason: AxiosError<{ error: string }>) => {
       if (reason.response?.data.error) {
         ServerError<string>(reason.response.data.error, ErrorAC, dispatch)
         dispatch(statusAC('error'))
-        dispatch(setStatusAC('error'))
       } else {
         ServerError<string>(reason.message, ErrorAC, dispatch)
         dispatch(statusAC('error'))
-        dispatch(setStatusAC('error'))
       }
     })
 }

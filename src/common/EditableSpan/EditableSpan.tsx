@@ -37,9 +37,7 @@ const EditableSpan = (props: PropsType) => {
   const editModeHandler = (value: boolean) => {
     setEditMode(value)
     if (!value) {
-      if (text) {
-        changedText && changedText(text)
-      }
+      if (text) changedText && changedText(text)
     }
   }
 
