@@ -18,16 +18,16 @@ export type LoginActionType =
   | ReturnType<typeof setErrorAC>
   | ReturnType<typeof setStatusAC>
 
-type InitialStateType = typeof initState
+export type AuthStateType = typeof initState
 
 export const loginAC = (isLoggedIn: boolean) => ({ type: AUTH_LOGIN, isLoggedIn } as const)
 export const setErrorAC = (error: string | null) => ({ type: SET_ERROR, error } as const)
 export const setStatusAC = (status: string | null) => ({ type: 'AUTH/SET-STATUS', status } as const)
 
 export const loginReducer = (
-  state: InitialStateType = initState,
+  state: AuthStateType = initState,
   action: LoginActionType
-): InitialStateType => {
+): AuthStateType => {
   switch (action.type) {
     case AUTH_LOGIN:
       return { ...state, isLoggedIn: action.isLoggedIn }
