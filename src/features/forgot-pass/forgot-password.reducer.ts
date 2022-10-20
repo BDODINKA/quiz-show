@@ -21,7 +21,7 @@ const initialState = {
   sendFormToEmail: {
     email: '',
     from: 'Friday Team',
-    message: `<div style="background-color: lime; padding: 15px">\n" +
+    message: `<div style="background-color: Green; padding: 15px">\n" +
         "password recovery link: \n" +
         "<a href=http://localhost:3000/#/NewPass/$token$>\n" +
         "link</a>\n" +
