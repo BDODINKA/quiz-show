@@ -2,6 +2,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  padding-top: 60px;
 }
 
 .button_sign_in_navbar,
@@ -23,17 +25,15 @@
   display: flex;
   flex-direction: column;
 
-  width: 400px;
-  height: 530px;
-  margin-top: 60px;
+  width: 413px;
 
-  border: 2px solid #efecec;
-  border-radius: 5px;
-  box-shadow: 2px 3px 3px grey;
+  background: #ffffff;
+  border-radius: 2px;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1), -1px -1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .title_form {
-  margin: 20px 0;
+  padding: 35px 0 41px;
 
   font-family: 'Bookman Old Style', cursive;
   font-size: 24px;
@@ -42,14 +42,15 @@
 }
 
 .input_block,
-.checkbox_block,
-.button_sign_in_form_block {
+.checkbox_block {
   display: flex;
   flex-direction: column;
 
   width: 80%;
-  height: 80px;
   margin-left: 10%;
+}
+.input_block {
+  padding-bottom: 24px;
 }
 
 .title_input,
@@ -59,8 +60,7 @@
 
 .input_email,
 .password_block,
-.checkbox_block,
-.button_sign_in_form_block {
+.checkbox_block {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -72,6 +72,12 @@
   border: none;
   border-bottom: 2px solid #c0bfbf;
   outline: none;
+}
+.button_sign_in_form_block {
+  display: flex;
+  flex-direction: column;
+
+  margin: 0;
 }
 
 .input_password {
@@ -94,6 +100,7 @@
   align-items: center;
 
   width: 20px;
+  padding-bottom: 20px;
 }
 
 .checkbox_block {
@@ -109,41 +116,68 @@
 
 .forgot_password {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 
-  margin-top: 30px;
-  margin-right: 10%;
+  padding: 29px 38px 69px 0;
 
   font-size: 16px;
   font-weight: 500;
   text-decoration: none;
 }
 
-.button_sign_in_form_block {
-  margin-top: 60px;
-  margin-bottom: 40px;
-}
-
 .button_sign_in_form {
-  width: 100%;
+  align-self: center;
+
+  width: 347px;
   height: 36px;
 
   font-size: 18px;
 }
 
 .have_account {
+  padding-top: 39px;
+
   font-weight: 600;
   text-align: center;
 }
 
 .button_sign_up_form_block {
-  margin-top: 20px;
+  padding: 20px 0 42px;
 
   text-align: center;
 }
 .sign_up_button {
-  font-size: 22px;
-  font-weight: bold;
-  color: #0479fd;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  font-style: normal;
+  line-height: 24px;
+  color: #366eff;
   text-align: center;
+  text-decoration-line: underline;
+}
+
+.input_email:-webkit-autofill,
+.input_email:-webkit-autofill:hover,
+.input_email:-webkit-autofill:focus,
+.input_email:-webkit-autofill:active .input_password:-webkit-autofill,
+.input_password:-webkit-autofill:hover,
+.input_password:-webkit-autofill:focus,
+.input_password:-webkit-autofill:active {
+  font-family: 'Montserrat', 'sans-serif';
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 24px;
+  color: #000000;
+
+  opacity: 0.5;
+  background: #ffffff !important;
+  border: none;
+  border-bottom: 1.51px solid #000000;
+  border-radius: 0;
+  outline: none;
+  box-shadow: 0 0 0 30px #ffffff inset !important;
+
+  appearance: none;
 }

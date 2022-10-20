@@ -10,7 +10,7 @@ import { loginAC } from '../login/login-reducer'
 export type ProfileStateType = typeof initialState
 export type ProfileActionType =
   | ReturnType<typeof setProfileAC>
-  | ReturnType<typeof statusAC>
+  | ReturnType<typeof StatusAC>
   | ReturnType<typeof logOutAC>
   | ReturnType<typeof updateProfileAC>
   | ReturnType<typeof ErrorAC>
@@ -30,7 +30,7 @@ export const ProfileReducer = (
       return { ...state, profile: action.payload.profile }
     }
     case 'PROFILE/SET-STATUS': {
-      return { ...state, status: action.payload.status }
+      return { ...state, status: action.payload.status, error: action.payload.status }
     }
     case 'PROFILE/SET-LOGOUT': {
       return { ...state, profile: null }
@@ -58,7 +58,7 @@ export const setProfileAC = (profile: ProfileType) => {
   } as const
 }
 
-const statusAC = (status: string) => {
+export const StatusAC = (status: string | null) => {
   return {
     type: 'PROFILE/SET-STATUS',
     payload: { status },
@@ -84,62 +84,62 @@ const updateProfileAC = (data: ProfileType) => {
 }
 
 export const authMeTC = (): AppThunk => (dispatch: Dispatch) => {
-  dispatch(statusAC('progress'))
+  dispatch(StatusAC('progress'))
   profileAPI
     .authMe()
     .then(res => {
       dispatch(setProfileAC(res.data))
       dispatch(loginAC(true))
-      dispatch(statusAC('success'))
+      dispatch(StatusAC('success'))
     })
     .catch((reason: AxiosError<{ error: string }>) => {
       if (reason.response?.data.error) {
         ServerError<string>(reason.response.data.error, ErrorAC, dispatch)
-        dispatch(statusAC('error'))
+        dispatch(StatusAC('error'))
       } else {
         ServerError<string>(reason.message, ErrorAC, dispatch)
-        dispatch(statusAC('error'))
+        dispatch(StatusAC('error'))
       }
     })
 }
 export const LogOutTC = (): AppThunk => (dispatch: Dispatch) => {
-  dispatch(statusAC('progress'))
+  dispatch(StatusAC('progress'))
   profileAPI
     .logOut()
     .then(() => {
       dispatch(logOutAC(null))
       dispatch(loginAC(false))
-      dispatch(statusAC('success'))
+      dispatch(StatusAC('success'))
     })
     .catch((reason: AxiosError<LogOutType>) => {
       if (reason.response?.data) {
         ServerError<string>(reason.response.data.info, ErrorAC, dispatch)
-        dispatch(statusAC('error'))
+        dispatch(StatusAC('error'))
       } else {
         ServerError<string>(reason.message, ErrorAC, dispatch)
-        dispatch(statusAC('error'))
+        dispatch(StatusAC('error'))
       }
     })
 }
 export const UpdateUserProfile =
   (data: ChangeProfileType): AppThunk =>
   (dispatch: Dispatch) => {
-    dispatch(statusAC('progress'))
+    dispatch(StatusAC('progress'))
     profileAPI
       .updateProfile(data)
       .then(res => {
         if (res.data.updatedUser) {
           dispatch(setProfileAC(res.data.updatedUser))
-          dispatch(statusAC('success'))
+          dispatch(StatusAC('success'))
         }
       })
       .catch((reason: AxiosError<LogOutType>) => {
         if (reason.response?.data) {
           ServerError<string>(reason.response.data.info, ErrorAC, dispatch)
-          dispatch(statusAC('error'))
+          dispatch(StatusAC('error'))
         } else {
           ServerError<string>(reason.message, ErrorAC, dispatch)
-          dispatch(statusAC('error'))
+          dispatch(StatusAC('error'))
         }
       })
   }

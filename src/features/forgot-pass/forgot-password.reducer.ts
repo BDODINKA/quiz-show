@@ -5,14 +5,7 @@ import { forgotApi, forgotNewPassword } from '../../api/forgot-Pass-Api'
 import { RootStateType, AppThunk } from '../../app/store'
 import { ServerError } from '../../utils/ServerErrorHandler'
 
-export enum SendStatusType {
-  initial = 'info',
-  inProgress = 'warning',
-  error = 'error',
-  success = 'success',
-}
-
-export type AllActionsType =
+export type ForgotActionsType =
   | ReturnType<typeof SendForgotEmailAC>
   | ReturnType<typeof SetResetStateAC>
   | ReturnType<typeof SetStatusResponseAC>
@@ -22,8 +15,8 @@ export type ForgotStateType = typeof initialState
 
 const initialState = {
   response: {
-    message: '',
-    status: 'info',
+    message: null as null | string,
+    status: null as null | string,
   },
   sendFormToEmail: {
     email: '',
@@ -38,7 +31,7 @@ const initialState = {
 
 export const forgotPasswordReducer = (
   state: ForgotStateType = initialState,
-  action: AllActionsType
+  action: ForgotActionsType
 ): ForgotStateType => {
   switch (action.type) {
     case 'FORGOT-PASS/SET-FORGOT-EMAIL': {
@@ -51,7 +44,7 @@ export const forgotPasswordReducer = (
       return {
         ...state,
         sendFormToEmail: { ...state.sendFormToEmail, email: '' },
-        response: { ...state.response, status: 'info', message: '' },
+        response: { ...state.response, status: null, message: null },
       }
     }
     case 'FORGOT-PASS/SET-STATUS-RESPONSE': {
@@ -88,7 +81,7 @@ export const forgotPasswordReducer = (
         response: {
           ...state.response,
           message: action.payload.error,
-          status: SendStatusType.error,
+          status: action.payload.error,
         },
       }
     }
@@ -112,7 +105,7 @@ export const SetResetStateAC = () => {
   } as const
 }
 
-export const SetStatusResponseAC = (status: SendStatusType) => {
+export const SetStatusResponseAC = (status: string | null) => {
   return {
     type: 'FORGOT-PASS/SET-STATUS-RESPONSE',
     payload: { status },
@@ -130,14 +123,14 @@ export const SendForgotFormTC =
   (values: string): AppThunk =>
   (dispatch: Dispatch, getState: () => RootStateType) => {
     dispatch(SendForgotEmailAC(values))
-    dispatch(SetStatusResponseAC(SendStatusType.inProgress))
+    dispatch(SetStatusResponseAC('progress'))
     const data = getState().forgotPass.sendFormToEmail
 
     forgotApi
       .sendFormToEmail(data)
       .then(response => {
         if (response.status === 200) {
-          dispatch(SetStatusResponseAC(SendStatusType.success))
+          dispatch(SetStatusResponseAC('success'))
         }
       })
       .catch((reason: AxiosError<{ error: string; email: string; in: string }>) => {
@@ -154,12 +147,12 @@ export const SetResetStateTC = (): AppThunk => (dispatch: Dispatch) => {
 export const SendNewPasswordFormTC =
   (data: forgotNewPassword): AppThunk =>
   (dispatch: Dispatch) => {
-    dispatch(SetStatusResponseAC(SendStatusType.inProgress))
+    dispatch(SetStatusResponseAC('progress'))
     forgotApi
       .sendNewPassword(data)
       .then(response => {
         if (response.status === 200) {
-          dispatch(SetStatusResponseAC(SendStatusType.success))
+          dispatch(SetStatusResponseAC('success'))
         }
       })
       .catch((reason: AxiosError<{ error: string }>) => {

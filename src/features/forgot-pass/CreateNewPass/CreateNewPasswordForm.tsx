@@ -6,7 +6,7 @@ import * as Yup from 'yup'
 import { useAppDispatch } from '../../../app/store'
 import SuperButton from '../../../common/superButton/SuperButton'
 import SuperInput from '../../../common/superInputText/SuperInput'
-import { SendNewPasswordFormTC, SendStatusType } from '../forgot-password.reducer'
+import { SendNewPasswordFormTC } from '../forgot-password.reducer'
 
 import style from './CreateNewPassword.module.css'
 
@@ -49,7 +49,7 @@ const CreateNewPasswordForm = (props: PropsType) => {
             placeholder={'Password'}
             {...formik.getFieldProps('password')}
             error={formik.touched && formik.errors.password}
-            disabled={status === SendStatusType.inProgress}
+            disabled={status === 'progress'}
             className={style.input}
             spanClassName={style.spanError}
           />
@@ -59,7 +59,7 @@ const CreateNewPasswordForm = (props: PropsType) => {
           </p>
           <SuperButton
             type={'submit'}
-            disabled={status === SendStatusType.inProgress}
+            disabled={status === 'progress'}
             className={style.btn}
             title={'Create new password'}
           />

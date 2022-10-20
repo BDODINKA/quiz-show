@@ -4,17 +4,24 @@ import { LinearProgress } from '@mui/material'
 import { Navigate, NavLink } from 'react-router-dom'
 
 import { useAppDispatch, useAppSelector } from '../../app/store'
+import { CustomAlertSnackBar, SnackBarType } from '../../common/CustomSnackBar/CustomAlertSnackBar'
 import EditableSpan from '../../common/EditableSpan/EditableSpan'
 import { LoginPage, PackCardsPage } from '../../common/routes/const-routes'
 import SuperButton from '../../common/superButton/SuperButton'
 
 import style from './profile.module.css'
-import { authMeTC, LogOutTC, ProfileStateType, UpdateUserProfile } from './profile.reducer'
+import {
+  authMeTC,
+  LogOutTC,
+  ProfileStateType,
+  StatusAC,
+  UpdateUserProfile,
+} from './profile.reducer'
 
 export const Profile = () => {
   const dispatch = useAppDispatch()
   const { profile } = useAppSelector<ProfileStateType>(state => state.profile)
-  const status = useAppSelector(state => state.profile.status)
+  const { status, error } = useAppSelector(state => state.profile)
 
   useEffect(() => {
     if (profile === null) {
@@ -28,11 +35,13 @@ export const Profile = () => {
   const changeName = (name: string) => {
     dispatch(UpdateUserProfile({ name: name, avatar: '' }))
   }
+  const closeHandlerSnackbar = () => {
+    dispatch(StatusAC(null))
+  }
 
   if (profile === null) {
     return <Navigate to={LoginPage} />
   }
-  console.log(status)
 
   return (
     <div>
@@ -70,6 +79,12 @@ export const Profile = () => {
           />
         </div>
       </div>
+      <CustomAlertSnackBar
+        status={status as SnackBarType}
+        closeHandlerSnackbar={closeHandlerSnackbar}
+        message={error as string}
+        autoHideDuration={6000}
+      />
     </div>
   )
 }

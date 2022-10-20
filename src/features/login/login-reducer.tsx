@@ -34,7 +34,7 @@ export const loginReducer = (
     case SET_ERROR:
       return { ...state, error: action.error }
     case 'AUTH/SET-STATUS': {
-      return { ...state, status: action.status }
+      return { ...state, status: action.status, error: action.status }
     }
     default:
       return state
@@ -48,9 +48,9 @@ export const loginTC =
     authAPI
       .login(data)
       .then(res => {
+        dispatch(setStatusAC('success'))
         dispatch(loginAC(true))
         dispatch(setProfileAC(res.data))
-        dispatch(setStatusAC('success'))
       })
       .catch((err: AxiosError) => {
         const error = err.response ? (err.response.data as { error: string }).error : err.message

@@ -3,7 +3,7 @@ import React from 'react'
 import { AlertColor } from '@mui/material'
 
 import { useAppDispatch, useAppSelector } from '../../../app/store'
-import { CustomAlertSnackBar } from '../../../common/CustomSnackBar/CustomSnackBar'
+import { CustomAlertSnackBar } from '../../../common/CustomSnackBar/CustomAlertSnackBar'
 import CheckEmail from '../CheckEmail/CheckEmail'
 import { SetResetStateTC } from '../forgot-password.reducer'
 
@@ -23,11 +23,12 @@ const ForgotPass = () => {
 
   return (
     <div>
-      <ForgotPassForm status={status as AlertColor} style={style} />
+      <ForgotPassForm status={status as string} style={style} />
       <CustomAlertSnackBar
-        message={message}
+        message={message as string}
         status={status as AlertColor}
         closeHandlerSnackbar={closeHandlerSnackbar}
+        autoHideDuration={6000}
       />
     </div>
   )

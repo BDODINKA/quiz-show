@@ -7,6 +7,7 @@ import * as Yup from 'yup'
 import { useAppDispatch } from '../../app/store'
 import hide_password from '../../assets/img/Login/close_eye_password.png'
 import show_password from '../../assets/img/Login/open_eye_password.png'
+import { RegistrationPage, RestorePassPage } from '../../common/routes/const-routes'
 import SuperButton from '../../common/superButton/SuperButton'
 import SuperCheckbox from '../../common/superCheckbox/SuperCheckbox'
 import SuperInput from '../../common/superInputText/SuperInput'
@@ -62,7 +63,7 @@ const SignInForm = () => {
                 <span onClick={() => setShown(!shown)}>
                   <img
                     className={s.visible_password}
-                    src={shown ? show_password : hide_password}
+                    src={!shown ? show_password : hide_password}
                     alt="password"
                   />
                 </span>
@@ -83,20 +84,18 @@ const SignInForm = () => {
                 <label htmlFor="rememberMe">Remember me</label>
               </div>
             </div>
-            <div>
-              <NavLink to={'/RestorePage'} className={s.forgot_password}>
+            <div className={s.button_sign_in_form_block}>
+              <NavLink to={RestorePassPage} className={s.forgot_password}>
                 Forgot Password?
               </NavLink>
-              <div className={s.button_sign_in_form_block}>
-                <SuperButton type="submit" className={s.button_sign_in_form} title={'Sign In'} />
-              </div>
+              <SuperButton type="submit" className={s.button_sign_in_form} title={'Sign In'} />
             </div>
             <div className={s.have_account}>Already have an account?</div>
           </form>
         )}
       </Formik>
       <div className={s.button_sign_up_form_block}>
-        <NavLink className={s.sign_up_button} to="/registration">
+        <NavLink className={s.sign_up_button} to={RegistrationPage}>
           Sign Up
         </NavLink>
       </div>

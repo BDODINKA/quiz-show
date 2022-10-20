@@ -1,6 +1,5 @@
 import React from 'react'
 
-import { AlertColor } from '@mui/material'
 import { Formik } from 'formik'
 import { NavLink } from 'react-router-dom'
 import * as Yup from 'yup'
@@ -9,12 +8,12 @@ import { useAppDispatch } from '../../../app/store'
 import { LoginPage } from '../../../common/routes/const-routes'
 import SuperButton from '../../../common/superButton/SuperButton'
 import SuperInput from '../../../common/superInputText/SuperInput'
-import { SendStatusType, SendForgotFormTC } from '../forgot-password.reducer'
+import { SendForgotFormTC } from '../forgot-password.reducer'
 
 import style from './ForgotPasswordForm.module.css'
 
 type PropsType = {
-  status: AlertColor
+  status: string
   style: any
 }
 export const ForgotPassForm = (props: PropsType) => {
@@ -48,7 +47,7 @@ export const ForgotPassForm = (props: PropsType) => {
               </p>
               <SuperButton
                 type={'submit'}
-                disabled={props.status === SendStatusType.inProgress}
+                disabled={props.status === 'progress'}
                 className={props.style.btn}
                 title={'Send Instructions'}
               />
