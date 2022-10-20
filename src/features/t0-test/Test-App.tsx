@@ -11,6 +11,8 @@ import {
   RegistrationPage,
   RestorePassPage,
 } from '../../common/routes/const-routes'
+import CreateNewPassword from '../forgot-pass/CreateNewPass/CreateNewPassword'
+import ForgotPass from '../forgot-pass/ForgotPass/ForgotPass'
 import Header from '../header/Header'
 import Login from '../login/Login'
 import { Profile } from '../profile/Profile'
@@ -33,13 +35,13 @@ export const TestApp = () => {
       <Header />
       <Routes>
         <Route path={'/'} element={<SuperComponents />} />
-        <Route path={'*'} element={<Navigate to={'/'} />} />
+        <Route path={'*'} element={<Navigate to={NotPage} />} />
         <Route path={LoginPage} element={<Login />} />
         <Route path={RegistrationPage} element={<h1>Register</h1>} />
         <Route path={ProfilePage} element={<Profile />} />
         <Route path={NotPage} element={<PageNotFound />} />
-        <Route path={RestorePassPage} element={<h1>Restore Password</h1>} />
-        <Route path={NewPassPage} element={<h1>Enter New Password</h1>} />
+        <Route path={RestorePassPage} element={<ForgotPass />} />
+        <Route path={NewPassPage} element={<CreateNewPassword />} />
       </Routes>
     </HashRouter>
   )

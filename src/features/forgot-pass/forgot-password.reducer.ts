@@ -3,7 +3,7 @@ import { Dispatch } from 'redux'
 
 import { forgotApi, forgotNewPassword } from '../../api/forgot-Pass-Api'
 import { RootStateType, AppThunk } from '../../app/store'
-import { ServerErrorForgot } from '../../utils/ServerErrorHandler'
+import { ServerError } from '../../utils/ServerErrorHandler'
 
 export enum SendStatusType {
   initial = 'info',
@@ -142,9 +142,9 @@ export const SendForgotFormTC =
       })
       .catch((reason: AxiosError<{ error: string; email: string; in: string }>) => {
         if (reason.response?.data.error) {
-          ServerErrorForgot(reason.response?.data.error, dispatch)
+          ServerError(reason.response?.data.error, ErrorAC, dispatch)
         } else {
-          ServerErrorForgot(reason.message, dispatch)
+          ServerError(reason.message, ErrorAC, dispatch)
         }
       })
   }
@@ -164,9 +164,9 @@ export const SendNewPasswordFormTC =
       })
       .catch((reason: AxiosError<{ error: string }>) => {
         if (reason.response?.data.error) {
-          ServerErrorForgot(reason.response?.data.error, dispatch)
+          ServerError(reason.response?.data.error, ErrorAC, dispatch)
         } else {
-          ServerErrorForgot(reason.message, dispatch)
+          ServerError(reason.message, ErrorAC, dispatch)
         }
       })
   }

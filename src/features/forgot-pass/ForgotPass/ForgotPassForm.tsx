@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom'
 import * as Yup from 'yup'
 
 import { useAppDispatch } from '../../../app/store'
-import { login } from '../../../common/routes/const-routes'
+import { LoginPage } from '../../../common/routes/const-routes'
 import SuperButton from '../../../common/superButton/SuperButton'
 import SuperInput from '../../../common/superInputText/SuperInput'
 import { SendStatusType, SendForgotFormTC } from '../forgot-password.reducer'
@@ -53,7 +53,7 @@ export const ForgotPassForm = (props: PropsType) => {
                 title={'Send Instructions'}
               />
               <p className={style.question}>Did you remember your password?</p>
-              <NavLink to={login} className={style.link}>
+              <NavLink to={LoginPage} className={style.link}>
                 Try logging in
               </NavLink>
             </form>

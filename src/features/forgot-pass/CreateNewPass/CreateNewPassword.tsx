@@ -5,7 +5,7 @@ import { Navigate, useParams } from 'react-router-dom'
 
 import { useAppDispatch, useAppSelector } from '../../../app/store'
 import { CustomAlertSnackBar } from '../../../common/CustomSnackBar/CustomSnackBar'
-import { login } from '../../../common/routes/const-routes'
+import { LoginPage } from '../../../common/routes/const-routes'
 import { SendStatusType, SetResetStateTC } from '../forgot-password.reducer'
 
 import style from './CreateNewPassword.module.css'
@@ -22,7 +22,7 @@ const CreateNewPassword = () => {
   }
 
   if (status === SendStatusType.success) {
-    return <Navigate to={login} />
+    return <Navigate to={LoginPage} />
   }
 
   return (

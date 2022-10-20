@@ -3,7 +3,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { useAppDispatch, useAppSelector } from '../../../app/store'
-import { login } from '../../../common/routes/const-routes'
+import { LoginPage } from '../../../common/routes/const-routes'
 import SuperButton from '../../../common/superButton/SuperButton'
 import { SetResetStateTC } from '../forgot-password.reducer'
 
@@ -15,7 +15,7 @@ const CheckEmail = () => {
   const navigate = useNavigate()
 
   const GoToLogin = () => {
-    navigate(login)
+    navigate(LoginPage)
     dispatch(SetResetStateTC())
   }
 
