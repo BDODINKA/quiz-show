@@ -1,0 +1,149 @@
+.login_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button_sign_in_navbar,
+.button_sign_in_form {
+  cursor: pointer;
+
+  width: 100px;
+  height: 30px;
+
+  color: white;
+
+  background-color: #0479fd;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 1px 1px 2px #0479fd;
+}
+
+.form_container {
+  display: flex;
+  flex-direction: column;
+
+  width: 400px;
+  height: 530px;
+  margin-top: 60px;
+
+  border: 2px solid #efecec;
+  border-radius: 5px;
+  box-shadow: 2px 3px 3px grey;
+}
+
+.title_form {
+  margin: 20px 0;
+
+  font-family: 'Bookman Old Style', cursive;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.input_block,
+.checkbox_block,
+.button_sign_in_form_block {
+  display: flex;
+  flex-direction: column;
+
+  width: 80%;
+  height: 80px;
+  margin-left: 10%;
+}
+
+.title_input,
+.have_account {
+  color: grey;
+}
+
+.input_email,
+.password_block,
+.checkbox_block,
+.button_sign_in_form_block {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  height: 20px;
+
+  font-size: 14px;
+
+  border: none;
+  border-bottom: 2px solid #c0bfbf;
+  outline: none;
+}
+
+.input_password {
+  width: 280px;
+
+  font-size: 14px;
+
+  border: none;
+  outline: none;
+}
+
+.error_message {
+  color: red;
+}
+
+.visible_password {
+  cursor: pointer;
+
+  display: block;
+  align-items: center;
+
+  width: 20px;
+}
+
+.checkbox_block {
+  border-bottom: none;
+}
+
+.rememberMe {
+  margin-left: 15px;
+
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.forgot_password {
+  display: flex;
+  justify-content: end;
+
+  margin-top: 30px;
+  margin-right: 10%;
+
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.button_sign_in_form_block {
+  margin-top: 60px;
+  margin-bottom: 40px;
+}
+
+.button_sign_in_form {
+  width: 100%;
+  height: 36px;
+
+  font-size: 18px;
+}
+
+.have_account {
+  font-weight: 600;
+  text-align: center;
+}
+
+.button_sign_up_form_block {
+  margin-top: 20px;
+
+  text-align: center;
+}
+.sign_up_button {
+  font-size: 22px;
+  font-weight: bold;
+  color: #0479fd;
+  text-align: center;
+}
