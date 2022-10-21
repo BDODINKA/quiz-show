@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import { LinearProgress } from '@mui/material'
 import { Navigate, NavLink } from 'react-router-dom'
@@ -10,25 +10,14 @@ import { LoginPage, PackCardsPage } from '../../common/routes/const-routes'
 import SuperButton from '../../common/superButton/SuperButton'
 
 import style from './profile.module.css'
-import {
-  authMeTC,
-  LogOutTC,
-  ProfileStateType,
-  StatusAC,
-  UpdateUserProfile,
-} from './profile.reducer'
+import { LogOutTC, ProfileStateType, StatusAC, UpdateUserProfile } from './profile.reducer'
 
 export const Profile = () => {
   const dispatch = useAppDispatch()
   const { profile } = useAppSelector<ProfileStateType>(state => state.profile)
   const { status, error } = useAppSelector(state => state.profile)
 
-  useEffect(() => {
-    if (profile === null) {
-      dispatch(authMeTC())
-    }
-  }, [])
-
+  console.log(status, error)
   const goToLogout = () => {
     dispatch(LogOutTC())
   }

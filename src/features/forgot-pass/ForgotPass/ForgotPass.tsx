@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { AlertColor } from '@mui/material'
+import { AlertColor, LinearProgress } from '@mui/material'
 
 import { useAppDispatch, useAppSelector } from '../../../app/store'
 import { CustomAlertSnackBar } from '../../../common/CustomSnackBar/CustomAlertSnackBar'
@@ -23,6 +23,7 @@ const ForgotPass = () => {
 
   return (
     <div>
+      {status === 'progress' && <LinearProgress sx={{ width: '100%' }} />}
       <ForgotPassForm status={status as string} style={style} />
       <CustomAlertSnackBar
         message={message as string}

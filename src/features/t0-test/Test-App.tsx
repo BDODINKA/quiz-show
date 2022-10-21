@@ -36,6 +36,7 @@ export const TestApp = () => {
       <Header />
       <Routes>
         <Route path={'/'} element={<SuperComponents />} />
+
         <Route path={'*'} element={<Navigate to={NotPage} />} />
         <Route path={LoginPage} element={<Login />} />
         <Route path={RegistrationPage} element={<SignUp />} />

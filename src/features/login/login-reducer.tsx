@@ -34,7 +34,7 @@ export const loginReducer = (
     case SET_ERROR:
       return { ...state, error: action.error }
     case 'AUTH/SET-STATUS': {
-      return { ...state, status: action.status, error: action.status }
+      return { ...state, status: action.status }
     }
     default:
       return state

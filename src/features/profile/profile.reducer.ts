@@ -5,7 +5,7 @@ import { ProfileType } from '../../api/authAPI'
 import { ChangeProfileType, LogOutType, profileAPI } from '../../api/profileAPI'
 import { AppThunk } from '../../app/store'
 import { ServerError } from '../../utils/ServerErrorHandler'
-import { loginAC } from '../login/login-reducer'
+import { loginAC, setErrorAC, setStatusAC } from '../login/login-reducer'
 
 export type ProfileStateType = typeof initialState
 export type ProfileActionType =
@@ -27,13 +27,13 @@ export const ProfileReducer = (
 ): ProfileStateType => {
   switch (action.type) {
     case 'PROFILE/SET-PROFILE': {
-      return { ...state, profile: action.payload.profile }
+      return { ...state, profile: action.payload.profile, error: null, status: null }
     }
     case 'PROFILE/SET-STATUS': {
-      return { ...state, status: action.payload.status, error: action.payload.status }
+      return { ...state, status: action.payload.status }
     }
     case 'PROFILE/SET-LOGOUT': {
-      return { ...state, profile: null }
+      return { ...state, profile: action.payload, error: null, status: null }
     }
     case 'PROFILE/UPDATE-PROFILE': {
       return {
@@ -88,17 +88,21 @@ export const authMeTC = (): AppThunk => (dispatch: Dispatch) => {
   profileAPI
     .authMe()
     .then(res => {
-      dispatch(setProfileAC(res.data))
       dispatch(loginAC(true))
+      dispatch(setProfileAC(res.data))
       dispatch(StatusAC('success'))
     })
     .catch((reason: AxiosError<{ error: string }>) => {
       if (reason.response?.data.error) {
         ServerError<string>(reason.response.data.error, ErrorAC, dispatch)
+        ServerError<string>(reason.response.data.error, setErrorAC, dispatch)
         dispatch(StatusAC('error'))
+        dispatch(setStatusAC('error'))
       } else {
         ServerError<string>(reason.message, ErrorAC, dispatch)
+        ServerError<string>(reason.message, setErrorAC, dispatch)
         dispatch(StatusAC('error'))
+        dispatch(setStatusAC('error'))
       }
     })
 }
@@ -109,7 +113,8 @@ export const LogOutTC = (): AppThunk => (dispatch: Dispatch) => {
     .then(() => {
       dispatch(logOutAC(null))
       dispatch(loginAC(false))
-      dispatch(StatusAC('success'))
+      dispatch(setStatusAC('warning'))
+      dispatch(setErrorAC('You unAuthorized'))
     })
     .catch((reason: AxiosError<LogOutType>) => {
       if (reason.response?.data) {

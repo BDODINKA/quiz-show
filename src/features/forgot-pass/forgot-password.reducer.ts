@@ -5,6 +5,8 @@ import { forgotApi, forgotNewPassword } from '../../api/forgot-Pass-Api'
 import { RootStateType, AppThunk } from '../../app/store'
 import { ServerError } from '../../utils/ServerErrorHandler'
 
+import { ForgotLink } from './ForgotLink'
+
 export type ForgotActionsType =
   | ReturnType<typeof SendForgotEmailAC>
   | ReturnType<typeof SetResetStateAC>
@@ -21,11 +23,7 @@ const initialState = {
   sendFormToEmail: {
     email: '',
     from: 'Friday Team',
-    message: `<div style="background-color: Green; padding: 15px">\n" +
-        "password recovery link: \n" +
-        "<a href=http://localhost:3000/#/NewPass/$token$>\n" +
-        "link</a>\n" +
-        "</div>`,
+    message: ForgotLink,
   },
 }
 
@@ -48,31 +46,13 @@ export const forgotPasswordReducer = (
       }
     }
     case 'FORGOT-PASS/SET-STATUS-RESPONSE': {
-      if (action.payload.status === 'info') {
-        return {
-          ...state,
-          response: {
-            ...state.response,
-            status: action.payload.status,
-          },
-        }
-      } else if (action.payload.status === 'warning') {
-        return {
-          ...state,
-          response: {
-            ...state.response,
-            status: action.payload.status,
-          },
-        }
-      } else {
-        return {
-          ...state,
-          response: {
-            ...state.response,
-            status: action.payload.status,
-            message: action.payload.status,
-          },
-        }
+      return {
+        ...state,
+        response: {
+          ...state.response,
+          status: action.payload.status,
+          message: action.payload.status,
+        },
       }
     }
     case 'FORGOT-PASS/SET-ERROR': {

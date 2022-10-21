@@ -15,11 +15,12 @@ const Login = () => {
   const dispatch = useAppDispatch()
   const { status, error, isLoggedIn } = useAppSelector(state => state.auth)
 
+  console.log(isLoggedIn)
   const closeHandlerSnackbar = () => {
     dispatch(setStatusAC(null))
   }
 
-  if (isLoggedIn && status) {
+  if (isLoggedIn) {
     return <Navigate to={ProfilePage} />
   }
 
