@@ -37,18 +37,18 @@ export const setIsSignUpAC = (isSignUp: boolean) => {
 }
 
 export const signUpTC = (data: SignUpUserType) => (dispatch: Dispatch<SignUpActionsType>) => {
-  dispatch(setAppStatusAC('loading'))
+  dispatch(setAppStatusAC('progress'))
   signUpAPI
     .signUp(data)
     .then(res => {
       dispatch(setIsSignUpAC(true))
       console.log(res)
-      dispatch(setAppStatusAC('succeeded'))
+      dispatch(setAppStatusAC('success'))
     })
     .catch((e: AxiosError) => {
       const error = e.response ? (e.response.data as { error: string }).error : e.message
 
       dispatch(setAppErrorAC(error))
-      dispatch(setAppStatusAC('succeeded'))
+      dispatch(setAppStatusAC('success'))
     })
 }

@@ -4,20 +4,23 @@ import { Formik } from 'formik'
 import { NavLink } from 'react-router-dom'
 import * as Yup from 'yup'
 
-import { useAppDispatch, useAppSelector } from '../../app/store'
+import { RootStateType } from '../../app/store'
 import hide_password from '../../assets/img/SignUp/close_eye_password.png'
 import show_password from '../../assets/img/SignUp/open_eye_password.png'
+import SuperButton from '../../common/components/superButton/SuperButton'
+import SuperInput from '../../common/components/superInputText/SuperInput'
 import { LoginPage } from '../../common/routes/const-routes'
-import SuperButton from '../../common/superButton/SuperButton'
-import SuperInput from '../../common/superInputText/SuperInput'
-import s from '../SignUp/signUp.module.css'
+import { useAppDispatch, useAppSelector } from '../../utils/hooks/customHooks'
 
+import s from './/signUp.module.css'
 import { signUpTC } from './signUpReducer'
+
+const selectStatus = (state: RootStateType) => state.app.status
 
 export const SignUpForm = () => {
   const [passShown, setPassShown] = useState<boolean>(true)
   const [confPassShown, setConfPassShown] = useState<boolean>(true)
-  const status = useAppSelector(state => state.app.status)
+  const status = useAppSelector(selectStatus)
 
   const dispatch = useAppDispatch()
 
@@ -119,7 +122,7 @@ export const SignUpForm = () => {
                   type="submit"
                   className={s.button_signUp_form}
                   title={'Sign Up'}
-                  disabled={status === 'loading'}
+                  disabled={status === 'progress'}
                 ></SuperButton>
                 <span className={s.have_account}>Already have an account?</span>
                 <NavLink to={LoginPage} className={s.link}>

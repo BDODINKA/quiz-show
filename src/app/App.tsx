@@ -3,7 +3,6 @@ import React, { useEffect } from 'react'
 import './App.css'
 import { HashRouter, Navigate, Route, Routes } from 'react-router-dom'
 
-import PageNotFound from '../common/page-404/PageNotFound'
 import {
   LoginPage,
   NewPassPage,
@@ -17,16 +16,19 @@ import CreateNewPassword from '../features/forgot-pass/CreateNewPass/CreateNewPa
 import ForgotPass from '../features/forgot-pass/ForgotPass/ForgotPass'
 import Header from '../features/header/Header'
 import Login from '../features/login/Login'
+import PageNotFound from '../features/page-404/PageNotFound'
 import { Profile } from '../features/profile/Profile'
-import { authMeTC, ProfileStateType } from '../features/profile/profile.reducer'
-import SignUp from '../features/SignUp/SignUp'
-import SuperComponents from '../features/t0-test/SuperComponents'
+import { authMeTC } from '../features/profile/profile.reducer'
+import SignUp from '../features/signUp/SignUp'
+import { useAppDispatch, useAppSelector } from '../utils/hooks/customHooks'
 
-import { useAppDispatch, useAppSelector } from './store'
+import { RootStateType } from './store'
+
+const selectProfile = (state: RootStateType) => state.profile.profile
 
 function App() {
   const dispatch = useAppDispatch()
-  const { profile } = useAppSelector<ProfileStateType>(state => state.profile)
+  const profile = useAppSelector(selectProfile)
 
   useEffect(() => {
     if (profile === null) {
@@ -50,7 +52,6 @@ function App() {
           <Route path={PackCardsPage} element={<h1>Pack Cards</h1>} />
         </Routes>
       </HashRouter>
-      {/*<TestApp />*/}
     </>
   )
 }

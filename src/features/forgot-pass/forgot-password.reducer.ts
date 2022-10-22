@@ -2,7 +2,10 @@ import { AxiosError } from 'axios'
 import { Dispatch } from 'redux'
 
 import { forgotApi, forgotNewPassword } from '../../api/forgot-Pass-Api'
-import { RootStateType, AppThunk } from '../../app/store'
+import { RootStateType } from '../../app/store'
+import { SnackBarType } from '../../common/components/CustomSnackBar/CustomAlertSnackBar'
+import { AppThunk } from '../../types/HooksTypes'
+import { Nullable } from '../../types/Nullable'
 import { ServerError } from '../../utils/ServerErrorHandler'
 
 import { ForgotLink } from './ForgotLink'
@@ -17,8 +20,8 @@ export type ForgotStateType = typeof initialState
 
 const initialState = {
   response: {
-    message: null as null | string,
-    status: null as null | string,
+    message: null as Nullable<string>,
+    status: null as Nullable<SnackBarType>,
   },
   sendFormToEmail: {
     email: '',
@@ -61,7 +64,6 @@ export const forgotPasswordReducer = (
         response: {
           ...state.response,
           message: action.payload.error,
-          status: action.payload.error,
         },
       }
     }
@@ -85,7 +87,7 @@ export const SetResetStateAC = () => {
   } as const
 }
 
-export const SetStatusResponseAC = (status: string | null) => {
+export const SetStatusResponseAC = (status: Nullable<SnackBarType>) => {
   return {
     type: 'FORGOT-PASS/SET-STATUS-RESPONSE',
     payload: { status },
@@ -101,7 +103,7 @@ export const ErrorAC = (error: string) => {
 
 export const SendForgotFormTC =
   (values: string): AppThunk =>
-  (dispatch: Dispatch, getState: () => RootStateType) => {
+  (dispatch, getState: () => RootStateType) => {
     dispatch(SendForgotEmailAC(values))
     dispatch(SetStatusResponseAC('progress'))
     const data = getState().forgotPass.sendFormToEmail
@@ -126,7 +128,7 @@ export const SetResetStateTC = (): AppThunk => (dispatch: Dispatch) => {
 }
 export const SendNewPasswordFormTC =
   (data: forgotNewPassword): AppThunk =>
-  (dispatch: Dispatch) => {
+  dispatch => {
     dispatch(SetStatusResponseAC('progress'))
     forgotApi
       .sendNewPassword(data)

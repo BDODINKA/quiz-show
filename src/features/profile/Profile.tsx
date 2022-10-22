@@ -3,21 +3,26 @@ import React from 'react'
 import { LinearProgress } from '@mui/material'
 import { Navigate, NavLink } from 'react-router-dom'
 
-import { useAppDispatch, useAppSelector } from '../../app/store'
-import { CustomAlertSnackBar, SnackBarType } from '../../common/CustomSnackBar/CustomAlertSnackBar'
-import EditableSpan from '../../common/EditableSpan/EditableSpan'
+import { RootStateType } from '../../app/store'
+import { CustomAlertSnackBar } from '../../common/components/CustomSnackBar/CustomAlertSnackBar'
+import EditableSpan from '../../common/components/EditableSpan/EditableSpan'
+import SuperButton from '../../common/components/superButton/SuperButton'
 import { LoginPage, PackCardsPage } from '../../common/routes/const-routes'
-import SuperButton from '../../common/superButton/SuperButton'
+import { useAppDispatch, useAppSelector } from '../../utils/hooks/customHooks'
 
 import style from './profile.module.css'
-import { LogOutTC, ProfileStateType, StatusAC, UpdateUserProfile } from './profile.reducer'
+import { LogOutTC, StatusAC, UpdateUserProfile } from './profile.reducer'
+
+const selectProfile = (state: RootStateType) => state.profile.profile
+const selectStatus = (state: RootStateType) => state.profile.status
+const selectError = (state: RootStateType) => state.profile.error
 
 export const Profile = () => {
   const dispatch = useAppDispatch()
-  const { profile } = useAppSelector<ProfileStateType>(state => state.profile)
-  const { status, error } = useAppSelector(state => state.profile)
+  const profile = useAppSelector(selectProfile)
+  const status = useAppSelector(selectStatus)
+  const error = useAppSelector(selectError)
 
-  console.log(status, error)
   const goToLogout = () => {
     dispatch(LogOutTC())
   }
@@ -69,9 +74,9 @@ export const Profile = () => {
         </div>
       </div>
       <CustomAlertSnackBar
-        status={status as SnackBarType}
+        status={status}
         closeHandlerSnackbar={closeHandlerSnackbar}
-        message={error as string}
+        message={error}
         autoHideDuration={6000}
       />
     </div>

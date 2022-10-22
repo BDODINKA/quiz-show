@@ -2,17 +2,22 @@ import React from 'react'
 
 import { AlertColor, LinearProgress } from '@mui/material'
 
-import { useAppDispatch, useAppSelector } from '../../../app/store'
-import { CustomAlertSnackBar } from '../../../common/CustomSnackBar/CustomAlertSnackBar'
+import { RootStateType } from '../../../app/store'
+import { CustomAlertSnackBar } from '../../../common/components/CustomSnackBar/CustomAlertSnackBar'
+import { useAppDispatch, useAppSelector } from '../../../utils/hooks/customHooks'
 import CheckEmail from '../CheckEmail/CheckEmail'
 import { SetResetStateTC } from '../forgot-password.reducer'
 
 import { ForgotPassForm } from './ForgotPassForm'
 import style from './ForgotPasswordForm.module.css'
 
+const selectMessage = (state: RootStateType) => state.forgotPass.response.message
+const selectStatus = (state: RootStateType) => state.forgotPass.response.status
+
 const ForgotPass = () => {
   const dispatch = useAppDispatch()
-  const { status, message } = useAppSelector(state => state.forgotPass.response)
+  const message = useAppSelector(selectMessage)
+  const status = useAppSelector(selectStatus)
 
   if (status === 'success') {
     return <CheckEmail />

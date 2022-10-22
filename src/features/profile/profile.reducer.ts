@@ -3,7 +3,9 @@ import { Dispatch } from 'redux'
 
 import { ProfileType } from '../../api/authAPI'
 import { ChangeProfileType, LogOutType, profileAPI } from '../../api/profileAPI'
-import { AppThunk } from '../../app/store'
+import { SnackBarType } from '../../common/components/CustomSnackBar/CustomAlertSnackBar'
+import { AppThunk } from '../../types/HooksTypes'
+import { Nullable } from '../../types/Nullable'
 import { ServerError } from '../../utils/ServerErrorHandler'
 import { loginAC, setErrorAC, setStatusAC } from '../login/login-reducer'
 
@@ -16,9 +18,9 @@ export type ProfileActionType =
   | ReturnType<typeof ErrorAC>
 
 const initialState = {
-  profile: null as null | ProfileType,
-  status: null as string | null,
-  error: null as string | null,
+  profile: null as Nullable<ProfileType>,
+  status: null as Nullable<SnackBarType>,
+  error: null as Nullable<string>,
 }
 
 export const ProfileReducer = (
@@ -58,7 +60,7 @@ export const setProfileAC = (profile: ProfileType) => {
   } as const
 }
 
-export const StatusAC = (status: string | null) => {
+export const StatusAC = (status: Nullable<SnackBarType>) => {
   return {
     type: 'PROFILE/SET-STATUS',
     payload: { status },
@@ -83,7 +85,7 @@ const updateProfileAC = (data: ProfileType) => {
   } as const
 }
 
-export const authMeTC = (): AppThunk => (dispatch: Dispatch) => {
+export const authMeTC = (): AppThunk => dispatch => {
   dispatch(StatusAC('progress'))
   profileAPI
     .authMe()

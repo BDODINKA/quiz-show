@@ -4,6 +4,8 @@ import { AlertColor, ThemeProvider } from '@mui/material'
 import MuiAlert, { AlertProps } from '@mui/material/Alert'
 import Snackbar from '@mui/material/Snackbar'
 
+import { Nullable } from '../../../types/Nullable'
+
 import { themeSnackBar } from './Theme'
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(props, ref) {
@@ -17,8 +19,8 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(props,
 export type SnackBarType = AlertColor | 'progress'
 
 type PropsType = {
-  status: SnackBarType
-  message: string
+  status: Nullable<SnackBarType>
+  message: Nullable<string>
   closeHandlerSnackbar: () => void
   autoHideDuration: number
 }

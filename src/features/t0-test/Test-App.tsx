@@ -2,7 +2,6 @@ import React from 'react'
 
 import { HashRouter, Navigate, NavLink, Route, Routes } from 'react-router-dom'
 
-import PageNotFound from '../../common/page-404/PageNotFound'
 import {
   LoginPage,
   NewPassPage,
@@ -15,8 +14,9 @@ import CreateNewPassword from '../forgot-pass/CreateNewPass/CreateNewPassword'
 import ForgotPass from '../forgot-pass/ForgotPass/ForgotPass'
 import Header from '../header/Header'
 import Login from '../login/Login'
+import PageNotFound from '../page-404/PageNotFound'
 import { Profile } from '../profile/Profile'
-import SignUp from '../SignUp/SignUp'
+import SignUp from '../signUp/SignUp'
 
 import SuperComponents from './SuperComponents'
 import style from './testApp.module.css'

@@ -1,18 +1,17 @@
-export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
-export type InitialStateType = {
-  status: RequestStatusType
-  error: string | null
-}
+import { SnackBarType } from '../common/components/CustomSnackBar/CustomAlertSnackBar'
+import { Nullable } from '../types/Nullable'
 
-const initialState: InitialStateType = {
-  status: 'idle' as RequestStatusType,
-  error: null,
+export type AppInitStateType = typeof AppInitState
+
+const AppInitState = {
+  status: null as Nullable<SnackBarType>,
+  error: null as Nullable<string>,
 }
 
 export const appReducer = (
-  state: InitialStateType = initialState,
+  state: AppInitStateType = AppInitState,
   action: ActionsType
-): InitialStateType => {
+): AppInitStateType => {
   switch (action.type) {
     case 'APP/SET-STATUS':
       return { ...state, status: action.status }
@@ -24,11 +23,11 @@ export const appReducer = (
 }
 
 export type SetAppStatusActionType = ReturnType<typeof setAppStatusAC>
-export const setAppStatusAC = (status: RequestStatusType) => {
+export const setAppStatusAC = (status: SnackBarType) => {
   return { type: 'APP/SET-STATUS', status } as const
 }
 export type SetAppErrorActionType = ReturnType<typeof setAppErrorAC>
-export const setAppErrorAC = (error: string | null) => {
+export const setAppErrorAC = (error: Nullable<string>) => {
   return { type: 'APP/SET-ERROR', error } as const
 }
 
