@@ -7,6 +7,7 @@ export type forgotType = {
   from: string
   message: string
 }
+
 export type forgotNewPassword = {
   password: string
   resetPasswordToken: string | undefined

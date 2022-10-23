@@ -44,7 +44,6 @@ export const SignUpForm = () => {
         }}
         validationSchema={SignupSchema}
         onSubmit={values => {
-          console.log(values)
           dispatch(signUpTC(values))
         }}
       >

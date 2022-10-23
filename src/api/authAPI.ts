@@ -22,6 +22,7 @@ export type ProfileType = {
   tokenDeathTime: number
   avatar?: string
 }
+
 export const authAPI = {
   async login(data: LoginFieldsType) {
     await new Promise(resolve => setTimeout(resolve, 500))

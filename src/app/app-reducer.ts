@@ -8,9 +8,11 @@ const AppInitState = {
   error: null as Nullable<string>,
 }
 
+export type AppActionsType = ReturnType<typeof setAppStatusAC> | ReturnType<typeof setAppErrorAC>
+
 export const appReducer = (
   state: AppInitStateType = AppInitState,
-  action: ActionsType
+  action: AppActionsType
 ): AppInitStateType => {
   switch (action.type) {
     case 'APP/SET-STATUS':
@@ -22,13 +24,10 @@ export const appReducer = (
   }
 }
 
-export type SetAppStatusActionType = ReturnType<typeof setAppStatusAC>
-export const setAppStatusAC = (status: SnackBarType) => {
+export const setAppStatusAC = (status: Nullable<SnackBarType>) => {
   return { type: 'APP/SET-STATUS', status } as const
 }
-export type SetAppErrorActionType = ReturnType<typeof setAppErrorAC>
+
 export const setAppErrorAC = (error: Nullable<string>) => {
   return { type: 'APP/SET-ERROR', error } as const
 }
-
-type ActionsType = SetAppStatusActionType | SetAppErrorActionType

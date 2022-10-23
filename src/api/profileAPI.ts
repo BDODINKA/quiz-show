@@ -7,10 +7,12 @@ export type ChangeProfileType = {
   name: string
   avatar: string // url or base64
 }
+
 export type LogOutType = {
   info: string
   error?: string
 }
+
 export type UpdateUserProfile = {
   updatedUser: ProfileType
   error?: string

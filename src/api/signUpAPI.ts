@@ -6,6 +6,7 @@ export type SignUpUserType = {
   email: string
   password: string
 }
+
 export type ResponseType = {
   addedUser: SignUpUserType
   error?: string

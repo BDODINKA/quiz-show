@@ -11,12 +11,12 @@ import {
   RestorePassPage,
 } from '../../common/routes/const-routes'
 import CreateNewPassword from '../forgot-pass/CreateNewPass/CreateNewPassword'
-import ForgotPass from '../forgot-pass/ForgotPass/ForgotPass'
+import { ForgotPass } from '../forgot-pass/ForgotPass/ForgotPass'
 import Header from '../header/Header'
 import Login from '../login/Login'
 import PageNotFound from '../page-404/PageNotFound'
 import { Profile } from '../profile/Profile'
-import SignUp from '../signUp/SignUp'
+import SignUp from '../sign-up/SignUp'
 
 import SuperComponents from './SuperComponents'
 import style from './testApp.module.css'

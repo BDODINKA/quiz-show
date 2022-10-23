@@ -16,7 +16,7 @@ import { useAppDispatch, useAppSelector } from '../../utils/hooks/customHooks'
 import { loginTC } from './login-reducer'
 import s from './login.module.css'
 
-const selectStatus = (state: RootStateType) => state.auth.status
+const selectStatus = (state: RootStateType) => state.app.status
 
 const SignInForm = () => {
   const [shown, setShown] = useState<boolean>(true)

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { useNavigate } from 'react-router-dom'
 
@@ -18,6 +18,12 @@ const CheckEmail = () => {
   const email = useAppSelector(selectEmail)
 
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (!email) {
+      navigate(LoginPage)
+    }
+  }, [])
 
   const GoToLogin = () => {
     navigate(LoginPage)

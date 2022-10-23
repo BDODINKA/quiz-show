@@ -4,7 +4,7 @@ import thunk from 'redux-thunk'
 import { forgotPasswordReducer } from '../features/forgot-pass/forgot-password.reducer'
 import { loginReducer } from '../features/login/login-reducer'
 import { ProfileReducer } from '../features/profile/profile.reducer'
-import { signUpReducer } from '../features/signUp/signUpReducer'
+import { signUpReducer } from '../features/sign-up/signUpReducer'
 
 import { appReducer } from './app-reducer'
 

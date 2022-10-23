@@ -1,6 +1,5 @@
 import React from 'react'
 
-import { LinearProgress } from '@mui/material'
 import { Navigate, NavLink } from 'react-router-dom'
 
 import { RootStateType } from '../../app/store'
@@ -11,11 +10,11 @@ import { LoginPage, PackCardsPage } from '../../common/routes/const-routes'
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/customHooks'
 
 import style from './profile.module.css'
-import { LogOutTC, StatusAC, UpdateUserProfile } from './profile.reducer'
+import { LogOutTC, UpdateUserProfile } from './profile.reducer'
 
 const selectProfile = (state: RootStateType) => state.profile.profile
-const selectStatus = (state: RootStateType) => state.profile.status
-const selectError = (state: RootStateType) => state.profile.error
+const selectStatus = (state: RootStateType) => state.app.status
+const selectError = (state: RootStateType) => state.app.error
 
 export const Profile = () => {
   const dispatch = useAppDispatch()
@@ -29,9 +28,6 @@ export const Profile = () => {
   const changeName = (name: string) => {
     dispatch(UpdateUserProfile({ name: name, avatar: '' }))
   }
-  const closeHandlerSnackbar = () => {
-    dispatch(StatusAC(null))
-  }
 
   if (profile === null) {
     return <Navigate to={LoginPage} />
@@ -39,7 +35,6 @@ export const Profile = () => {
 
   return (
     <div>
-      {status === 'progress' && <LinearProgress sx={{ width: '100%' }} />}
       <div className={style.container}>
         <div className={style.backBlock}>
           <NavLink to={PackCardsPage} className={style.arrow} />
@@ -73,12 +68,7 @@ export const Profile = () => {
           />
         </div>
       </div>
-      <CustomAlertSnackBar
-        status={status}
-        closeHandlerSnackbar={closeHandlerSnackbar}
-        message={error}
-        autoHideDuration={6000}
-      />
+      <CustomAlertSnackBar status={status} message={error} autoHideDuration={6000} />
     </div>
   )
 }

@@ -20,19 +20,12 @@ const SignUp = () => {
   const status = useAppSelector(selectStatus)
   const navigate = useNavigate()
 
-  const closeHandlerSnackbar = () => {}
-
   if (signUp) navigate(LoginPage)
 
   return (
     <div className={s.signUp_container}>
       <SignUpForm />
-      <CustomAlertSnackBar
-        status={status}
-        message={error}
-        closeHandlerSnackbar={closeHandlerSnackbar}
-        autoHideDuration={6000}
-      />
+      <CustomAlertSnackBar status={status} message={error} autoHideDuration={6000} />
     </div>
   )
 }
