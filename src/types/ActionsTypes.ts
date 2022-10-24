@@ -1,4 +1,5 @@
 import { AppActionsType } from '../app/app-reducer'
+import { ActionsPaginationType } from '../common/components/pagination/pagination-reducer'
 import { ForgotActionsType } from '../features/forgot-pass/forgot-password.reducer'
 import { LoginActionType } from '../features/login/login-reducer'
 import { ProfileActionType } from '../features/profile/profile.reducer'
@@ -10,3 +11,4 @@ export type ActionsType =
   | SignUpActionsType
   | ForgotActionsType
   | AppActionsType
+  | ActionsPaginationType

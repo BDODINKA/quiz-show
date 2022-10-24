@@ -1,6 +1,7 @@
 import { combineReducers, createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 
+import { paginationReducer } from '../common/components/pagination/pagination-reducer'
 import { forgotPasswordReducer } from '../features/forgot-pass/forgot-password.reducer'
 import { loginReducer } from '../features/login/login-reducer'
 import { ProfileReducer } from '../features/profile/profile.reducer'
@@ -14,6 +15,7 @@ export const rootReducer = combineReducers({
   forgotPass: forgotPasswordReducer,
   reg: signUpReducer,
   app: appReducer,
+  pagination: paginationReducer,
 })
 
 export const store = createStore(rootReducer, applyMiddleware(thunk))

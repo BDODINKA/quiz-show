@@ -14,6 +14,7 @@ import {
   RegistrationPage,
   RestorePassPage,
 } from '../common/routes/const-routes'
+import Cards from '../features/cards/Cards'
 import CheckEmail from '../features/forgot-pass/CheckEmail/CheckEmail'
 import CreateNewPassword from '../features/forgot-pass/CreateNewPass/CreateNewPassword'
 import { ForgotPass } from '../features/forgot-pass/ForgotPass/ForgotPass'
@@ -56,7 +57,7 @@ function App() {
           <Route path={CheckEmailPage} element={<CheckEmail />} />
           <Route path={RestorePassPage} element={<ForgotPass />} />
           <Route path={NewPassPage} element={<CreateNewPassword />} />
-          <Route path={PackCardsPage} element={<h1>Pack Cards</h1>} />
+          <Route path={PackCardsPage} element={<Cards />} />
         </Routes>
       </HashRouter>
     </>
