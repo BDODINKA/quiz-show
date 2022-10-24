@@ -1,8 +1,9 @@
-import { AppActionsType } from '../app/app-reducer'
-import { ForgotActionsType } from '../features/forgot-pass/forgot-password.reducer'
-import { LoginActionType } from '../features/login/login-reducer'
-import { ProfileActionType } from '../features/profile/profile.reducer'
-import { SignUpActionsType } from '../features/sign-up/signUpReducer'
+import { AppActionsType } from "../app/app-reducer";
+import { ForgotActionsType } from "../features/forgot-pass/forgot-password.reducer";
+import { LoginActionType } from "../features/login/login-reducer";
+import { ProfileActionType } from "../features/profile/profile.reducer";
+import { SignUpActionsType } from "../features/sign-up/signUpReducer";
+import { CardPacksActionType } from "../features/packCards/CardPacks-reducer";
 
 export type ActionsType =
   | LoginActionType
@@ -10,3 +11,4 @@ export type ActionsType =
   | SignUpActionsType
   | ForgotActionsType
   | AppActionsType
+  | CardPacksActionType;
