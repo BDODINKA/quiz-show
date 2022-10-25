@@ -2,7 +2,6 @@ import React from 'react'
 
 import { HashRouter, Navigate, NavLink, Route, Routes } from 'react-router-dom'
 
-import PageNotFound from '../../common/page-404/PageNotFound'
 import {
   LoginPage,
   NewPassPage,
@@ -12,11 +11,12 @@ import {
   RestorePassPage,
 } from '../../common/routes/const-routes'
 import CreateNewPassword from '../forgot-pass/CreateNewPass/CreateNewPassword'
-import ForgotPass from '../forgot-pass/ForgotPass/ForgotPass'
+import { ForgotPass } from '../forgot-pass/ForgotPass/ForgotPass'
 import Header from '../header/Header'
 import Login from '../login/Login'
+import PageNotFound from '../page-404/PageNotFound'
 import { Profile } from '../profile/Profile'
-import SignUp from '../SignUp/SignUp'
+import SignUp from '../sign-up/SignUp'
 
 import SuperComponents from './SuperComponents'
 import style from './testApp.module.css'
@@ -36,6 +36,7 @@ export const TestApp = () => {
       <Header />
       <Routes>
         <Route path={'/'} element={<SuperComponents />} />
+
         <Route path={'*'} element={<Navigate to={NotPage} />} />
         <Route path={LoginPage} element={<Login />} />
         <Route path={RegistrationPage} element={<SignUp />} />

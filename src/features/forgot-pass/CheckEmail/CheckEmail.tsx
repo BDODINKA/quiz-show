@@ -1,18 +1,29 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { useNavigate } from 'react-router-dom'
 
-import { useAppDispatch, useAppSelector } from '../../../app/store'
+import { RootStateType } from '../../../app/store'
+import SuperButton from '../../../common/components/superButton/SuperButton'
 import { LoginPage } from '../../../common/routes/const-routes'
-import SuperButton from '../../../common/superButton/SuperButton'
+import { useAppDispatch, useAppSelector } from '../../../utils/hooks/customHooks'
 import { SetResetStateTC } from '../forgot-password.reducer'
 
 import style from './CheckEmail.module.css'
 
+const selectEmail = (state: RootStateType) => state.forgotPass.sendFormToEmail.email
+
 const CheckEmail = () => {
   const dispatch = useAppDispatch()
-  const { email } = useAppSelector(state => state.forgotPass.sendFormToEmail)
+
+  const email = useAppSelector(selectEmail)
+
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (!email) {
+      navigate(LoginPage)
+    }
+  }, [])
 
   const GoToLogin = () => {
     navigate(LoginPage)

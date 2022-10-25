@@ -3,15 +3,17 @@ import React, { useState } from 'react'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 
-import { useAppDispatch } from '../../../app/store'
-import SuperButton from '../../../common/superButton/SuperButton'
-import SuperInput from '../../../common/superInputText/SuperInput'
+import { SnackBarType } from '../../../common/components/CustomSnackBar/CustomAlertSnackBar'
+import SuperButton from '../../../common/components/superButton/SuperButton'
+import SuperInput from '../../../common/components/superInputText/SuperInput'
+import { Nullable } from '../../../types/Nullable'
+import { useAppDispatch } from '../../../utils/hooks/customHooks'
 import { SendNewPasswordFormTC } from '../forgot-password.reducer'
 
 import style from './CreateNewPassword.module.css'
 
 type PropsType = {
-  status: string
+  status: Nullable<SnackBarType>
   token?: string
 }
 

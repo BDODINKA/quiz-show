@@ -4,19 +4,23 @@ import { Formik } from 'formik'
 import { NavLink } from 'react-router-dom'
 import * as Yup from 'yup'
 
-import { useAppDispatch } from '../../app/store'
+import { RootStateType } from '../../app/store'
 import hide_password from '../../assets/img/Login/close_eye_password.png'
 import show_password from '../../assets/img/Login/open_eye_password.png'
+import SuperButton from '../../common/components/superButton/SuperButton'
+import SuperCheckbox from '../../common/components/superCheckbox/SuperCheckbox'
+import SuperInput from '../../common/components/superInputText/SuperInput'
 import { RegistrationPage, RestorePassPage } from '../../common/routes/const-routes'
-import SuperButton from '../../common/superButton/SuperButton'
-import SuperCheckbox from '../../common/superCheckbox/SuperCheckbox'
-import SuperInput from '../../common/superInputText/SuperInput'
+import { useAppDispatch, useAppSelector } from '../../utils/hooks/customHooks'
 
 import { loginTC } from './login-reducer'
 import s from './login.module.css'
 
+const selectStatus = (state: RootStateType) => state.app.status
+
 const SignInForm = () => {
   const [shown, setShown] = useState<boolean>(true)
+  const status = useAppSelector(selectStatus)
 
   const dispatch = useAppDispatch()
 
@@ -88,7 +92,12 @@ const SignInForm = () => {
               <NavLink to={RestorePassPage} className={s.forgot_password}>
                 Forgot Password?
               </NavLink>
-              <SuperButton type="submit" className={s.button_sign_in_form} title={'Sign In'} />
+              <SuperButton
+                type="submit"
+                className={s.button_sign_in_form}
+                title={'Sign In'}
+                disabled={status === 'progress'}
+              />
             </div>
             <div className={s.have_account}>Already have an account?</div>
           </form>

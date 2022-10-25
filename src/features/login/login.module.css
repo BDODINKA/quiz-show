@@ -10,15 +10,41 @@
 .button_sign_in_form {
   cursor: pointer;
 
-  width: 100px;
-  height: 30px;
+  width: 84.02%;
+  height: 36px;
 
-  color: white;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 20px;
+  color: #ffffff;
+  text-align: center;
 
-  background-color: #0479fd;
+  background: #366eff;
   border: none;
-  border-radius: 20px;
-  box-shadow: 1px 1px 2px #0479fd;
+  border-radius: 30px;
+  box-shadow: 0 4px 18px rgba(54, 110, 255, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+.button_sign_in_form:disabled,
+.button_sign_in_form:disabled:hover {
+  cursor: auto;
+
+  color: #366eff;
+
+  background-color: #f1f1f1;
+  border: none;
+  border-radius: 30px;
+  box-shadow: none;
+}
+.button_sign_in_form:active,
+.button_sign_in_form:hover{
+  color: #366eff;
+
+  background-color: #ffffff;
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0 4px 18px rgb(54, 110, 255), inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .form_container {
@@ -146,6 +172,7 @@
 
   text-align: center;
 }
+
 .sign_up_button {
   font-family: 'Montserrat', sans-serif;
   font-size: 16px;

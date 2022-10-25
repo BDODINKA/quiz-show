@@ -1,39 +1,35 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
-import { LinearProgress } from '@mui/material'
-import { Navigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
-import { useAppDispatch, useAppSelector } from '../../app/store'
-import { CustomAlertSnackBar, SnackBarType } from '../../common/CustomSnackBar/CustomAlertSnackBar'
+import { RootStateType } from '../../app/store'
+import { CustomAlertSnackBar } from '../../common/components/CustomSnackBar/CustomAlertSnackBar'
 import { ProfilePage } from '../../common/routes/const-routes'
+import { useAppSelector } from '../../utils/hooks/customHooks'
 
-import { setStatusAC } from './login-reducer'
 import s from './login.module.css'
 import SingInForm from './SingInForm'
 
+const selectStatus = (state: RootStateType) => state.app.status
+const selectError = (state: RootStateType) => state.app.error
+const selectIsLoggedIn = (state: RootStateType) => state.auth.isLoggedIn
+
 const Login = () => {
-  const dispatch = useAppDispatch()
-  const { status, error, isLoggedIn } = useAppSelector(state => state.auth)
+  const status = useAppSelector(selectStatus)
+  const error = useAppSelector(selectError)
+  const isLoggedIn = useAppSelector(selectIsLoggedIn)
+  const navigate = useNavigate()
 
-  const closeHandlerSnackbar = () => {
-    dispatch(setStatusAC(null))
-  }
-
-  if (isLoggedIn && status) {
-    return <Navigate to={ProfilePage} />
-  }
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate(ProfilePage)
+    }
+  }, [isLoggedIn])
 
   return (
     <div>
-      {status === 'progress' && <LinearProgress sx={{ width: '100%' }} />}
-
       <div className={s.login_container}>
-        <CustomAlertSnackBar
-          status={status as SnackBarType}
-          closeHandlerSnackbar={closeHandlerSnackbar}
-          message={error as string}
-          autoHideDuration={6000}
-        />
+        <CustomAlertSnackBar status={status} message={error} autoHideDuration={6000} />
         <SingInForm />
       </div>
     </div>

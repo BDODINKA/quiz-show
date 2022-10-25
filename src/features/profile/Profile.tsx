@@ -1,42 +1,32 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
-import { LinearProgress } from '@mui/material'
 import { Navigate, NavLink } from 'react-router-dom'
 
-import { useAppDispatch, useAppSelector } from '../../app/store'
-import { CustomAlertSnackBar, SnackBarType } from '../../common/CustomSnackBar/CustomAlertSnackBar'
-import EditableSpan from '../../common/EditableSpan/EditableSpan'
+import { RootStateType } from '../../app/store'
+import { CustomAlertSnackBar } from '../../common/components/CustomSnackBar/CustomAlertSnackBar'
+import EditableSpan from '../../common/components/EditableSpan/EditableSpan'
+import SuperButton from '../../common/components/superButton/SuperButton'
 import { LoginPage, PackCardsPage } from '../../common/routes/const-routes'
-import SuperButton from '../../common/superButton/SuperButton'
+import { useAppDispatch, useAppSelector } from '../../utils/hooks/customHooks'
 
 import style from './profile.module.css'
-import {
-  authMeTC,
-  LogOutTC,
-  ProfileStateType,
-  StatusAC,
-  UpdateUserProfile,
-} from './profile.reducer'
+import { LogOutTC, UpdateUserProfile } from './profile.reducer'
+
+const selectProfile = (state: RootStateType) => state.profile.profile
+const selectStatus = (state: RootStateType) => state.app.status
+const selectError = (state: RootStateType) => state.app.error
 
 export const Profile = () => {
   const dispatch = useAppDispatch()
-  const { profile } = useAppSelector<ProfileStateType>(state => state.profile)
-  const { status, error } = useAppSelector(state => state.profile)
-
-  useEffect(() => {
-    if (profile === null) {
-      dispatch(authMeTC())
-    }
-  }, [])
+  const profile = useAppSelector(selectProfile)
+  const status = useAppSelector(selectStatus)
+  const error = useAppSelector(selectError)
 
   const goToLogout = () => {
     dispatch(LogOutTC())
   }
   const changeName = (name: string) => {
     dispatch(UpdateUserProfile({ name: name, avatar: '' }))
-  }
-  const closeHandlerSnackbar = () => {
-    dispatch(StatusAC(null))
   }
 
   if (profile === null) {
@@ -45,7 +35,6 @@ export const Profile = () => {
 
   return (
     <div>
-      {status === 'progress' && <LinearProgress sx={{ width: '100%' }} />}
       <div className={style.container}>
         <div className={style.backBlock}>
           <NavLink to={PackCardsPage} className={style.arrow} />
@@ -79,12 +68,7 @@ export const Profile = () => {
           />
         </div>
       </div>
-      <CustomAlertSnackBar
-        status={status as SnackBarType}
-        closeHandlerSnackbar={closeHandlerSnackbar}
-        message={error as string}
-        autoHideDuration={6000}
-      />
+      <CustomAlertSnackBar status={status} message={error} autoHideDuration={6000} />
     </div>
   )
 }

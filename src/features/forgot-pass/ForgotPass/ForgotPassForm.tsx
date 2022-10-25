@@ -4,16 +4,17 @@ import { Formik } from 'formik'
 import { NavLink } from 'react-router-dom'
 import * as Yup from 'yup'
 
-import { useAppDispatch } from '../../../app/store'
+import SuperButton from '../../../common/components/superButton/SuperButton'
+import SuperInput from '../../../common/components/superInputText/SuperInput'
 import { LoginPage } from '../../../common/routes/const-routes'
-import SuperButton from '../../../common/superButton/SuperButton'
-import SuperInput from '../../../common/superInputText/SuperInput'
+import { Nullable } from '../../../types/Nullable'
+import { useAppDispatch } from '../../../utils/hooks/customHooks'
 import { SendForgotFormTC } from '../forgot-password.reducer'
 
 import style from './ForgotPasswordForm.module.css'
 
 type PropsType = {
-  status: string
+  status: Nullable<string>
   style: any
 }
 export const ForgotPassForm = (props: PropsType) => {
