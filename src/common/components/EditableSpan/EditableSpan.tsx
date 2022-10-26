@@ -6,8 +6,8 @@ import React, {
   useState,
 } from 'react'
 
-import SuperButton from '../superButton/SuperButton'
-import SuperInput from '../superInputText/SuperInput'
+import SuperButton from '../SuperButton/SuperButton'
+import SuperInput from '../SuperInputText/SuperInput'
 
 type PropsType = {
   text?: string

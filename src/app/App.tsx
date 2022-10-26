@@ -19,6 +19,7 @@ import CreateNewPassword from '../features/forgot-pass/CreateNewPass/CreateNewPa
 import { ForgotPass } from '../features/forgot-pass/ForgotPass/ForgotPass'
 import Header from '../features/header/Header'
 import Login from '../features/login/Login'
+import PacksCard from '../features/packs-card/PacksCard'
 import PageNotFound from '../features/page-404/PageNotFound'
 import { Profile } from '../features/profile/Profile'
 import { authMeTC } from '../features/profile/profile.reducer'
@@ -56,7 +57,7 @@ function App() {
           <Route path={CheckEmailPage} element={<CheckEmail />} />
           <Route path={RestorePassPage} element={<ForgotPass />} />
           <Route path={NewPassPage} element={<CreateNewPassword />} />
-          <Route path={PackCardsPage} element={<h1>Pack Cards</h1>} />
+          <Route path={PackCardsPage} element={<PacksCard />} />
         </Routes>
       </HashRouter>
     </>

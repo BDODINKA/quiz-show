@@ -5,7 +5,7 @@ import { Navigate, NavLink } from 'react-router-dom'
 import { RootStateType } from '../../app/store'
 import { CustomAlertSnackBar } from '../../common/components/CustomSnackBar/CustomAlertSnackBar'
 import EditableSpan from '../../common/components/EditableSpan/EditableSpan'
-import SuperButton from '../../common/components/superButton/SuperButton'
+import SuperButton from '../../common/components/SuperButton/SuperButton'
 import { LoginPage, PackCardsPage } from '../../common/routes/const-routes'
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/customHooks'
 
