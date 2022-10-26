@@ -1,7 +1,8 @@
 import {Dispatch} from "redux";
-import {CardsPackResponceType, CardResponceType, crudAPI, UpdateCardType} from "./crudAPI";
+import {CardPacksResponceType, CardResponceType, crudAPI, UpdateCardType} from "./crudAPI";
+import {AppThunk} from "../../types/HooksTypes";
 
-type InitialStateType = CardsPackResponceType[] | CardResponceType[]
+type InitialStateType = CardPacksResponceType[] | CardResponceType[]
 
 const initialState: InitialStateType = []
 
@@ -29,16 +30,7 @@ export const crudReducer = (state= initialState, action: CrudActionsType):Initia
     }
 }
 
-/*export type SetPacksAtionsType = ReturnType<typeof setPacksAC>
-export type AddPackAtionsType = ReturnType<typeof addPackAC>
-export type DeletePackAtionsType = ReturnType<typeof deletePackAC>
-export type UpdatePackActionsType = ReturnType<typeof updatePackAC>
-export type SetCardsActionsType = ReturnType<typeof setCardsAC>
-export type AddCardActionsType = ReturnType<typeof addCardAC>
-export type DeleteCardActionsType = ReturnType<typeof deleteCardAC>
-export type UpdateCardActionsType = ReturnType<typeof updateCardAC>*/
-
-export const setPacksAC = (cardPacks: CardsPackResponceType[]) => {
+export const setPacksAC = (cardPacks: CardPacksResponceType[]) => {
     return {type: "CRUD/SET-PACKS", cardPacks} as const
 }
 export const addPackAC = (name: string) => {
@@ -47,13 +39,13 @@ export const addPackAC = (name: string) => {
 export const deletePackAC = (id: string) => {
     return {type: "CRUD/DELETE-PACKS", id} as const
 }
-export const updatePackAC = (cardsPack: CardsPackResponceType) => {
+export const updatePackAC = (cardsPack: CardPacksResponceType) => {
     return {type: "CRUD/UPDATE-PACKS", cardsPack} as const
 }
 export const setCardsAC = (cards: CardResponceType[]) => {
     return {type: "CRUD/SET-CARDS", cards} as const
 }
-export const addCardAC = (cardsPack: CardsPackResponceType) => {
+export const addCardAC = (cardsPack: CardPacksResponceType) => {
     return {type: "CRUD/ADD-CARD", cardsPack} as const
 }
 export const deleteCardAC = (id:string) => {
@@ -64,7 +56,7 @@ export const updateCardAC = (card: CardResponceType) => {
 }
 
 export const getPacksTC =
-    () => (dispatch: Dispatch<CrudActionsType>) => {
+    (): AppThunk => (dispatch: Dispatch<CrudActionsType>) => {
         crudAPI.getPacks()
             .then((res) => {
                 dispatch(setPacksAC(res.data.cardPacks))
@@ -73,7 +65,7 @@ export const getPacksTC =
     }
 
 export const addPackTC =
-    (cardsPack: CardsPackResponceType) => (dispatch: Dispatch<CrudActionsType>) => {
+    (cardsPack: CardPacksResponceType): AppThunk => (dispatch: Dispatch<CrudActionsType>) => {
         crudAPI.addPack(cardsPack)
             .then((res) => {
                 console.log(res)
@@ -81,7 +73,7 @@ export const addPackTC =
     }
 
 export const deletePackTC =
-    () => (dispatch: Dispatch<CrudActionsType>) => {
+    (): AppThunk => (dispatch: Dispatch<CrudActionsType>) => {
         crudAPI.deletePack()
             .then((res) => {
                 console.log(res)
@@ -89,7 +81,7 @@ export const deletePackTC =
     }
 
 export const updatePackTC =
-    (cardsPack: CardsPackResponceType) => (dispatch: Dispatch<CrudActionsType>) => {
+    (cardsPack: CardPacksResponceType): AppThunk => (dispatch: Dispatch<CrudActionsType>) => {
         crudAPI.updatePack(cardsPack)
             .then((res) => {
                 console.log(res)
@@ -97,7 +89,7 @@ export const updatePackTC =
     }
 
     export const getCardsTC =
-        () => (dispatch: Dispatch<CrudActionsType>) => {
+        (): AppThunk => (dispatch: Dispatch<CrudActionsType>) => {
     crudAPI.getCards()
         .then((res) => {
             dispatch(setCardsAC(res.data.cards))
@@ -106,7 +98,7 @@ export const updatePackTC =
 }
 
 export const addCardTC =
-    (card: CardResponceType) => (dispatch: Dispatch<CrudActionsType>) => {
+    (card: CardResponceType): AppThunk => (dispatch: Dispatch<CrudActionsType>) => {
         crudAPI.addCard(card)
             .then((res) => {
                 console.log(res)
@@ -114,7 +106,7 @@ export const addCardTC =
     }
 
     export const deleteCardTC =
-        () => (dispatch: Dispatch<CrudActionsType>) => {
+        (): AppThunk => (dispatch: Dispatch<CrudActionsType>) => {
     crudAPI.deleteCard()
         .then((res) => {
             console.log(res)
@@ -122,7 +114,7 @@ export const addCardTC =
         }
 
     export const updateCardTC =
-        (updateCard: UpdateCardType) => (dispatch: Dispatch<CrudActionsType>) => {
+        (updateCard: UpdateCardType): AppThunk => (dispatch: Dispatch<CrudActionsType>) => {
     crudAPI.updateCard(updateCard)
         .then((res) => {
             console.log(res)

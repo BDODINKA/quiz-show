@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios'
 
-export type CardsPackResponceType = {
+export type CardPacksResponceType = {
     _id?: string
     name?: string,
     deckCover?: string,
@@ -44,7 +44,7 @@ export const crudAPI = {
             }
         )
     },
-    addPack (cardsPack: CardsPackResponceType) {
+    addPack (cardsPack: CardPacksResponceType) {
         return instance.post(
             "/cards/pack", {
                 cardsPack: {
@@ -59,7 +59,7 @@ export const crudAPI = {
             '/cards/pack?id=635633448187d600045d9931'
         )
     },
-    updatePack (cardsPack: CardsPackResponceType) {
+    updatePack (cardsPack: CardPacksResponceType) {
         return instance.put(
           '/cards/pack', {
               cardsPack: {

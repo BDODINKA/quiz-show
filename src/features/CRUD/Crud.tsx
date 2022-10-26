@@ -4,7 +4,8 @@ import {UpdatePack} from "./components/UpdatePack";
 import {AddNewCard} from "./components/AddNewCard";
 import {DeleteCard} from "./components/DeleteCard";
 import {UpdateCard} from "./components/UpdateCard";
-import {PackCards} from "../PackCards/PackCards";
+import {CardPacks} from "../CardPacks/CardPacks";
+import {Card} from "../Card/Card";
 
 export const Crud = () => {
     return (
@@ -15,7 +16,8 @@ export const Crud = () => {
             <AddNewCard/>
             <DeleteCard/>
             <UpdateCard/>
-            <PackCards/>
+            <CardPacks/>
+            <Card/>
         </div>
     )
 }

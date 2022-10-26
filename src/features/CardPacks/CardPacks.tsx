@@ -3,7 +3,7 @@ import {useAppDispatch, useAppSelector} from "../../utils/hooks/customHooks";
 import {getCardsTC, getPacksTC} from "../CRUD/crud-reducer";
 import SuperButton from "../../common/components/superButton/SuperButton";
 
-export const PackCards = () => {
+export const CardPacks = () => {
     const dispatch = useAppDispatch();
     const pack = useAppSelector(state => state.packs)
     useEffect(()=>{
@@ -24,7 +24,7 @@ export const PackCards = () => {
     console.log(pack)
     return (
         <div>
-            <SuperButton title={"Get PackCards"} onClick={getPacksHandler}/>
+            <SuperButton title={"Get CardPacks"} onClick={getPacksHandler}/>
             <SuperButton title={"Get Cards"} onClick={getCardsHandler}/>
         </div>
     );

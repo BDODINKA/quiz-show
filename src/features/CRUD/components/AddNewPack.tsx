@@ -2,7 +2,7 @@
 import {addPackTC} from "../crud-reducer";
 import {useAppDispatch} from "../../../utils/hooks/customHooks";
 import SuperButton from "../../../common/components/superButton/SuperButton";
-import {CardsPackResponceType} from "../crudAPI";
+import {CardPacksResponceType} from "../crudAPI";
 import {useCallback} from "react";
 
 
