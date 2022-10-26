@@ -41,7 +41,9 @@
 
 .tools_container {
     display: grid;
-    grid-template-columns: 40% 20% 30% 10%;
+    grid-template-columns: 40% 27% 27% 6%;
+    margin-bottom: 20px;
+    align-items: end;
 }
 
 .input_table {
@@ -50,14 +52,93 @@
     background-position: 10px;
     padding-left: 40px;
 
-    height: 36px;
-    width: 400px;
+    height: 34px;
+    width: 80%;
+    margin-top: 8px;
+
     border-radius: 2px;
 
-    border: 2px solid #D9D9D9;
+    border: 1px solid #D9D9D9;
 
 }
 
-.header_table {
+.button_show, .button_active {
+    width: 96px;
+    height: 38px;
+    border: 1px solid #D9D9D9;
+    color: black;
+    background-color: white;
+    border-radius: 2px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.button_active {
+    background-color: #0479fd;
+    color: white;
+    border-radius: 0 2px 2px 0;
+}
+
+.rating_block {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 8px;
+}
+
+.border_rating, .filter_remove {
+    display: block;
+    width: 34px;
+    height: 34px;
+    background: #FFFFFF;
+    border: 1px solid #D9D9D9;
+    border-radius: 2px;
+    text-align: center;
+    padding: 0;
+}
+.range_slider_block{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.range_slider {
+    display: block;
+    width: 80%;
+}
+.filter_remove_container{
+    display: flex;
+    justify-content: end;
+}
+.filter_remove{
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+}
+.table_block{
+    display: flex;
+    flex-direction: column;
+}
+.table_header{
     background-color: #EFEFEF;
+}
+
+.title_table_header, .title_table_body{
+    display: grid;
+    grid-template-columns: 25% 15% 20% 25% 15%;
+    justify-items: center;
+    align-items: center;
+
+}
+.actions_button_container{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    width: 70%;
+}
+.actions_button_container div{
+    cursor: pointer;
 }
