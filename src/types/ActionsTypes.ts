@@ -3,12 +3,10 @@ import { ForgotActionsType } from "../features/forgot-pass/forgot-password.reduc
 import { LoginActionType } from "../features/login/login-reducer";
 import { ProfileActionType } from "../features/profile/profile.reducer";
 import { SignUpActionsType } from "../features/sign-up/signUpReducer";
-import { CardPacksActionType } from "../features/packCards/CardPacks-reducer";
 
 export type ActionsType =
   | LoginActionType
   | ProfileActionType
   | SignUpActionsType
   | ForgotActionsType
-  | AppActionsType
-  | CardPacksActionType;
+  | AppActionsType;

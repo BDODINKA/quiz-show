@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   Paper,
   Table,
@@ -8,50 +8,63 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import { useAppDispatch, useAppSelector } from "../../utils/hooks/customHooks";
-import { getCardPacksTC } from "./CardPacks-reducer";
-import { RootStateType } from "../../app/store";
-
-export const selectCardsPack = (state: RootStateType) =>
-  state.cardPacks.cardPacks;
+import style from "./CardPacks.module.css";
+import SuperButton from "../../common/components/superButton/SuperButton";
+import SuperInput from "../../common/components/superInputText/SuperInput";
+import image from "./../../assets/img/Table/Delete.svg";
 
 export const CardPacks = () => {
-  const cardsPack = useAppSelector(selectCardsPack);
-  const dispatch = useAppDispatch();
-  console.log(cardsPack);
-  useEffect(() => {
-    dispatch(getCardPacksTC());
-  }, []);
-
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell align="right">Cards</TableCell>
-            <TableCell align="right">Last Updated</TableCell>
-            <TableCell align="right">Created by</TableCell>
-            <TableCell align="right">Actions</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {cardsPack.map((card) => (
-            <TableRow
-              key={card.cards._id}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {card.cards.name}
-              </TableCell>
-              <TableCell align="right">{card.cards.cardsCount}</TableCell>
-              <TableCell align="right">{card.cards.updated}</TableCell>
-              <TableCell align="right">{card.cards.user_name}</TableCell>
-              <TableCell align="right">---</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <div className={style.packs_list_container}>
+      <div className={style.table_container}>
+        <div className={style.packs_list_header}>
+          <div className={style.packs_list_name}>Packs list</div>
+          <div>
+            <SuperButton
+              title={"Add new pack"}
+              className={style.btn_add_new_pack}
+            />
+          </div>
+        </div>
+
+        <div className={style.tools_container}>
+          <div>
+            <div>Search</div>
+            <div>
+              <SuperInput
+                className={style.input_table}
+                placeholder={"Provide your text"}
+              />
+            </div>
+          </div>
+          <div></div>
+          <div>3</div>
+          <div>4</div>
+        </div>
+
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead className={style.header_table}>
+              <TableRow>
+                <TableCell>Name</TableCell>
+                <TableCell>Cards</TableCell>
+                <TableCell>Last Updated</TableCell>
+                <TableCell>Created by</TableCell>
+                <TableCell>Actions</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <TableRow>
+                <TableCell>name</TableCell>
+                <TableCell>count</TableCell>
+                <TableCell>updated</TableCell>
+                <TableCell>user name</TableCell>
+                <TableCell>image</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </div>
+    </div>
   );
 };

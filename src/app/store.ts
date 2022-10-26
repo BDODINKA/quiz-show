@@ -1,4 +1,4 @@
-import { combineReducers, createStore, applyMiddleware } from "redux";
+import { applyMiddleware, combineReducers, createStore } from "redux";
 import thunk from "redux-thunk";
 
 import { forgotPasswordReducer } from "../features/forgot-pass/forgot-password.reducer";
@@ -7,7 +7,6 @@ import { ProfileReducer } from "../features/profile/profile.reducer";
 import { signUpReducer } from "../features/sign-up/signUpReducer";
 
 import { appReducer } from "./app-reducer";
-import { cardPacksReducer } from "../features/packCards/CardPacks-reducer";
 
 export const rootReducer = combineReducers({
   auth: loginReducer,
@@ -15,7 +14,6 @@ export const rootReducer = combineReducers({
   forgotPass: forgotPasswordReducer,
   reg: signUpReducer,
   app: appReducer,
-  cardPacks: cardPacksReducer,
 });
 
 export const store = createStore(rootReducer, applyMiddleware(thunk));
