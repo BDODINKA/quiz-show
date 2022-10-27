@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
+
 import {
   Box,
   Paper,
@@ -9,14 +10,16 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-} from "@mui/material";
-import style from "./CardPacks.module.css";
-import SuperButton from "../../common/components/superButton/SuperButton";
-import SuperInput from "../../common/components/superInputText/SuperInput";
-import filter_remove from "./../../assets/img/Table/filter-remove.svg";
-import teacher from "./../../assets/img/Table/teacher.svg";
-import edit from "./../../assets/img/Table/Edit.svg";
-import remove from "./../../assets/img/Table/Delete.svg";
+} from '@mui/material'
+
+import SuperButton from '../../common/components/superButton/SuperButton'
+import SuperInput from '../../common/components/superInputText/SuperInput'
+
+import remove from './../../assets/img/Table/Delete.svg'
+import edit from './../../assets/img/Table/Edit.svg'
+import filter_remove from './../../assets/img/Table/filter-remove.svg'
+import teacher from './../../assets/img/Table/teacher.svg'
+import style from './CardPacks.module.css'
 
 const MyActionsButton = () => {
   return (
@@ -31,38 +34,39 @@ const MyActionsButton = () => {
         <img src={remove} alt="remove" />
       </div>
     </>
-  );
-};
+  )
+}
 
 const users: {
-  created: string;
-  cardsCount: number;
-  name: string;
-  updated: string;
-  actions: JSX.Element;
+  created: string
+  cardsCount: number
+  name: string
+  updated: string
+  actions: JSX.Element
 }[] = [
   {
-    name: "Our Team",
+    name: 'Our Team',
     cardsCount: 10,
-    updated: "26/10/2022",
-    created: "25/10/2022",
+    updated: '26/10/2022',
+    created: '25/10/2022',
+
     actions: <MyActionsButton />,
   },
-];
+]
 
 export const CardPacks = () => {
-  const [active, setActive] = useState<boolean>(false);
+  const [active, setActive] = useState<boolean>(false)
   const onClickHundler = () => {
-    setActive(!active);
-  };
-  const [value, setValue] = useState<number[]>([2, 5]);
+    setActive(!active)
+  }
+  const [value, setValue] = useState<number[]>([2, 5])
   const valuetext = (value: number) => {
-    return `${value}`;
-  };
+    return `${value}`
+  }
 
   const handleChange = (event: Event, newValue: number | number[]) => {
-    setValue(newValue as number[]);
-  };
+    setValue(newValue as number[])
+  }
 
   return (
     <div className={style.packs_list_container}>
@@ -70,10 +74,7 @@ export const CardPacks = () => {
         <div className={style.packs_list_header}>
           <div className={style.packs_list_name}>Packs list</div>
           <div>
-            <SuperButton
-              title={"Add new pack"}
-              className={style.btn_add_new_pack}
-            />
+            <SuperButton title={'Add new pack'} className={style.btn_add_new_pack} />
           </div>
         </div>
 
@@ -81,10 +82,7 @@ export const CardPacks = () => {
           <div>
             <div>Search</div>
             <div>
-              <SuperInput
-                className={style.input_table}
-                placeholder={"Provide your text"}
-              />
+              <SuperInput className={style.input_table} placeholder={'Provide your text'} />
             </div>
           </div>
 
@@ -106,17 +104,13 @@ export const CardPacks = () => {
           <div>
             <div>Number of cards</div>
             <div className={style.rating_block}>
-              <SuperInput
-                readOnly
-                className={style.border_rating}
-                value={value[0]}
-              />
+              <SuperInput readOnly className={style.border_rating} value={value[0]} />
               <div className={style.range_slider_block}>
                 <Box className={style.range_slider}>
                   <Slider
                     min={1}
                     max={10}
-                    getAriaLabel={() => "Rating"}
+                    getAriaLabel={() => 'Rating'}
                     value={value}
                     onChange={handleChange}
                     valueLabelDisplay="auto"
@@ -124,11 +118,7 @@ export const CardPacks = () => {
                   />
                 </Box>
               </div>
-              <SuperInput
-                readOnly
-                className={style.border_rating}
-                value={value[1]}
-              />
+              <SuperInput readOnly className={style.border_rating} value={value[1]} />
             </div>
           </div>
           <div className={style.filter_remove_container}>
@@ -164,5 +154,5 @@ export const CardPacks = () => {
         </TableContainer>
       </div>
     </div>
-  );
-};
+  )
+}
