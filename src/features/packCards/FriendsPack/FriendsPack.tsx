@@ -1,6 +1,5 @@
 import React from "react";
 import style from "../PackCard/PackCard.module.css";
-import InputSearch from "./InputSearch";
 import { TableFriendsPack } from "./TableFriendsPack";
 import { TitleAndButtonPack } from "../TitleAndButtonPack";
 
@@ -12,7 +11,6 @@ const FriendsPack = () => {
           titlePack="Friend's Pack"
           titleButton="Learn to pack"
         />
-        <InputSearch />
         <TableFriendsPack />
       </div>
     </div>
