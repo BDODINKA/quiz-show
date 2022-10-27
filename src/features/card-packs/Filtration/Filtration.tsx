@@ -7,6 +7,7 @@ import Search from '../../../common/components/Search/Search'
 import SuperButton from '../../../common/components/SuperButton/SuperButton'
 import { CardsPage } from '../../../common/routes/const-routes'
 import { useAppDispatch, useDebounce } from '../../../utils/hooks/customHooks'
+import { filterPackTC, getPacksTC } from '../cardPacks-reducer'
 
 import style from './Filtration.module.css'
 
@@ -20,17 +21,17 @@ export const Filtration = () => {
   const [rangeValue, setRangeValue] = useState<number[]>(initialValueSlider)
 
   const debounceSearch = useDebounce<string>(searchValue, 700)
-  const debounceRange = useDebounce<Number[]>(rangeValue, 1000)
+  const debounceRange = useDebounce<number[]>(rangeValue, 1000)
 
   useEffect(() => {
     if (debounceSearch !== '') {
-      console.log(debounceSearch)
+      dispatch(filterPackTC({ packName: debounceSearch }))
       setTimeout(() => {
         setSearchValue('')
-      }, 5000)
+      }, 20000)
     }
     if (debounceRange !== initialValueSlider) {
-      console.log(debounceRange)
+      dispatch(filterPackTC({ min: debounceRange[0], max: debounceRange[1] }))
     }
   }, [debounceSearch, debounceRange])
 
@@ -44,7 +45,7 @@ export const Filtration = () => {
     navigate(CardsPage)
   }
   const getAllPacks = () => {
-    console.log('getAllPack')
+    dispatch(getPacksTC())
   }
   const resetFilter = () => {
     setSearchValue('')
