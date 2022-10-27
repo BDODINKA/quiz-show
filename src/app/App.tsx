@@ -28,6 +28,8 @@ import SignUp from '../features/sign-up/SignUp'
 import { useAppDispatch, useAppSelector } from '../utils/hooks/customHooks'
 
 import { RootStateType } from './store'
+import {Card} from "../features/card/Card";
+import {CardPacks} from "../features/card-packs/CardPacks";
 
 const selectProfile = (state: RootStateType) => state.profile.profile
 const selectStatus = (state: RootStateType) => state.app.status
@@ -62,6 +64,8 @@ function App() {
           <Route path={CardsPage} element={<h1>Cards</h1>} />
         </Routes>
       </HashRouter>
+      <Card/>
+      <CardPacks/>
     </>
   )
 }
