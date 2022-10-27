@@ -14,6 +14,8 @@ import {
   RegistrationPage,
   RestorePassPage,
 } from '../common/routes/const-routes'
+import { CardPacks } from '../features/card-packs/CardPacks'
+import { Card } from '../features/card/Card'
 import CheckEmail from '../features/forgot-pass/CheckEmail/CheckEmail'
 import CreateNewPassword from '../features/forgot-pass/CreateNewPass/CreateNewPassword'
 import { ForgotPass } from '../features/forgot-pass/ForgotPass/ForgotPass'
@@ -26,8 +28,6 @@ import SignUp from '../features/sign-up/SignUp'
 import { useAppDispatch, useAppSelector } from '../utils/hooks/customHooks'
 
 import { RootStateType } from './store'
-import {Card} from "../features/card/Card";
-import {CardPacks} from "../features/card-packs/CardPacks";
 
 const selectProfile = (state: RootStateType) => state.profile.profile
 const selectStatus = (state: RootStateType) => state.app.status
@@ -61,8 +61,8 @@ function App() {
           <Route path={PackCardsPage} element={<h1>Pack Cards</h1>} />
         </Routes>
       </HashRouter>
-      <Card/>
-      <CardPacks/>
+      <Card />
+      <CardPacks />
     </>
   )
 }
