@@ -1,27 +1,38 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
 
+import { useNavigate } from 'react-router-dom'
+
 import { DoubleRangeSlider } from '../../../common/components/DoubleRangeSlider/DoubleRangeSlider'
+import Search from '../../../common/components/Search/Search'
 import SuperButton from '../../../common/components/SuperButton/SuperButton'
-import SuperInput from '../../../common/components/SuperInputText/SuperInput'
+import { CardsPage } from '../../../common/routes/const-routes'
 import { useAppDispatch, useDebounce } from '../../../utils/hooks/customHooks'
 
 import style from './Filtration.module.css'
 
 const initialValueSlider = [2, 52]
 
-const Filtration = () => {
+export const Filtration = () => {
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   const [searchValue, setSearchValue] = useState<string>('')
   const [rangeValue, setRangeValue] = useState<number[]>(initialValueSlider)
 
-  const debounce = useDebounce<string>(searchValue, 700)
+  const debounceSearch = useDebounce<string>(searchValue, 700)
+  const debounceRange = useDebounce<Number[]>(rangeValue, 1000)
 
   useEffect(() => {
-    if (debounce !== '') {
-      console.log(debounce)
+    if (debounceSearch !== '') {
+      console.log(debounceSearch)
+      setTimeout(() => {
+        setSearchValue('')
+      }, 5000)
     }
-  }, [debounce])
+    if (debounceRange !== initialValueSlider) {
+      console.log(debounceRange)
+    }
+  }, [debounceSearch, debounceRange])
 
   const onSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.currentTarget.value)
@@ -30,7 +41,7 @@ const Filtration = () => {
     setRangeValue(value as number[])
   }
   const getMyPacks = () => {
-    console.log('getMyPack')
+    navigate(CardsPage)
   }
   const getAllPacks = () => {
     console.log('getAllPack')
@@ -44,12 +55,7 @@ const Filtration = () => {
   return (
     <div className={style.container}>
       <div className={style.boxSearch}>
-        <span className={style.span}>Search</span>
-        <SuperInput
-          onChange={onSearchChange}
-          className={style.search}
-          placeholder={'Provide your text'}
-        />
+        <Search onSearchChange={onSearchChange} value={searchValue} />
       </div>
       <div className={style.boxPacks}>
         <span className={style.span}>Show packs cards</span>
@@ -74,5 +80,3 @@ const Filtration = () => {
     </div>
   )
 }
-
-export default Filtration

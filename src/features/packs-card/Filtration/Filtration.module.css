@@ -12,33 +12,7 @@
   flex-direction: column;
   gap: 8px;
 }
-.search {
-  position: relative;
 
-  width: 413px;
-  height: 36px;
-
-  text-indent: 17px;
-
-  background: #ffffff;
-  border: 1px solid #d9d9d9;
-  border-radius: 2px;
-}
-.search::placeholder {
-  position: relative;
-  left: 17px;
-
-  font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  font-style: normal;
-  line-height: 24px;
-  color: #000000;
-  text-indent: 40px;
-
-  opacity: 0.5;
-  background: url('../../../assets/img/Filter/SearchIcon.png') no-repeat left;
-}
 .boxBtn {
   display: flex;
 }
@@ -85,8 +59,8 @@
   align-items: center;
   justify-content: center;
 
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
 
   font-family: 'Montserrat', sans-serif;
   font-size: 16px;

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Filtration from './Filtration/Filtration'
+import { Filtration } from './Filtration/Filtration'
 
 const PacksCard = () => {
   return (

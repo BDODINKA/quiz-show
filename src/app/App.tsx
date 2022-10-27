@@ -5,6 +5,7 @@ import { LinearProgress } from '@mui/material'
 import { HashRouter, Navigate, Route, Routes } from 'react-router-dom'
 
 import {
+  CardsPage,
   CheckEmailPage,
   LoginPage,
   NewPassPage,
@@ -58,6 +59,7 @@ function App() {
           <Route path={RestorePassPage} element={<ForgotPass />} />
           <Route path={NewPassPage} element={<CreateNewPassword />} />
           <Route path={PackCardsPage} element={<PacksCard />} />
+          <Route path={CardsPage} element={<h1>Cards</h1>} />
         </Routes>
       </HashRouter>
     </>
