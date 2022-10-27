@@ -9,6 +9,7 @@ import {
   FriendsCardsPage,
   LoginPage,
   MyPackPage,
+  NamePackPage,
   NewPassPage,
   NotPage,
   PackCardsPage,
@@ -31,6 +32,7 @@ import { RootStateType } from "./store";
 import { PackCard } from "../features/packCards/PackCard/PackCard";
 import FriendsPack from "../features/packCards/FriendsPack/FriendsPack";
 import { MyPack } from "../features/packCards/MyPack/MyPack";
+import NamePack from "../features/packCards/NamePack/NamePack";
 
 const selectProfile = (state: RootStateType) => state.profile.profile;
 const selectStatus = (state: RootStateType) => state.app.status;
@@ -64,6 +66,7 @@ function App() {
           <Route path={PackCardsPage} element={<PackCard />} />
           <Route path={FriendsCardsPage} element={<FriendsPack />} />
           <Route path={MyPackPage} element={<MyPack />} />
+          <Route path={NamePackPage} element={<NamePack />} />
         </Routes>
       </HashRouter>
     </>

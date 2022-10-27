@@ -7,4 +7,5 @@ export const NewPassPage = "/NewPass/:token";
 export const PackCardsPage = "/PackCard";
 export const CheckEmailPage = "/CheckEmail";
 export const FriendsCardsPage = "/FriendsCard";
-export const MyPackPage = "/MyPack";
+export const MyPackPage = "/MyCard";
+export const NamePackPage = "/NamePack";
