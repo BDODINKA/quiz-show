@@ -6,7 +6,9 @@ import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import {
   CheckEmailPage,
+  FriendsCardsPage,
   LoginPage,
+  MyPackPage,
   NewPassPage,
   NotPage,
   PackCardsPage,
@@ -26,7 +28,9 @@ import SignUp from "../features/sign-up/SignUp";
 import { useAppDispatch, useAppSelector } from "../utils/hooks/customHooks";
 
 import { RootStateType } from "./store";
-import { CardPacks } from "../features/packCards/CardPacks";
+import { PackCard } from "../features/packCards/PackCard/PackCard";
+import FriendsPack from "../features/packCards/FriendsPack/FriendsPack";
+import { MyPack } from "../features/packCards/MyPack/MyPack";
 
 const selectProfile = (state: RootStateType) => state.profile.profile;
 const selectStatus = (state: RootStateType) => state.app.status;
@@ -57,7 +61,9 @@ function App() {
           <Route path={CheckEmailPage} element={<CheckEmail />} />
           <Route path={RestorePassPage} element={<ForgotPass />} />
           <Route path={NewPassPage} element={<CreateNewPassword />} />
-          <Route path={PackCardsPage} element={<CardPacks />} />
+          <Route path={PackCardsPage} element={<PackCard />} />
+          <Route path={FriendsCardsPage} element={<FriendsPack />} />
+          <Route path={MyPackPage} element={<MyPack />} />
         </Routes>
       </HashRouter>
     </>
