@@ -3,6 +3,7 @@ import thunk from 'redux-thunk'
 
 import { cardPacksReducer } from '../features/card-packs/cardPacks-reducer'
 import { cardReducer } from '../features/card/card-reducer'
+import { paginationReducer } from '../common/components/pagination/pagination-reducer'
 import { forgotPasswordReducer } from '../features/forgot-pass/forgot-password.reducer'
 import { loginReducer } from '../features/login/login-reducer'
 import { ProfileReducer } from '../features/profile/profile.reducer'
@@ -18,11 +19,11 @@ export const rootReducer = combineReducers({
   app: appReducer,
   cardPacks: cardPacksReducer,
   card: cardReducer,
+  pagination: paginationReducer,
 })
 
 export const store = createStore(rootReducer, applyMiddleware(thunk))
 export type RootStateType = ReturnType<typeof store.getState>
 
 //@ts-ignore
-
 window.store = store
