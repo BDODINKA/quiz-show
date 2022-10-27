@@ -1,0 +1,157 @@
+.packs_list_container {
+  display: flex;
+  justify-content: center;
+}
+
+.table_container {
+  display: flex;
+  flex-direction: column;
+
+  width: 80%;
+}
+
+.packs_list_header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  margin-top: 40px;
+  margin-bottom: 50px;
+}
+
+.packs_list_name {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.btn_add_new_pack {
+  cursor: pointer;
+
+  width: 175px;
+  height: 36px;
+
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+
+  background-color: #0479fd;
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0 2px 5px rgb(54, 110, 255);
+}
+
+.tools_container {
+  display: grid;
+  grid-template-columns: 40% 27% 27% 6%;
+  align-items: end;
+
+  margin-bottom: 20px;
+}
+
+.input_table {
+  width: 80%;
+  height: 34px;
+  margin-top: 8px;
+  padding-left: 40px;
+
+  background-image: url('/src/assets/img/Table/Union.svg');
+  background-repeat: no-repeat;
+  background-position: 10px;
+  border: 1px solid #d9d9d9;
+  border-radius: 2px;
+}
+
+.button_show,
+.button_active {
+  cursor: pointer;
+
+  width: 96px;
+  height: 38px;
+  margin-top: 8px;
+
+  font-size: 14px;
+  font-weight: 400;
+  color: black;
+
+  background-color: white;
+  border: 1px solid #d9d9d9;
+  border-radius: 2px;
+}
+
+.button_active {
+  color: white;
+
+  background-color: #0479fd;
+  border-radius: 0 2px 2px 0;
+}
+
+.rating_block {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  margin-top: 8px;
+}
+
+.border_rating,
+.filter_remove {
+  display: block;
+
+  width: 34px;
+  height: 34px;
+  padding: 0;
+
+  text-align: center;
+
+  background: #ffffff;
+  border: 1px solid #d9d9d9;
+  border-radius: 2px;
+}
+.range_slider_block {
+  display: flex;
+  justify-content: center;
+
+  width: 100%;
+}
+.range_slider {
+  display: block;
+
+  width: 80%;
+}
+.filter_remove_container {
+  display: flex;
+  justify-content: flex-end;
+}
+.filter_remove {
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.table_block {
+  display: flex;
+  flex-direction: column;
+}
+.table_header {
+  background-color: #efefef;
+}
+
+.title_table_header,
+.title_table_body {
+  display: grid;
+  grid-template-columns: 25% 15% 20% 25% 15%;
+  align-items: center;
+  justify-items: center;
+}
+.actions_button_container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 70%;
+}
+.actions_button_container div {
+  cursor: pointer;
+}
