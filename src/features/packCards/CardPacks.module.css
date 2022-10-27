@@ -1,13 +1,19 @@
-.packs_list_container {
+.container {
   display: flex;
   justify-content: center;
+}
+
+.packs_list_container {
+  display: flex;
+  flex-direction: column;
 }
 
 .table_container {
   display: flex;
   flex-direction: column;
+  gap: 30px;
 
-  width: 80%;
+  width: 75%;
 }
 
 .packs_list_header {

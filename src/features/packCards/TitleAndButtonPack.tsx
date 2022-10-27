@@ -1,17 +1,20 @@
-import React from "react";
-import style from "./PackCard/PackCard.module.css";
-import SuperButton from "../../common/components/superButton/SuperButton";
+import React, { MouseEventHandler } from 'react'
+
+import SuperButton from '../../common/components/SuperButton/SuperButton'
+import style from '../packCards/TitleAndButtonPack.module.css'
 
 type PropsType = {
-  titlePack: string;
-  titleButton: string;
-  image?: any;
-};
+  titlePack: string
+  titleButton: string
+  image?: any
+  onClick: () => void
+}
 
 export const TitleAndButtonPack: React.FC<PropsType> = ({
   titlePack,
   titleButton,
   image,
+  onClick,
 }) => {
   return (
     <div className={style.packs_list_header}>
@@ -21,8 +24,8 @@ export const TitleAndButtonPack: React.FC<PropsType> = ({
       </div>
 
       <div>
-        <SuperButton title={titleButton} className={style.btn_add_new_pack} />
+        <SuperButton title={titleButton} className={style.btn_add_new_pack} onClick={onClick} />
       </div>
     </div>
-  );
-};
+  )
+}

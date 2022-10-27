@@ -1,23 +1,18 @@
-import React, {
-  ChangeEvent,
-  DetailedHTMLProps,
-  InputHTMLAttributes,
-  KeyboardEvent,
-} from "react";
+import React, { ChangeEvent, DetailedHTMLProps, InputHTMLAttributes, KeyboardEvent } from 'react'
 
-import s from "./SuperInput.module.css";
+import s from './SuperInput.module.css'
 
 type DefaultInputPropsType = DetailedHTMLProps<
   InputHTMLAttributes<HTMLInputElement>,
   HTMLInputElement
->;
+>
 
 type SuperInputTextPropsType = DefaultInputPropsType & {
-  onChangeText?: (value: string) => void;
-  onEnter?: () => void;
-  error?: string;
-  spanClassName?: string;
-};
+  onChangeText?: (value: string) => void
+  onEnter?: () => void
+  error?: string
+  spanClassName?: string
+}
 
 const SuperInput: React.FC<SuperInputTextPropsType> = ({
   type, // достаём и игнорируем чтоб нельзя было задать другой тип инпута
@@ -32,20 +27,18 @@ const SuperInput: React.FC<SuperInputTextPropsType> = ({
   ...restProps
 }) => {
   const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
-    onChange && onChange(e);
+    onChange && onChange(e)
 
-    onChangeText && onChangeText(e.currentTarget.value);
-  };
+    onChangeText && onChangeText(e.currentTarget.value)
+  }
   const onKeyPressCallback = (e: KeyboardEvent<HTMLInputElement>) => {
-    onKeyPress && onKeyPress(e);
+    onKeyPress && onKeyPress(e)
 
-    onEnter && e.key === "Enter" && onEnter();
-  };
+    onEnter && e.key === 'Enter' && onEnter()
+  }
 
-  const finalSpanClassName = `${s.error} ${spanClassName ? spanClassName : ""}`;
-  const finalInputClassName = `${s.superInput} ${
-    className ? className : error && s.errorInput
-  }`;
+  const finalSpanClassName = `${s.error} ${spanClassName ? spanClassName : ''}`
+  const finalInputClassName = `${s.superInput} ${className ? className : error && s.errorInput}`
 
   return (
     <>
@@ -58,7 +51,7 @@ const SuperInput: React.FC<SuperInputTextPropsType> = ({
       />
       {error && <span className={finalSpanClassName}>{error}</span>}
     </>
-  );
-};
+  )
+}
 
-export default SuperInput;
+export default SuperInput

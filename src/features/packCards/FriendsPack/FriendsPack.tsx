@@ -1,7 +1,9 @@
-import React from "react";
-import style from "../PackCard/PackCard.module.css";
-import { TableFriendsPack } from "./TableFriendsPack";
-import { TitleAndButtonPack } from "../TitleAndButtonPack";
+import React from 'react'
+
+import { TitleAndButtonPack } from '../TitleAndButtonPack'
+import style from '../TitleAndButtonPack.module.css'
+
+import { TableFriendsPack } from './TableFriendsPack'
 
 const FriendsPack = () => {
   return (
@@ -10,11 +12,12 @@ const FriendsPack = () => {
         <TitleAndButtonPack
           titlePack="Friend's Pack"
           titleButton="Learn to pack"
+          onClick={() => {}}
         />
         <TableFriendsPack />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default FriendsPack;
+export default FriendsPack

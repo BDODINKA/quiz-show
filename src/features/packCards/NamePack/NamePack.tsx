@@ -1,7 +1,9 @@
-import React from "react";
-import style from "./NamePack.module.css";
-import s from "./../PackCard/PackCard.module.css";
-import SuperButton from "../../../common/components/superButton/SuperButton";
+import React from 'react'
+
+import SuperButton from '../../../common/components/SuperButton/SuperButton'
+import s from '../TitleAndButtonPack.module.css'
+
+import style from './NamePack.module.css'
 
 const NamePack = () => {
   return (
@@ -16,7 +18,7 @@ const NamePack = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default NamePack;
+export default NamePack

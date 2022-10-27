@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { DoubleRangeSlider } from '../../../common/components/DoubleRangeSlider/DoubleRangeSlider'
 import Search from '../../../common/components/Search/Search'
 import SuperButton from '../../../common/components/SuperButton/SuperButton'
-import { CardsPage } from '../../../common/routes/const-routes'
+import { MyPackPage } from '../../../common/routes/const-routes'
 import { useAppDispatch, useDebounce } from '../../../utils/hooks/customHooks'
 import { filterPackTC, getPacksTC } from '../cardPacks-reducer'
 
@@ -42,7 +42,7 @@ export const Filtration = () => {
     setRangeValue(value as number[])
   }
   const getMyPacks = () => {
-    navigate(CardsPage)
+    navigate(MyPackPage)
   }
   const getAllPacks = () => {
     dispatch(getPacksTC())

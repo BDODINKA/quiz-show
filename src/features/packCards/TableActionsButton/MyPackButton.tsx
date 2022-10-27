@@ -1,6 +1,7 @@
-import React from "react";
-import edit from "../../../assets/img/Table/Edit.svg";
-import remove from "../../../assets/img/Table/Delete.svg";
+import React from 'react'
+
+import remove from '../../../assets/img/Table/Delete.svg'
+import edit from '../../../assets/img/Table/Edit.svg'
 
 export const MyPackButton = () => {
   return (
@@ -12,5 +13,5 @@ export const MyPackButton = () => {
         <img src={remove} alt="remove" />
       </div>
     </>
-  );
-};
+  )
+}

@@ -23,10 +23,10 @@ export const cardPacksReducer = (
 ): InitialStateType => {
   switch (action.type) {
     case 'CRUD/SET-PACKS': {
-      return action.cardPacks
+      return { ...action.cardPacks }
     }
     case 'CARD-PACKS/FILTER': {
-      return action.packsCard
+      return { ...action.packsCard }
     }
     default:
       return state

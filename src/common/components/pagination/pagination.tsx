@@ -17,9 +17,7 @@ export const Pagination = (props: PropsType) => {
 
   const pages = maxPages >= props.maxPages ? props.currentPage + props.maxPages : maxPages
 
-  console.log(pages)
-
-  for (let i = props.currentPage; i <= pages; i++) {
+  for (let i = props.currentPage; i < pages; i++) {
     totalPages.push(i)
   }
 

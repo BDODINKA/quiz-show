@@ -1,9 +1,11 @@
-import React from "react";
-import style from "../PackCard/PackCard.module.css";
-import s from "./MyPack.module.css";
-import { TitleAndButtonPack } from "../TitleAndButtonPack";
-import dots from "./../../../assets/img/Table/dots.svg";
-import { TableMyPack } from "./TableMyPack";
+import React from 'react'
+
+import { TitleAndButtonPack } from '../TitleAndButtonPack'
+import style from '../TitleAndButtonPack.module.css'
+
+import dots from './../../../assets/img/Table/dots.svg'
+import s from './MyPack.module.css'
+import { TableMyPack } from './TableMyPack'
 
 export const MyPack = () => {
   return (
@@ -13,9 +15,10 @@ export const MyPack = () => {
           titlePack="My Pack"
           titleButton="Add new card"
           image={<img className={s.dots} src={dots} alt="dots" />}
+          onClick={() => {}}
         />
         <TableMyPack />
       </div>
     </div>
-  );
-};
+  )
+}

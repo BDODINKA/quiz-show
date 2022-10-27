@@ -1,5 +1,6 @@
-import teacher from "../../../assets/img/Table/teacher.svg";
-import React from "react";
+import React from 'react'
+
+import teacher from '../../../assets/img/Table/teacher.svg'
 
 export const FriendsButton = () => {
   return (
@@ -8,5 +9,5 @@ export const FriendsButton = () => {
         <img src={teacher} alt="teacher" />
       </div>
     </>
-  );
-};
+  )
+}

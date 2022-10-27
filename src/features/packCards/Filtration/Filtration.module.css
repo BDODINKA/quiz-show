@@ -1,9 +1,7 @@
 .container {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
-
-  width: 1008px;
+  justify-content: space-between;
 }
 .boxSearch,
 .boxPacks,

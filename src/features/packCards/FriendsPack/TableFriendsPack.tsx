@@ -1,22 +1,24 @@
-import React from "react";
-import RatingComponent from "../RatingComponent";
-import style from "./FriensPack.module.css";
-import poligon from "../../../assets/img/Table/Polygon 2.svg";
+import React from 'react'
+
+import poligon from '../../../assets/img/Table/Polygon 2.svg'
+import RatingComponent from '../RatingComponent'
+
+import style from './FriensPack.module.css'
 
 const questions = [
   {
     question: "How 'This' work in Java Script",
     answer: "This is how 'This' work in Java Script",
-    last_updated: "20/10/2022",
+    last_updated: '20/10/2022',
     grade: <RatingComponent />,
   },
   {
     question: "How 'This' work in Java Script",
     answer: "This is how 'This' work in Java Script",
-    last_updated: "23/10/2022",
+    last_updated: '23/10/2022',
     grade: <RatingComponent />,
   },
-];
+]
 
 export const TableFriendsPack = () => {
   return (
@@ -28,13 +30,13 @@ export const TableFriendsPack = () => {
             <th>Answer</th>
             <th>
               Last Updated
-              <img style={{ marginLeft: "5px" }} src={poligon} alt="poligon" />
+              <img style={{ marginLeft: '5px' }} src={poligon} alt="poligon" />
             </th>
             <th>Grade</th>
           </tr>
         </thead>
         <tbody>
-          {questions.map((elem) => {
+          {questions.map(elem => {
             return (
               <tr className={style.title_table_body_friends}>
                 <td>{elem.question}</td>
@@ -42,10 +44,10 @@ export const TableFriendsPack = () => {
                 <td>{elem.last_updated}</td>
                 <td>{elem.grade}</td>
               </tr>
-            );
+            )
           })}
         </tbody>
       </table>
     </>
-  );
-};
+  )
+}

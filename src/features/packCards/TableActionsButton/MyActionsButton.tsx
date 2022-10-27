@@ -1,7 +1,8 @@
-import React from "react";
-import teacher from "../../../assets/img/Table/teacher.svg";
-import edit from "../../../assets/img/Table/Edit.svg";
-import remove from "../../../assets/img/Table/Delete.svg";
+import React from 'react'
+
+import remove from '../../../assets/img/Table/Delete.svg'
+import edit from '../../../assets/img/Table/Edit.svg'
+import teacher from '../../../assets/img/Table/teacher.svg'
 
 export const MyActionsButton = () => {
   return (
@@ -16,5 +17,5 @@ export const MyActionsButton = () => {
         <img src={remove} alt="remove" />
       </div>
     </>
-  );
-};
+  )
+}
