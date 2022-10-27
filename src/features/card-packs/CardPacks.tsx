@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 
 import SuperButton from '../../common/components/superButton/SuperButton'
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/customHooks'
+import { Card } from '../card/Card'
 
 import { addPackTC, deletePackTC, getPacksTC } from './cardPacks-reducer'
 
@@ -32,6 +33,9 @@ export const CardPacks = () => {
       <SuperButton title={'Add New Pack'} onClick={addPack} />
       <SuperButton title={'Delete Pack'} onClick={deletePack} />
       <SuperButton title={'Update Pack'} onClick={updatePack} />
+      <div>
+        <Card />
+      </div>
     </div>
   )
 }
