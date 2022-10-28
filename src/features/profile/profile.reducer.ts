@@ -74,10 +74,10 @@ export const authMeTC = (): AppThunk => dispatch => {
     .catch((reason: AxiosError<{ error: string }>) => {
       if (reason.response?.data.error) {
         ServerError<string>(reason.response.data.error, setAppErrorAC, dispatch)
-        dispatch(setAppStatusAC('error'))
+        dispatch(setAppStatusAC(null))
       } else {
         ServerError<string>(reason.message, setAppErrorAC, dispatch)
-        dispatch(setAppStatusAC('error'))
+        dispatch(setAppStatusAC(null))
       }
     })
 }

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import { RootStateType } from '../../app/store'
 import { CustomAlertSnackBar } from '../../common/components/CustomSnackBar/CustomAlertSnackBar'
 import { Pagination } from '../../common/components/pagination/pagination'
 import { maxPaginationPage } from '../../common/constants/pagination'
-import { LoginPage } from '../../common/routes/const-routes'
+import { PATH } from '../../common/routes/const-routes'
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/customHooks'
 
 import { CardPackForm } from './CardPackForm'
@@ -21,10 +21,9 @@ const selectorCardPageCount = (state: RootStateType) => state.cardPacks.pageCoun
 const selectorCardPage = (state: RootStateType) => state.cardPacks.page
 const selectorTotalCount = (state: RootStateType) => state.cardPacks.cardPacksTotalCount
 const selectorProfileId = (state: RootStateType) => state.profile.profile?._id
-const selectorStatus = (state: RootStateType) => state.app.status
-const selectorMessage = (state: RootStateType) => state.app.error
 
 export const CardPacks = () => {
+  // const params = useParams<'my' | 'all'>()
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const cardPacks = useAppSelector(selectorCardPacks)
@@ -32,15 +31,13 @@ export const CardPacks = () => {
   const page = useAppSelector(selectorCardPage)
   const totalCount = useAppSelector(selectorTotalCount)
   const profileId = useAppSelector(selectorProfileId)
-  const status = useAppSelector(selectorStatus)
-  const message = useAppSelector(selectorMessage)
 
   const [showForm, setShowForm] = useState<boolean>(false)
-  const [filterBtn, setfilterBtn] = useState<string>('')
+  const [filterBtn, setfilterBtn] = useState<string>('All')
 
   useEffect(() => {
     if (!profileId) {
-      navigate(LoginPage)
+      navigate(PATH.LOGIN_PAGE)
     } else {
       dispatch(getPacksTC())
     }
@@ -96,7 +93,6 @@ export const CardPacks = () => {
         />
       </div>
       {showForm && <CardPackForm onClose={navigateMyPack} />}
-      <CustomAlertSnackBar status={status} message={message} autoHideDuration={6000} />
     </div>
   )
 }

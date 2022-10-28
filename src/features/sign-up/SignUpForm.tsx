@@ -9,7 +9,7 @@ import hide_password from '../../assets/img/SignUp/close_eye_password.png'
 import show_password from '../../assets/img/SignUp/open_eye_password.png'
 import SuperButton from '../../common/components/SuperButton/SuperButton'
 import SuperInput from '../../common/components/SuperInputText/SuperInput'
-import { LoginPage } from '../../common/routes/const-routes'
+import { PATH } from '../../common/routes/const-routes'
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/customHooks'
 
 import s from './/signUp.module.css'
@@ -124,7 +124,7 @@ export const SignUpForm = () => {
                   disabled={status === 'progress'}
                 ></SuperButton>
                 <span className={s.have_account}>Already have an account?</span>
-                <NavLink to={LoginPage} className={s.link}>
+                <NavLink to={PATH.LOGIN_PAGE} className={s.link}>
                   Sign In
                 </NavLink>
               </div>

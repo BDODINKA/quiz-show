@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom'
 import { RootStateType } from '../../app/store'
 import logo from '../../assets/svg/logo-Incubator.svg'
 import SuperButton from '../../common/components/SuperButton/SuperButton'
-import { LoginPage, ProfilePage } from '../../common/routes/const-routes'
+import { PATH } from '../../common/routes/const-routes'
 import { useAppSelector } from '../../utils/hooks/customHooks'
 
 import style from './header.module.css'
@@ -29,13 +29,13 @@ const Header = () => {
 
         {isLogin ? (
           <div className={style.profileBlock}>
-            <NavLink className={style.profileName} to={ProfilePage}>
+            <NavLink className={style.profileName} to={PATH.PROFILE_PAGE}>
               {name}
             </NavLink>
             <div className={style.profileAva}>{avatar}</div>
           </div>
         ) : (
-          <NavLink to={LoginPage}>
+          <NavLink to={PATH.LOGIN_PAGE}>
             <SuperButton className={style.button_sign_in_navbar} type="submit" title={'Sign In'} />
           </NavLink>
         )}

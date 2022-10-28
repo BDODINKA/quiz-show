@@ -6,7 +6,7 @@ import { RootStateType } from '../../../app/store'
 import { Pagination } from '../../../common/components/pagination/pagination'
 import Search from '../../../common/components/Search/Search'
 import { maxPaginationPage } from '../../../common/constants/pagination'
-import { LoginPage } from '../../../common/routes/const-routes'
+import { PATH } from '../../../common/routes/const-routes'
 import { useAppDispatch, useAppSelector } from '../../../utils/hooks/customHooks'
 import { filterPackTC, getPacksTC } from '../cardPacks-reducer'
 import { TitleAndButtonPack } from '../TitleAndButtonPack'
@@ -33,7 +33,7 @@ export const MyPack = () => {
 
   useEffect(() => {
     if (!profileId) {
-      navigate(LoginPage)
+      navigate(PATH.LOGIN_PAGE)
     } else {
       console.log('s')
       console.log(profileId)

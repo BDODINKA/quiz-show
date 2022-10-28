@@ -10,7 +10,7 @@ import show_password from '../../assets/img/Login/open_eye_password.png'
 import SuperButton from '../../common/components/SuperButton/SuperButton'
 import SuperCheckbox from '../../common/components/SuperCheckbox/SuperCheckbox'
 import SuperInput from '../../common/components/SuperInputText/SuperInput'
-import { RegistrationPage, RestorePassPage } from '../../common/routes/const-routes'
+import { PATH } from '../../common/routes/const-routes'
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/customHooks'
 
 import { loginTC } from './login-reducer'
@@ -89,7 +89,7 @@ const SignInForm = () => {
               </div>
             </div>
             <div className={s.button_sign_in_form_block}>
-              <NavLink to={RestorePassPage} className={s.forgot_password}>
+              <NavLink to={PATH.RESTORE_PASS_PAGE} className={s.forgot_password}>
                 Forgot Password?
               </NavLink>
               <SuperButton
@@ -104,7 +104,7 @@ const SignInForm = () => {
         )}
       </Formik>
       <div className={s.button_sign_up_form_block}>
-        <NavLink className={s.sign_up_button} to={RegistrationPage}>
+        <NavLink className={s.sign_up_button} to={PATH.REGISTRATION_PAGE}>
           Sign Up
         </NavLink>
       </div>

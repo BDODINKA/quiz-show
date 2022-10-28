@@ -3,10 +3,9 @@ import React from 'react'
 import { Navigate, NavLink } from 'react-router-dom'
 
 import { RootStateType } from '../../app/store'
-import { CustomAlertSnackBar } from '../../common/components/CustomSnackBar/CustomAlertSnackBar'
 import EditableSpan from '../../common/components/EditableSpan/EditableSpan'
 import SuperButton from '../../common/components/SuperButton/SuperButton'
-import { LoginPage, PackCardsPage } from '../../common/routes/const-routes'
+import { PATH } from '../../common/routes/const-routes'
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/customHooks'
 
 import style from './profile.module.css'
@@ -14,13 +13,11 @@ import { LogOutTC, UpdateUserProfile } from './profile.reducer'
 
 const selectProfile = (state: RootStateType) => state.profile.profile
 const selectStatus = (state: RootStateType) => state.app.status
-const selectError = (state: RootStateType) => state.app.error
 
 export const Profile = () => {
   const dispatch = useAppDispatch()
   const profile = useAppSelector(selectProfile)
   const status = useAppSelector(selectStatus)
-  const error = useAppSelector(selectError)
 
   const goToLogout = () => {
     dispatch(LogOutTC())
@@ -30,15 +27,15 @@ export const Profile = () => {
   }
 
   if (profile === null) {
-    return <Navigate to={LoginPage} />
+    return <Navigate to={PATH.LOGIN_PAGE} />
   }
 
   return (
     <div>
       <div className={style.container}>
         <div className={style.backBlock}>
-          <NavLink to={PackCardsPage} className={style.arrow} />
-          <NavLink to={PackCardsPage} className={style.link}>
+          <NavLink to={PATH.PACK_CARDS_PAGE} className={style.arrow} />
+          <NavLink to={PATH.PACK_CARDS_PAGE} className={style.link}>
             Back to Packs List
           </NavLink>
         </div>
@@ -68,7 +65,6 @@ export const Profile = () => {
           />
         </div>
       </div>
-      <CustomAlertSnackBar status={status} message={error} autoHideDuration={6000} />
     </div>
   )
 }

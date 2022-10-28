@@ -6,7 +6,7 @@ import * as Yup from 'yup'
 
 import SuperButton from '../../../common/components/SuperButton/SuperButton'
 import SuperInput from '../../../common/components/SuperInputText/SuperInput'
-import { LoginPage } from '../../../common/routes/const-routes'
+import { PATH } from '../../../common/routes/const-routes'
 import { Nullable } from '../../../types/Nullable'
 import { useAppDispatch } from '../../../utils/hooks/customHooks'
 import { SendForgotFormTC } from '../forgot-password.reducer'
@@ -53,7 +53,7 @@ export const ForgotPassForm = (props: PropsType) => {
                 title={'Send Instructions'}
               />
               <p className={style.question}>Did you remember your password?</p>
-              <NavLink to={LoginPage} className={style.link}>
+              <NavLink to={PATH.LOGIN_PAGE} className={style.link}>
                 Try logging in
               </NavLink>
             </form>

@@ -9,7 +9,7 @@ import style from './TablePackCard.module.css'
 
 type PropsType = {
   cards?: CardPacks[]
-  userId: string | undefined
+  userId?: string
   sort: (value: boolean) => void
   deleteHandler?: (id: string) => void
 }

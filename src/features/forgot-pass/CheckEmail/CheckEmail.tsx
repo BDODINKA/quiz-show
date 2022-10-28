@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { RootStateType } from '../../../app/store'
 import SuperButton from '../../../common/components/SuperButton/SuperButton'
-import { LoginPage } from '../../../common/routes/const-routes'
+import { PATH } from '../../../common/routes/const-routes'
 import { useAppDispatch, useAppSelector } from '../../../utils/hooks/customHooks'
 import { SetResetStateTC } from '../forgot-password.reducer'
 
@@ -21,12 +21,12 @@ const CheckEmail = () => {
 
   useEffect(() => {
     if (!email) {
-      navigate(LoginPage)
+      navigate(PATH.LOGIN_PAGE)
     }
   }, [])
 
   const GoToLogin = () => {
-    navigate(LoginPage)
+    navigate(PATH.LOGIN_PAGE)
     dispatch(SetResetStateTC())
   }
 
