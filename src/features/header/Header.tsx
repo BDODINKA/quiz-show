@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 
 import { RootStateType } from '../../app/store'
 import logo from '../../assets/svg/logo-Incubator.svg'
-import SuperButton from '../../common/components/superButton/SuperButton'
+import SuperButton from '../../common/components/SuperButton/SuperButton'
 import { LoginPage, ProfilePage } from '../../common/routes/const-routes'
 import { useAppSelector } from '../../utils/hooks/customHooks'
 

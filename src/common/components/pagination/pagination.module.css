@@ -1,0 +1,78 @@
+.container {
+  display: flex;
+  justify-content: flex-start;
+}
+.btn {
+  width: 24px;
+  height: 24px;
+
+  background: none;
+  border: none;
+}
+.btn:active,
+.btn:hover {
+  cursor: pointer;
+
+  color: #ffffff;
+
+  border-radius: 2px;
+}
+.pages {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 24px;
+  height: 24px;
+
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 15px;
+  color: #000000;
+
+  border-radius: 2px;
+}
+
+.pages:hover,
+.pages:active {
+  cursor: pointer;
+
+  color: #ffffff;
+
+  background: #366eff;
+  border-radius: 2px;
+}
+.selectBlock {
+  display: flex;
+  gap: 5px;
+
+  padding: 0 0 0 30px;
+}
+.select {
+  color: #000000;
+
+  opacity: 0.4;
+  background: #ffffff;
+  border: 1px solid #d9d9d9;
+  border-radius: 2px;
+}
+.pagesActive {
+  color: #ffffff;
+
+  background: #366eff;
+  border-radius: 2px;
+}
+.blockPages {
+  display: flex;
+  gap: 12px;
+
+  padding: 0 10px;
+}
+.prevBtn {
+  background: url('../../../assets/img/Pagination/prevBtn.png') no-repeat center;
+}
+.nextBtn {
+  background: url('../../../assets/img/Pagination/nextBtn.png') no-repeat center;
+}

@@ -2,6 +2,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  padding-top: 60px;
 }
 
 .navbar_form_container {
@@ -39,7 +41,6 @@
 
   width: 400px;
   height: 530px;
-  margin-top: 30px;
 
   background: #ffffff;
   border-radius: 2px;

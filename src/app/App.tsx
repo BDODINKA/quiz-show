@@ -7,6 +7,7 @@ import { HashRouter, Navigate, Route, Routes } from 'react-router-dom'
 import {
   CheckEmailPage,
   LoginPage,
+  MyPackPage,
   NewPassPage,
   NotPage,
   PackCardsPage,
@@ -14,12 +15,13 @@ import {
   RegistrationPage,
   RestorePassPage,
 } from '../common/routes/const-routes'
-import { CardPacks } from '../features/card-packs/CardPacks'
 import CheckEmail from '../features/forgot-pass/CheckEmail/CheckEmail'
 import CreateNewPassword from '../features/forgot-pass/CreateNewPass/CreateNewPassword'
 import { ForgotPass } from '../features/forgot-pass/ForgotPass/ForgotPass'
 import Header from '../features/header/Header'
 import Login from '../features/login/Login'
+import { CardPacks } from '../features/packCards/CardPacks'
+import { MyPack } from '../features/packCards/MyPack/MyPack'
 import PageNotFound from '../features/page-404/PageNotFound'
 import { Profile } from '../features/profile/Profile'
 import { authMeTC } from '../features/profile/profile.reducer'
@@ -58,6 +60,7 @@ function App() {
           <Route path={RestorePassPage} element={<ForgotPass />} />
           <Route path={NewPassPage} element={<CreateNewPassword />} />
           <Route path={PackCardsPage} element={<CardPacks />} />
+          <Route path={MyPackPage} element={<MyPack />} />
         </Routes>
       </HashRouter>
     </>

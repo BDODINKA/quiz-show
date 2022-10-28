@@ -32,6 +32,7 @@ export const cardAPI = {
       },
     })
   },
+
   deleteCard() {
     return axiosInstance.delete('/cards/card?id=')
   },

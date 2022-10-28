@@ -1,8 +1,8 @@
 import { Dispatch } from 'redux'
 
-import { cardAPI, CardResponceType, UpdateCardType } from '../../api/cardAPI'
-import { CardPacksResponceType } from '../../api/cardPacksAPI'
-import { AppThunk } from '../../types/HooksTypes'
+import { cardAPI, CardResponceType, UpdateCardType } from '../../../api/cardAPI'
+import { CardPacksResponceType } from '../../../api/cardPacksAPI'
+import { AppThunk } from '../../../types/HooksTypes'
 
 type InitialStateType = CardResponceType[]
 const initialState: InitialStateType = []
@@ -13,7 +13,7 @@ export type CardActionsType =
   | ReturnType<typeof deleteCardAC>
   | ReturnType<typeof updateCardAC>
 
-export const cardReducer = (state = initialState, action: CardActionsType): InitialStateType => {
+export const myPackReducer = (state = initialState, action: CardActionsType): InitialStateType => {
   switch (action.type) {
     case 'CRUD/SET-CARDS': {
       return action.cards
@@ -45,13 +45,13 @@ export const getCardsTC = (): AppThunk => (dispatch: Dispatch<CardActionsType>) 
 
 export const addCardTC =
   (card: CardResponceType): AppThunk =>
-  (dispatch: Dispatch<CardActionsType>) => {
+  dispatch => {
     cardAPI.addCard(card).then(res => {
       console.log(res)
     })
   }
 
-export const deleteCardTC = (): AppThunk => (dispatch: Dispatch<CardActionsType>) => {
+export const deleteCardTC = (): AppThunk => dispatch => {
   cardAPI.deleteCard().then(res => {
     console.log(res)
   })
@@ -59,7 +59,7 @@ export const deleteCardTC = (): AppThunk => (dispatch: Dispatch<CardActionsType>
 
 export const updateCardTC =
   (updateCard: UpdateCardType): AppThunk =>
-  (dispatch: Dispatch<CardActionsType>) => {
+  dispatch => {
     cardAPI.updateCard(updateCard).then(res => {
       console.log(res)
     })
