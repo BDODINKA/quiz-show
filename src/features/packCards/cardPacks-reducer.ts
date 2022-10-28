@@ -1,5 +1,4 @@
 import { AxiosError } from 'axios'
-import { Dispatch } from 'redux'
 
 import { cardPacksAPI, CardPacksResponceType, PacksParamsType } from '../../api/cardPacksAPI'
 import { setAppErrorAC, setAppStatusAC } from '../../app/app-reducer'
@@ -60,11 +59,11 @@ export const getPacksTC = (): AppThunk => dispatch => {
 }
 
 export const addPackTC =
-  (packName: string, deckCover: string, isPrivate: boolean): AppThunk =>
+  (packName: string, isPrivate: boolean): AppThunk =>
   dispatch => {
     dispatch(setAppStatusAC('progress'))
     cardPacksAPI
-      .addPack(packName, deckCover, isPrivate)
+      .addPack(packName, isPrivate)
       .then(res => {
         dispatch(getPacksTC())
         dispatch(setAppStatusAC('success'))
@@ -81,25 +80,27 @@ export const addPackTC =
       })
   }
 
-export const deletePackTC = (): AppThunk => dispatch => {
-  dispatch(setAppStatusAC('progress'))
-  cardPacksAPI
-    .deletePack()
-    .then(res => {
-      dispatch(getPacksTC())
-      dispatch(setAppStatusAC('success'))
-      console.log(res)
-    })
-    .catch((reason: AxiosError<{ error: string }>) => {
-      if (reason.response?.data.error) {
-        ServerError<string>(reason.response.data.error, setAppErrorAC, dispatch)
-        dispatch(setAppStatusAC('error'))
-      } else {
-        ServerError<string>(reason.message, setAppErrorAC, dispatch)
-        dispatch(setAppStatusAC('error'))
-      }
-    })
-}
+export const deletePackTC =
+  (_id: string): AppThunk =>
+  dispatch => {
+    dispatch(setAppStatusAC('progress'))
+    cardPacksAPI
+      .deletePack(_id)
+      .then(res => {
+        dispatch(getPacksTC())
+        dispatch(setAppStatusAC('success'))
+        console.log(res)
+      })
+      .catch((reason: AxiosError<{ error: string }>) => {
+        if (reason.response?.data.error) {
+          ServerError<string>(reason.response.data.error, setAppErrorAC, dispatch)
+          dispatch(setAppStatusAC('error'))
+        } else {
+          ServerError<string>(reason.message, setAppErrorAC, dispatch)
+          dispatch(setAppStatusAC('error'))
+        }
+      })
+  }
 
 export const updatePackTC =
   (cardsPack: CardPacksResponceType): AppThunk =>

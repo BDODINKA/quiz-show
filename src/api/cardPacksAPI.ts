@@ -50,16 +50,16 @@ export const cardPacksAPI = {
     })
   },
 
-  addPack(packName: string, deckCover: string, isPrivate: boolean) {
+  addPack(packName: string, isPrivate: boolean) {
     return axiosInstance.post('/cards/pack', {
       cardPacks: {
-        name: 'new  pack',
-        private: false,
+        name: packName,
+        private: isPrivate,
       },
     })
   },
-  deletePack() {
-    return axiosInstance.delete('/cards/pack?id=635633448187d600045d9931')
+  deletePack(_id: string) {
+    return axiosInstance.delete(`/cards/pack?id=${_id}`)
   },
 
   updatePack(cardsPack: CardPacksResponceType) {

@@ -54,11 +54,13 @@ export const addCardTC =
     })
   }
 
-export const deleteCardTC = (): AppThunk => dispatch => {
-  cardAPI.deleteCard().then(res => {
-    console.log(res)
-  })
-}
+export const deleteCardTC =
+  (_id: string): AppThunk =>
+  dispatch => {
+    cardAPI.deleteCard(_id).then(res => {
+      console.log(res)
+    })
+  }
 
 export const updateCardTC =
   (updateCard: UpdateCardType): AppThunk =>
