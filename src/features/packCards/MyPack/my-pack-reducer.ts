@@ -1,7 +1,6 @@
 import { Dispatch } from 'redux'
 
 import { cardAPI, CardResponceType, UpdateCardType } from '../../../api/cardAPI'
-import { CardPacksResponceType } from '../../../api/cardPacksAPI'
 import { AppThunk } from '../../../types/HooksTypes'
 
 type InitialStateType = CardResponceType[]
@@ -18,6 +17,9 @@ export const myPackReducer = (state = initialState, action: CardActionsType): In
     case 'CRUD/SET-CARDS': {
       return action.cards
     }
+    case 'CRUD/ADD-CARD': {
+      return state
+    }
     default:
       return state
   }
@@ -26,8 +28,8 @@ export const myPackReducer = (state = initialState, action: CardActionsType): In
 export const setCardsAC = (cards: CardResponceType[]) => {
   return { type: 'CRUD/SET-CARDS', cards } as const
 }
-export const addCardAC = (cardsPack: CardPacksResponceType) => {
-  return { type: 'CRUD/ADD-CARD', cardsPack } as const
+export const addCardAC = (card: CardResponceType[]) => {
+  return { type: 'CRUD/ADD-CARD', card } as const
 }
 export const deleteCardAC = (id: string) => {
   return { type: 'CRUD/DELETE-CARD', id } as const
@@ -47,6 +49,7 @@ export const addCardTC =
   (card: CardResponceType): AppThunk =>
   dispatch => {
     cardAPI.addCard(card).then(res => {
+      dispatch
       console.log(res)
     })
   }

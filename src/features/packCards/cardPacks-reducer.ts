@@ -25,6 +25,9 @@ export const cardPacksReducer = (
     case 'CRUD/SET-PACKS': {
       return { ...action.cardPacks }
     }
+    /* case 'CRUD/ADD-PACKS': {
+      return { ...state, cardPacks: [action.packs.cardPacks, ...state.cardPacks] }
+    }*/
     case 'CARD-PACKS/FILTER': {
       return { ...action.packsCard }
     }
@@ -36,8 +39,8 @@ export const cardPacksReducer = (
 export const setPacksAC = (cardPacks: CardPacksResponceType) => {
   return { type: 'CRUD/SET-PACKS', cardPacks } as const
 }
-export const addPackAC = (name: string) => {
-  return { type: 'CRUD/ADD-PACKS', name } as const
+export const addPackAC = (packs: CardPacksResponceType) => {
+  return { type: 'CRUD/ADD-PACKS', packs } as const
 }
 export const deletePackAC = (id: string) => {
   return { type: 'CRUD/DELETE-PACKS', id } as const
@@ -60,17 +63,45 @@ export const getPacksTC = (): AppThunk => dispatch => {
 }
 
 export const addPackTC =
-  (cardsPack: CardPacksResponceType): AppThunk =>
+  (packName: string, deckCover: string, isPrivate: boolean): AppThunk =>
   dispatch => {
-    cardPacksAPI.addPack(cardsPack).then(res => {
-      console.log(res)
-    })
+    dispatch(setAppStatusAC('progress'))
+    cardPacksAPI
+      .addPack(packName, deckCover, isPrivate)
+      .then(res => {
+        dispatch(getPacksTC())
+        dispatch(setAppStatusAC('success'))
+        console.log(res)
+      })
+      .catch((reason: AxiosError<{ error: string }>) => {
+        if (reason.response?.data.error) {
+          ServerError<string>(reason.response.data.error, setAppErrorAC, dispatch)
+          dispatch(setAppStatusAC('error'))
+        } else {
+          ServerError<string>(reason.message, setAppErrorAC, dispatch)
+          dispatch(setAppStatusAC('error'))
+        }
+      })
   }
 
 export const deletePackTC = (): AppThunk => dispatch => {
-  cardPacksAPI.deletePack().then(res => {
-    console.log(res)
-  })
+  dispatch(setAppStatusAC('progress'))
+  cardPacksAPI
+    .deletePack()
+    .then(res => {
+      dispatch(getPacksTC())
+      dispatch(setAppStatusAC('success'))
+      console.log(res)
+    })
+    .catch((reason: AxiosError<{ error: string }>) => {
+      if (reason.response?.data.error) {
+        ServerError<string>(reason.response.data.error, setAppErrorAC, dispatch)
+        dispatch(setAppStatusAC('error'))
+      } else {
+        ServerError<string>(reason.message, setAppErrorAC, dispatch)
+        dispatch(setAppStatusAC('error'))
+      }
+    })
 }
 
 export const updatePackTC =

@@ -50,7 +50,7 @@ export const cardPacksAPI = {
     })
   },
 
-  addPack(cardPacks: CardPacksResponceType) {
+  addPack(packName: string, deckCover: string, isPrivate: boolean) {
     return axiosInstance.post('/cards/pack', {
       cardPacks: {
         name: 'new  pack',

@@ -38,7 +38,7 @@
   box-shadow: none;
 }
 .button_sign_in_form:active,
-.button_sign_in_form:hover{
+.button_sign_in_form:hover {
   color: #366eff;
 
   background-color: #ffffff;

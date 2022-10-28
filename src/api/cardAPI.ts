@@ -24,11 +24,11 @@ export const cardAPI = {
   addCard(card: CardResponceType) {
     return axiosInstance.post('/cards/card', {
       card: {
-        cardsPack_id: '6357f1cb61a8d500046944c9',
-        question: 'no question',
-        answer: 'no answer',
-        grade: 0,
-        shots: 0,
+        cardsPack_id: card.cardsPack_id,
+        question: card.question,
+        answer: card.answer,
+        grade: card.grade,
+        shots: card.shots,
       },
     })
   },
