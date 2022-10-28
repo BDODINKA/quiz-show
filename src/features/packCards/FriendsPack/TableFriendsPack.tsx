@@ -1,7 +1,7 @@
 import React from 'react'
 
 import poligon from '../../../assets/img/Table/Polygon 2.svg'
-import RatingComponent from '../RatingComponent'
+import RatingComponent from '../../../common/components/Rating/RatingComponent'
 
 import style from './FriensPack.module.css'
 

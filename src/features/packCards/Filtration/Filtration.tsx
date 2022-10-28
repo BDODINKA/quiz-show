@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom'
 import { DoubleRangeSlider } from '../../../common/components/DoubleRangeSlider/DoubleRangeSlider'
 import Search from '../../../common/components/Search/Search'
 import SuperButton from '../../../common/components/SuperButton/SuperButton'
-import { MyPackPage } from '../../../common/routes/const-routes'
 import { useAppDispatch, useDebounce } from '../../../utils/hooks/customHooks'
 import { filterPackTC, getPacksTC } from '../cardPacks-reducer'
 
@@ -13,9 +12,11 @@ import style from './Filtration.module.css'
 
 const initialValueSlider = [2, 52]
 
-export const Filtration = () => {
+type PropsType = {
+  id?: string
+}
+export const Filtration = (props: PropsType) => {
   const dispatch = useAppDispatch()
-  const navigate = useNavigate()
 
   const [searchValue, setSearchValue] = useState<string>('')
   const [rangeValue, setRangeValue] = useState<number[]>(initialValueSlider)
@@ -42,7 +43,7 @@ export const Filtration = () => {
     setRangeValue(value as number[])
   }
   const getMyPacks = () => {
-    navigate(MyPackPage)
+    dispatch(filterPackTC({ user_id: props.id }))
   }
   const getAllPacks = () => {
     dispatch(getPacksTC())

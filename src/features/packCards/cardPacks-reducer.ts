@@ -51,8 +51,11 @@ export const filterPackAC = (packsCard: CardPacksResponceType) => {
 }
 
 export const getPacksTC = (): AppThunk => dispatch => {
+  dispatch(setAppStatusAC('progress'))
   cardPacksAPI.getPacks().then(res => {
     dispatch(setPacksAC(res.data))
+    dispatch(setAppStatusAC('success'))
+    dispatch(setAppErrorAC('Packs loading success'))
   })
 }
 
@@ -92,7 +95,6 @@ export const filterPackTC =
       block: filter && filter.block,
     }
 
-    // console.log(filters.pageCount)
     console.log(getState().cardPacks.pageCount)
     dispatch(setAppStatusAC('progress'))
     cardPacksAPI
@@ -101,7 +103,7 @@ export const filterPackTC =
         if (res.data.cardPacks.length) {
           console.log(res.data)
           dispatch(filterPackAC(res.data))
-          dispatch(setAppStatusAC('success'))
+          dispatch(setAppStatusAC(null))
         } else {
           dispatch(setAppStatusAC('warning'))
           dispatch(setAppErrorAC('Current Pack not found '))

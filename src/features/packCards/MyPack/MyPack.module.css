@@ -1,7 +1,12 @@
-.dots{
-    position: relative;
-    width: 25px;
-    height: 25px;
-    margin-left: 5px;
-    cursor: pointer;
+.dots {
+  cursor: pointer;
+
+  position: relative;
+
+  width: 25px;
+  height: 25px;
+  margin-left: 5px;
+}
+.search {
+  width: 100%;
 }

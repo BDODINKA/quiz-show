@@ -1,4 +1,4 @@
-import React, { MouseEventHandler } from 'react'
+import React from 'react'
 
 import SuperButton from '../../common/components/SuperButton/SuperButton'
 import style from '../packCards/TitleAndButtonPack.module.css'

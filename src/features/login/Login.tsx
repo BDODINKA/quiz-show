@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { RootStateType } from '../../app/store'
 import { CustomAlertSnackBar } from '../../common/components/CustomSnackBar/CustomAlertSnackBar'
-import { ProfilePage } from '../../common/routes/const-routes'
+import { PackCardsPage, ProfilePage } from '../../common/routes/const-routes'
 import { useAppSelector } from '../../utils/hooks/customHooks'
 
 import s from './login.module.css'
@@ -22,7 +22,7 @@ const Login = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      navigate(ProfilePage)
+      navigate(PackCardsPage)
     }
   }, [isLoggedIn])
 
