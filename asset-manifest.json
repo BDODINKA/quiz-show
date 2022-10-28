@@ -1,25 +1,31 @@
 {
   "files": {
-    "main.css": "/cards/static/css/main.73bb36e6.css",
-    "main.js": "/cards/static/js/main.90f06090.js",
+    "main.css": "/cards/static/css/main.4dc0b52c.css",
+    "main.js": "/cards/static/js/main.b20501c9.js",
     "static/js/787.8517b185.chunk.js": "/cards/static/js/787.8517b185.chunk.js",
     "static/media/ProfileAva.jpg": "/cards/static/media/ProfileAva.bc7a71f0299b27b44877.jpg",
     "static/media/close_eye_password.png": "/cards/static/media/close_eye_password.4cefae3fcd16c05f2756.png",
     "static/media/open_eye_password.png": "/cards/static/media/open_eye_password.16dcae1913da8f91070e.png",
     "static/media/CheckEmailLogo.svg": "/cards/static/media/CheckEmailLogo.cdfba66fde5a43fa07de.svg",
     "static/media/logo-Incubator.svg": "/cards/static/media/logo-Incubator.eb69407f5ef9e283c564e57b716d6291.svg",
+    "static/media/Delete.svg": "/cards/static/media/Delete.ae50fc0bd96a5d17a9476d4542020145.svg",
     "static/media/pencilProfile.svg": "/cards/static/media/pencilProfile.1241cb07d4b7fab769c1.svg",
+    "static/media/Edit.svg": "/cards/static/media/Edit.031de5626de44d0e1be1ae4419d62f46.svg",
     "static/media/addProfileAva.svg": "/cards/static/media/addProfileAva.f44d951526acbd5ef97e.svg",
+    "static/media/teacher.svg": "/cards/static/media/teacher.61316ef9f9bb14acdf57faf399645aeb.svg",
+    "static/media/Union.svg": "/cards/static/media/Union.21d49aad92e6d122c55f.svg",
     "index.html": "/cards/index.html",
     "static/media/logoutBtnProfile.svg": "/cards/static/media/logoutBtnProfile.4631dbd136b384a81188.svg",
     "static/media/eyes.svg": "/cards/static/media/eyes.b30b1f6a2b20057708f4.svg",
+    "static/media/dots.svg": "/cards/static/media/dots.ecec4b031dd51ed8bfbf4d748437ebce.svg",
     "static/media/arrowProfile.svg": "/cards/static/media/arrowProfile.19c7bd8ee7d32ca8451f.svg",
-    "main.73bb36e6.css.map": "/cards/static/css/main.73bb36e6.css.map",
-    "main.90f06090.js.map": "/cards/static/js/main.90f06090.js.map",
+    "static/media/Polygon 2.svg": "/cards/static/media/Polygon 2.fea3ba07db5a1e87b16c9acd04731f72.svg",
+    "main.4dc0b52c.css.map": "/cards/static/css/main.4dc0b52c.css.map",
+    "main.b20501c9.js.map": "/cards/static/js/main.b20501c9.js.map",
     "787.8517b185.chunk.js.map": "/cards/static/js/787.8517b185.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.73bb36e6.css",
-    "static/js/main.90f06090.js"
+    "static/css/main.4dc0b52c.css",
+    "static/js/main.b20501c9.js"
   ]
 }
