@@ -9,7 +9,7 @@ import { LoginPage, MyPackPage } from '../../common/routes/const-routes'
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/customHooks'
 import Login from '../login/Login'
 
-import { addPackTC, filterPackTC, getPacksTC } from './cardPacks-reducer'
+import { filterPackTC, getPacksTC } from './cardPacks-reducer'
 import style from './CardPacks.module.css'
 import { Filtration } from './Filtration/Filtration'
 import { TablePackCard } from './Table/TablePackCard'
