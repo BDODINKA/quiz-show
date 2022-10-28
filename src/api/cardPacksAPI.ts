@@ -52,14 +52,19 @@ export const cardPacksAPI = {
 
   addPack(packName: string, deckCover: string, isPrivate: boolean) {
     return axiosInstance.post('/cards/pack', {
-      cardPacks: {
-        name: 'new  pack',
-        private: false,
+      cardsPack: {
+        name: packName,
+        deckCover: deckCover,
+        private: isPrivate,
       },
     })
   },
-  deletePack() {
-    return axiosInstance.delete('/cards/pack?id=635633448187d600045d9931')
+  deletePack(id: string) {
+    return axiosInstance.delete('/cards/pack', {
+      params: {
+        id: id,
+      },
+    })
   },
 
   updatePack(cardsPack: CardPacksResponceType) {

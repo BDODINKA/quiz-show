@@ -10,7 +10,7 @@ import { LoginPage } from '../../common/routes/const-routes'
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/customHooks'
 
 import { CardPackForm } from './CardPackForm'
-import { filterPackTC, getPacksTC } from './cardPacks-reducer'
+import { deletePackTC, filterPackTC, getPacksTC } from './cardPacks-reducer'
 import style from './CardPacks.module.css'
 import { Filtration } from './Filtration/Filtration'
 import { TablePackCard } from './Table/TablePackCard'
@@ -36,6 +36,7 @@ export const CardPacks = () => {
   const message = useAppSelector(selectorMessage)
 
   const [showForm, setShowForm] = useState<boolean>(false)
+  const [filterBtn, setfilterBtn] = useState<string>('')
 
   useEffect(() => {
     if (!profileId) {
@@ -56,8 +57,14 @@ export const CardPacks = () => {
 
     dispatch(filterPackTC({ sortPacks: update }))
   }
+  const deleteMyPack = (id: string) => {
+    dispatch(deletePackTC(id))
+  }
   const navigateMyPack = () => {
     setShowForm(!showForm)
+  }
+  const activeBtnHandler = (value: string) => {
+    setfilterBtn(value)
   }
 
   return (
@@ -68,8 +75,17 @@ export const CardPacks = () => {
           titleButton="Add new pack"
           onClick={navigateMyPack}
         />
-        <Filtration id={profileId} />
-        <TablePackCard cards={cardPacks} userId={profileId} sort={setLastUpdate} />
+        <Filtration
+          id={profileId}
+          activeBtnHandler={value => activeBtnHandler(value)}
+          showActive={filterBtn}
+        />
+        <TablePackCard
+          cards={cardPacks}
+          userId={profileId}
+          sort={setLastUpdate}
+          deleteHandler={id => deleteMyPack(id)}
+        />
         <Pagination
           pageCount={pageCount}
           currentPage={page}

@@ -11,6 +11,7 @@ type PropsType = {
   cards?: CardPacks[]
   userId: string | undefined
   sort: (value: boolean) => void
+  deleteHandler?: (id: string) => void
 }
 export const TablePackCard = (props: PropsType) => {
   const [sort, setSort] = useState(false)
@@ -18,6 +19,9 @@ export const TablePackCard = (props: PropsType) => {
   const sortHandler = (value: boolean) => {
     setSort(value)
     props.sort(sort)
+  }
+  const deleteHandler = (id: string) => {
+    props.deleteHandler && props.deleteHandler(id)
   }
 
   return (
@@ -57,7 +61,11 @@ export const TablePackCard = (props: PropsType) => {
                     <td>{new Date(Date.parse(elem.updated)).toLocaleDateString('ru-RU')}</td>
                     <td>{elem.user_name}</td>
                     <td className={style.actions_button_container}>
-                      {elem.user_id === props.userId ? <MyActionsButton /> : <FriendsButton />}
+                      {elem.user_id === props.userId ? (
+                        <MyActionsButton deleteHandler={() => deleteHandler(elem._id)} />
+                      ) : (
+                        <FriendsButton />
+                      )}
                     </td>
                   </tr>
                 ))

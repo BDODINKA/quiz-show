@@ -1,7 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
 
-import { useNavigate } from 'react-router-dom'
-
 import { DoubleRangeSlider } from '../../../common/components/DoubleRangeSlider/DoubleRangeSlider'
 import Search from '../../../common/components/Search/Search'
 import SuperButton from '../../../common/components/SuperButton/SuperButton'
@@ -14,6 +12,8 @@ const initialValueSlider = [2, 52]
 
 type PropsType = {
   id?: string
+  activeBtnHandler: (value: string) => void
+  showActive: string
 }
 export const Filtration = (props: PropsType) => {
   const dispatch = useAppDispatch()
@@ -43,9 +43,11 @@ export const Filtration = (props: PropsType) => {
     setRangeValue(value as number[])
   }
   const getMyPacks = () => {
+    props.activeBtnHandler('My')
     dispatch(filterPackTC({ user_id: props.id }))
   }
   const getAllPacks = () => {
+    props.activeBtnHandler('All')
     dispatch(getPacksTC())
   }
   const resetFilter = () => {
@@ -53,6 +55,10 @@ export const Filtration = (props: PropsType) => {
     setRangeValue(initialValueSlider)
     getAllPacks()
   }
+
+  const finalClassBtnMy = props.showActive === 'My' ? `${style.btn} ${style.activeBtn}` : style.btn
+  const finalClassBtnAll =
+    props.showActive === 'All' ? `${style.btn} ${style.activeBtn}` : style.btn
 
   return (
     <div className={style.container}>
@@ -62,8 +68,8 @@ export const Filtration = (props: PropsType) => {
       <div className={style.boxPacks}>
         <span className={style.span}>Show packs cards</span>
         <div className={style.boxBtn}>
-          <SuperButton onClick={getMyPacks} className={style.btn} title={'My'} />
-          <SuperButton onClick={getAllPacks} className={style.btn} title={'All'} />
+          <SuperButton onClick={getMyPacks} className={finalClassBtnMy} title={'My'} />
+          <SuperButton onClick={getAllPacks} className={finalClassBtnAll} title={'All'} />
         </div>
       </div>
       <div className={style.boxRange}>

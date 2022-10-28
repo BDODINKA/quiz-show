@@ -1,16 +1,16 @@
 import React from 'react'
 
 import { Formik } from 'formik'
-import { NavLink, useNavigate } from 'react-router-dom'
 import * as Yup from 'yup'
 
 import { RootStateType } from '../../app/store'
 import SuperButton from '../../common/components/SuperButton/SuperButton'
-import SuperCheckbox from '../../common/components/SuperCheckbox/SuperCheckbox'
+import { SuperCheckbox } from '../../common/components/SuperCheckbox/SuperCheckbox'
 import SuperInput from '../../common/components/SuperInputText/SuperInput'
-import { useAppSelector } from '../../utils/hooks/customHooks'
+import { useAppDispatch, useAppSelector } from '../../utils/hooks/customHooks'
 
 import style from './CardPackForm.module.css'
+import { addPackTC } from './cardPacks-reducer'
 
 type PropsType = {
   onClose: () => void
@@ -19,6 +19,7 @@ type PropsType = {
 const selectorProgress = (state: RootStateType) => state.app.status
 
 export const CardPackForm = (props: PropsType) => {
+  const dispatch = useAppDispatch()
   const status = useAppSelector(selectorProgress)
 
   const redirect = () => {
@@ -34,8 +35,8 @@ export const CardPackForm = (props: PropsType) => {
           .required('Field Required'),
       })}
       onSubmit={values => {
-        // dispatch(SendForgotFormTC(values.email))
-        console.log(values)
+        dispatch(addPackTC(values.text, '', values.private))
+        props.onClose()
       }}
     >
       {formik => (

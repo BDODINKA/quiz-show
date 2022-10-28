@@ -52,6 +52,14 @@
   background: #366eff;
   border-radius: 0 2px 2px 0;
 }
+.activeBtn {
+  cursor: pointer;
+
+  color: #ffffff;
+
+  background: #366eff;
+  border-radius: 0 2px 2px 0;
+}
 .rangeWindow {
   display: flex;
   align-items: center;

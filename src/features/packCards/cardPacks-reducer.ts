@@ -1,5 +1,4 @@
 import { AxiosError } from 'axios'
-import { Dispatch } from 'redux'
 
 import { cardPacksAPI, CardPacksResponceType, PacksParamsType } from '../../api/cardPacksAPI'
 import { setAppErrorAC, setAppStatusAC } from '../../app/app-reducer'
@@ -71,7 +70,6 @@ export const addPackTC =
       .then(res => {
         dispatch(getPacksTC())
         dispatch(setAppStatusAC('success'))
-        console.log(res)
       })
       .catch((reason: AxiosError<{ error: string }>) => {
         if (reason.response?.data.error) {
@@ -84,25 +82,27 @@ export const addPackTC =
       })
   }
 
-export const deletePackTC = (): AppThunk => dispatch => {
-  dispatch(setAppStatusAC('progress'))
-  cardPacksAPI
-    .deletePack()
-    .then(res => {
-      dispatch(getPacksTC())
-      dispatch(setAppStatusAC('success'))
-      console.log(res)
-    })
-    .catch((reason: AxiosError<{ error: string }>) => {
-      if (reason.response?.data.error) {
-        ServerError<string>(reason.response.data.error, setAppErrorAC, dispatch)
-        dispatch(setAppStatusAC('error'))
-      } else {
-        ServerError<string>(reason.message, setAppErrorAC, dispatch)
-        dispatch(setAppStatusAC('error'))
-      }
-    })
-}
+export const deletePackTC =
+  (id: string): AppThunk =>
+  dispatch => {
+    dispatch(setAppStatusAC('progress'))
+    cardPacksAPI
+      .deletePack(id)
+      .then(res => {
+        dispatch(getPacksTC())
+        dispatch(setAppStatusAC('success'))
+        dispatch(setAppErrorAC('Delete success'))
+      })
+      .catch((reason: AxiosError<{ error: string }>) => {
+        if (reason.response?.data.error) {
+          ServerError<string>(reason.response.data.error, setAppErrorAC, dispatch)
+          dispatch(setAppStatusAC('error'))
+        } else {
+          ServerError<string>(reason.message, setAppErrorAC, dispatch)
+          dispatch(setAppStatusAC('error'))
+        }
+      })
+  }
 
 export const updatePackTC =
   (cardsPack: CardPacksResponceType): AppThunk =>
@@ -126,13 +126,11 @@ export const filterPackTC =
       block: filter && filter.block,
     }
 
-    console.log(getState().cardPacks.pageCount)
     dispatch(setAppStatusAC('progress'))
     cardPacksAPI
       .filterPacks(filters)
       .then(res => {
         if (res.data.cardPacks.length) {
-          console.log(res.data)
           dispatch(filterPackAC(res.data))
           dispatch(setAppStatusAC(null))
         } else {
