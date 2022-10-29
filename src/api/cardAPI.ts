@@ -18,8 +18,8 @@ export type UpdateCardType = {
 }
 
 export const cardAPI = {
-  getCards() {
-    return axiosInstance.get('/cards/card?cardsPack_id=6357f1cb61a8d500046944c9')
+  getCards(cardsPack_id: string) {
+    return axiosInstance.get(`/cards/card?cardsPack_id=${cardsPack_id}`)
   },
   addCard(card: CardResponceType) {
     return axiosInstance.post('/cards/card', {

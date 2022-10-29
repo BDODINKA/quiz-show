@@ -53,9 +53,20 @@ export const filterPackAC = (packsCard: CardPacksResponceType) => {
 }
 
 export const getPacksTC = (): AppThunk => dispatch => {
+    dispatch(setAppStatusAC('progress'))
   cardPacksAPI.getPacks().then(res => {
     dispatch(setPacksAC(res.data))
+      dispatch(setAppStatusAC('success'))
   })
+      .catch((reason: AxiosError<{ error: string }>) => {
+          if (reason.response?.data.error) {
+              ServerError<string>(reason.response.data.error, setAppErrorAC, dispatch)
+              dispatch(setAppStatusAC('error'))
+          } else {
+              ServerError<string>(reason.message, setAppErrorAC, dispatch)
+              dispatch(setAppStatusAC('error'))
+          }
+      })
 }
 
 export const addPackTC =
