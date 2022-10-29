@@ -37,12 +37,58 @@ export type CardPacks = {
   updated: string
   more_id: string
   __v: number
-  deckCover?: any
+  deckCover?: string
+}
+export type DeleteType = {
+  deletedCardsPack: DeleteTypeDeletedCardsPack
+  token: string
+  tokenDeathTime: number
+}
+export type DeleteTypeDeletedCardsPack = {
+  _id: string
+  user_id: string
+  user_name: string
+  private: boolean
+  name: string
+  path: string
+  grade: number
+  shots: number
+  deckCover: string
+  cardsCount: number
+  type: string
+  rating: number
+  created: string
+  updated: string
+  more_id: string
+  __v: number
+}
+export type AddPackType = {
+  newCardsPack: AddPackTypeNewCardsPack
+  token: string
+  tokenDeathTime: number
+}
+export type AddPackTypeNewCardsPack = {
+  _id: string
+  user_id: string
+  user_name: string
+  private: boolean
+  name: string
+  path: string
+  grade: number
+  shots: number
+  deckCover: string
+  cardsCount: number
+  type: string
+  rating: number
+  created: string
+  updated: string
+  more_id: string
+  __v: number
 }
 
 export const cardPacksAPI = {
   getPacks() {
-    return axiosInstance.get('/cards/pack', {
+    return axiosInstance.get<CardPacksResponceType>('/cards/pack', {
       params: {
         page: 1,
         pageCount: 10,
@@ -51,7 +97,7 @@ export const cardPacksAPI = {
   },
 
   addPack(packName: string, deckCover: string, isPrivate: boolean) {
-    return axiosInstance.post('/cards/pack', {
+    return axiosInstance.post<AddPackType>('/cards/pack', {
       cardsPack: {
         name: packName,
         deckCover: deckCover,
@@ -59,8 +105,9 @@ export const cardPacksAPI = {
       },
     })
   },
+
   deletePack(id: string) {
-    return axiosInstance.delete('/cards/pack', {
+    return axiosInstance.delete<DeleteType>('/cards/pack', {
       params: {
         id: id,
       },

@@ -59,7 +59,9 @@ function App() {
           <Route path={PATH.CHECK_EMAIL_PAGE} element={<CheckEmail />} />
           <Route path={PATH.RESTORE_PASS_PAGE} element={<ForgotPass />} />
           <Route path={PATH.NEW_PASS_PAGE} element={<CreateNewPassword />} />
-          <Route path={PATH.PACK_CARDS_PAGE} element={<CardPacks />} />
+          <Route path={PATH.PACK_CARDS_PAGE} element={<CardPacks />}>
+            <Route path={PATH.PACK_CARDS_PAGE + '/:id'} element={<CardPacks />} />
+          </Route>
           <Route path={PATH.MY_PACK_PAGE} element={<MyPack />} />
         </Routes>
         <CustomAlertSnackBar

@@ -5,7 +5,7 @@ export enum PATH {
   NOT_PAGE = '/404',
   RESTORE_PASS_PAGE = '/RestorePage',
   NEW_PASS_PAGE = '/NewPass/:token',
-  PACK_CARDS_PAGE = '/PackCard/:id',
+  PACK_CARDS_PAGE = '/PackCard',
   CHECK_EMAIL_PAGE = '/CheckEmail',
   FRIENDS_CARD_PAGE = '/FriendsCard',
   MY_PACK_PAGE = '/MyPack',

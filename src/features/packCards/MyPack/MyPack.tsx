@@ -62,7 +62,7 @@ export const MyPack = () => {
         <Pagination
           pageCount={pageCount}
           currentPage={page}
-          totalCount={totalCount}
+          totalCount={totalCount as number}
           setPage={setPage}
           setPageCount={setPageCount}
           maxPages={maxPaginationPage}

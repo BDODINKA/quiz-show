@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react'
 
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import { RootStateType } from '../../app/store'
-import { CustomAlertSnackBar } from '../../common/components/CustomSnackBar/CustomAlertSnackBar'
 import { Pagination } from '../../common/components/pagination/pagination'
 import { maxPaginationPage } from '../../common/constants/pagination'
 import { PATH } from '../../common/routes/const-routes'
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/customHooks'
 
 import { CardPackForm } from './CardPackForm'
-import { deletePackTC, filterPackTC, getPacksTC } from './cardPacks-reducer'
+import { deletePackTC, filterPackTC, getPacksTC, setFilterBtnTC } from './cardPacks-reducer'
 import style from './CardPacks.module.css'
 import { Filtration } from './Filtration/Filtration'
 import { TablePackCard } from './Table/TablePackCard'
@@ -21,48 +20,55 @@ const selectorCardPageCount = (state: RootStateType) => state.cardPacks.pageCoun
 const selectorCardPage = (state: RootStateType) => state.cardPacks.page
 const selectorTotalCount = (state: RootStateType) => state.cardPacks.cardPacksTotalCount
 const selectorProfileId = (state: RootStateType) => state.profile.profile?._id
+const selectorFilterBtn = (state: RootStateType) => state.cardPacks.currentPack
 
 export const CardPacks = () => {
-  // const params = useParams<'my' | 'all'>()
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const cardPacks = useAppSelector(selectorCardPacks)
   const pageCount = useAppSelector(selectorCardPageCount)
   const page = useAppSelector(selectorCardPage)
   const totalCount = useAppSelector(selectorTotalCount)
+  const filterBtn = useAppSelector(selectorFilterBtn)
   const profileId = useAppSelector(selectorProfileId)
 
   const [showForm, setShowForm] = useState<boolean>(false)
-  const [filterBtn, setfilterBtn] = useState<string>('All')
 
   useEffect(() => {
     if (!profileId) {
       navigate(PATH.LOGIN_PAGE)
-    } else {
-      dispatch(getPacksTC())
     }
+    console.log('render')
+    dispatch(getPacksTC())
   }, [])
 
   const setPage = (value: number) => {
     dispatch(filterPackTC({ page: value }))
   }
+
   const setPageCount = (value: number) => {
     dispatch(filterPackTC({ pageCount: value }))
   }
+
   const setLastUpdate = (value: boolean) => {
     const update = value ? '0updated' : '1updated'
 
     dispatch(filterPackTC({ sortPacks: update }))
   }
+
   const deleteMyPack = (id: string) => {
     dispatch(deletePackTC(id))
   }
+
   const navigateMyPack = () => {
     setShowForm(!showForm)
   }
+
   const activeBtnHandler = (value: string) => {
-    setfilterBtn(value)
+    dispatch(setFilterBtnTC(value))
   }
+
+  console.log(filterBtn)
 
   return (
     <div className={style.container}>
@@ -88,7 +94,7 @@ export const CardPacks = () => {
           currentPage={page}
           setPage={value => setPage(value)}
           setPageCount={value => setPageCount(value)}
-          totalCount={totalCount}
+          totalCount={totalCount as number}
           maxPages={maxPaginationPage}
         />
       </div>

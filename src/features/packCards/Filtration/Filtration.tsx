@@ -8,7 +8,7 @@ import { filterPackTC, getPacksTC } from '../cardPacks-reducer'
 
 import style from './Filtration.module.css'
 
-const initialValueSlider = [2, 52]
+const initialValueSlider = [0, 52]
 
 type PropsType = {
   id?: string
