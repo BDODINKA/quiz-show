@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { CardPacks } from '../../../api/cardPacksAPI'
+import { CardPacksType } from '../../../api/cardPacksAPI'
 import { FriendsButton } from '../TableActionsButton/FriendsButton'
 import { MyActionsButton } from '../TableActionsButton/MyActionsButton'
 
@@ -8,7 +8,7 @@ import poligon from './../../../assets/img/Table/Polygon 2.svg'
 import style from './TablePackCard.module.css'
 
 type PropsType = {
-  cards?: CardPacks[]
+  cards?: CardPacksType[]
   userId: string | undefined
   sort: (value: boolean) => void
 }

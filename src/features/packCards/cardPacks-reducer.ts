@@ -1,6 +1,11 @@
 import { AxiosError } from 'axios'
 
-import { cardPacksAPI, CardPacksResponceType, PacksParamsType } from '../../api/cardPacksAPI'
+import {
+  CardPacksType,
+  cardPacksAPI,
+  CardPacksResponceType,
+  PacksParamsType,
+} from '../../api/cardPacksAPI'
 import { setAppErrorAC, setAppStatusAC } from '../../app/app-reducer'
 import { RootStateType } from '../../app/store'
 import { AppThunk } from '../../types/HooksTypes'
@@ -24,9 +29,6 @@ export const cardPacksReducer = (
     case 'CRUD/SET-PACKS': {
       return { ...action.cardPacks }
     }
-    /* case 'CRUD/ADD-PACKS': {
-      return { ...state, cardPacks: [action.packs.cardPacks, ...state.cardPacks] }
-    }*/
     case 'CARD-PACKS/FILTER': {
       return { ...action.packsCard }
     }
@@ -53,20 +55,22 @@ export const filterPackAC = (packsCard: CardPacksResponceType) => {
 }
 
 export const getPacksTC = (): AppThunk => dispatch => {
-    dispatch(setAppStatusAC('progress'))
-  cardPacksAPI.getPacks().then(res => {
-    dispatch(setPacksAC(res.data))
+  dispatch(setAppStatusAC('progress'))
+  cardPacksAPI
+    .getPacks()
+    .then(res => {
+      dispatch(setPacksAC(res.data))
       dispatch(setAppStatusAC('success'))
-  })
-      .catch((reason: AxiosError<{ error: string }>) => {
-          if (reason.response?.data.error) {
-              ServerError<string>(reason.response.data.error, setAppErrorAC, dispatch)
-              dispatch(setAppStatusAC('error'))
-          } else {
-              ServerError<string>(reason.message, setAppErrorAC, dispatch)
-              dispatch(setAppStatusAC('error'))
-          }
-      })
+    })
+    .catch((reason: AxiosError<{ error: string }>) => {
+      if (reason.response?.data.error) {
+        ServerError<string>(reason.response.data.error, setAppErrorAC, dispatch)
+        dispatch(setAppStatusAC('error'))
+      } else {
+        ServerError<string>(reason.message, setAppErrorAC, dispatch)
+        dispatch(setAppStatusAC('error'))
+      }
+    })
 }
 
 export const addPackTC =
@@ -114,11 +118,24 @@ export const deletePackTC =
   }
 
 export const updatePackTC =
-  (cardsPack: CardPacksResponceType): AppThunk =>
+  (cardsPack: CardPacksType): AppThunk =>
   dispatch => {
-    cardPacksAPI.updatePack(cardsPack).then(res => {
-      console.log(res)
-    })
+    dispatch(setAppStatusAC('progress'))
+    cardPacksAPI
+      .updatePack(cardsPack)
+      .then(res => {
+        dispatch(setAppStatusAC('success'))
+        console.log(res)
+      })
+      .catch((reason: AxiosError<{ error: string }>) => {
+        if (reason.response?.data.error) {
+          ServerError<string>(reason.response.data.error, setAppErrorAC, dispatch)
+          dispatch(setAppStatusAC('error'))
+        } else {
+          ServerError<string>(reason.message, setAppErrorAC, dispatch)
+          dispatch(setAppStatusAC('error'))
+        }
+      })
   }
 
 export const filterPackTC =

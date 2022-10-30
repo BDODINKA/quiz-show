@@ -1,27 +1,52 @@
 import { axiosInstance } from './apiConfig/axiosConfig'
 
+export type CardsParamsType = {
+  cardAnswer?: string
+  cardQuestion?: string
+  min?: number
+  max?: number
+  sortCards?: any
+  page?: number
+  pageCount?: number
+}
+
 export type CardResponceType = {
+  cards: CardType[]
+  cardsTotalCount: number
+  maxGrade: number
+  minGrade: number
+  page: number
+  pageCount: number
+  packUserId: string
+}
+
+export type CardType = {
+  _id: string
   cardsPack_id: string
-  question?: string
+  user_id: string
   answer?: string
-  grade?: 0 | 1 | 2 | 3 | 4 | 5
+  question?: string
+  grade?: number
   shots?: number
+  comments: string
+  type: string
+  rating: number
+  more_id: string
+  created: string
+  updated: string
+  __v: number
   answerImg?: string
   questionImg?: string
   questionVideo?: string
   answerVideo?: string
 }
 
-export type UpdateCardType = {
-  _id: string
-  question?: string
-}
-
 export const cardAPI = {
   getCards(cardsPack_id: string) {
     return axiosInstance.get(`/cards/card?cardsPack_id=${cardsPack_id}`)
   },
-  addCard(card: CardResponceType) {
+
+  addCard(card: CardType) {
     return axiosInstance.post('/cards/card', {
       card: {
         cardsPack_id: card.cardsPack_id,
@@ -36,11 +61,14 @@ export const cardAPI = {
   deleteCard(_id: string) {
     return axiosInstance.delete(`/cards/card?id=${_id}`)
   },
-  updateCard(updateCard: UpdateCardType) {
+
+  updateCard(card: CardType) {
     return axiosInstance.put('/cards/card', {
       card: {
-        _id: '5eb6a2f72f849402d46c6ac7',
-        question: 'new question',
+        _id: card._id,
+        cardsPack_id: card.cardsPack_id,
+        question: card.question,
+        answer: card.answer,
       },
     })
   },

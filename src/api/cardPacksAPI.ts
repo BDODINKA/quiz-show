@@ -12,7 +12,7 @@ export type PacksParamsType = {
   block?: boolean
 }
 export type CardPacksResponceType = {
-  cardPacks: CardPacks[]
+  cardPacks: CardPacksType[]
   page: number
   pageCount: number
   cardPacksTotalCount: number
@@ -21,7 +21,7 @@ export type CardPacksResponceType = {
   token: string
   tokenDeathTime: number
 }
-export type CardPacks = {
+export type CardPacksType = {
   _id: string
   user_id: string
   user_name: string
@@ -62,11 +62,12 @@ export const cardPacksAPI = {
     return axiosInstance.delete(`/cards/pack?id=${_id}`)
   },
 
-  updatePack(cardsPack: CardPacksResponceType) {
+  updatePack(cardsPack: CardPacksType) {
     return axiosInstance.put('/cards/pack', {
       cardsPack: {
-        _id: '63569c0865c36e000499fa23',
-        name: 'new name',
+        _id: cardsPack._id,
+        name: cardsPack.name,
+        private: cardsPack.private,
       },
     })
   },
