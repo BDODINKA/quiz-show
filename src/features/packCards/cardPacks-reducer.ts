@@ -24,6 +24,10 @@ const initialState = {
   token: null as Nullable<string>,
   tokenDeathTime: null as Nullable<number>,
   currentPack: 'All' as CurrentPackType,
+  // params: {
+  //   userIs: '',
+  //   //  ...
+  // },
 }
 
 export type CardPacksActionsType =

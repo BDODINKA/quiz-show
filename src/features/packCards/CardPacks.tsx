@@ -21,6 +21,7 @@ const selectorCardPage = (state: RootStateType) => state.cardPacks.page
 const selectorTotalCount = (state: RootStateType) => state.cardPacks.cardPacksTotalCount
 const selectorProfileId = (state: RootStateType) => state.profile.profile?._id
 const selectorFilterBtn = (state: RootStateType) => state.cardPacks.currentPack
+const selectorIsLogin = (state: RootStateType) => state.auth.isLoggedIn
 
 export const CardPacks = () => {
   const dispatch = useAppDispatch()
@@ -31,16 +32,18 @@ export const CardPacks = () => {
   const totalCount = useAppSelector(selectorTotalCount)
   const filterBtn = useAppSelector(selectorFilterBtn)
   const profileId = useAppSelector(selectorProfileId)
+  const isLogin = useAppSelector(selectorIsLogin)
 
   const [showForm, setShowForm] = useState<boolean>(false)
 
   useEffect(() => {
-    if (!profileId) {
+    if (!isLogin) {
       navigate(PATH.LOGIN_PAGE)
+    } else {
+      dispatch(getPacksTC())
+      console.log('render')
     }
-    console.log('render')
-    dispatch(getPacksTC())
-  }, [])
+  }, [isLogin])
 
   const setPage = (value: number) => {
     dispatch(filterPackTC({ page: value }))
@@ -67,8 +70,6 @@ export const CardPacks = () => {
   const activeBtnHandler = (value: string) => {
     dispatch(setFilterBtnTC(value))
   }
-
-  console.log(filterBtn)
 
   return (
     <div className={style.container}>
