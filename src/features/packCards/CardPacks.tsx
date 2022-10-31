@@ -92,7 +92,6 @@ export const CardPacks = () => {
           userId={profileId}
           sort={setLastUpdate}
           deleteHandler={id => deleteMyPack(id)}
-          changeFieldName={(name, id) => changeFieldName(name, id)}
         />
         <Pagination
           pageCount={params.pageCount}

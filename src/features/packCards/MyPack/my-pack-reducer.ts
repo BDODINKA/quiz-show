@@ -1,10 +1,10 @@
+import { AxiosError } from 'axios'
 import { Dispatch } from 'redux'
 
 import { cardAPI, CardResponceType, UpdateCardType } from '../../../api/cardAPI'
+import { setAppErrorAC, setAppStatusAC } from '../../../app/app-reducer'
 import { AppThunk } from '../../../types/HooksTypes'
-import {AxiosError} from "axios";
-import {ServerError} from "../../../utils/ServerErrorHandler";
-import {setAppErrorAC, setAppStatusAC} from "../../../app/app-reducer";
+import { ServerError } from '../../../utils/ServerErrorHandler'
 
 type InitialStateType = CardResponceType[]
 const initialState: InitialStateType = []
@@ -41,52 +41,57 @@ export const updateCardAC = (card: CardResponceType) => {
   return { type: 'CRUD/UPDATE-CARD', card } as const
 }
 
-export const getCardsTC = (cardsPack_id: string): AppThunk => (dispatch: Dispatch<CardActionsType>) => {
-  cardAPI.getCards(cardsPack_id).then(res => {
-    dispatch(setCardsAC(res.data.cards))
-    console.log(res.data.cards)
-  })
-
-}
+export const getCardsTC =
+  (cardsPack_id: string): AppThunk =>
+  (dispatch: Dispatch<CardActionsType>) => {
+    cardAPI.getCards(cardsPack_id).then(res => {
+      dispatch(setCardsAC(res.data.cards))
+      console.log(res.data.cards)
+    })
+  }
 
 export const addCardTC =
   (card: CardResponceType): AppThunk =>
   dispatch => {
     dispatch(setAppStatusAC('progress'))
-    cardAPI.addCard(card).then(res => {
-      dispatch(getCardsTC(card.cardsPack_id))
-      dispatch(setAppStatusAC('success'))
-      console.log(res)
-    })
-        .catch((reason: AxiosError<{ error: string }>) => {
-          if (reason.response?.data.error) {
-            ServerError<string>(reason.response.data.error, setAppErrorAC, dispatch)
-            dispatch(setAppStatusAC('error'))
-          } else {
-            ServerError<string>(reason.message, setAppErrorAC, dispatch)
-            dispatch(setAppStatusAC('error'))
-          }
-        })
+    cardAPI
+      .addCard(card)
+      .then(res => {
+        dispatch(getCardsTC(card.cardsPack_id))
+        dispatch(setAppStatusAC('success'))
+        console.log(res)
+      })
+      .catch((reason: AxiosError<{ error: string }>) => {
+        if (reason.response?.data.error) {
+          ServerError<string>(reason.response.data.error, setAppErrorAC, dispatch)
+          dispatch(setAppStatusAC('error'))
+        } else {
+          ServerError<string>(reason.message, setAppErrorAC, dispatch)
+          dispatch(setAppStatusAC('error'))
+        }
+      })
   }
 
 export const deleteCardTC =
   (_id: string): AppThunk =>
   dispatch => {
     dispatch(setAppStatusAC('progress'))
-    cardAPI.deleteCard(_id).then(res => {
+    cardAPI
+      .deleteCard(_id)
+      .then(res => {
         dispatch(getCardsTC(_id))
-      dispatch(setAppStatusAC('success'))
-      console.log(res)
-    })
-        .catch((reason: AxiosError<{ error: string }>) => {
-          if (reason.response?.data.error) {
-            ServerError<string>(reason.response.data.error, setAppErrorAC, dispatch)
-            dispatch(setAppStatusAC('error'))
-          } else {
-            ServerError<string>(reason.message, setAppErrorAC, dispatch)
-            dispatch(setAppStatusAC('error'))
-          }
-        })
+        dispatch(setAppStatusAC('success'))
+        console.log(res)
+      })
+      .catch((reason: AxiosError<{ error: string }>) => {
+        if (reason.response?.data.error) {
+          ServerError<string>(reason.response.data.error, setAppErrorAC, dispatch)
+          dispatch(setAppStatusAC('error'))
+        } else {
+          ServerError<string>(reason.message, setAppErrorAC, dispatch)
+          dispatch(setAppStatusAC('error'))
+        }
+      })
   }
 
 export const updateCardTC =
