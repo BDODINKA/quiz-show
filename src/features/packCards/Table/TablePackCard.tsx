@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 
+import { NavLink } from 'react-router-dom'
+
 import { CardPacks } from '../../../api/cardPacksAPI'
-import EditableSpan from '../../../common/components/EditableSpan/EditableSpan'
 import { Nullable } from '../../../types/Nullable'
 import { FriendsButton } from '../TableActionsButton/FriendsButton'
 import { MyActionsButton } from '../TableActionsButton/MyActionsButton'
@@ -25,10 +26,6 @@ export const TablePackCard = (props: PropsType) => {
   }
   const deleteHandler = (id: string) => {
     props.deleteHandler && props.deleteHandler(id)
-  }
-
-  const changeFieldName = (text: string, id: string) => {
-    props.changeFieldName && props.changeFieldName(text, id)
   }
 
   return (
@@ -64,12 +61,9 @@ export const TablePackCard = (props: PropsType) => {
               ? props.cards.map(elem => (
                   <tr key={elem._id} className={style.title_table_body}>
                     <td className={style.td}>
-                      <EditableSpan
-                        text={elem.name}
-                        classNameInput={style.changeName}
-                        classNameBtn={style.changeNameBtn}
-                        changedText={text => changeFieldName(text, elem._id)}
-                      />
+                      <NavLink to={'/'} className={style.linkName}>
+                        {elem.name}
+                      </NavLink>
                     </td>
                     <td>{elem.cardsCount}</td>
                     <td>{new Date(Date.parse(elem.updated)).toLocaleDateString('ru-RU')}</td>
