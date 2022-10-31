@@ -1,23 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-import { RootStateType } from '../../../app/store'
 import edit from '../../../assets/img/Table/Edit.svg'
 import teacher from '../../../assets/img/Table/teacher.svg'
 import SuperButton from '../../../common/components/SuperButton/SuperButton'
+import { selectorStatus } from '../../../common/selectors/selectors'
 import { useAppSelector } from '../../../utils/hooks/customHooks'
 
 import style from './actionBtn.module.css'
 
 type PropsType = {
   deleteHandler?: () => void
+  changeName?: () => void
 }
 
-const selectorStatus = (state: RootStateType) => state.app.status
-
 export const MyActionsButton = (props: PropsType) => {
+  const [disabled, setDisabled] = useState(false)
   const status = useAppSelector(selectorStatus)
+
   const deleteHandler = () => {
+    setDisabled(true)
     props.deleteHandler && props.deleteHandler()
+  }
+  const changeNameHandler = () => {
+    props.changeName && props.changeName()
   }
 
   return (
@@ -25,12 +30,12 @@ export const MyActionsButton = (props: PropsType) => {
       <div>
         <img src={teacher} alt="teacher" />
       </div>
-      <div>
+      <div onClick={changeNameHandler}>
         <img src={edit} alt="edit" />
       </div>
       <SuperButton
         onClick={deleteHandler}
-        disabled={status === 'progress'}
+        disabled={disabled && status === 'progress'}
         className={style.deleteBtn}
       />
     </>

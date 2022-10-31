@@ -56,3 +56,9 @@
   width: 100%;
   padding-left: 100px;
 }
+.linkName {
+  text-decoration: none;
+}
+.linkName:hover {
+  border-bottom: 1px solid black;
+}

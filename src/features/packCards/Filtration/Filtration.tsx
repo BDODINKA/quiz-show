@@ -3,36 +3,32 @@ import React, { ChangeEvent, useEffect, useState } from 'react'
 import { DoubleRangeSlider } from '../../../common/components/DoubleRangeSlider/DoubleRangeSlider'
 import Search from '../../../common/components/Search/Search'
 import SuperButton from '../../../common/components/SuperButton/SuperButton'
+import { Nullable } from '../../../types/Nullable'
 import { useAppDispatch, useDebounce } from '../../../utils/hooks/customHooks'
-import { filterPackTC, getPacksTC } from '../cardPacks-reducer'
+import { filterPackNameAC, filterRangeSliderAC, setUserIdAC } from '../cardPacks-reducer'
 
 import style from './Filtration.module.css'
 
-const initialValueSlider = [0, 52]
-
 type PropsType = {
-  id?: string
-  activeBtnHandler: (value: string) => void
-  showActive: string
+  user_id?: string
+  initialValueSlider: number[]
+  paramsId?: Nullable<string>
 }
 export const Filtration = (props: PropsType) => {
   const dispatch = useAppDispatch()
 
   const [searchValue, setSearchValue] = useState<string>('')
-  const [rangeValue, setRangeValue] = useState<number[]>(initialValueSlider)
+  const [rangeValue, setRangeValue] = useState<number[]>(props.initialValueSlider)
 
   const debounceSearch = useDebounce<string>(searchValue, 700)
   const debounceRange = useDebounce<number[]>(rangeValue, 1000)
 
   useEffect(() => {
     if (debounceSearch !== '') {
-      dispatch(filterPackTC({ packName: debounceSearch }))
-      setTimeout(() => {
-        setSearchValue('')
-      }, 20000)
+      dispatch(filterPackNameAC(debounceSearch))
     }
-    if (debounceRange !== initialValueSlider) {
-      dispatch(filterPackTC({ min: debounceRange[0], max: debounceRange[1] }))
+    if (debounceRange !== props.initialValueSlider) {
+      dispatch(filterRangeSliderAC(debounceRange))
     }
   }, [debounceSearch, debounceRange])
 
@@ -43,22 +39,19 @@ export const Filtration = (props: PropsType) => {
     setRangeValue(value as number[])
   }
   const getMyPacks = () => {
-    props.activeBtnHandler('My')
-    dispatch(filterPackTC({ user_id: props.id }))
+    dispatch(setUserIdAC(props.user_id as string))
   }
   const getAllPacks = () => {
-    props.activeBtnHandler('All')
-    dispatch(getPacksTC())
+    dispatch(setUserIdAC(null))
   }
   const resetFilter = () => {
     setSearchValue('')
-    setRangeValue(initialValueSlider)
+    setRangeValue(props.initialValueSlider)
     getAllPacks()
   }
 
-  const finalClassBtnMy = props.showActive === 'My' ? `${style.btn} ${style.activeBtn}` : style.btn
-  const finalClassBtnAll =
-    props.showActive === 'All' ? `${style.btn} ${style.activeBtn}` : style.btn
+  const finalClassBtnMy = props.paramsId !== null ? `${style.btn} ${style.activeBtn}` : style.btn
+  const finalClassBtnAll = props.paramsId === null ? `${style.btn} ${style.activeBtn}` : style.btn
 
   return (
     <div className={style.container}>
@@ -77,9 +70,9 @@ export const Filtration = (props: PropsType) => {
         <div className={style.range}>
           <div className={style.rangeWindow}>{rangeValue[0]}</div>
           <DoubleRangeSlider
-            initialValue={initialValueSlider}
             getValue={getValueInput}
             currentValue={rangeValue}
+            minMaxValue={props.initialValueSlider}
           />
           <div className={style.rangeWindow}>{rangeValue[1]}</div>
         </div>

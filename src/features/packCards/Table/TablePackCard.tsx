@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+import { NavLink } from 'react-router-dom'
+
 import { CardPacks } from '../../../api/cardPacksAPI'
 import { Nullable } from '../../../types/Nullable'
 import { FriendsButton } from '../TableActionsButton/FriendsButton'
@@ -13,6 +15,7 @@ type PropsType = {
   userId?: string
   sort: (value: boolean) => void
   deleteHandler?: (id: string) => void
+  changeFieldName?: (text: string, id: string) => void
 }
 export const TablePackCard = (props: PropsType) => {
   const [sort, setSort] = useState(false)
@@ -57,7 +60,11 @@ export const TablePackCard = (props: PropsType) => {
             {props.cards
               ? props.cards.map(elem => (
                   <tr key={elem._id} className={style.title_table_body}>
-                    <td className={style.td}>{elem.name}</td>
+                    <td className={style.td}>
+                      <NavLink to={'/'} className={style.linkName}>
+                        {elem.name}
+                      </NavLink>
+                    </td>
                     <td>{elem.cardsCount}</td>
                     <td>{new Date(Date.parse(elem.updated)).toLocaleDateString('ru-RU')}</td>
                     <td>{elem.user_name}</td>

@@ -3,7 +3,7 @@ import { AxiosError } from 'axios'
 import {
   CardPacks,
   cardPacksAPI,
-  CardPacksResponceType,
+  CardPacksResponseType,
   PacksParamsType,
 } from '../../api/cardPacksAPI'
 import { setAppErrorAC, setAppStatusAC } from '../../app/app-reducer'
@@ -12,27 +12,31 @@ import { AppThunk } from '../../types/HooksTypes'
 import { Nullable } from '../../types/Nullable'
 import { ServerError } from '../../utils/ServerErrorHandler'
 
-type CurrentPackType = 'All' | 'My'
 type InitialStateType = typeof initialState
 const initialState = {
   cardPacks: null as Nullable<CardPacks[]>,
-  page: 1,
-  pageCount: 10,
   cardPacksTotalCount: null as Nullable<number>,
-  minCardsCount: null as Nullable<number>,
-  maxCardsCount: null as Nullable<number>,
-  token: null as Nullable<string>,
-  tokenDeathTime: null as Nullable<number>,
-  currentPack: 'All' as CurrentPackType,
+  params: {
+    packName: null as Nullable<string>,
+    min: 0,
+    max: 52,
+    sortPacks: null as Nullable<string>,
+    page: 1,
+    pageCount: 10,
+    user_id: null as Nullable<string>,
+    block: null as Nullable<boolean>,
+  },
 }
 
 export type CardPacksActionsType =
   | ReturnType<typeof setPacksAC>
-  | ReturnType<typeof addPackAC>
-  | ReturnType<typeof deletePackAC>
-  | ReturnType<typeof updatePackAC>
-  | ReturnType<typeof filterPackAC>
-  | ReturnType<typeof setFilterBtnAC>
+  | ReturnType<typeof filterPageAC>
+  | ReturnType<typeof filterPageCountAC>
+  | ReturnType<typeof filterLastUpdateAC>
+  | ReturnType<typeof filterPackNameAC>
+  | ReturnType<typeof filterRangeSliderAC>
+  | ReturnType<typeof setUserIdAC>
+  | ReturnType<typeof filterResetAC>
 
 export const cardPacksReducer = (
   state = initialState,
@@ -40,47 +44,91 @@ export const cardPacksReducer = (
 ): InitialStateType => {
   switch (action.type) {
     case 'CRUD/SET-PACKS': {
-      return { ...state, ...action.cardPacks }
+      return {
+        ...state,
+        cardPacks: action.cardPacks.cardPacks,
+        cardPacksTotalCount: action.cardPacks.cardPacksTotalCount,
+      }
     }
-    case 'CARD-PACKS/SET-FILTER-BTN': {
-      return { ...state, currentPack: action.value }
+    case 'CARD-PACKS/SET-FILTER-PACK-NAME': {
+      return { ...state, params: { ...state.params, packName: action.value } }
     }
-    case 'CARD-PACKS/FILTER': {
-      return { ...state, ...action.packsCard }
+    case 'CARD-PACKS/SET-FILTER-PAGE': {
+      return { ...state, params: { ...state.params, page: action.value } }
+    }
+    case 'CARD-PACKS/SET-FILTER-PAGE-COUNT': {
+      return { ...state, params: { ...state.params, pageCount: action.value } }
+    }
+    case 'CARD-PACKS/SET-FILTER-RANGE-SLIDER': {
+      return { ...state, params: { ...state.params, min: action.value[0], max: action.value[1] } }
+    }
+    case 'CARD-PACKS/SET-FILTER-LAST-UPDATE': {
+      return { ...state, params: { ...state.params, sortPacks: action.value } }
+    }
+    case 'CARD-PACKS/SET-USER-ID': {
+      return { ...state, params: { ...state.params, user_id: action.value } }
+    }
+    case 'CARD-PACKS/SET-RESET-FILTER': {
+      return { ...state, params: { ...state.params, min: 0, max: 52 } }
     }
     default:
       return state
   }
 }
 
-export const setPacksAC = (cardPacks: CardPacksResponceType) => {
+export const setPacksAC = (cardPacks: CardPacksResponseType) => {
   return { type: 'CRUD/SET-PACKS', cardPacks } as const
 }
-export const addPackAC = (packs: CardPacksResponceType) => {
-  return { type: 'CRUD/ADD-PACKS', packs } as const
-}
-export const deletePackAC = (id: string) => {
-  return { type: 'CRUD/DELETE-PACKS', id } as const
-}
-export const updatePackAC = (packsCard: CardPacksResponceType) => {
-  return { type: 'CRUD/UPDATE-PACKS', packsCard } as const
+
+export const filterPageAC = (value: number) => {
+  return { type: 'CARD-PACKS/SET-FILTER-PAGE', value } as const
 }
 
-export const filterPackAC = (packsCard: CardPacksResponceType) => {
-  return { type: 'CARD-PACKS/FILTER', packsCard } as const
+export const filterPageCountAC = (value: number) => {
+  return { type: 'CARD-PACKS/SET-FILTER-PAGE-COUNT', value } as const
 }
 
-export const setFilterBtnAC = (value: CurrentPackType) => {
-  return { type: 'CARD-PACKS/SET-FILTER-BTN', value } as const
+export const filterLastUpdateAC = (value: string) => {
+  return { type: 'CARD-PACKS/SET-FILTER-LAST-UPDATE', value } as const
 }
 
-export const getPacksTC = (): AppThunk => dispatch => {
+export const filterPackNameAC = (value: string) => {
+  return { type: 'CARD-PACKS/SET-FILTER-PACK-NAME', value } as const
+}
+
+export const filterRangeSliderAC = (value: number[]) => {
+  return { type: 'CARD-PACKS/SET-FILTER-RANGE-SLIDER', value } as const
+}
+
+export const setUserIdAC = (value: Nullable<string>) => {
+  return { type: 'CARD-PACKS/SET-USER-ID', value } as const
+}
+
+export const filterResetAC = () => {
+  return { type: 'CARD-PACKS/SET-RESET-FILTER' } as const
+}
+
+export const getPacksTC = (): AppThunk => (dispatch, getState: () => RootStateType) => {
   dispatch(setAppStatusAC('progress'))
-  cardPacksAPI.getPacks().then(res => {
-    dispatch(setPacksAC(res.data))
-    dispatch(setAppStatusAC('success'))
-    dispatch(setAppErrorAC('Packs loading success'))
-  })
+
+  const params = getState().cardPacks.params
+
+  cardPacksAPI
+    .getPacks(params as PacksParamsType)
+    .then(res => {
+      if (res.data.cardPacks.length) {
+        dispatch(setPacksAC(res.data))
+        dispatch(setAppStatusAC(null))
+      } else {
+        dispatch(setPacksAC(res.data))
+        dispatch(setAppStatusAC('warning'))
+        dispatch(setAppErrorAC('Current Pack not found '))
+      }
+    })
+    .catch((error: AxiosError) => {
+      dispatch(setAppStatusAC('error'))
+      ServerError(error.message, setAppErrorAC, dispatch)
+    })
 }
 
 export const addPackTC =
@@ -89,9 +137,8 @@ export const addPackTC =
     dispatch(setAppStatusAC('progress'))
     cardPacksAPI
       .addPack(packName, deckCover, isPrivate)
-      .then(res => {
-        console.log(res.data)
-        dispatch(filterPackTC())
+      .then(() => {
+        dispatch(getPacksTC())
         dispatch(setAppStatusAC('success'))
       })
       .catch((reason: AxiosError<{ error: string }>) => {
@@ -112,7 +159,7 @@ export const deletePackTC =
     cardPacksAPI
       .deletePack(id)
       .then(() => {
-        dispatch(filterPackTC())
+        dispatch(getPacksTC())
         dispatch(setAppStatusAC('success'))
         dispatch(setAppErrorAC('Delete success'))
       })
@@ -128,43 +175,9 @@ export const deletePackTC =
   }
 
 export const updatePackTC =
-  (cardsPack: CardPacksResponceType): AppThunk =>
+  (id: string, text: string): AppThunk =>
   dispatch => {
-    cardPacksAPI.updatePack(cardsPack).then(res => {
-      console.log(res)
+    cardPacksAPI.updatePack({ _id: id, name: text }).then(() => {
+      dispatch(getPacksTC())
     })
-  }
-
-export const setFilterBtnTC =
-  (value: string): AppThunk =>
-  dispatch => {
-    dispatch(setFilterBtnAC(value as CurrentPackType))
-  }
-
-export const filterPackTC =
-  (filter?: PacksParamsType): AppThunk =>
-  (dispatch, getState: () => RootStateType) => {
-    const { page, pageCount, currentPack } = getState().cardPacks
-    const user_id = getState().profile.profile?._id
-
-    const filters = currentPack === 'All' ? filter : { ...filter, user_id }
-
-    dispatch(setAppStatusAC('progress'))
-
-    cardPacksAPI
-      .filterPacks({ page, pageCount, ...filters })
-      .then(res => {
-        if (res.data.cardPacks.length) {
-          dispatch(filterPackAC(res.data))
-          dispatch(setAppStatusAC(null))
-        } else {
-          dispatch(filterPackAC(res.data))
-          dispatch(setAppStatusAC('warning'))
-          dispatch(setAppErrorAC('Current Pack not found '))
-        }
-      })
-      .catch((error: AxiosError) => {
-        dispatch(setAppStatusAC('error'))
-        ServerError(error.message, setAppErrorAC, dispatch)
-      })
   }

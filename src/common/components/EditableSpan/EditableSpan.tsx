@@ -34,6 +34,7 @@ const EditableSpan = (props: PropsType) => {
   const [editMode, setEditMode] = useState<boolean>(false)
   const [text, setText] = useState<string | undefined>(props.text)
   const [touchCount, setTouchCount] = useState<number>(1)
+
   const editModeHandler = (value: boolean) => {
     setEditMode(value)
     if (!value) {
