@@ -56,3 +56,23 @@
   width: 100%;
   padding-left: 100px;
 }
+.changeName {
+  width: 80%;
+
+  font-size: 14px;
+  font-weight: 400;
+
+  opacity: 0.5;
+  border: none;
+  outline: none;
+
+  appearance: none;
+}
+.changeNameBtn {
+  width: 24px;
+  height: 24px;
+
+  background: url('../../../assets/img/Table/Edit.svg') no-repeat center;
+  background-size: cover;
+  border: none;
+}

@@ -4,9 +4,9 @@ import { Box, Slider } from '@mui/material'
 
 type PropsType = {
   valueLabel?: string
-  initialValue: number[]
   getValue?: (value: number | number[]) => void
   currentValue: number[]
+  minMaxValue: number[]
 }
 
 export const DoubleRangeSlider = (props: PropsType) => {
@@ -19,8 +19,8 @@ export const DoubleRangeSlider = (props: PropsType) => {
       <Slider
         value={props.currentValue}
         onChange={handleChange}
-        min={props.initialValue[0]}
-        max={props.initialValue[1]}
+        min={props.minMaxValue[0]}
+        max={props.minMaxValue[1]}
       />
     </Box>
   )

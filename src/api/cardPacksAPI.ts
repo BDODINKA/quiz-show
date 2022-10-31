@@ -7,11 +7,10 @@ export type PacksParamsType = {
   sortPacks?: string
   page?: number
   pageCount?: number
-  user_id?: string
-  // чьи колоды не обязательно, или придут все
+  user_id?: string // чьи колоды не обязательно, или придут все
   block?: boolean
 }
-export type CardPacksResponceType = {
+export type CardPacksResponseType = {
   cardPacks: CardPacks[]
   page: number
   pageCount: number
@@ -85,13 +84,16 @@ export type AddPackTypeNewCardsPack = {
   more_id: string
   __v: number
 }
+export type CardsPackUpdateType = {
+  _id: string
+  name: string
+}
 
 export const cardPacksAPI = {
-  getPacks() {
-    return axiosInstance.get<CardPacksResponceType>('/cards/pack', {
+  getPacks(data: PacksParamsType) {
+    return axiosInstance.get<CardPacksResponseType>('/cards/pack', {
       params: {
-        page: 1,
-        pageCount: 10,
+        ...data,
       },
     })
   },
@@ -114,19 +116,7 @@ export const cardPacksAPI = {
     })
   },
 
-  updatePack(cardsPack: CardPacksResponceType) {
-    return axiosInstance.put('/cards/pack', {
-      cardsPack: {
-        _id: '63569c0865c36e000499fa23',
-        name: 'new name',
-      },
-    })
-  },
-  filterPacks(data: PacksParamsType) {
-    return axiosInstance.get<CardPacksResponceType>('/cards/pack', {
-      params: {
-        ...data,
-      },
-    })
+  updatePack(cardsPack: CardsPackUpdateType) {
+    return axiosInstance.put('/cards/pack', { cardsPack })
   },
 }

@@ -8,7 +8,6 @@ import Search from '../../../common/components/Search/Search'
 import { maxPaginationPage } from '../../../common/constants/pagination'
 import { PATH } from '../../../common/routes/const-routes'
 import { useAppDispatch, useAppSelector } from '../../../utils/hooks/customHooks'
-import { filterPackTC, getPacksTC } from '../cardPacks-reducer'
 import { TitleAndButtonPack } from '../TitleAndButtonPack'
 import style from '../TitleAndButtonPack.module.css'
 
@@ -16,37 +15,37 @@ import dots from './../../../assets/img/Table/dots.svg'
 import s from './MyPack.module.css'
 import { TableMyPack } from './TableMyPack'
 
-const selectorCardPacks = (state: RootStateType) => state.cardPacks.cardPacks
-const selectorCardPageCount = (state: RootStateType) => state.cardPacks.pageCount
-const selectorCardPage = (state: RootStateType) => state.cardPacks.page
-const selectorTotalCount = (state: RootStateType) => state.cardPacks.cardPacksTotalCount
-const selectorProfileId = (state: RootStateType) => state.profile.profile?._id
+// const selectorCardPacks = (state: RootStateType) => state.cardPacks.cardPacks
+// const selectorCardPageCount = (state: RootStateType) => state.cardPacks.pageCount
+// const selectorCardPage = (state: RootStateType) => state.cardPacks.page
+// const selectorTotalCount = (state: RootStateType) => state.cardPacks.cardPacksTotalCount
+// const selectorProfileId = (state: RootStateType) => state.profile.profile?._id
 
 export const MyPack = () => {
-  const navigate = useNavigate()
-  const dispatch = useAppDispatch()
-  const cardPacks = useAppSelector(selectorCardPacks)
-  const pageCount = useAppSelector(selectorCardPageCount)
-  const page = useAppSelector(selectorCardPage)
-  const totalCount = useAppSelector(selectorTotalCount)
-  const profileId = useAppSelector(selectorProfileId)
+  // const navigate = useNavigate()
+  // const dispatch = useAppDispatch()
+  // const cardPacks = useAppSelector(selectorCardPacks)
+  // const pageCount = useAppSelector(selectorCardPageCount)
+  // const page = useAppSelector(selectorCardPage)
+  // const totalCount = useAppSelector(selectorTotalCount)
+  // const profileId = useAppSelector(selectorProfileId)
+  //
+  // // useEffect(() => {
+  //   if (!profileId) {
+  //     navigate(PATH.LOGIN_PAGE)
+  //   } else {
+  //     console.log('s')
+  //     console.log(profileId)
+  //     dispatch(filterPackTC({ user_id: profileId }))
+  //   }
+  // }, [])
 
-  useEffect(() => {
-    if (!profileId) {
-      navigate(PATH.LOGIN_PAGE)
-    } else {
-      console.log('s')
-      console.log(profileId)
-      dispatch(filterPackTC({ user_id: profileId }))
-    }
-  }, [])
-
-  const setPage = (value: number) => {
-    dispatch(filterPackTC({ page: value }))
-  }
-  const setPageCount = (value: number) => {
-    dispatch(filterPackTC({ pageCount: value }))
-  }
+  // const setPage = (value: number) => {
+  //   dispatch(filterPackTC({ page: value }))
+  // }
+  // const setPageCount = (value: number) => {
+  //   dispatch(filterPackTC({ pageCount: value }))
+  // }
 
   return (
     <div className={style.packs_list_container}>
@@ -59,14 +58,14 @@ export const MyPack = () => {
         />
         <Search onSearchChange={() => {}} value={''} className={s.search} />
         <TableMyPack />
-        <Pagination
-          pageCount={pageCount}
-          currentPage={page}
-          totalCount={totalCount as number}
-          setPage={setPage}
-          setPageCount={setPageCount}
-          maxPages={maxPaginationPage}
-        />
+        {/*<Pagination*/}
+        {/*  pageCount={pageCount}*/}
+        {/*  currentPage={page}*/}
+        {/*  totalCount={totalCount as number}*/}
+        {/*  setPage={setPage}*/}
+        {/*  setPageCount={setPageCount}*/}
+        {/*  maxPages={maxPaginationPage}*/}
+        {/*/>*/}
       </div>
     </div>
   )
