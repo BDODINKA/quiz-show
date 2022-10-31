@@ -18,8 +18,8 @@ export type UpdateCardType = {
 }
 
 export const cardAPI = {
-  getCards() {
-    return axiosInstance.get('/cards/card?cardsPack_id=6357f1cb61a8d500046944c9')
+  getCards(cardsPack_id: string) {
+    return axiosInstance.get(`/cards/card?cardsPack_id=${cardsPack_id}`)
   },
   addCard(card: CardResponceType) {
     return axiosInstance.post('/cards/card', {
@@ -33,8 +33,8 @@ export const cardAPI = {
     })
   },
 
-  deleteCard() {
-    return axiosInstance.delete('/cards/card?id=')
+  deleteCard(_id: string) {
+    return axiosInstance.delete(`/cards/card?id=${_id}`)
   },
   updateCard(updateCard: UpdateCardType) {
     return axiosInstance.put('/cards/card', {
