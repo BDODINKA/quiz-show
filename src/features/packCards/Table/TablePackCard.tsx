@@ -16,6 +16,7 @@ type PropsType = {
   sort: (value: boolean) => void
   deleteHandler?: (id: string) => void
   changeFieldName?: (text: string, id: string) => void
+  navigateToCards?: (cardId: string) => void
 }
 export const TablePackCard = (props: PropsType) => {
   const [sort, setSort] = useState(false)
@@ -26,6 +27,9 @@ export const TablePackCard = (props: PropsType) => {
   }
   const deleteHandler = (id: string) => {
     props.deleteHandler && props.deleteHandler(id)
+  }
+  const navigateToCards = (cardId: string) => {
+    props.navigateToCards && props.navigateToCards(cardId)
   }
 
   return (
@@ -61,9 +65,9 @@ export const TablePackCard = (props: PropsType) => {
               ? props.cards.map(elem => (
                   <tr key={elem._id} className={style.title_table_body}>
                     <td className={style.td}>
-                      <NavLink to={'/'} className={style.linkName}>
+                      <span className={style.linkName} onClick={() => navigateToCards(elem._id)}>
                         {elem.name}
-                      </NavLink>
+                      </span>
                     </td>
                     <td>{elem.cardsCount}</td>
                     <td>{new Date(Date.parse(elem.updated)).toLocaleDateString('ru-RU')}</td>

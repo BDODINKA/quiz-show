@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
 import { RootStateType } from '../../app/store'
 import { CustomAlertSnackBar } from '../../common/components/CustomSnackBar/CustomAlertSnackBar'
@@ -18,7 +18,13 @@ const Login = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      navigate(PATH.PACK_CARDS_PAGE)
+      const path = sessionStorage.getItem('url')
+
+      if (path) {
+        navigate(path)
+      } else {
+        navigate(PATH.PACK_CARDS_PAGE)
+      }
     }
   }, [isLoggedIn])
 

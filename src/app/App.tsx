@@ -8,7 +8,6 @@ import { CustomAlertSnackBar } from '../common/components/CustomSnackBar/CustomA
 import { PATH } from '../common/routes/const-routes'
 import CheckEmail from '../features/forgot-pass/CheckEmail/CheckEmail'
 import CreateNewPassword from '../features/forgot-pass/CreateNewPass/CreateNewPassword'
-import { SetResetStateTC } from '../features/forgot-pass/forgot-password.reducer'
 import { ForgotPass } from '../features/forgot-pass/ForgotPass/ForgotPass'
 import Header from '../features/header/Header'
 import Login from '../features/login/Login'

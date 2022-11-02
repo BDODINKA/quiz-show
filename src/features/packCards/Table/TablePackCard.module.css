@@ -60,5 +60,7 @@
   text-decoration: none;
 }
 .linkName:hover {
+  cursor: pointer;
+
   border-bottom: 1px solid black;
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
 import { Pagination } from '../../common/components/pagination/pagination'
 import { InitValueRangeSlider } from '../../common/constants/packsCard'
@@ -9,9 +9,9 @@ import { PATH } from '../../common/routes/const-routes'
 import {
   selectorCardPacks,
   selectorIsLogin,
-  selectorParams,
+  selectorPackParams,
   selectorProfileId,
-  selectorTotalCount,
+  selectorPacksTotalCount,
 } from '../../common/selectors/selectors'
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/customHooks'
 
@@ -26,6 +26,7 @@ import {
 } from './cardPacks-reducer'
 import style from './CardPacks.module.css'
 import { Filtration } from './Filtration/Filtration'
+import { setPackCardsIdAC } from './MyPack/my-pack-reducer'
 import { TablePackCard } from './Table/TablePackCard'
 import { TitleAndButtonPack } from './TitleAndButtonPack'
 
@@ -33,10 +34,10 @@ export const CardPacks = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const cardPacks = useAppSelector(selectorCardPacks)
-  const totalCount = useAppSelector(selectorTotalCount)
+  const totalCount = useAppSelector(selectorPacksTotalCount)
   const profileId = useAppSelector(selectorProfileId)
   const isLogin = useAppSelector(selectorIsLogin)
-  const params = useAppSelector(selectorParams)
+  const params = useAppSelector(selectorPackParams)
 
   const [showForm, setShowForm] = useState<boolean>(false)
 
@@ -73,6 +74,10 @@ export const CardPacks = () => {
   const changeFieldName = (text: string, id: string) => {
     dispatch(updatePackTC(id, text))
   }
+  const navigateToCards = (cardId: string) => {
+    dispatch(setPackCardsIdAC(cardId))
+    navigate(PATH.MY_PACK_PAGE)
+  }
 
   return (
     <div className={style.container}>
@@ -92,6 +97,7 @@ export const CardPacks = () => {
           userId={profileId}
           sort={setLastUpdate}
           deleteHandler={id => deleteMyPack(id)}
+          navigateToCards={cardId => navigateToCards(cardId)}
         />
         <Pagination
           pageCount={params.pageCount}
