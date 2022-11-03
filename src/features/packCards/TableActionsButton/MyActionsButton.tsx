@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 
-import edit from '../../../assets/img/Table/Edit.svg'
 import teacher from '../../../assets/img/Table/teacher.svg'
 import SuperButton from '../../../common/components/SuperButton/SuperButton'
 import { selectorStatus } from '../../../common/selectors/selectors'
@@ -30,9 +29,11 @@ export const MyActionsButton = (props: PropsType) => {
       <div>
         <img src={teacher} alt="teacher" />
       </div>
-      <div onClick={changeNameHandler}>
-        <img src={edit} alt="edit" />
-      </div>
+      <SuperButton
+        onClick={changeNameHandler}
+        disabled={disabled && status === 'progress'}
+        className={style.editBtn}
+      />
       <SuperButton
         onClick={deleteHandler}
         disabled={disabled && status === 'progress'}

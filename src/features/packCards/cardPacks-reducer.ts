@@ -175,9 +175,12 @@ export const deletePackTC =
   }
 
 export const updatePackTC =
-  (id: string, text: string): AppThunk =>
+  (text: string, deckCover: string, privates: boolean, cardId: string): AppThunk =>
   dispatch => {
-    cardPacksAPI.updatePack({ _id: id, name: text }).then(() => {
-      dispatch(getPacksTC())
-    })
+    cardPacksAPI
+      .updatePack({ name: text, deckCover: '', private: privates, _id: cardId })
+      .then(res => {
+        console.log(res)
+        dispatch(getPacksTC())
+      })
   }

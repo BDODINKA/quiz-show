@@ -87,6 +87,8 @@ export type AddPackTypeNewCardsPack = {
 export type CardsPackUpdateType = {
   _id: string
   name: string
+  deckCover: string
+  private: boolean
 }
 
 export const cardPacksAPI = {

@@ -9,49 +9,51 @@ import { SuperCheckbox } from '../../../common/components/SuperCheckbox/SuperChe
 import SuperInput from '../../../common/components/SuperInputText/SuperInput'
 import { useAppSelector } from '../../../utils/hooks/customHooks'
 
-import style from './ModalAddNewPack.module.css'
+import style from './ModalPack.module.css'
 
 type PropsType = {
   onClose?: () => void
   setActive: (modalActive: boolean) => void
   title: string
   onSubmit: (text: string, deckCover: string, privates: boolean) => void
+  text: string
 }
 
 const selectorProgress = (state: RootStateType) => state.app.status
 
-export const ModalAddNewPack = (props: PropsType) => {
+export const ModalPack = (props: PropsType) => {
   const status = useAppSelector(selectorProgress)
 
-  /*const redirect = () => {
-    props.onClose()
-  }*/
   const setActiveHandler = () => {
     props.setActive(false)
+    props.onClose && props.onClose
   }
 
   return (
     <Formik
-      initialValues={{ text: '', private: false }}
+      initialValues={{ text: props.text, private: false }}
       validationSchema={Yup.object({
         text: Yup.string()
           .max(20, 'Max length should be max 20 Symbols')
           .required('Field Required'),
       })}
-      onSubmit={values => {
+      onSubmit={(values, { resetForm }) => {
         props.onSubmit(values.text, '', values.private)
-        console.log(values)
         setActiveHandler()
-        // props.onClose()
+        resetForm()
       }}
     >
       {formik => (
         <div className={style.modal}>
           <div className={style.form}>
             <div className="container">
+              {/*<div onClick={setActiveHandler}>{'close_icon'}</div>*/}
               <h2 className={style.title}>{props.title}</h2>
-              {/*<div onClick={setActiveHandler}>{close_icon}</div>*/}
-              <form onSubmit={formik.handleSubmit} className={style.forma}>
+              <form
+                onSubmit={formik.handleSubmit}
+                className={style.forma}
+                onReset={formik.handleReset}
+              >
                 <SuperInput
                   type={'text'}
                   placeholder={'New Pack Name'}
@@ -74,6 +76,7 @@ export const ModalAddNewPack = (props: PropsType) => {
                 </div>
                 <div className={style.btn_block}>
                   <SuperButton
+                    type={'reset'}
                     title={'Cancel'}
                     className={style.btn_cancel}
                     onClick={setActiveHandler}
@@ -82,13 +85,9 @@ export const ModalAddNewPack = (props: PropsType) => {
                     type={'submit'}
                     disabled={status === 'progress'}
                     className={style.btn}
-                    title={'Add newPack'}
+                    title={'Save'}
                   />
                 </div>
-
-                {/*<div onClick={redirect} className={style.link}>
-                Comeback to PackList
-              </div>*/}
               </form>
             </div>
           </div>
