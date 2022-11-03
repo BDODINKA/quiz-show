@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 import { Pagination } from '../../common/components/pagination/pagination'
 import { InitValueRangeSlider } from '../../common/constants/packsCard'
@@ -14,8 +14,10 @@ import {
   selectorPacksTotalCount,
 } from '../../common/selectors/selectors'
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/customHooks'
+import { ModalCard } from '../modal/ModalCard/ModalCard'
+import { ModalDelete } from '../modal/ModalDelete/ModalDelete'
 import { ModalMain } from '../modal/ModalMain'
-import { ModalAddNewPack } from '../modal/ModalPack/ModalAddNewPack'
+import { ModalPack } from '../modal/ModalPack/ModalPack'
 
 import {
   addPackTC,
@@ -28,7 +30,7 @@ import {
 } from './cardPacks-reducer'
 import style from './CardPacks.module.css'
 import { Filtration } from './Filtration/Filtration'
-import { setPackCardsIdAC } from './MyPack/my-pack-reducer'
+import { addCardTC, setPackCardsIdAC } from './MyPack/my-pack-reducer'
 import { TablePackCard } from './Table/TablePackCard'
 import { TitleAndButtonPack } from './TitleAndButtonPack'
 
@@ -117,10 +119,23 @@ export const CardPacks = () => {
           />
         </div>
         <ModalMain active={modalActive} setActive={setModalActive}>
-          <ModalAddNewPack
+          {/*<ModalCard
             setActive={setModalActive}
             title={'Add New Pack'}
             onSubmit={(text, deckCover, privates) => dispatch(addPackTC(text, deckCover, privates))}
+          />*/}
+          {
+            /* <ModalDelete
+            setActive={setModalActive}
+            title={'Delete Pack'}
+            name={'hardcode'}
+            /*onSubmit={_id => dispatch(deletePackTC(_id))}*/
+            />*/
+          }
+          <ModalCard
+            setActive={setModalActive}
+            title={'Add New Card'}
+            onSubmit={(question, answer) => addCardTC(question, answer)}
           />
         </ModalMain>
       </div>

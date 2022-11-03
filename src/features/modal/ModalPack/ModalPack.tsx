@@ -9,7 +9,7 @@ import { SuperCheckbox } from '../../../common/components/SuperCheckbox/SuperChe
 import SuperInput from '../../../common/components/SuperInputText/SuperInput'
 import { useAppSelector } from '../../../utils/hooks/customHooks'
 
-import style from './ModalAddNewPack.module.css'
+import style from './ModalPack.module.css'
 
 type PropsType = {
   onClose?: () => void
@@ -20,7 +20,7 @@ type PropsType = {
 
 const selectorProgress = (state: RootStateType) => state.app.status
 
-export const ModalAddNewPack = (props: PropsType) => {
+export const ModalPack = (props: PropsType) => {
   const status = useAppSelector(selectorProgress)
 
   /*const redirect = () => {

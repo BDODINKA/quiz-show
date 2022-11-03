@@ -87,25 +87,27 @@ export const getCardsTC =
     })
   }
 
-export const addCardTC = (): AppThunk => dispatch => {
-  dispatch(setAppStatusAC('progress'))
-  cardAPI
-    .addCard()
-    .then(res => {
-      dispatch(getCardsTC())
-      dispatch(setAppStatusAC('success'))
-      console.log(res)
-    })
-    .catch((reason: AxiosError<{ error: string }>) => {
-      if (reason.response?.data.error) {
-        ServerError<string>(reason.response.data.error, setAppErrorAC, dispatch)
-        dispatch(setAppStatusAC('error'))
-      } else {
-        ServerError<string>(reason.message, setAppErrorAC, dispatch)
-        dispatch(setAppStatusAC('error'))
-      }
-    })
-}
+export const addCardTC =
+  (question: string, answer: string): AppThunk =>
+  dispatch => {
+    dispatch(setAppStatusAC('progress'))
+    cardAPI
+      .addCard()
+      .then(res => {
+        dispatch(getCardsTC())
+        dispatch(setAppStatusAC('success'))
+        console.log(res)
+      })
+      .catch((reason: AxiosError<{ error: string }>) => {
+        if (reason.response?.data.error) {
+          ServerError<string>(reason.response.data.error, setAppErrorAC, dispatch)
+          dispatch(setAppStatusAC('error'))
+        } else {
+          ServerError<string>(reason.message, setAppErrorAC, dispatch)
+          dispatch(setAppStatusAC('error'))
+        }
+      })
+  }
 
 export const deleteCardTC =
   (_id: string): AppThunk =>
