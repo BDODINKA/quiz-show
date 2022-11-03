@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 
 import { Pagination } from '../../common/components/pagination/pagination'
 import { InitValueRangeSlider } from '../../common/constants/packsCard'
@@ -33,6 +33,7 @@ import { TitleAndButtonPack } from './TitleAndButtonPack'
 export const CardPacks = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  const location = useLocation()
   const cardPacks = useAppSelector(selectorCardPacks)
   const totalCount = useAppSelector(selectorPacksTotalCount)
   const profileId = useAppSelector(selectorProfileId)
@@ -45,6 +46,7 @@ export const CardPacks = () => {
     if (!isLogin) {
       navigate(PATH.LOGIN_PAGE)
     } else {
+      sessionStorage.setItem('url', location.pathname)
       dispatch(getPacksTC())
     }
   }, [isLogin, params])
@@ -76,7 +78,8 @@ export const CardPacks = () => {
   }
   const navigateToCards = (cardId: string) => {
     dispatch(setPackCardsIdAC(cardId))
-    navigate(PATH.MY_PACK_PAGE)
+    navigate(`${PATH.MY_PACK_PAGE}/${cardId}`)
+    sessionStorage.setItem('url', `${PATH.MY_PACK_PAGE}/${cardId}`)
   }
 
   return (

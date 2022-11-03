@@ -1,29 +1,27 @@
 import React, { useEffect } from 'react'
 
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { Navigate, useNavigate, useParams } from 'react-router-dom'
 
 import { RootStateType } from '../../app/store'
-import { CustomAlertSnackBar } from '../../common/components/CustomSnackBar/CustomAlertSnackBar'
 import { PATH } from '../../common/routes/const-routes'
+import { selectorIsLogin } from '../../common/selectors/selectors'
 import { useAppSelector } from '../../utils/hooks/customHooks'
 
 import s from './login.module.css'
 import SingInForm from './SingInForm'
 
-const selectIsLoggedIn = (state: RootStateType) => state.auth.isLoggedIn
-
 const Login = () => {
-  const isLoggedIn = useAppSelector(selectIsLoggedIn)
+  const isLoggedIn = useAppSelector(selectorIsLogin)
   const navigate = useNavigate()
 
   useEffect(() => {
     if (isLoggedIn) {
-      const path = sessionStorage.getItem('url')
+      const url = sessionStorage.getItem('url')
 
-      if (path) {
-        navigate(path)
+      if (url) {
+        navigate(url)
       } else {
-        navigate(PATH.PACK_CARDS_PAGE)
+        navigate(PATH.MY_PACK_PAGE)
       }
     }
   }, [isLoggedIn])

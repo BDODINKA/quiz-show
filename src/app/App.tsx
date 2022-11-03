@@ -6,6 +6,7 @@ import { HashRouter, Navigate, Route, Routes } from 'react-router-dom'
 
 import { CustomAlertSnackBar } from '../common/components/CustomSnackBar/CustomAlertSnackBar'
 import { PATH } from '../common/routes/const-routes'
+import { selectorError, selectorIsLogin, selectorStatus } from '../common/selectors/selectors'
 import CheckEmail from '../features/forgot-pass/CheckEmail/CheckEmail'
 import CreateNewPassword from '../features/forgot-pass/CreateNewPass/CreateNewPassword'
 import { ForgotPass } from '../features/forgot-pass/ForgotPass/ForgotPass'
@@ -20,23 +21,18 @@ import SignUp from '../features/sign-up/SignUp'
 import { useAppDispatch, useAppSelector } from '../utils/hooks/customHooks'
 
 import { setAppErrorAC, setAppStatusAC } from './app-reducer'
-import { RootStateType } from './store'
-
-const selectProfile = (state: RootStateType) => state.profile.profile
-const selectStatus = (state: RootStateType) => state.app.status
-const selectMessage = (state: RootStateType) => state.app.error
 
 function App() {
   const dispatch = useAppDispatch()
-  const profile = useAppSelector(selectProfile)
-  const status = useAppSelector(selectStatus)
-  const message = useAppSelector(selectMessage)
+  const isLogin = useAppSelector(selectorIsLogin)
+  const status = useAppSelector(selectorStatus)
+  const message = useAppSelector(selectorError)
 
   useEffect(() => {
-    if (profile === null) {
+    if (!isLogin) {
       dispatch(authMeTC())
     }
-  }, [])
+  }, [isLogin])
 
   const closeHandlerSnackbar = () => {
     dispatch(setAppStatusAC(null))
@@ -59,7 +55,7 @@ function App() {
           <Route path={PATH.RESTORE_PASS_PAGE} element={<ForgotPass />} />
           <Route path={PATH.NEW_PASS_PAGE} element={<CreateNewPassword />} />
           <Route path={PATH.PACK_CARDS_PAGE} element={<CardPacks />} />
-          <Route path={PATH.MY_PACK_PAGE} element={<MyPack />} />
+          <Route path={`${PATH.MY_PACK_PAGE}/:id`} element={<MyPack />} />
         </Routes>
         <CustomAlertSnackBar
           status={status}

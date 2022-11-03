@@ -26,6 +26,10 @@ export const useDebounce = <T>(value: T, delay?: number): T => {
 
 type AppSearchParamsType = Record<string, string>
 
+// {
+//   [key: strring]:string
+// }
+
 export const useAppSearchParams = (setParams: AppSearchParamsType) => {
   const [searchParams, setSearhParams] = useSearchParams()
 

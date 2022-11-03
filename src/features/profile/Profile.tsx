@@ -1,8 +1,10 @@
 import React from 'react'
 
+import { ArrowBack } from '@material-ui/icons'
 import { Navigate, NavLink } from 'react-router-dom'
 
 import { RootStateType } from '../../app/store'
+import ArrowBackTo from '../../common/components/ArrowBackTo/ArrowBackTo'
 import EditableSpan from '../../common/components/EditableSpan/EditableSpan'
 import SuperButton from '../../common/components/SuperButton/SuperButton'
 import { PATH } from '../../common/routes/const-routes'
@@ -33,12 +35,7 @@ export const Profile = () => {
   return (
     <div>
       <div className={style.container}>
-        <div className={style.backBlock}>
-          <NavLink to={PATH.PACK_CARDS_PAGE} className={style.arrow} />
-          <NavLink to={PATH.PACK_CARDS_PAGE} className={style.link}>
-            Back to Packs List
-          </NavLink>
-        </div>
+        <ArrowBackTo />
         <div className={style.card}>
           <h2 className={style.title}>Personal Information</h2>
           <div className={style.avaGroup}>

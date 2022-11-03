@@ -13,6 +13,7 @@ type PropsType = {
   minGrade?: Nullable<number>
   maxGrade?: Nullable<number>
   profileId?: string
+  changeRating?: (value: number) => void
 }
 
 export const TableMyPack = (props: PropsType) => {
@@ -37,9 +38,12 @@ export const TableMyPack = (props: PropsType) => {
                 <tr key={elem._id} className={style.title_table_body}>
                   <td>{elem.question}</td>
                   <td>{elem.answer}</td>
-                  <td>{elem.updated}</td>
+                  <td>{new Date(Date.parse(elem.updated)).toLocaleDateString('ru-RU')}</td>
                   <td>
-                    <RatingComponent />
+                    <RatingComponent
+                      changeRating={value => props.changeRating && props.changeRating(value)}
+                      valueRating={elem.grade}
+                    />
                   </td>
                   <td className={style.actions_button_my_pack}>
                     {props.profileId === elem.user_id && <MyPackButton />}
