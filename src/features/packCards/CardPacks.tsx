@@ -14,9 +14,11 @@ import {
   selectorTotalCount,
 } from '../../common/selectors/selectors'
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/customHooks'
+import { ModalMain } from '../modal/ModalMain'
+import { ModalAddNewPack } from '../modal/ModalPack/ModalAddNewPack'
 
-import { CardPackForm } from './CardPackForm'
 import {
+  addPackTC,
   deletePackTC,
   filterLastUpdateAC,
   filterPageAC,
@@ -38,7 +40,8 @@ export const CardPacks = () => {
   const isLogin = useAppSelector(selectorIsLogin)
   const params = useAppSelector(selectorParams)
 
-  const [showForm, setShowForm] = useState<boolean>(false)
+  const [modalActive, setModalActive] = useState<boolean>(true)
+  //const [showForm, setShowForm] = useState<boolean>(false)
 
   useEffect(() => {
     if (!isLogin) {
@@ -66,8 +69,8 @@ export const CardPacks = () => {
     dispatch(deletePackTC(id))
   }
 
-  const navigateMyPack = () => {
-    setShowForm(!showForm)
+  const setModalActiveHandler = () => {
+    setModalActive(true)
   }
 
   const changeFieldName = (text: string, id: string) => {
@@ -75,34 +78,43 @@ export const CardPacks = () => {
   }
 
   return (
-    <div className={style.container}>
-      <div className={style.table_container}>
-        <TitleAndButtonPack
-          titlePack="Packs list"
-          titleButton="Add new pack"
-          onClick={navigateMyPack}
-        />
-        <Filtration
-          user_id={profileId}
-          initialValueSlider={InitValueRangeSlider}
-          paramsId={params.user_id}
-        />
-        <TablePackCard
-          cards={cardPacks}
-          userId={profileId}
-          sort={setLastUpdate}
-          deleteHandler={id => deleteMyPack(id)}
-        />
-        <Pagination
-          pageCount={params.pageCount}
-          currentPage={params.page}
-          setPage={value => setPage(value)}
-          setPageCount={value => setPageCount(value)}
-          totalCount={totalCount as number}
-          maxPages={maxPaginationPage}
-        />
+    <div className={style.main}>
+      <div className={style.container}>
+        <div className={style.table_container}>
+          <TitleAndButtonPack
+            titlePack="Packs list"
+            titleButton="Add new pack"
+            onClick={setModalActiveHandler}
+          />
+
+          <Filtration
+            user_id={profileId}
+            initialValueSlider={InitValueRangeSlider}
+            paramsId={params.user_id}
+          />
+          <TablePackCard
+            cards={cardPacks}
+            userId={profileId}
+            sort={setLastUpdate}
+            deleteHandler={id => deleteMyPack(id)}
+          />
+          <Pagination
+            pageCount={params.pageCount}
+            currentPage={params.page}
+            setPage={value => setPage(value)}
+            setPageCount={value => setPageCount(value)}
+            totalCount={totalCount as number}
+            maxPages={maxPaginationPage}
+          />
+        </div>
+        <ModalMain active={modalActive} setActive={setModalActive}>
+          <ModalAddNewPack
+            setActive={setModalActive}
+            title={'Add New Pack'}
+            onSubmit={(text, deckCover, privates) => dispatch(addPackTC(text, deckCover, privates))}
+          />
+        </ModalMain>
       </div>
-      {showForm && <CardPackForm onClose={navigateMyPack} />}
     </div>
   )
 }
