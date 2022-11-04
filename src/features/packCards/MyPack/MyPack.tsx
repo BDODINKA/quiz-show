@@ -22,7 +22,7 @@ import { TitleAndButtonPack } from '../TitleAndButtonPack'
 import style from '../TitleAndButtonPack.module.css'
 
 import dots from './../../../assets/img/Table/dots.svg'
-import { getCardsTC, setPackCardsIdAC } from './my-pack-reducer'
+import { getCardsTC } from './my-pack-reducer'
 import s from './MyPack.module.css'
 import { TableMyPack } from './TableMyPack'
 

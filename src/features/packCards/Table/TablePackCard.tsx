@@ -1,15 +1,13 @@
 import React, { useState } from 'react'
 
-import { NavLink } from 'react-router-dom'
-
 import { CardPacks } from '../../../api/cardPacksAPI'
 import { Nullable } from '../../../types/Nullable'
-import { ModalDelete } from '../../modal/ModalDelete/ModalDelete'
+import { ModalMain } from '../../modal/ModalMain'
+import { ModalPack } from '../../modal/ModalPack/ModalPack'
 import { FriendsButton } from '../TableActionsButton/FriendsButton'
 import { MyActionsButton } from '../TableActionsButton/MyActionsButton'
 
 import poligon from './../../../assets/img/Table/Polygon 2.svg'
-import { TableModal } from './TableModal'
 import style from './TablePackCard.module.css'
 
 type PropsType = {
@@ -17,11 +15,13 @@ type PropsType = {
   userId?: string
   sort: (value: boolean) => void
   deleteHandler?: (id: string) => void
-  changeFieldName?: (text: string, id: string) => void
+  changeFieldName?: (text: string, deckCover: string, privates: boolean, cardId: string) => void
   navigateToCards?: (cardId: string) => void
 }
 export const TablePackCard = (props: PropsType) => {
   const [sort, setSort] = useState(false)
+  const [modalActive, setModalActive] = useState<boolean>(false)
+  const [elemId, setElemID] = useState<string>('')
 
   const sortHandler = (value: boolean) => {
     setSort(value)
@@ -32,6 +32,15 @@ export const TablePackCard = (props: PropsType) => {
   }
   const navigateToCards = (cardId: string) => {
     props.navigateToCards && props.navigateToCards(cardId)
+  }
+
+  const setFieldName = (text: string, deckCover: string, privates: boolean, cardId: string) => {
+    props.changeFieldName && props.changeFieldName(text, deckCover, privates, cardId)
+  }
+
+  const onChangeName = (id: string) => {
+    setElemID(id)
+    setModalActive(true)
   }
 
   return (
@@ -65,14 +74,44 @@ export const TablePackCard = (props: PropsType) => {
           <tbody>
             {props.cards
               ? props.cards.map(elem => (
-                  <TableModal
-                    key={elem._id}
-                    elem={elem}
-                    userId={props.userId}
-                    navigateToCards={navigateToCards}
-                    changeFieldName={props.changeFieldName!}
-                    deleteHandler={deleteHandler}
-                  />
+                  <tr key={elem._id} className={style.title_table_body}>
+                    <td className={style.td}>
+                      <span className={style.linkName} onClick={() => navigateToCards(elem._id)}>
+                        {elem.name}
+                      </span>
+                    </td>
+                    <td>{elem.cardsCount}</td>
+                    <td>{new Date(Date.parse(elem.updated)).toLocaleDateString('ru-RU')}</td>
+                    <td>{elem.user_name}</td>
+                    <td className={style.actions_button_container}>
+                      {elem.user_id === props.userId ? (
+                        <>
+                          <MyActionsButton
+                            deleteHandler={() => deleteHandler(elem._id)}
+                            changeName={() => onChangeName(elem._id)}
+                          />
+
+                          <>
+                            <ModalMain
+                              active={elemId === elem._id && modalActive}
+                              setActive={setModalActive}
+                            >
+                              <ModalPack
+                                text={elem.name}
+                                title={'Edit pack'}
+                                setActive={modalActive => setModalActive(modalActive)}
+                                onSubmit={(text, deckCover, privates) =>
+                                  setFieldName(text, deckCover, privates, elem._id)
+                                }
+                              />
+                            </ModalMain>
+                          </>
+                        </>
+                      ) : (
+                        <FriendsButton />
+                      )}
+                    </td>
+                  </tr>
                 ))
               : null}
           </tbody>

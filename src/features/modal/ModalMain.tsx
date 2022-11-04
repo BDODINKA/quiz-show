@@ -5,7 +5,7 @@ import style from './ModalMain.module.css'
 type PropsType = {
   active: boolean
   setActive: (modalActive: boolean) => void
-  children: any
+  children: React.ReactNode
 }
 
 export const ModalMain = (props: PropsType) => {

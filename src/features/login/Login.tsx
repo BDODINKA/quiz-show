@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
 
-import { Navigate, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
-import { RootStateType } from '../../app/store'
 import { PATH } from '../../common/routes/const-routes'
 import { selectorIsLogin } from '../../common/selectors/selectors'
 import { useAppSelector } from '../../utils/hooks/customHooks'
@@ -21,7 +20,7 @@ const Login = () => {
       if (url) {
         navigate(url)
       } else {
-        navigate(PATH.MY_PACK_PAGE)
+        navigate(PATH.PACK_CARDS_PAGE)
       }
     }
   }, [isLoggedIn])
