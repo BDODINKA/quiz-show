@@ -16,7 +16,7 @@ type PropsType = {
   setActive: (modalActive: boolean) => void
   title: string
   name: string
-  deleteCallback?: (id: string) => void
+  deleteCallback?: () => void
 }
 
 const selectorProgress = (state: RootStateType) => state.app.status
@@ -30,9 +30,9 @@ export const ModalDelete = (props: PropsType) => {
   const setActiveHandler = () => {
     props.setActive(false)
   }
-  /* const deleteHandler = () => {
-    props.deleteCallback({})
-  }*/
+  const deleteHandler = () => {
+    props.deleteCallback?.()
+  }
 
   return (
     <div className={style.modal}>
@@ -43,7 +43,12 @@ export const ModalDelete = (props: PropsType) => {
 
         <div className={style.btn_block}>
           <SuperButton title={'Cancel'} className={style.btn_cancel} onClick={setActiveHandler} />
-          <SuperButton disabled={status === 'progress'} className={style.btn} title={props.title} />
+          <SuperButton
+            disabled={status === 'progress'}
+            className={style.btn}
+            onClick={deleteHandler}
+            title={props.title}
+          />
         </div>
 
         {/*<div onClick={redirect} className={style.link}>

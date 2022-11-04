@@ -4,10 +4,12 @@ import { NavLink } from 'react-router-dom'
 
 import { CardPacks } from '../../../api/cardPacksAPI'
 import { Nullable } from '../../../types/Nullable'
+import { ModalDelete } from '../../modal/ModalDelete/ModalDelete'
 import { FriendsButton } from '../TableActionsButton/FriendsButton'
 import { MyActionsButton } from '../TableActionsButton/MyActionsButton'
 
 import poligon from './../../../assets/img/Table/Polygon 2.svg'
+import { TableModal } from './TableModal'
 import style from './TablePackCard.module.css'
 
 type PropsType = {
@@ -63,23 +65,14 @@ export const TablePackCard = (props: PropsType) => {
           <tbody>
             {props.cards
               ? props.cards.map(elem => (
-                  <tr key={elem._id} className={style.title_table_body}>
-                    <td className={style.td}>
-                      <span className={style.linkName} onClick={() => navigateToCards(elem._id)}>
-                        {elem.name}
-                      </span>
-                    </td>
-                    <td>{elem.cardsCount}</td>
-                    <td>{new Date(Date.parse(elem.updated)).toLocaleDateString('ru-RU')}</td>
-                    <td>{elem.user_name}</td>
-                    <td className={style.actions_button_container}>
-                      {elem.user_id === props.userId ? (
-                        <MyActionsButton deleteHandler={() => deleteHandler(elem._id)} />
-                      ) : (
-                        <FriendsButton />
-                      )}
-                    </td>
-                  </tr>
+                  <TableModal
+                    key={elem._id}
+                    elem={elem}
+                    userId={props.userId}
+                    navigateToCards={navigateToCards}
+                    changeFieldName={props.changeFieldName!}
+                    deleteHandler={deleteHandler}
+                  />
                 ))
               : null}
           </tbody>

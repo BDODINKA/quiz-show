@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Formik } from 'formik'
 import * as Yup from 'yup'
@@ -21,6 +21,7 @@ const selectorProgress = (state: RootStateType) => state.app.status
 
 export const ModalCard = (props: PropsType) => {
   const status = useAppSelector(selectorProgress)
+  const [select, setSelect] = useState('')
 
   /*const redirect = () => {
     props.onClose()
@@ -28,6 +29,7 @@ export const ModalCard = (props: PropsType) => {
   const setActiveHandler = () => {
     props.setActive(false)
   }
+  const selectHandler = () => {}
 
   return (
     <Formik

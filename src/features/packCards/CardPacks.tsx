@@ -119,23 +119,10 @@ export const CardPacks = () => {
           />
         </div>
         <ModalMain active={modalActive} setActive={setModalActive}>
-          {/*<ModalCard
-            setActive={setModalActive}
-            title={'Add New Pack'}
-            onSubmit={(text, deckCover, privates) => dispatch(addPackTC(text, deckCover, privates))}
-          />*/}
-          {
-            /* <ModalDelete
-            setActive={setModalActive}
-            title={'Delete Pack'}
-            name={'hardcode'}
-            /*onSubmit={_id => dispatch(deletePackTC(_id))}*/
-            />*/
-          }
           <ModalCard
             setActive={setModalActive}
             title={'Add New Card'}
-            onSubmit={(question, answer) => addCardTC(question, answer)}
+            onSubmit={(question, answer) => dispatch(addCardTC())}
           />
         </ModalMain>
       </div>
