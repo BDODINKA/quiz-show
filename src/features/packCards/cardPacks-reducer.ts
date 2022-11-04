@@ -180,7 +180,6 @@ export const updatePackTC =
     cardPacksAPI
       .updatePack({ name: text, deckCover: '', private: privates, _id: cardId })
       .then(res => {
-        console.log(res)
         dispatch(getPacksTC())
       })
   }

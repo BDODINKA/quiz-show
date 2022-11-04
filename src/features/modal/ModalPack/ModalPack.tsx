@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 import { Formik } from 'formik'
 import * as Yup from 'yup'
@@ -29,18 +29,21 @@ export const ModalPack = (props: PropsType) => {
     props.onClose && props.onClose
   }
 
+  const initial = { text: props.text, private: false }
+
   return (
     <Formik
-      initialValues={{ text: props.text, private: false }}
+      enableReinitialize
+      initialValues={initial}
       validationSchema={Yup.object({
         text: Yup.string()
           .max(20, 'Max length should be max 20 Symbols')
           .required('Field Required'),
       })}
-      onSubmit={(values, { resetForm }) => {
-        props.onSubmit(values.text, '', values.private)
-        setActiveHandler()
+      onSubmit={(values, { setSubmitting, resetForm }) => {
+        if (values.text) props.onSubmit(values.text, '', values.private)
         resetForm()
+        setActiveHandler()
       }}
     >
       {formik => (

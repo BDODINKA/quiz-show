@@ -1,11 +1,11 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
 
 import style from './ModalMain.module.css'
 
 type PropsType = {
   active: boolean
   setActive: (modalActive: boolean) => void
-  children: ReactNode
+  children: React.ReactNode
 }
 
 export const ModalMain = (props: PropsType) => {
