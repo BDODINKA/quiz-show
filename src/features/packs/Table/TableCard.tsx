@@ -72,6 +72,7 @@ export const TableCard = (props: PropsType) => {
                     }
                     navigateToCards={cardId => navigateToCards(cardId)}
                     elem={elem}
+                    userId={props.userId}
                   />
                 ))
               : null}

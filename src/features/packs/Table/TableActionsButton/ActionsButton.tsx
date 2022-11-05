@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 
-import teacher from '../../../../assets/img/Table/teacher.svg'
 import SuperButton from '../../../../common/components/SuperButton/SuperButton'
 import { selectorStatus } from '../../../../common/selectors/selectors'
 import { useAppSelector } from '../../../../utils/hooks/customHooks'
@@ -11,6 +10,7 @@ type PropsType = {
   deleteHandler?: () => void
   changeName?: () => void
   learnHandler?: () => void
+  showBtn: boolean
 }
 
 export const ActionsButton = (props: PropsType) => {
@@ -30,21 +30,33 @@ export const ActionsButton = (props: PropsType) => {
 
   return (
     <>
-      <SuperButton
-        onClick={learnHandler}
-        disabled={disabled && status === 'progress'}
-        className={style.learn}
-      />
-      <SuperButton
-        onClick={changeNameHandler}
-        disabled={disabled && status === 'progress'}
-        className={style.editBtn}
-      />
-      <SuperButton
-        onClick={deleteHandler}
-        disabled={disabled && status === 'progress'}
-        className={style.deleteBtn}
-      />
+      {props.showBtn ? (
+        <>
+          <SuperButton
+            onClick={learnHandler}
+            disabled={disabled && status === 'progress'}
+            className={style.learn}
+          />
+          <SuperButton
+            onClick={changeNameHandler}
+            disabled={disabled && status === 'progress'}
+            className={style.editBtn}
+          />
+          <SuperButton
+            onClick={deleteHandler}
+            disabled={disabled && status === 'progress'}
+            className={style.deleteBtn}
+          />
+        </>
+      ) : (
+        <>
+          <SuperButton
+            onClick={learnHandler}
+            disabled={disabled && status === 'progress'}
+            className={style.learn}
+          />
+        </>
+      )}
     </>
   )
 }

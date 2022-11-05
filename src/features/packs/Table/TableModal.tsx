@@ -39,17 +39,23 @@ export const TableModal = ({
       <td>{new Date(Date.parse(elem.updated)).toLocaleDateString('ru-RU')}</td>
       <td>{elem.user_name}</td>
       <td className={style.actions_button_container}>
-        <ActionsButton
-          learnHandler={() => navigateToCards(elem._id)}
-          deleteHandler={() => {
-            setModalActive(true)
-            setModalBtn('delete')
-          }}
-          changeName={() => {
-            setModalActive(true)
-            setModalBtn('change')
-          }}
-        />
+        {userId === elem.user_id ? (
+          <ActionsButton
+            showBtn={true}
+            learnHandler={() => navigateToCards(elem._id)}
+            deleteHandler={() => {
+              setModalActive(true)
+              setModalBtn('delete')
+            }}
+            changeName={() => {
+              setModalActive(true)
+              setModalBtn('change')
+            }}
+          />
+        ) : (
+          <ActionsButton showBtn={false} />
+        )}
+
         {modalActive && modalBtn === 'delete' ? (
           <ModalMain active={modalActive} setActive={setModalActive}>
             <ModalDelete
