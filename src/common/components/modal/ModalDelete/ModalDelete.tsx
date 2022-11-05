@@ -1,13 +1,8 @@
 import React from 'react'
 
-import { Formik } from 'formik'
-import * as Yup from 'yup'
-
-import { RootStateType } from '../../../app/store'
-import SuperButton from '../../../common/components/SuperButton/SuperButton'
-import { SuperCheckbox } from '../../../common/components/SuperCheckbox/SuperCheckbox'
-import SuperInput from '../../../common/components/SuperInputText/SuperInput'
-import { useAppSelector } from '../../../utils/hooks/customHooks'
+import { RootStateType } from '../../../../app/store'
+import { useAppSelector } from '../../../../utils/hooks/customHooks'
+import SuperButton from '../../SuperButton/SuperButton'
 
 import style from './ModalDelete.module.css'
 

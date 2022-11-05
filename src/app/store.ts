@@ -4,8 +4,8 @@ import thunk from 'redux-thunk'
 import { paginationReducer } from '../common/components/pagination/pagination-reducer'
 import { forgotPasswordReducer } from '../features/forgot-pass/forgot-password.reducer'
 import { loginReducer } from '../features/login/login-reducer'
-import { cardPacksReducer } from '../features/packCards/cardPacks-reducer'
-import { myPackReducer } from '../features/packCards/MyPack/my-pack-reducer'
+import { cardsReducer } from '../features/packs/Cards/cards-reducer'
+import { packsReducer } from '../features/packs/Packs-reducer'
 import { ProfileReducer } from '../features/profile/profile.reducer'
 import { signUpReducer } from '../features/sign-up/signUpReducer'
 
@@ -17,8 +17,8 @@ export const rootReducer = combineReducers({
   forgotPass: forgotPasswordReducer,
   reg: signUpReducer,
   app: appReducer,
-  cardPacks: cardPacksReducer,
-  card: myPackReducer,
+  cardPacks: packsReducer,
+  card: cardsReducer,
   pagination: paginationReducer,
 })
 

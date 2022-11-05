@@ -3,11 +3,11 @@ import React from 'react'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 
-import { RootStateType } from '../../../app/store'
-import SuperButton from '../../../common/components/SuperButton/SuperButton'
-import { SuperCheckbox } from '../../../common/components/SuperCheckbox/SuperCheckbox'
-import SuperInput from '../../../common/components/SuperInputText/SuperInput'
-import { useAppSelector } from '../../../utils/hooks/customHooks'
+import { RootStateType } from '../../../../app/store'
+import { useAppSelector } from '../../../../utils/hooks/customHooks'
+import SuperButton from '../../SuperButton/SuperButton'
+import { SuperCheckbox } from '../../SuperCheckbox/SuperCheckbox'
+import SuperInput from '../../SuperInputText/SuperInput'
 
 import style from './ModalPack.module.css'
 
@@ -65,7 +65,6 @@ export const ModalPack = (props: PropsType) => {
                   className={style.input}
                   spanClassName={style.spanError}
                 />
-
                 <div className={style.privateBox}>
                   <SuperCheckbox
                     id="private"

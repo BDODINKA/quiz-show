@@ -1,18 +1,19 @@
 import React, { useState } from 'react'
 
-import teacher from '../../../assets/img/Table/teacher.svg'
-import SuperButton from '../../../common/components/SuperButton/SuperButton'
-import { selectorStatus } from '../../../common/selectors/selectors'
-import { useAppSelector } from '../../../utils/hooks/customHooks'
+import teacher from '../../../../assets/img/Table/teacher.svg'
+import SuperButton from '../../../../common/components/SuperButton/SuperButton'
+import { selectorStatus } from '../../../../common/selectors/selectors'
+import { useAppSelector } from '../../../../utils/hooks/customHooks'
 
 import style from './actionBtn.module.css'
 
 type PropsType = {
   deleteHandler?: () => void
   changeName?: () => void
+  learnHandler?: () => void
 }
 
-export const MyActionsButton = (props: PropsType) => {
+export const ActionsButton = (props: PropsType) => {
   const [disabled, setDisabled] = useState(false)
   const status = useAppSelector(selectorStatus)
 
@@ -23,12 +24,17 @@ export const MyActionsButton = (props: PropsType) => {
   const changeNameHandler = () => {
     props.changeName && props.changeName()
   }
+  const learnHandler = () => {
+    props.learnHandler && props.learnHandler()
+  }
 
   return (
     <>
-      <div>
-        <img src={teacher} alt="teacher" />
-      </div>
+      <SuperButton
+        onClick={learnHandler}
+        disabled={disabled && status === 'progress'}
+        className={style.learn}
+      />
       <SuperButton
         onClick={changeNameHandler}
         disabled={disabled && status === 'progress'}

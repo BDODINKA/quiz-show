@@ -5,7 +5,7 @@ import Search from '../../../common/components/Search/Search'
 import SuperButton from '../../../common/components/SuperButton/SuperButton'
 import { Nullable } from '../../../types/Nullable'
 import { useAppDispatch, useDebounce } from '../../../utils/hooks/customHooks'
-import { filterPackNameAC, filterRangeSliderAC, setUserIdAC } from '../cardPacks-reducer'
+import { filterPackNameAC, filterRangeSliderAC, setUserIdAC } from '../Packs-reducer'
 
 import style from './Filtration.module.css'
 

@@ -3,10 +3,10 @@ import React, { useState } from 'react'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 
-import { RootStateType } from '../../../app/store'
-import SuperButton from '../../../common/components/SuperButton/SuperButton'
-import SuperInput from '../../../common/components/SuperInputText/SuperInput'
-import { useAppSelector } from '../../../utils/hooks/customHooks'
+import { RootStateType } from '../../../../app/store'
+import { useAppSelector } from '../../../../utils/hooks/customHooks'
+import SuperButton from '../../SuperButton/SuperButton'
+import SuperInput from '../../SuperInputText/SuperInput'
 
 import style from './ModalCard.module.css'
 
@@ -33,17 +33,18 @@ export const ModalCard = (props: PropsType) => {
 
   return (
     <Formik
+      enableReinitialize
       initialValues={{ question: '', answer: '' }}
       validationSchema={Yup.object({
         text: Yup.string()
           .max(20, 'Max length should be max 20 Symbols')
           .required('Field Required'),
       })}
-      onSubmit={values => {
+      onSubmit={(values, { resetForm }) => {
         props.onSubmit(values.question, values.answer)
         console.log(values)
         setActiveHandler()
-        // props.onClose()
+        resetForm()
       }}
     >
       {formik => (

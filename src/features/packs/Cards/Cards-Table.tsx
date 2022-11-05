@@ -4,9 +4,8 @@ import { CardsType } from '../../../api/cardAPI'
 import poligon from '../../../assets/img/Table/Polygon 2.svg'
 import RatingComponent from '../../../common/components/Rating/RatingComponent'
 import { Nullable } from '../../../types/Nullable'
-import { MyPackButton } from '../TableActionsButton/MyPackButton'
-
-import style from './../Table/TablePackCard.module.css'
+import { ActionsButton } from '../Table/TableActionsButton/ActionsButton'
+import style from '../Table/TableCard.module.css'
 
 type PropsType = {
   cards: Nullable<CardsType[]>
@@ -16,7 +15,7 @@ type PropsType = {
   changeRating?: (value: number) => void
 }
 
-export const TableMyPack = (props: PropsType) => {
+export const CardsTable = (props: PropsType) => {
   return (
     <>
       <table className={style.table}>
@@ -46,7 +45,7 @@ export const TableMyPack = (props: PropsType) => {
                     />
                   </td>
                   <td className={style.actions_button_my_pack}>
-                    {props.profileId === elem.user_id && <MyPackButton />}
+                    {props.profileId === elem.user_id && <ActionsButton />}
                   </td>
                 </tr>
               )

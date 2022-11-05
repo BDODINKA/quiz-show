@@ -18,15 +18,15 @@ import {
   selectorProfileId,
 } from '../../../common/selectors/selectors'
 import { useAppDispatch, useAppSelector } from '../../../utils/hooks/customHooks'
-import { TitleAndButtonPack } from '../TitleAndButtonPack'
-import style from '../TitleAndButtonPack.module.css'
+import { TitleBlockTable } from '../TitleBlockTable/TitleBlockTable'
+import style from '../TitleBlockTable/TitleBlockTable.module.css'
 
 import dots from './../../../assets/img/Table/dots.svg'
-import { getCardsTC } from './my-pack-reducer'
-import s from './MyPack.module.css'
-import { TableMyPack } from './TableMyPack'
+import { getCardsTC } from './cards-reducer'
+import { CardsTable } from './Cards-Table'
+import s from './Cards.module.css'
 
-export const MyPack = () => {
+export const Cards = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const params = useParams<'id'>()
@@ -54,7 +54,7 @@ export const MyPack = () => {
         {cards && cards.length ? (
           <>
             <ArrowBackTo />
-            <TitleAndButtonPack
+            <TitleBlockTable
               titlePack={packName as string}
               titleButton={packUserId === profileId ? 'Add new card' : 'Learn to pack'}
               image={<img className={s.dots} src={dots} alt="dots" />}
@@ -62,7 +62,7 @@ export const MyPack = () => {
               style={style}
             />
             <Search onSearchChange={() => {}} value={''} className={s.search} />
-            <TableMyPack
+            <CardsTable
               cards={cards}
               minGrade={minGrade}
               maxGrade={maxGrade}
@@ -80,7 +80,7 @@ export const MyPack = () => {
         ) : (
           <>
             <ArrowBackTo />
-            <TitleAndButtonPack
+            <TitleBlockTable
               titlePack={packName as string}
               titleButton={'Add new card'}
               image={<img className={s.dots} src={dots} alt="dots" />}

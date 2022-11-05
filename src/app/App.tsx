@@ -5,6 +5,7 @@ import { LinearProgress } from '@mui/material'
 import { HashRouter, Navigate, Route, Routes } from 'react-router-dom'
 
 import { CustomAlertSnackBar } from '../common/components/CustomSnackBar/CustomAlertSnackBar'
+import PageNotFound from '../common/components/page-404/PageNotFound'
 import { PATH } from '../common/routes/const-routes'
 import { selectorError, selectorIsLogin, selectorStatus } from '../common/selectors/selectors'
 import CheckEmail from '../features/forgot-pass/CheckEmail/CheckEmail'
@@ -12,9 +13,8 @@ import CreateNewPassword from '../features/forgot-pass/CreateNewPass/CreateNewPa
 import { ForgotPass } from '../features/forgot-pass/ForgotPass/ForgotPass'
 import Header from '../features/header/Header'
 import Login from '../features/login/Login'
-import { CardPacks } from '../features/packCards/CardPacks'
-import { MyPack } from '../features/packCards/MyPack/MyPack'
-import PageNotFound from '../features/page-404/PageNotFound'
+import { Cards } from '../features/packs/Cards/Cards'
+import { Packs } from '../features/packs/Packs'
 import { Profile } from '../features/profile/Profile'
 import { authMeTC } from '../features/profile/profile.reducer'
 import SignUp from '../features/sign-up/SignUp'
@@ -54,8 +54,8 @@ function App() {
           <Route path={PATH.CHECK_EMAIL_PAGE} element={<CheckEmail />} />
           <Route path={PATH.RESTORE_PASS_PAGE} element={<ForgotPass />} />
           <Route path={PATH.NEW_PASS_PAGE} element={<CreateNewPassword />} />
-          <Route path={PATH.PACK_CARDS_PAGE} element={<CardPacks />} />
-          <Route path={`${PATH.MY_PACK_PAGE}/:id`} element={<MyPack />} />
+          <Route path={PATH.PACK_CARDS_PAGE} element={<Packs />} />
+          <Route path={`${PATH.MY_PACK_PAGE}/:id`} element={<Cards />} />
         </Routes>
         <CustomAlertSnackBar
           status={status}

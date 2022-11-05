@@ -38,7 +38,7 @@ export type CardPacksActionsType =
   | ReturnType<typeof setUserIdAC>
   | ReturnType<typeof filterResetAC>
 
-export const cardPacksReducer = (
+export const packsReducer = (
   state = initialState,
   action: CardPacksActionsType
 ): InitialStateType => {

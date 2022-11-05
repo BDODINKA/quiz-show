@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 
 import { useLocation, useNavigate } from 'react-router-dom'
 
+import { ModalMain } from '../../common/components/modal/ModalMain'
+import { ModalPack } from '../../common/components/modal/ModalPack/ModalPack'
 import { Pagination } from '../../common/components/pagination/pagination'
 import { InitValueRangeSlider } from '../../common/constants/packsCard'
 import { maxPaginationPage } from '../../common/constants/pagination'
@@ -14,9 +16,9 @@ import {
   selectorPacksTotalCount,
 } from '../../common/selectors/selectors'
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/customHooks'
-import { ModalMain } from '../modal/ModalMain'
-import { ModalPack } from '../modal/ModalPack/ModalPack'
 
+import { setPackCardsIdAC } from './Cards/cards-reducer'
+import { Filtration } from './Filtration/Filtration'
 import {
   addPackTC,
   deletePackTC,
@@ -25,14 +27,12 @@ import {
   filterPageCountAC,
   getPacksTC,
   updatePackTC,
-} from './cardPacks-reducer'
-import style from './CardPacks.module.css'
-import { Filtration } from './Filtration/Filtration'
-import { setPackCardsIdAC } from './MyPack/my-pack-reducer'
-import { TablePackCard } from './Table/TablePackCard'
-import { TitleAndButtonPack } from './TitleAndButtonPack'
+} from './Packs-reducer'
+import style from './Packs.module.css'
+import { TableCard } from './Table/TableCard'
+import { TitleBlockTable } from './TitleBlockTable/TitleBlockTable'
 
-export const CardPacks = () => {
+export const Packs = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const location = useLocation()
@@ -93,7 +93,7 @@ export const CardPacks = () => {
     <div className={style.main}>
       <div className={style.container}>
         <div className={style.table_container}>
-          <TitleAndButtonPack
+          <TitleBlockTable
             titlePack="Packs list"
             titleButton="Add new pack"
             onClick={setModalActiveHandler}
@@ -104,7 +104,7 @@ export const CardPacks = () => {
             initialValueSlider={InitValueRangeSlider}
             paramsId={params.user_id}
           />
-          <TablePackCard
+          <TableCard
             cards={cardPacks}
             userId={profileId}
             sort={setLastUpdate}

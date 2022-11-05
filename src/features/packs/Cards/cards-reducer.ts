@@ -37,7 +37,7 @@ const initialState = {
 
 export type CardActionsType = ReturnType<typeof setCardsAC> | ReturnType<typeof setPackCardsIdAC>
 
-export const myPackReducer = (state = initialState, action: CardActionsType): InitialStateType => {
+export const cardsReducer = (state = initialState, action: CardActionsType): InitialStateType => {
   switch (action.type) {
     case 'CARDS/SET-PACK-CARDS-ID': {
       return { ...state, params: { ...state.params, cardsPack_id: action.cardId } }
