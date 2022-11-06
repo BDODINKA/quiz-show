@@ -4,8 +4,8 @@ import { CardPacks } from '../../../api/cardPacksAPI'
 import { Nullable } from '../../../types/Nullable'
 
 import poligon from './../../../assets/img/Table/Polygon 2.svg'
+import { PacksTableModal } from './PacksTableModal'
 import style from './TableCard.module.css'
-import { TableModal } from './TableModal'
 
 type PropsType = {
   cards?: Nullable<CardPacks[]>
@@ -64,7 +64,7 @@ export const TableCard = (props: PropsType) => {
           <tbody>
             {props.cards
               ? props.cards.map(elem => (
-                  <TableModal
+                  <PacksTableModal
                     key={elem._id}
                     deleteHandler={id => deleteHandler(id)}
                     changeFieldName={(text, deckCover, privates, id) =>

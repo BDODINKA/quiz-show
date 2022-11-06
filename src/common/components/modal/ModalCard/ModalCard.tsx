@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 
+import { UpdateCardType } from '../../../../api/cardAPI'
 import { RootStateType } from '../../../../app/store'
 import { useAppSelector } from '../../../../utils/hooks/customHooks'
 import SuperButton from '../../SuperButton/SuperButton'
@@ -15,21 +16,20 @@ type PropsType = {
   setActive: (modalActive: boolean) => void
   title: string
   onSubmit: (question: string, answer: string) => void
+  question: string
+  answer: string
+  edetCardHandler?: (updateCard: UpdateCardType) => void
 }
 
 const selectorProgress = (state: RootStateType) => state.app.status
 
 export const ModalCard = (props: PropsType) => {
   const status = useAppSelector(selectorProgress)
-  const [select, setSelect] = useState('')
 
-  /*const redirect = () => {
-    props.onClose()
-  }*/
   const setActiveHandler = () => {
     props.setActive(false)
+    props.onClose && props.onClose
   }
-  const selectHandler = () => {}
 
   return (
     <Formik
@@ -41,7 +41,7 @@ export const ModalCard = (props: PropsType) => {
           .required('Field Required'),
       })}
       onSubmit={(values, { resetForm }) => {
-        props.onSubmit(values.question, values.answer)
+        if (values.question || values.answer) props.onSubmit(values.question, values.answer)
         console.log(values)
         setActiveHandler()
         resetForm()
@@ -76,6 +76,7 @@ export const ModalCard = (props: PropsType) => {
                 />
                 <div className={style.btn_block}>
                   <SuperButton
+                    type={'reset'}
                     title={'Cancel'}
                     className={style.btn_cancel}
                     onClick={setActiveHandler}
@@ -84,7 +85,7 @@ export const ModalCard = (props: PropsType) => {
                     type={'submit'}
                     disabled={status === 'progress'}
                     className={style.btn}
-                    title={'Add newCard'}
+                    title={'Save'}
                   />
                 </div>
 

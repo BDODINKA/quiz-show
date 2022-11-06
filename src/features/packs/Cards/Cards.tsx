@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 
 import { useNavigate, useParams } from 'react-router-dom'
 
+import { UpdateCardType } from '../../../api/cardAPI'
 import ArrowBackTo from '../../../common/components/ArrowBackTo/ArrowBackTo'
 import { Pagination } from '../../../common/components/pagination/pagination'
 import Search from '../../../common/components/Search/Search'
@@ -22,7 +23,7 @@ import { TitleBlockTable } from '../TitleBlockTable/TitleBlockTable'
 import style from '../TitleBlockTable/TitleBlockTable.module.css'
 
 import dots from './../../../assets/img/Table/dots.svg'
-import { getCardsTC } from './cards-reducer'
+import { deleteCardTC, getCardsTC, updateCardTC } from './cards-reducer'
 import { CardsTable } from './Cards-Table'
 import s from './Cards.module.css'
 
@@ -48,6 +49,14 @@ export const Cards = () => {
     }
   }, [isLogin, cardsParams, params])
 
+  const deleteCard = (_id: string) => {
+    dispatch(deleteCardTC(_id))
+  }
+
+  const editCard = (updateCard: UpdateCardType) => {
+    dispatch(updateCardTC(updateCard))
+  }
+
   return (
     <div className={style.packs_list_container}>
       <div className={style.table_container}>
@@ -67,6 +76,8 @@ export const Cards = () => {
               minGrade={minGrade}
               maxGrade={maxGrade}
               profileId={profileId}
+              deleteHandler={_id => deleteCard(_id)}
+              editCardHandler={updateCard => editCard(updateCard)}
             />
             <Pagination
               pageCount={cardsParams.pageCount}

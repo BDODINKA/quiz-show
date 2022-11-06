@@ -1,6 +1,7 @@
 import { AxiosError } from 'axios'
 
 import {
+  AddCardType,
   cardAPI,
   CardsParamsType,
   CardsResponseType,
@@ -87,25 +88,47 @@ export const getCardsTC =
     })
   }
 
-export const addCardTC = (): AppThunk => dispatch => {
-  dispatch(setAppStatusAC('progress'))
-  cardAPI
-    .addCard()
-    .then(res => {
-      dispatch(getCardsTC())
-      dispatch(setAppStatusAC('success'))
-      console.log(res)
-    })
-    .catch((reason: AxiosError<{ error: string }>) => {
-      if (reason.response?.data.error) {
-        ServerError<string>(reason.response.data.error, setAppErrorAC, dispatch)
-        dispatch(setAppStatusAC('error'))
-      } else {
-        ServerError<string>(reason.message, setAppErrorAC, dispatch)
-        dispatch(setAppStatusAC('error'))
-      }
-    })
-}
+export const addCardTC =
+  (
+    cardsPack_id: string,
+    question?: string,
+    answer?: string,
+    grade?: 0 | 1 | 2 | 3 | 4 | 5,
+    shots?: number,
+    answerImg?: string,
+    questionImg?: string,
+    questionVideo?: string,
+    answerVideo?: string
+  ): AppThunk =>
+  dispatch => {
+    dispatch(setAppStatusAC('progress'))
+    cardAPI
+      .addCard({
+        cardsPack_id,
+        question,
+        answer,
+        grade,
+        shots,
+        answerImg,
+        questionImg,
+        questionVideo,
+        answerVideo,
+      })
+      .then(res => {
+        dispatch(getCardsTC(cardsPack_id))
+        dispatch(setAppStatusAC('success'))
+        console.log(res)
+      })
+      .catch((reason: AxiosError<{ error: string }>) => {
+        if (reason.response?.data.error) {
+          ServerError<string>(reason.response.data.error, setAppErrorAC, dispatch)
+          dispatch(setAppStatusAC('error'))
+        } else {
+          ServerError<string>(reason.message, setAppErrorAC, dispatch)
+          dispatch(setAppStatusAC('error'))
+        }
+      })
+  }
 
 export const deleteCardTC =
   (_id: string): AppThunk =>
