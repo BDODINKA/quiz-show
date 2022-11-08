@@ -1,8 +1,11 @@
 import React from 'react'
 
+import { useLocation, useNavigate } from 'react-router-dom'
+
 import { CardsType } from '../../../api/cardAPI'
 import poligon from '../../../assets/img/Table/Polygon 2.svg'
 import RatingComponent from '../../../common/components/Rating/RatingComponent'
+import { PATH } from '../../../common/routes/const-routes'
 import { Nullable } from '../../../types/Nullable'
 import { ActionsButton } from '../Table/TableActionsButton/ActionsButton'
 import style from '../Table/TableCard.module.css'
@@ -16,6 +19,14 @@ type PropsType = {
 }
 
 export const CardsTable = (props: PropsType) => {
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  const navigateToLearn = (cardId: string) => {
+    sessionStorage.setItem('url', `${PATH.LEARN_PAGE}/${cardId}`)
+    navigate(`${PATH.LEARN_PAGE}/${cardId}`)
+  }
+
   return (
     <>
       <table className={style.table}>
@@ -35,7 +46,7 @@ export const CardsTable = (props: PropsType) => {
             props.cards.map(elem => {
               return (
                 <tr key={elem._id} className={style.title_table_body}>
-                  <td>{elem.question}</td>
+                  <td onClick={() => navigateToLearn(elem._id)}>{elem.question}</td>
                   <td>{elem.answer}</td>
                   <td>{new Date(Date.parse(elem.updated)).toLocaleDateString('ru-RU')}</td>
                   <td>
@@ -45,7 +56,7 @@ export const CardsTable = (props: PropsType) => {
                     />
                   </td>
                   <td className={style.actions_button_my_pack}>
-                    {props.profileId === elem.user_id && <ActionsButton />}
+                    {props.profileId === elem.user_id && <ActionsButton showBtn={false} />}
                   </td>
                 </tr>
               )
