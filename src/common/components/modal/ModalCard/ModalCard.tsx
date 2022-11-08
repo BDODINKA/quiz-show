@@ -18,7 +18,6 @@ type PropsType = {
   onSubmit: (question: string, answer: string) => void
   question: string
   answer: string
-  edetCardHandler?: (updateCard: UpdateCardType) => void
 }
 
 const selectorProgress = (state: RootStateType) => state.app.status
@@ -31,20 +30,25 @@ export const ModalCard = (props: PropsType) => {
     props.onClose && props.onClose
   }
 
+  const initial = { question: props.question, answer: props.answer }
+
   return (
     <Formik
       enableReinitialize
-      initialValues={{ question: '', answer: '' }}
+      initialValues={initial}
       validationSchema={Yup.object({
-        text: Yup.string()
+        question: Yup.string()
+          .max(20, 'Max length should be max 20 Symbols')
+          .required('Field Required'),
+        answer: Yup.string()
           .max(20, 'Max length should be max 20 Symbols')
           .required('Field Required'),
       })}
       onSubmit={(values, { resetForm }) => {
-        if (values.question || values.answer) props.onSubmit(values.question, values.answer)
         console.log(values)
-        setActiveHandler()
+        if (values.question || values.answer) props.onSubmit(values.question, values.answer)
         resetForm()
+        setActiveHandler()
       }}
     >
       {formik => (
@@ -57,11 +61,15 @@ export const ModalCard = (props: PropsType) => {
                 <option>Text</option>
                 <option>Picture</option>
               </select>
-              <form onSubmit={formik.handleSubmit} className={style.forma}>
+              <form
+                onSubmit={formik.handleSubmit}
+                className={style.forma}
+                onReset={formik.handleReset}
+              >
                 <SuperInput
                   type={'text'}
                   placeholder={'Question'}
-                  {...formik.getFieldProps('text')}
+                  {...formik.getFieldProps('question')}
                   error={formik.touched && formik.errors.question}
                   className={style.input}
                   spanClassName={style.spanError}
@@ -69,7 +77,7 @@ export const ModalCard = (props: PropsType) => {
                 <SuperInput
                   type={'text'}
                   placeholder={'Answer'}
-                  {...formik.getFieldProps('text')}
+                  {...formik.getFieldProps('answer')}
                   error={formik.touched && formik.errors.answer}
                   className={style.input}
                   spanClassName={style.spanError}

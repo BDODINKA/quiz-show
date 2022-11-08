@@ -14,8 +14,8 @@ type PropsType = {
   elem: CardsType
   profileId?: string
   changeRating?: (value: number) => void
-  deleteHandler?: (_id: string) => void
-  editCardHandler?: (updateCard: UpdateCardType) => void
+  deleteHandler: (_id: string) => void
+  editCardHandler: (updateCard: UpdateCardType) => void
 }
 
 export const CardsTableModal = (props: PropsType) => {
@@ -34,7 +34,7 @@ export const CardsTableModal = (props: PropsType) => {
         />
       </td>
       <td className={style.actions_button_my_pack}>
-        {props.profileId === props.elem.user_id && (
+        {props.elem._id && (
           <ActionsButton
             showBtn={true}
             deleteHandler={() => {
@@ -54,7 +54,7 @@ export const CardsTableModal = (props: PropsType) => {
               title={'Delete Card'}
               name={props.elem.question}
               deleteCallback={() => {
-                props.deleteHandler!(props.elem._id)
+                props.deleteHandler(props.elem._id)
                 console.log(props.elem._id)
               }}
             />
@@ -65,7 +65,10 @@ export const CardsTableModal = (props: PropsType) => {
               question={props.elem.question}
               setActive={setModalActive}
               title={'Edit card'}
-              onSubmit={(question, answer) => props.editCardHandler(question, answer)}
+              answer={props.elem.answer}
+              onSubmit={(question, answer) =>
+                props.editCardHandler({ _id: props.elem._id, question, answer })
+              }
             />
           </ModalMain>
         )}

@@ -9,6 +9,8 @@ type PropsType = {
 }
 
 export const ModalMain = (props: PropsType) => {
+  console.log('ModalMain')
+
   return (
     <div
       className={props.active ? `${style.modal_active} ${style.modal}` : style.modal}

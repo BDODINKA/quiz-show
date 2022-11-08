@@ -39,6 +39,7 @@ export const CardsTable = (props: PropsType) => {
               <img style={{ marginLeft: '5px' }} src={poligon} alt="poligon" />
             </th>
             <th>Grade</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>

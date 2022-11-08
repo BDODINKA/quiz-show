@@ -26,7 +26,7 @@ export const ModalDelete = (props: PropsType) => {
     props.setActive(false)
   }
   const deleteHandler = () => {
-    props.deleteCallback?.()
+    props.deleteCallback && props.deleteCallback()
   }
 
   return (
