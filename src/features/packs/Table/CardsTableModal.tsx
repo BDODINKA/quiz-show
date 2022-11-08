@@ -67,7 +67,12 @@ export const CardsTableModal = (props: PropsType) => {
               title={'Edit card'}
               answer={props.elem.answer}
               onSubmit={(question, answer) =>
-                props.editCardHandler({ _id: props.elem._id, question, answer })
+                props.editCardHandler({
+                  cardsPack_id: props.elem.cardsPack_id,
+                  _id: props.elem._id,
+                  question,
+                  answer,
+                })
               }
             />
           </ModalMain>

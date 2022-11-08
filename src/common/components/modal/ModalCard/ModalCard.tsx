@@ -27,7 +27,7 @@ export const ModalCard = (props: PropsType) => {
 
   const setActiveHandler = () => {
     props.setActive(false)
-    props.onClose && props.onClose
+    props.onClose && props.onClose()
   }
 
   const initial = { question: props.question, answer: props.answer }

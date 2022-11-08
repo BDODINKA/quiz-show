@@ -50,6 +50,7 @@ export type AddCardType = {
 }
 
 export type UpdateCardType = {
+  cardsPack_id: string
   _id: string
   question?: string
   answer?: string
@@ -75,6 +76,7 @@ export const cardAPI = {
   updateCard(updateCard: UpdateCardType) {
     return axiosInstance.put('/cards/card', {
       card: {
+        cardsPack_id: updateCard.cardsPack_id,
         _id: updateCard._id,
         question: updateCard.question,
         answer: updateCard.answer,

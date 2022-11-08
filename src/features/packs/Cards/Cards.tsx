@@ -1,9 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useNavigate, useParams } from 'react-router-dom'
 
-import { UpdateCardType } from '../../../api/cardAPI'
+import { AddCardType, UpdateCardType } from '../../../api/cardAPI'
 import ArrowBackTo from '../../../common/components/ArrowBackTo/ArrowBackTo'
+import { ModalCard } from '../../../common/components/modal/ModalCard/ModalCard'
+import { ModalMain } from '../../../common/components/modal/ModalMain'
+import { ModalPack } from '../../../common/components/modal/ModalPack/ModalPack'
 import { Pagination } from '../../../common/components/pagination/pagination'
 import Search from '../../../common/components/Search/Search'
 import { PATH } from '../../../common/routes/const-routes'
@@ -23,14 +26,14 @@ import { TitleBlockTable } from '../TitleBlockTable/TitleBlockTable'
 import style from '../TitleBlockTable/TitleBlockTable.module.css'
 
 import dots from './../../../assets/img/Table/dots.svg'
-import { deleteCardTC, getCardsTC, updateCardTC } from './cards-reducer'
+import { addCardTC, deleteCardTC, getCardsTC, updateCardTC } from './cards-reducer'
 import { CardsTable } from './Cards-Table'
 import s from './Cards.module.css'
 
 export const Cards = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  const params = useParams<'id'>()
+  const params = useParams<'_id' | 'id'>()
   const cards = useAppSelector(selectorCards)
   const packUserId = useAppSelector(selectorPackUserId)
   const packName = useAppSelector(selectorPackName)
@@ -41,13 +44,16 @@ export const Cards = () => {
   const cardsParams = useAppSelector(selectorCardsParams)
   const isLogin = useAppSelector(selectorIsLogin)
 
+  const [modalActive, setModalActive] = useState<boolean>(false)
+
   useEffect(() => {
     if (isLogin) {
-      dispatch(getCardsTC(params.id))
+      dispatch(getCardsTC(params._id))
     } else {
       navigate(PATH.LOGIN_PAGE)
     }
-  }, [isLogin, cardsParams, params])
+  }, [isLogin, dispatch])
+  // }, [isLogin, cardsParams, params])
 
   const deleteCard = (_id: string) => {
     dispatch(deleteCardTC(_id))
@@ -55,6 +61,14 @@ export const Cards = () => {
 
   const editCard = (updateCard: UpdateCardType) => {
     dispatch(updateCardTC(updateCard))
+  }
+
+  const setModalActiveHandler = () => {
+    setModalActive(true)
+  }
+
+  const addNewCard = (card: AddCardType) => {
+    dispatch(addCardTC(card.cardsPack_id, card.question, card.answer))
   }
 
   return (
@@ -67,7 +81,7 @@ export const Cards = () => {
               titlePack={packName as string}
               titleButton={packUserId === profileId ? 'Add new card' : 'Learn to pack'}
               image={<img className={s.dots} src={dots} alt="dots" />}
-              onClick={() => {}}
+              onClick={setModalActiveHandler}
               style={style}
             />
             <Search onSearchChange={() => {}} value={''} className={s.search} />
@@ -95,12 +109,23 @@ export const Cards = () => {
               titlePack={packName as string}
               titleButton={'Add new card'}
               image={<img className={s.dots} src={dots} alt="dots" />}
-              onClick={() => {}}
+              onClick={setModalActiveHandler}
               style={style}
             />
           </>
         )}
       </div>
+      <ModalMain active={modalActive} setActive={setModalActive}>
+        <ModalCard
+          question={''}
+          answer={''}
+          setActive={setModalActive}
+          title={'Add New Card'}
+          onSubmit={(question, answer) =>
+            addNewCard({ cardsPack_id: params.id!, question, answer })
+          }
+        />
+      </ModalMain>
     </div>
   )
 }
