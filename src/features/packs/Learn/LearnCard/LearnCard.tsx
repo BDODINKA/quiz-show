@@ -5,16 +5,16 @@ import { Question } from './Question'
 
 export const LearnCard = () => {
   const [showAnswer, setShowAnswer] = useState(false)
-  const [answer, setAnswer] = useState('')
+  const [answer, setAnswer] = useState(0)
 
   const showAnswerHandler = () => {
     setShowAnswer(true)
   }
-  const onChangeAnswer = (value: string) => {
+  const onChangeAnswer = (value: number) => {
     setAnswer(value)
   }
   const nextCard = () => {
-    if (answer === '') {
+    if (answer === 0) {
       console.log('NextCard without Rating')
     } else {
       console.log(answer)

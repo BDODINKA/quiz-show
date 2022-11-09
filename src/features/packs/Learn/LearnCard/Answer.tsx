@@ -5,12 +5,12 @@ import { SuperCheckbox } from '../../../../common/components/SuperCheckbox/Super
 import style from './Answer.module.css'
 
 type PropsType = {
-  onChangeRadio?: (value: string) => void
+  onChangeRadio?: (value: number) => void
 }
 
 export const Answer = (props: PropsType) => {
   const onChangeRadio = (e: ChangeEvent<HTMLInputElement>) => {
-    props.onChangeRadio && props.onChangeRadio(e.currentTarget.value)
+    props.onChangeRadio && props.onChangeRadio(Number(e.currentTarget.value))
   }
 
   return (
@@ -23,34 +23,29 @@ export const Answer = (props: PropsType) => {
         <label form={'answer'}>Rate yourself:</label>
         <SuperCheckbox
           name={'answer'}
-          value={'Did not know'}
+          value={1}
           type={'radio'}
           onChange={onChangeRadio}
         >{`Did not know`}</SuperCheckbox>
         <SuperCheckbox
           name={'answer'}
           type={'radio'}
-          value={'Forgot'}
+          value={2}
           onChange={onChangeRadio}
         >{`Forgot`}</SuperCheckbox>
         <SuperCheckbox
           name={'answer'}
           type={'radio'}
-          value={'A lot of thought'}
+          value={3}
           onChange={onChangeRadio}
         >{`A lot of thought`}</SuperCheckbox>
         <SuperCheckbox
           name={'answer'}
           type={'radio'}
-          value={'Confused'}
+          value={4}
           onChange={onChangeRadio}
         >{`Confused`}</SuperCheckbox>
-        <SuperCheckbox
-          name={'answer'}
-          type={'radio'}
-          value={'Knew the answer'}
-          onChange={onChangeRadio}
-        >
+        <SuperCheckbox name={'answer'} type={'radio'} value={5} onChange={onChangeRadio}>
           {`Knew the answer`}
         </SuperCheckbox>
       </div>
