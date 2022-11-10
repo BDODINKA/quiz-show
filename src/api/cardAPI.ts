@@ -41,7 +41,7 @@ export type AddCardType = {
   cardsPack_id: string
   question?: string
   answer?: string
-  grade?: 0 | 1 | 2 | 3 | 4 | 5
+  grade?: GradeType
   shots?: number
   answerImg?: string
   questionImg?: string
@@ -54,17 +54,20 @@ export type UpdateCardType = {
   _id: string
   question?: string
   answer?: string
-  grade?: 0 | 1 | 2 | 3 | 4 | 5
+  grade?: GradeType
   shots?: number
   answerImg?: string
   questionImg?: string
   questionVideo?: string
   answerVideo?: string
 }
+
 export type GradeCardType = {
   card_id: string
-  grade: 0 | 1 | 2 | 3 | 4 | 5
+  grade: GradeType
 }
+
+export type GradeType = 0 | 1 | 2 | 3 | 4 | 5
 
 export const cardAPI = {
   getCards(params: CardsParamsType) {
@@ -88,11 +91,6 @@ export const cardAPI = {
     })
   },
   changeRatingCard(grade: GradeCardType) {
-    return axiosInstance.put('/cards/grade', {
-      grade: {
-        card_id: grade.card_id,
-        grade: grade.grade,
-      },
-    })
+    return axiosInstance.put('/cards/grade', grade)
   },
 }

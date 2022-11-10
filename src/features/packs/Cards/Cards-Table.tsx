@@ -1,11 +1,9 @@
 import React from 'react'
 
-import { CardsType, GradeCardType, UpdateCardType } from '../../../api/cardAPI'
+import { CardsType, UpdateCardType } from '../../../api/cardAPI'
 import poligon from '../../../assets/img/Table/Polygon 2.svg'
-import RatingComponent from '../../../common/components/Rating/RatingComponent'
 import { Nullable } from '../../../types/Nullable'
 import { CardsTableModal } from '../Table/CardsTableModal'
-import { ActionsButton } from '../Table/TableActionsButton/ActionsButton'
 import style from '../Table/TableCard.module.css'
 
 type PropsType = {
@@ -13,7 +11,7 @@ type PropsType = {
   minGrade?: Nullable<number>
   maxGrade?: Nullable<number>
   profileId?: string
-  changeRating?: (grade: GradeCardType) => void
+  changeRating?: (cardId: string, value: number) => void
   deleteHandler: (_id: string) => void
   editCardHandler: (updateCard: UpdateCardType) => void
   userId?: string
@@ -26,6 +24,9 @@ export const CardsTable = (props: PropsType) => {
 
   const editCardHandler = (updateCard: UpdateCardType) => {
     props.editCardHandler && props.editCardHandler(updateCard)
+  }
+  const changeRatingHandler = (cardId: string, value: number) => {
+    props.changeRating && props.changeRating(cardId, value)
   }
 
   return (
@@ -52,7 +53,7 @@ export const CardsTable = (props: PropsType) => {
                 editCardHandler={updateCard => editCardHandler(updateCard)}
                 elem={elem}
                 userId={props.userId}
-                changeRating={props.changeRating}
+                changeRating={value => changeRatingHandler(elem._id, value)}
               />
             ))}
         </tbody>

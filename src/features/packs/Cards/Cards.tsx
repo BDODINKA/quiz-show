@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react'
 
 import { useNavigate, useParams } from 'react-router-dom'
 
-import { AddCardType, GradeCardType, UpdateCardType } from '../../../api/cardAPI'
+import { AddCardType, GradeType, UpdateCardType } from '../../../api/cardAPI'
 import ArrowBackTo from '../../../common/components/ArrowBackTo/ArrowBackTo'
 import { ModalCard } from '../../../common/components/modal/ModalCard/ModalCard'
 import { ModalMain } from '../../../common/components/modal/ModalMain'
-import { ModalPack } from '../../../common/components/modal/ModalPack/ModalPack'
 import { Pagination } from '../../../common/components/pagination/pagination'
 import Search from '../../../common/components/Search/Search'
 import { PATH } from '../../../common/routes/const-routes'
@@ -39,7 +38,7 @@ import s from './Cards.module.css'
 export const Cards = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  const params = useParams<'_id' | 'id'>()
+  const params = useParams<'id'>()
   const cards = useAppSelector(selectorCards)
   const packUserId = useAppSelector(selectorPackUserId)
   const packName = useAppSelector(selectorPackName)
@@ -54,7 +53,7 @@ export const Cards = () => {
 
   useEffect(() => {
     if (isLogin) {
-      dispatch(getCardsTC(params._id))
+      dispatch(getCardsTC(params.id))
     } else {
       navigate(PATH.LOGIN_PAGE)
     }
@@ -77,8 +76,8 @@ export const Cards = () => {
     dispatch(addCardTC(card.cardsPack_id, card.question, card.answer))
   }
 
-  const changeRating = (grade: GradeCardType) => {
-    dispatch(changeRatingCardTC(grade))
+  const changeRating = (cardId: string, value: number) => {
+    dispatch(changeRatingCardTC({ card_id: cardId, grade: value as GradeType }))
   }
 
   return (
@@ -103,7 +102,7 @@ export const Cards = () => {
               profileId={profileId}
               deleteHandler={_id => deleteCard(_id)}
               editCardHandler={updateCard => editCard(updateCard)}
-              changeRating={changeRating}
+              changeRating={(cardId, value) => changeRating(cardId, value)}
             />
             <Pagination
               pageCount={cardsParams.pageCount}

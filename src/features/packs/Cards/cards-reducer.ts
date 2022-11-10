@@ -1,12 +1,12 @@
 import { AxiosError } from 'axios'
 
 import {
-  AddCardType,
   cardAPI,
   CardsParamsType,
   CardsResponseType,
   CardsType,
   GradeCardType,
+  GradeType,
   UpdateCardType,
 } from '../../../api/cardAPI'
 import { setAppErrorAC, setAppStatusAC } from '../../../app/app-reducer'
@@ -94,7 +94,7 @@ export const addCardTC =
     cardsPack_id: string,
     question?: string,
     answer?: string,
-    grade?: 0 | 1 | 2 | 3 | 4 | 5,
+    grade?: GradeType,
     shots?: number,
     answerImg?: string,
     questionImg?: string,
@@ -180,15 +180,13 @@ export const updateCardTC =
 export const changeRatingCardTC =
   (grade: GradeCardType): AppThunk =>
   dispatch => {
+    console.log(grade)
     dispatch(setAppStatusAC('progress'))
     cardAPI
       .changeRatingCard(grade)
-      .then(res => {
-        if (res.status === 200) {
-          dispatch(getCardsTC())
-          dispatch(setAppStatusAC('success'))
-        }
-        console.log(res)
+      .then(() => {
+        dispatch(getCardsTC())
+        dispatch(setAppStatusAC('success'))
       })
       .catch((reason: AxiosError<{ error: string }>) => {
         if (reason.response?.data.error) {

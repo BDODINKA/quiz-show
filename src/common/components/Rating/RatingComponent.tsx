@@ -9,7 +9,7 @@ type PropsType = {
   valueRating: number
 }
 
-const RatingComponent = (props: PropsType) => {
+export const RatingComponent = (props: PropsType) => {
   const changeRating = (newValue: Nullable<number>) => {
     newValue && props.changeRating(newValue)
   }
@@ -26,5 +26,3 @@ const RatingComponent = (props: PropsType) => {
     </div>
   )
 }
-
-export default RatingComponent
