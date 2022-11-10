@@ -6,6 +6,7 @@ import {
   CardsParamsType,
   CardsResponseType,
   CardsType,
+  GradeCardType,
   UpdateCardType,
 } from '../../../api/cardAPI'
 import { setAppErrorAC, setAppStatusAC } from '../../../app/app-reducer'
@@ -158,6 +159,30 @@ export const updateCardTC =
     dispatch(setAppStatusAC('progress'))
     cardAPI
       .updateCard(updateCard)
+      .then(res => {
+        if (res.status === 200) {
+          dispatch(getCardsTC())
+          dispatch(setAppStatusAC('success'))
+        }
+        console.log(res)
+      })
+      .catch((reason: AxiosError<{ error: string }>) => {
+        if (reason.response?.data.error) {
+          ServerError<string>(reason.response.data.error, setAppErrorAC, dispatch)
+          dispatch(setAppStatusAC('error'))
+        } else {
+          ServerError<string>(reason.message, setAppErrorAC, dispatch)
+          dispatch(setAppStatusAC('error'))
+        }
+      })
+  }
+
+export const changeRatingCardTC =
+  (grade: GradeCardType): AppThunk =>
+  dispatch => {
+    dispatch(setAppStatusAC('progress'))
+    cardAPI
+      .changeRatingCard(grade)
       .then(res => {
         if (res.status === 200) {
           dispatch(getCardsTC())

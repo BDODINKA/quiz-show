@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { CardsType, UpdateCardType } from '../../../api/cardAPI'
+import { CardsType, GradeCardType, UpdateCardType } from '../../../api/cardAPI'
 import { ModalCard } from '../../../common/components/modal/ModalCard/ModalCard'
 import { ModalDelete } from '../../../common/components/modal/ModalDelete/ModalDelete'
 import { ModalMain } from '../../../common/components/modal/ModalMain'
@@ -13,9 +13,10 @@ import style from './TableCard.module.css'
 type PropsType = {
   elem: CardsType
   profileId?: string
-  changeRating?: (value: number) => void
+  changeRating?: (grade: GradeCardType) => void
   deleteHandler: (_id: string) => void
   editCardHandler: (updateCard: UpdateCardType) => void
+  userId?: string
 }
 
 export const CardsTableModal = (props: PropsType) => {
@@ -34,7 +35,7 @@ export const CardsTableModal = (props: PropsType) => {
         />
       </td>
       <td className={style.actions_button_my_pack}>
-        {props.elem._id && (
+        {props.elem._id && props.userId === props.elem.user_id ? (
           <ActionsButton
             showBtn={true}
             deleteHandler={() => {
@@ -46,6 +47,8 @@ export const CardsTableModal = (props: PropsType) => {
               setModalBtn('change')
             }}
           />
+        ) : (
+          <ActionsButton showBtn={false} />
         )}
         {modalActive && modalBtn === 'delete' ? (
           <ModalMain active={modalActive} setActive={setModalActive}>

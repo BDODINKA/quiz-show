@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import { useNavigate, useParams } from 'react-router-dom'
 
-import { AddCardType, UpdateCardType } from '../../../api/cardAPI'
+import { AddCardType, GradeCardType, UpdateCardType } from '../../../api/cardAPI'
 import ArrowBackTo from '../../../common/components/ArrowBackTo/ArrowBackTo'
 import { ModalCard } from '../../../common/components/modal/ModalCard/ModalCard'
 import { ModalMain } from '../../../common/components/modal/ModalMain'
@@ -26,7 +26,13 @@ import { TitleBlockTable } from '../TitleBlockTable/TitleBlockTable'
 import style from '../TitleBlockTable/TitleBlockTable.module.css'
 
 import dots from './../../../assets/img/Table/dots.svg'
-import { addCardTC, deleteCardTC, getCardsTC, updateCardTC } from './cards-reducer'
+import {
+  addCardTC,
+  changeRatingCardTC,
+  deleteCardTC,
+  getCardsTC,
+  updateCardTC,
+} from './cards-reducer'
 import { CardsTable } from './Cards-Table'
 import s from './Cards.module.css'
 
@@ -71,6 +77,10 @@ export const Cards = () => {
     dispatch(addCardTC(card.cardsPack_id, card.question, card.answer))
   }
 
+  const changeRating = (grade: GradeCardType) => {
+    dispatch(changeRatingCardTC(grade))
+  }
+
   return (
     <div className={style.packs_list_container}>
       <div className={style.table_container}>
@@ -87,11 +97,13 @@ export const Cards = () => {
             <Search onSearchChange={() => {}} value={''} className={s.search} />
             <CardsTable
               cards={cards}
+              userId={profileId}
               minGrade={minGrade}
               maxGrade={maxGrade}
               profileId={profileId}
               deleteHandler={_id => deleteCard(_id)}
               editCardHandler={updateCard => editCard(updateCard)}
+              changeRating={changeRating}
             />
             <Pagination
               pageCount={cardsParams.pageCount}

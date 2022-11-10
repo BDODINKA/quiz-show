@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { CardsType, UpdateCardType } from '../../../api/cardAPI'
+import { CardsType, GradeCardType, UpdateCardType } from '../../../api/cardAPI'
 import poligon from '../../../assets/img/Table/Polygon 2.svg'
 import RatingComponent from '../../../common/components/Rating/RatingComponent'
 import { Nullable } from '../../../types/Nullable'
@@ -13,9 +13,10 @@ type PropsType = {
   minGrade?: Nullable<number>
   maxGrade?: Nullable<number>
   profileId?: string
-  changeRating?: (value: number) => void
+  changeRating?: (grade: GradeCardType) => void
   deleteHandler: (_id: string) => void
   editCardHandler: (updateCard: UpdateCardType) => void
+  userId?: string
 }
 
 export const CardsTable = (props: PropsType) => {
@@ -50,6 +51,8 @@ export const CardsTable = (props: PropsType) => {
                 deleteHandler={_id => deleteHandler(_id)}
                 editCardHandler={updateCard => editCardHandler(updateCard)}
                 elem={elem}
+                userId={props.userId}
+                changeRating={props.changeRating}
               />
             ))}
         </tbody>
