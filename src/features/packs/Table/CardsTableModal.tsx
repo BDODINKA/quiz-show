@@ -15,6 +15,7 @@ type PropsType = {
   changeRating?: (grade: number) => void
   deleteHandler: (_id: string) => void
   editCardHandler: (updateCard: UpdateCardType) => void
+  navigateLearnPage: (cardId: string) => void
   userId?: string
 }
 
@@ -26,9 +27,13 @@ export const CardsTableModal = (props: PropsType) => {
     props.changeRating && props.changeRating(value)
   }
 
+  const navigateLearnPage = (cardId: string) => {
+    props.navigateLearnPage && props.navigateLearnPage(cardId)
+  }
+
   return (
     <tr key={props.elem._id} className={style.title_table_body}>
-      <td>{props.elem.question}</td>
+      <td onClick={() => navigateLearnPage(props.elem._id)}>{props.elem.question}</td>
       <td>{props.elem.answer}</td>
       <td>{new Date(Date.parse(props.elem.updated)).toLocaleDateString('ru-RU')}</td>
       <td>

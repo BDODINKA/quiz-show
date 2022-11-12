@@ -14,6 +14,7 @@ type PropsType = {
   changeRating?: (cardId: string, value: number) => void
   deleteHandler: (_id: string) => void
   editCardHandler: (updateCard: UpdateCardType) => void
+  navigateLearnPage: (cardId: string) => void
   userId?: string
 }
 
@@ -27,6 +28,9 @@ export const CardsTable = (props: PropsType) => {
   }
   const changeRatingHandler = (cardId: string, value: number) => {
     props.changeRating && props.changeRating(cardId, value)
+  }
+  const navigateLearnPage = (cardId: string) => {
+    props.navigateLearnPage && props.navigateLearnPage(cardId)
   }
 
   return (
@@ -51,6 +55,7 @@ export const CardsTable = (props: PropsType) => {
                 key={elem._id}
                 deleteHandler={_id => deleteHandler(_id)}
                 editCardHandler={updateCard => editCardHandler(updateCard)}
+                navigateLearnPage={cardId => navigateLearnPage(cardId)}
                 elem={elem}
                 userId={props.userId}
                 changeRating={value => changeRatingHandler(elem._id, value)}
