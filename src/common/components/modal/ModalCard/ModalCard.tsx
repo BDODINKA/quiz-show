@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 
+import { UpdateCardType } from '../../../../api/cardAPI'
 import { RootStateType } from '../../../../app/store'
 import { useAppSelector } from '../../../../utils/hooks/customHooks'
 import SuperButton from '../../SuperButton/SuperButton'
@@ -15,36 +16,39 @@ type PropsType = {
   setActive: (modalActive: boolean) => void
   title: string
   onSubmit: (question: string, answer: string) => void
+  question: string
+  answer: string
 }
 
 const selectorProgress = (state: RootStateType) => state.app.status
 
 export const ModalCard = (props: PropsType) => {
   const status = useAppSelector(selectorProgress)
-  const [select, setSelect] = useState('')
 
-  /*const redirect = () => {
-    props.onClose()
-  }*/
   const setActiveHandler = () => {
     props.setActive(false)
+    props.onClose && props.onClose()
   }
-  const selectHandler = () => {}
+
+  const initial = { question: props.question, answer: props.answer }
 
   return (
     <Formik
       enableReinitialize
-      initialValues={{ question: '', answer: '' }}
+      initialValues={initial}
       validationSchema={Yup.object({
-        text: Yup.string()
+        question: Yup.string()
+          .max(20, 'Max length should be max 20 Symbols')
+          .required('Field Required'),
+        answer: Yup.string()
           .max(20, 'Max length should be max 20 Symbols')
           .required('Field Required'),
       })}
       onSubmit={(values, { resetForm }) => {
-        props.onSubmit(values.question, values.answer)
         console.log(values)
-        setActiveHandler()
+        if (values.question || values.answer) props.onSubmit(values.question, values.answer)
         resetForm()
+        setActiveHandler()
       }}
     >
       {formik => (
@@ -57,11 +61,15 @@ export const ModalCard = (props: PropsType) => {
                 <option>Text</option>
                 <option>Picture</option>
               </select>
-              <form onSubmit={formik.handleSubmit} className={style.forma}>
+              <form
+                onSubmit={formik.handleSubmit}
+                className={style.forma}
+                onReset={formik.handleReset}
+              >
                 <SuperInput
                   type={'text'}
                   placeholder={'Question'}
-                  {...formik.getFieldProps('text')}
+                  {...formik.getFieldProps('question')}
                   error={formik.touched && formik.errors.question}
                   className={style.input}
                   spanClassName={style.spanError}
@@ -69,13 +77,14 @@ export const ModalCard = (props: PropsType) => {
                 <SuperInput
                   type={'text'}
                   placeholder={'Answer'}
-                  {...formik.getFieldProps('text')}
+                  {...formik.getFieldProps('answer')}
                   error={formik.touched && formik.errors.answer}
                   className={style.input}
                   spanClassName={style.spanError}
                 />
                 <div className={style.btn_block}>
                   <SuperButton
+                    type={'reset'}
                     title={'Cancel'}
                     className={style.btn_cancel}
                     onClick={setActiveHandler}
@@ -84,7 +93,7 @@ export const ModalCard = (props: PropsType) => {
                     type={'submit'}
                     disabled={status === 'progress'}
                     className={style.btn}
-                    title={'Add newCard'}
+                    title={'Save'}
                   />
                 </div>
 

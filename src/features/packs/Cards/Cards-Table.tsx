@@ -1,13 +1,9 @@
 import React from 'react'
 
-import { useLocation, useNavigate } from 'react-router-dom'
-
-import { CardsType } from '../../../api/cardAPI'
+import { CardsType, UpdateCardType } from '../../../api/cardAPI'
 import poligon from '../../../assets/img/Table/Polygon 2.svg'
-import RatingComponent from '../../../common/components/Rating/RatingComponent'
-import { PATH } from '../../../common/routes/const-routes'
 import { Nullable } from '../../../types/Nullable'
-import { ActionsButton } from '../Table/TableActionsButton/ActionsButton'
+import { CardsTableModal } from '../Table/CardsTableModal'
 import style from '../Table/TableCard.module.css'
 
 type PropsType = {
@@ -15,16 +11,22 @@ type PropsType = {
   minGrade?: Nullable<number>
   maxGrade?: Nullable<number>
   profileId?: string
-  changeRating?: (value: number) => void
+  changeRating?: (cardId: string, value: number) => void
+  deleteHandler: (_id: string) => void
+  editCardHandler: (updateCard: UpdateCardType) => void
+  userId?: string
 }
 
 export const CardsTable = (props: PropsType) => {
-  const navigate = useNavigate()
-  const location = useLocation()
+  const deleteHandler = (_id: string) => {
+    props.deleteHandler && props.deleteHandler(_id)
+  }
 
-  const navigateToLearn = (cardId: string) => {
-    sessionStorage.setItem('url', `${PATH.LEARN_PAGE}/${cardId}`)
-    navigate(`${PATH.LEARN_PAGE}/${cardId}`)
+  const editCardHandler = (updateCard: UpdateCardType) => {
+    props.editCardHandler && props.editCardHandler(updateCard)
+  }
+  const changeRatingHandler = (cardId: string, value: number) => {
+    props.changeRating && props.changeRating(cardId, value)
   }
 
   return (
@@ -39,28 +41,21 @@ export const CardsTable = (props: PropsType) => {
               <img style={{ marginLeft: '5px' }} src={poligon} alt="poligon" />
             </th>
             <th>Grade</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {props.cards &&
-            props.cards.map(elem => {
-              return (
-                <tr key={elem._id} className={style.title_table_body}>
-                  <td onClick={() => navigateToLearn(elem._id)}>{elem.question}</td>
-                  <td>{elem.answer}</td>
-                  <td>{new Date(Date.parse(elem.updated)).toLocaleDateString('ru-RU')}</td>
-                  <td>
-                    <RatingComponent
-                      changeRating={value => props.changeRating && props.changeRating(value)}
-                      valueRating={elem.grade}
-                    />
-                  </td>
-                  <td className={style.actions_button_my_pack}>
-                    {props.profileId === elem.user_id && <ActionsButton showBtn={false} />}
-                  </td>
-                </tr>
-              )
-            })}
+            props.cards.map(elem => (
+              <CardsTableModal
+                key={elem._id}
+                deleteHandler={_id => deleteHandler(_id)}
+                editCardHandler={updateCard => editCardHandler(updateCard)}
+                elem={elem}
+                userId={props.userId}
+                changeRating={value => changeRatingHandler(elem._id, value)}
+              />
+            ))}
         </tbody>
       </table>
     </>

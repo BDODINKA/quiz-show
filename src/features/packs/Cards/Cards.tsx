@@ -1,8 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useNavigate, useParams } from 'react-router-dom'
 
+import { AddCardType, GradeType, UpdateCardType } from '../../../api/cardAPI'
 import ArrowBackTo from '../../../common/components/ArrowBackTo/ArrowBackTo'
+import { ModalCard } from '../../../common/components/modal/ModalCard/ModalCard'
+import { ModalMain } from '../../../common/components/modal/ModalMain'
 import { Pagination } from '../../../common/components/pagination/pagination'
 import Search from '../../../common/components/Search/Search'
 import { PATH } from '../../../common/routes/const-routes'
@@ -22,7 +25,13 @@ import { TitleBlockTable } from '../TitleBlockTable/TitleBlockTable'
 import style from '../TitleBlockTable/TitleBlockTable.module.css'
 
 import dots from './../../../assets/img/Table/dots.svg'
-import { getCardsTC } from './cards-reducer'
+import {
+  addCardTC,
+  changeRatingCardTC,
+  deleteCardTC,
+  getCardsTC,
+  updateCardTC,
+} from './cards-reducer'
 import { CardsTable } from './Cards-Table'
 import s from './Cards.module.css'
 
@@ -40,13 +49,36 @@ export const Cards = () => {
   const cardsParams = useAppSelector(selectorCardsParams)
   const isLogin = useAppSelector(selectorIsLogin)
 
+  const [modalActive, setModalActive] = useState<boolean>(false)
+
   useEffect(() => {
     if (isLogin) {
       dispatch(getCardsTC(params.id))
     } else {
       navigate(PATH.LOGIN_PAGE)
     }
-  }, [isLogin, cardsParams, params])
+  }, [isLogin, dispatch])
+  // }, [isLogin, cardsParams, params])
+
+  const deleteCard = (_id: string) => {
+    dispatch(deleteCardTC(_id))
+  }
+
+  const editCard = (updateCard: UpdateCardType) => {
+    dispatch(updateCardTC(updateCard))
+  }
+
+  const setModalActiveHandler = () => {
+    setModalActive(true)
+  }
+
+  const addNewCard = (card: AddCardType) => {
+    dispatch(addCardTC(card.cardsPack_id, card.question, card.answer))
+  }
+
+  const changeRating = (cardId: string, value: number) => {
+    dispatch(changeRatingCardTC({ card_id: cardId, grade: value as GradeType }))
+  }
 
   return (
     <div className={style.packs_list_container}>
@@ -58,15 +90,19 @@ export const Cards = () => {
               titlePack={packName as string}
               titleButton={packUserId === profileId ? 'Add new card' : 'Learn to pack'}
               image={<img className={s.dots} src={dots} alt="dots" />}
-              onClick={() => {}}
+              onClick={setModalActiveHandler}
               style={style}
             />
             <Search onSearchChange={() => {}} value={''} className={s.search} />
             <CardsTable
               cards={cards}
+              userId={profileId}
               minGrade={minGrade}
               maxGrade={maxGrade}
               profileId={profileId}
+              deleteHandler={_id => deleteCard(_id)}
+              editCardHandler={updateCard => editCard(updateCard)}
+              changeRating={(cardId, value) => changeRating(cardId, value)}
             />
             <Pagination
               pageCount={cardsParams.pageCount}
@@ -84,12 +120,23 @@ export const Cards = () => {
               titlePack={packName as string}
               titleButton={'Add new card'}
               image={<img className={s.dots} src={dots} alt="dots" />}
-              onClick={() => {}}
+              onClick={setModalActiveHandler}
               style={style}
             />
           </>
         )}
       </div>
+      <ModalMain active={modalActive} setActive={setModalActive}>
+        <ModalCard
+          question={''}
+          answer={''}
+          setActive={setModalActive}
+          title={'Add New Card'}
+          onSubmit={(question, answer) =>
+            addNewCard({ cardsPack_id: params.id!, question, answer })
+          }
+        />
+      </ModalMain>
     </div>
   )
 }

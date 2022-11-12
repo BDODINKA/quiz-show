@@ -16,7 +16,7 @@ type PropsType = {
   userId?: string
 }
 
-export const TableModal = ({
+export const PacksTableModal = ({
   elem,
   deleteHandler,
   userId,
