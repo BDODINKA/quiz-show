@@ -5,6 +5,7 @@ import { ModalCard } from '../../../common/components/modal/ModalCard/ModalCard'
 import { ModalDelete } from '../../../common/components/modal/ModalDelete/ModalDelete'
 import { ModalMain } from '../../../common/components/modal/ModalMain'
 import { RatingComponent } from '../../../common/components/Rating/RatingComponent'
+import { useAppSelector } from '../../../utils/hooks/customHooks'
 
 import { ActionsButton } from './TableActionsButton/ActionsButton'
 import style from './TableCard.module.css'
@@ -13,12 +14,13 @@ type PropsType = {
   elem: CardsType
   profileId?: string
   changeRating?: (grade: number) => void
-  deleteHandler: (_id: string) => void
+  deleteHandler: (_id: string, packId: string) => void
   editCardHandler: (updateCard: UpdateCardType) => void
   userId?: string
 }
 
 export const CardsTableModal = (props: PropsType) => {
+  const isProgress = useAppSelector(state => state.app.status)
   const [modalActive, setModalActive] = useState(false)
   const [modalBtn, setModalBtn] = useState('')
 
@@ -35,6 +37,7 @@ export const CardsTableModal = (props: PropsType) => {
         <RatingComponent
           changeRating={value => changeRating(value)}
           valueRating={props.elem.grade}
+          disabled={isProgress === 'progress' ? true : false}
         />
       </td>
       <td className={style.actions_button_my_pack}>
@@ -60,7 +63,7 @@ export const CardsTableModal = (props: PropsType) => {
               title={'Delete Card'}
               name={props.elem.question}
               deleteCallback={() => {
-                props.deleteHandler(props.elem._id)
+                props.deleteHandler(props.elem._id, props.elem.cardsPack_id)
                 console.log(props.elem._id)
               }}
             />

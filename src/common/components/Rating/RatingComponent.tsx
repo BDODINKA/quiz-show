@@ -7,6 +7,7 @@ import { Nullable } from '../../../types/Nullable'
 type PropsType = {
   changeRating: (value: number) => void
   valueRating: number
+  disabled: boolean
 }
 
 export const RatingComponent = (props: PropsType) => {
@@ -17,6 +18,7 @@ export const RatingComponent = (props: PropsType) => {
   return (
     <div>
       <Rating
+        disabled={props.disabled}
         name="Rating"
         value={props.valueRating}
         defaultValue={0}

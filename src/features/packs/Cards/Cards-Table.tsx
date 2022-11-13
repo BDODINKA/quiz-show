@@ -12,14 +12,14 @@ type PropsType = {
   maxGrade?: Nullable<number>
   profileId?: string
   changeRating?: (cardId: string, value: number) => void
-  deleteHandler: (_id: string) => void
+  deleteHandler: (_id: string, packId: string) => void
   editCardHandler: (updateCard: UpdateCardType) => void
   userId?: string
 }
 
 export const CardsTable = (props: PropsType) => {
-  const deleteHandler = (_id: string) => {
-    props.deleteHandler && props.deleteHandler(_id)
+  const deleteHandler = (_id: string, packId: string) => {
+    props.deleteHandler && props.deleteHandler(_id, packId)
   }
 
   const editCardHandler = (updateCard: UpdateCardType) => {
@@ -49,7 +49,7 @@ export const CardsTable = (props: PropsType) => {
             props.cards.map(elem => (
               <CardsTableModal
                 key={elem._id}
-                deleteHandler={_id => deleteHandler(_id)}
+                deleteHandler={(_id, packId) => deleteHandler(_id, packId)}
                 editCardHandler={updateCard => editCardHandler(updateCard)}
                 elem={elem}
                 userId={props.userId}

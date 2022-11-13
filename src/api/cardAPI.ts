@@ -1,7 +1,7 @@
 import { axiosInstance } from './apiConfig/axiosConfig'
 
 export type CardsResponseType = {
-  cards: []
+  cards: CardsType[]
   packUserId: string
   packName: string
   packPrivate: boolean
@@ -16,16 +16,6 @@ export type CardsResponseType = {
   token: string
   tokenDeathTime: number
 }
-export type CardsParamsType = {
-  cardAnswer?: string
-  cardQuestion?: string
-  cardsPack_id?: string
-  min?: number
-  max?: number
-  sortCards?: string
-  page?: number
-  pageCount?: number
-}
 export type CardsType = {
   answer: string
   question: string
@@ -37,11 +27,22 @@ export type CardsType = {
   updated: string
   _id: string
 }
+export type CardsParamsType = {
+  cardAnswer?: string
+  cardQuestion?: string
+  cardsPack_id?: string
+  min?: number
+  max?: number
+  sortCards?: string
+  page?: number
+  pageCount?: number
+}
+
 export type AddCardType = {
   cardsPack_id: string
   question?: string
   answer?: string
-  grade?: GradeType
+  grade?: number
   shots?: number
   answerImg?: string
   questionImg?: string
@@ -54,7 +55,7 @@ export type UpdateCardType = {
   _id: string
   question?: string
   answer?: string
-  grade?: GradeType
+  grade?: number
   shots?: number
   answerImg?: string
   questionImg?: string
@@ -64,10 +65,19 @@ export type UpdateCardType = {
 
 export type GradeCardType = {
   card_id: string
-  grade: GradeType
+  grade: number
 }
 
-export type GradeType = 0 | 1 | 2 | 3 | 4 | 5
+export type GradeCardResponseType = {
+  updatedGrade: {
+    _id: string
+    cardsPack_id: string
+    card_id: string
+    user_id: string
+    grade: number
+    shots: number
+  }
+}
 
 export const cardAPI = {
   getCards(params: CardsParamsType) {

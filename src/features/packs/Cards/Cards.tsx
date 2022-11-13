@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import { useNavigate, useParams } from 'react-router-dom'
 
-import { AddCardType, GradeType, UpdateCardType } from '../../../api/cardAPI'
+import { AddCardType, UpdateCardType } from '../../../api/cardAPI'
 import ArrowBackTo from '../../../common/components/ArrowBackTo/ArrowBackTo'
 import { ModalCard } from '../../../common/components/modal/ModalCard/ModalCard'
 import { ModalMain } from '../../../common/components/modal/ModalMain'
@@ -60,8 +60,8 @@ export const Cards = () => {
   }, [isLogin, dispatch])
   // }, [isLogin, cardsParams, params])
 
-  const deleteCard = (_id: string) => {
-    dispatch(deleteCardTC(_id))
+  const deleteCard = (_id: string, packId: string) => {
+    dispatch(deleteCardTC(_id, packId))
   }
 
   const editCard = (updateCard: UpdateCardType) => {
@@ -77,7 +77,7 @@ export const Cards = () => {
   }
 
   const changeRating = (cardId: string, value: number) => {
-    dispatch(changeRatingCardTC({ card_id: cardId, grade: value as GradeType }))
+    dispatch(changeRatingCardTC({ card_id: cardId, grade: value }))
   }
 
   return (
@@ -100,7 +100,7 @@ export const Cards = () => {
               minGrade={minGrade}
               maxGrade={maxGrade}
               profileId={profileId}
-              deleteHandler={_id => deleteCard(_id)}
+              deleteHandler={(_id, packId) => deleteCard(_id, packId)}
               editCardHandler={updateCard => editCard(updateCard)}
               changeRating={(cardId, value) => changeRating(cardId, value)}
             />

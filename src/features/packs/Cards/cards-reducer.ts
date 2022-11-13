@@ -1,12 +1,12 @@
-import { AxiosError } from 'axios'
+import { AxiosError, AxiosResponse } from 'axios'
 
 import {
   cardAPI,
   CardsParamsType,
   CardsResponseType,
   CardsType,
+  GradeCardResponseType,
   GradeCardType,
-  GradeType,
   UpdateCardType,
 } from '../../../api/cardAPI'
 import { setAppErrorAC, setAppStatusAC } from '../../../app/app-reducer'
@@ -75,7 +75,6 @@ export const setCardsAC = (cards: CardsResponseType) => {
 export const setPackCardsIdAC = (cardId: string) => {
   return { type: 'CARDS/SET-PACK-CARDS-ID', cardId } as const
 }
-
 export const getCardsTC =
   (packId?: string): AppThunk =>
   (dispatch, getState: () => RootStateType) => {
@@ -83,9 +82,10 @@ export const getCardsTC =
 
     const param = packId ? { ...params, cardsPack_id: packId } : params
 
-    cardAPI.getCards(param as CardsParamsType).then(res => {
+    cardAPI.getCards(param as CardsParamsType).then((res: AxiosResponse<CardsResponseType>) => {
       dispatch(setCardsAC(res.data))
-      console.log(res.data.cards)
+      // dispatch(setAppErrorAC('Cards is setted'))
+      console.log(res)
     })
   }
 
@@ -94,7 +94,7 @@ export const addCardTC =
     cardsPack_id: string,
     question?: string,
     answer?: string,
-    grade?: GradeType,
+    grade?: number,
     shots?: number,
     answerImg?: string,
     questionImg?: string,
@@ -118,6 +118,7 @@ export const addCardTC =
       .then(res => {
         dispatch(getCardsTC(cardsPack_id))
         dispatch(setAppStatusAC('success'))
+        dispatch(setAppErrorAC('Card added'))
         console.log(res)
       })
       .catch((reason: AxiosError<{ error: string }>) => {
@@ -132,14 +133,15 @@ export const addCardTC =
   }
 
 export const deleteCardTC =
-  (_id: string): AppThunk =>
+  (_id: string, packId: string): AppThunk =>
   dispatch => {
     dispatch(setAppStatusAC('progress'))
     cardAPI
       .deleteCard(_id)
-      .then(res => {
-        dispatch(getCardsTC())
+      .then((res: AxiosResponse<CardsResponseType>) => {
+        dispatch(getCardsTC(packId))
         dispatch(setAppStatusAC('success'))
+        dispatch(setAppErrorAC('Card deleted'))
         console.log(res)
       })
       .catch((reason: AxiosError<{ error: string }>) => {
@@ -159,11 +161,10 @@ export const updateCardTC =
     dispatch(setAppStatusAC('progress'))
     cardAPI
       .updateCard(updateCard)
-      .then(res => {
-        if (res.status === 200) {
-          dispatch(getCardsTC())
-          dispatch(setAppStatusAC('success'))
-        }
+      .then((res: AxiosResponse<any>) => {
+        dispatch(getCardsTC(updateCard.cardsPack_id))
+        dispatch(setAppStatusAC('success'))
+        dispatch(setAppErrorAC('Card updated'))
         console.log(res)
       })
       .catch((reason: AxiosError<{ error: string }>) => {
@@ -184,9 +185,11 @@ export const changeRatingCardTC =
     dispatch(setAppStatusAC('progress'))
     cardAPI
       .changeRatingCard(grade)
-      .then(() => {
-        dispatch(getCardsTC())
+      .then((res: AxiosResponse<GradeCardResponseType>) => {
+        console.log(res.data)
+        dispatch(getCardsTC(res.data.updatedGrade.cardsPack_id))
         dispatch(setAppStatusAC('success'))
+        dispatch(setAppErrorAC('Rating changed'))
       })
       .catch((reason: AxiosError<{ error: string }>) => {
         if (reason.response?.data.error) {

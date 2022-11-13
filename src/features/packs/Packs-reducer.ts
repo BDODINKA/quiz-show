@@ -140,6 +140,7 @@ export const addPackTC =
       .then(() => {
         dispatch(getPacksTC())
         dispatch(setAppStatusAC('success'))
+        dispatch(setAppErrorAC('Pack added'))
       })
       .catch((reason: AxiosError<{ error: string }>) => {
         if (reason.response?.data.error) {
@@ -177,9 +178,21 @@ export const deletePackTC =
 export const updatePackTC =
   (text: string, deckCover: string, privates: boolean, cardId: string): AppThunk =>
   dispatch => {
+    dispatch(setAppStatusAC('progress'))
     cardPacksAPI
       .updatePack({ name: text, deckCover: '', private: privates, _id: cardId })
       .then(res => {
         dispatch(getPacksTC())
+        dispatch(setAppStatusAC('success'))
+        dispatch(setAppErrorAC('Pack updated'))
+      })
+      .catch((reason: AxiosError<{ error: string }>) => {
+        if (reason.response?.data.error) {
+          ServerError<string>(reason.response.data.error, setAppErrorAC, dispatch)
+          dispatch(setAppStatusAC('error'))
+        } else {
+          ServerError<string>(reason.message, setAppErrorAC, dispatch)
+          dispatch(setAppStatusAC('error'))
+        }
       })
   }
