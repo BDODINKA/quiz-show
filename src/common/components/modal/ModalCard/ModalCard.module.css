@@ -217,10 +217,9 @@
   text-decoration-line: underline;
 }
 .spanError {
-  position: fixed;
-  top: 120px;
-
   display: block;
+
+ margin-top: -20px;
 
   font-size: 20px;
   color: #eb5757;

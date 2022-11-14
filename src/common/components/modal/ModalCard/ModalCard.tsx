@@ -3,11 +3,11 @@ import React, { useState } from 'react'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 
-import { UpdateCardType } from '../../../../api/cardAPI'
 import { RootStateType } from '../../../../app/store'
 import { useAppSelector } from '../../../../utils/hooks/customHooks'
 import SuperButton from '../../SuperButton/SuperButton'
 import SuperInput from '../../SuperInputText/SuperInput'
+import { SuperSelect } from '../../SuperSelect/SuperSelect'
 
 import style from './ModalCard.module.css'
 
@@ -20,9 +20,12 @@ type PropsType = {
   answer: string
 }
 
+const selectArr = ['Text', 'Picture']
+
 const selectorProgress = (state: RootStateType) => state.app.status
 
 export const ModalCard = (props: PropsType) => {
+  const [value, onChangeOption] = useState(selectArr[0])
   const status = useAppSelector(selectorProgress)
 
   const setActiveHandler = () => {
@@ -57,10 +60,8 @@ export const ModalCard = (props: PropsType) => {
             <div className="container">
               <h2 className={style.title}>{props.title}</h2>
               {/*<div onClick={setActiveHandler}>{close_icon}</div>*/}
-              <select>
-                <option>Text</option>
-                <option>Picture</option>
-              </select>
+              <div>Choose a question format</div>
+              <SuperSelect options={selectArr} value={value} onChangeOption={onChangeOption} />
               <form
                 onSubmit={formik.handleSubmit}
                 className={style.forma}
