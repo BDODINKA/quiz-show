@@ -79,6 +79,10 @@ export const Cards = () => {
   const changeRating = (cardId: string, value: number) => {
     dispatch(changeRatingCardTC({ card_id: cardId, grade: value }))
   }
+  const navigateLearnPage = (cardId: string) => {
+    sessionStorage.setItem('url', `${PATH.LEARN_PAGE}/${cardId}`)
+    navigate(`${PATH.LEARN_PAGE}/${cardId}`)
+  }
 
   return (
     <div className={style.packs_list_container}>
@@ -103,6 +107,7 @@ export const Cards = () => {
               deleteHandler={(_id, packId) => deleteCard(_id, packId)}
               editCardHandler={updateCard => editCard(updateCard)}
               changeRating={(cardId, value) => changeRating(cardId, value)}
+              navigateLearnPage={cardId => navigateLearnPage(cardId)}
             />
             <Pagination
               pageCount={cardsParams.pageCount}

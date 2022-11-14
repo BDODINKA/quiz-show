@@ -10,6 +10,7 @@ export enum PATH {
   FRIENDS_CARD_PAGE = '/FriendsCard',
   MY_PACK_PAGE = '/MyPack',
   MY_CARD_PAGE = '/CardPage',
+  LEARN_PAGE = '/LearnPage',
 }
 
 // export const LoginPage = '/Login'

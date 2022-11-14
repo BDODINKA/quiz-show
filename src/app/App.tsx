@@ -14,6 +14,7 @@ import { ForgotPass } from '../features/forgot-pass/ForgotPass/ForgotPass'
 import Header from '../features/header/Header'
 import Login from '../features/login/Login'
 import { Cards } from '../features/packs/Cards/Cards'
+import Learn from '../features/packs/Learn/Learn'
 import { Packs } from '../features/packs/Packs'
 import { Profile } from '../features/profile/Profile'
 import { authMeTC } from '../features/profile/profile.reducer'
@@ -56,6 +57,7 @@ function App() {
           <Route path={PATH.NEW_PASS_PAGE} element={<CreateNewPassword />} />
           <Route path={PATH.PACK_CARDS_PAGE} element={<Packs />} />
           <Route path={`${PATH.MY_PACK_PAGE}/:id`} element={<Cards />} />
+          <Route path={`${PATH.LEARN_PAGE}/:id`} element={<Learn />} />
         </Routes>
         <CustomAlertSnackBar
           status={status}
