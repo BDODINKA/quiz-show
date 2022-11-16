@@ -42,7 +42,7 @@ export const CardsTableModal = (props: PropsType) => {
         <RatingComponent
           changeRating={value => changeRating(value)}
           valueRating={props.elem.grade}
-          disabled={isProgress === 'progress' ? true : false}
+          disabled={isProgress === 'progress'}
         />
       </td>
       <td className={style.actions_button_my_pack}>

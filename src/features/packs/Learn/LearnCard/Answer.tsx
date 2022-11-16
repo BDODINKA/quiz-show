@@ -6,6 +6,7 @@ import style from './Answer.module.css'
 
 type PropsType = {
   onChangeRadio?: (value: number) => void
+  answer: string
 }
 
 export const Answer = (props: PropsType) => {
@@ -17,7 +18,7 @@ export const Answer = (props: PropsType) => {
     <div>
       <div className={style.title}>
         <strong>{`Answer:`}</strong>
-        <p> {`This is how "This" works in JavaScript`}</p>
+        <p> {props.answer}</p>
       </div>
       <div className={style.radioBox}>
         <label form={'answer'}>Rate yourself:</label>

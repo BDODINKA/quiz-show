@@ -81,6 +81,7 @@ export const Cards = () => {
   }
   const navigateLearnPage = (cardId: string) => {
     sessionStorage.setItem('url', `${PATH.LEARN_PAGE}/${cardId}`)
+    sessionStorage.setItem('packId', `${params.id}`)
     navigate(`${PATH.LEARN_PAGE}/${cardId}`)
   }
 

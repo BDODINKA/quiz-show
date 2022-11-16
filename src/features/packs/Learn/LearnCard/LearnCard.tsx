@@ -3,7 +3,12 @@ import React, { useState } from 'react'
 import { Answer } from './Answer'
 import { Question } from './Question'
 
-export const LearnCard = () => {
+type PropsType = {
+  question: string
+  answer: string
+}
+
+export const LearnCard = (props: PropsType) => {
   const [showAnswer, setShowAnswer] = useState(false)
   const [answer, setAnswer] = useState(0)
 
@@ -24,11 +29,11 @@ export const LearnCard = () => {
   return (
     <div>
       {showAnswer ? (
-        <Question nextCardHandler={nextCard} question={`How "This" works in JavaScript?`}>
-          <Answer onChangeRadio={value => onChangeAnswer(value)} />
+        <Question nextCardHandler={nextCard} question={props.question}>
+          <Answer onChangeRadio={value => onChangeAnswer(value)} answer={props.answer} />
         </Question>
       ) : (
-        <Question showAnswer={showAnswerHandler} question={`How "This" works in JavaScript?`} />
+        <Question showAnswer={showAnswerHandler} question={props.question} />
       )}
     </div>
   )
