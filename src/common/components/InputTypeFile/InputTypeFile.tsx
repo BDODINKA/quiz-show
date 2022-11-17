@@ -16,6 +16,7 @@ type InputTypeFilePropsType = DefaultInputPropsType & {
   error?: string
   spanClassName?: string
   uploadImage: (data: string) => void
+  defaultImg: string
 }
 
 export const InputTypeFile: React.FC<InputTypeFilePropsType> = ({
@@ -31,7 +32,7 @@ export const InputTypeFile: React.FC<InputTypeFilePropsType> = ({
 
   ...restProps
 }) => {
-  const [image, setImage] = useState(defaultImage)
+  // const [image, setImage] = useState(defaultImage)
   const [isImageBroken, setIsImageBroken] = useState(false)
 
   const inputRef = useRef<HTMLInputElement>(null)
@@ -46,7 +47,8 @@ export const InputTypeFile: React.FC<InputTypeFilePropsType> = ({
 
       if (file.size < 4000000) {
         convertFileToBase64(file, (file64: string) => {
-          setImage(file64)
+          // setImage(file64)
+
           uploadImage(file64)
         })
       } else {
@@ -74,10 +76,12 @@ export const InputTypeFile: React.FC<InputTypeFilePropsType> = ({
   const finalSpanClassName = `${s.error} ${spanClassName ? spanClassName : ''}`
   const finalInputClassName = `${s.superInput} ${className ? className : error && s.errorInput}`
 
+  const defaultImg = restProps.defaultImg !== '' ? restProps.defaultImg : defaultImage
+
   return (
     <div>
       <img
-        src={isImageBroken ? defaultImage : image}
+        src={isImageBroken ? defaultImage : defaultImg}
         style={{ width: '100px' }}
         onError={errorHandler}
         className={finalInputClassName}

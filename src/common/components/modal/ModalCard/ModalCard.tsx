@@ -5,8 +5,7 @@ import { useParams } from 'react-router-dom'
 import * as Yup from 'yup'
 
 import { RootStateType } from '../../../../app/store'
-import { addCardTC } from '../../../../features/packs/Cards/cards-reducer'
-import { useAppDispatch, useAppSelector } from '../../../../utils/hooks/customHooks'
+import { useAppSelector } from '../../../../utils/hooks/customHooks'
 import { InputTypeFile } from '../../InputTypeFile/InputTypeFile'
 import SuperButton from '../../SuperButton/SuperButton'
 import SuperInput from '../../SuperInputText/SuperInput'
@@ -30,8 +29,10 @@ const selectorProgress = (state: RootStateType) => state.app.status
 export const ModalCard = (props: PropsType) => {
   const [optionValue, onChangeOption] = useState(selectArr[0])
   const status = useAppSelector(selectorProgress)
+
   const [questionImage, setQuestionImage] = useState('')
   const [answerImage, setAnswerImage] = useState('')
+
   const { cardPackId } = useParams<'cardPackId'>()
 
   //console.log(questionImage)
@@ -40,9 +41,18 @@ export const ModalCard = (props: PropsType) => {
   const setActiveHandler = () => {
     props.setActive(false)
     props.onClose && props.onClose()
+    setQuestionImage('')
+    setAnswerImage('')
   }
 
-  const initial = { question: props.question, answer: props.answer, questionImage, answerImage }
+  const initial = {
+    question: props.question,
+    answer: props.answer,
+    questionImage,
+    answerImage,
+  }
+
+  console.log(initial)
 
   return (
     <Formik
@@ -65,8 +75,8 @@ export const ModalCard = (props: PropsType) => {
       }
       onSubmit={(values, { resetForm }) => {
         console.log(values)
-        if (values.question || values.answer || values.questionImage || values.answerImage)
-          props.onSubmit(values.question, values.answer, values.questionImage, values.answerImage)
+        // if (values.question || values.answer || values.questionImage || values.answerImage)
+        props.onSubmit(values.question, values.answer, values.questionImage, values.answerImage)
         resetForm()
         setActiveHandler()
       }}
@@ -96,6 +106,7 @@ export const ModalCard = (props: PropsType) => {
                     error={formik.touched && formik.errors.questionImage}
                     spanClassName={style.spanError}
                     uploadImage={setQuestionImage}
+                    defaultImg={questionImage}
                   />
                 ) : (
                   <SuperInput
@@ -116,6 +127,7 @@ export const ModalCard = (props: PropsType) => {
                     error={formik.touched && formik.errors.answerImage}
                     spanClassName={style.spanError}
                     uploadImage={setAnswerImage}
+                    defaultImg={answerImage}
                   />
                 ) : (
                   <SuperInput

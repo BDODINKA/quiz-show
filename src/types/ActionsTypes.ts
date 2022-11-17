@@ -3,6 +3,7 @@ import { ActionsPaginationType } from '../common/components/pagination/paginatio
 import { ForgotActionsType } from '../features/forgot-pass/forgot-password.reducer'
 import { LoginActionType } from '../features/login/login-reducer'
 import { CardActionsType } from '../features/packs/Cards/cards-reducer'
+import { LearnActionsType } from '../features/packs/Learn/learn-reducer'
 import { CardPacksActionsType } from '../features/packs/Packs-reducer'
 import { ProfileActionType } from '../features/profile/profile.reducer'
 import { SignUpActionsType } from '../features/sign-up/signUpReducer'
@@ -16,3 +17,4 @@ export type ActionsType =
   | CardPacksActionsType
   | CardActionsType
   | ActionsPaginationType
+  | LearnActionsType

@@ -5,6 +5,7 @@ import { paginationReducer } from '../common/components/pagination/pagination-re
 import { forgotPasswordReducer } from '../features/forgot-pass/forgot-password.reducer'
 import { loginReducer } from '../features/login/login-reducer'
 import { cardsReducer } from '../features/packs/Cards/cards-reducer'
+import { learnReducer } from '../features/packs/Learn/learn-reducer'
 import { packsReducer } from '../features/packs/Packs-reducer'
 import { ProfileReducer } from '../features/profile/profile.reducer'
 import { signUpReducer } from '../features/sign-up/signUpReducer'
@@ -20,6 +21,7 @@ export const rootReducer = combineReducers({
   cardPacks: packsReducer,
   card: cardsReducer,
   pagination: paginationReducer,
+  learn: learnReducer,
 })
 
 export const store = createStore(rootReducer, applyMiddleware(thunk))
