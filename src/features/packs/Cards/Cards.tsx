@@ -35,6 +35,14 @@ import {
 import { CardsTable } from './Cards-Table'
 import s from './Cards.module.css'
 
+type addNewCardType = {
+  cardsPack_id: string
+  question: string
+  answer: string
+  questionImage: string
+  answerImage: string
+}
+
 export const Cards = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
@@ -72,8 +80,10 @@ export const Cards = () => {
     setModalActive(true)
   }
 
-  const addNewCard = (card: AddCardType) => {
-    dispatch(addCardTC(card.cardsPack_id, card.question, card.answer))
+  const addNewCard = (card: addNewCardType) => {
+    dispatch(
+      addCardTC(card.cardsPack_id, card.question, card.answer, card.questionImage, card.answerImage)
+    )
   }
 
   const changeRating = (cardId: string, value: number) => {
@@ -132,8 +142,8 @@ export const Cards = () => {
           answer={''}
           setActive={setModalActive}
           title={'Add New Card'}
-          onSubmit={(question, answer) =>
-            addNewCard({ cardsPack_id: params.id!, question, answer })
+          onSubmit={(question, answer, questionImage, answerImage) =>
+            addNewCard({ cardsPack_id: params.id!, question, answer, questionImage, answerImage })
           }
         />
       </ModalMain>
