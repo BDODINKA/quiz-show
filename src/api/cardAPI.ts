@@ -26,6 +26,10 @@ export type CardsType = {
   created: string
   updated: string
   _id: string
+  answerImg?: string
+  questionImg?: string
+  questionVideo?: string
+  answerVideo?: string
 }
 export type CardsParamsType = {
   cardAnswer?: string

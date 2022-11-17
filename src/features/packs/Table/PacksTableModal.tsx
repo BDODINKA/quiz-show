@@ -72,6 +72,7 @@ export const PacksTableModal = ({
           <ModalMain active={modalActive} setActive={setModalActive}>
             <ModalPack
               text={elem.name}
+              deckCover={elem.deckCover}
               setActive={setModalActive}
               title={'Edit pack'}
               onSubmit={(text, deckCover, privates) =>

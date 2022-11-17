@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 
 import { RootStateType } from '../../../../app/store'
 import { useAppSelector } from '../../../../utils/hooks/customHooks'
+import { InputTypeFile } from '../../InputTypeFile/InputTypeFile'
 import SuperButton from '../../SuperButton/SuperButton'
 import { SuperCheckbox } from '../../SuperCheckbox/SuperCheckbox'
 import SuperInput from '../../SuperInputText/SuperInput'
@@ -17,19 +18,21 @@ type PropsType = {
   title: string
   onSubmit: (text: string, deckCover: string, privates: boolean) => void
   text: string
+  deckCover: string | undefined
 }
 
 const selectorProgress = (state: RootStateType) => state.app.status
 
 export const ModalPack = (props: PropsType) => {
   const status = useAppSelector(selectorProgress)
+  const [deckCover, setDeckCover] = useState('')
 
   const setActiveHandler = () => {
     props.setActive(false)
     props.onClose && props.onClose
   }
 
-  const initial = { text: props.text, private: false }
+  const initial = { text: props.text, deckCover, private: false }
 
   return (
     <Formik
@@ -41,7 +44,8 @@ export const ModalPack = (props: PropsType) => {
           .required('Field Required'),
       })}
       onSubmit={(values, { resetForm }) => {
-        if (values.text) props.onSubmit(values.text, '', values.private)
+        if (values.text || values.deckCover)
+          props.onSubmit(values.text, values.deckCover, values.private)
         resetForm()
         setActiveHandler()
       }}
@@ -57,6 +61,11 @@ export const ModalPack = (props: PropsType) => {
                 className={style.forma}
                 onReset={formik.handleReset}
               >
+                <InputTypeFile
+                  type={'file'}
+                  {...formik.getFieldProps('questionImage')}
+                  uploadImage={setDeckCover}
+                />
                 <SuperInput
                   type={'text'}
                   placeholder={'New Pack Name'}

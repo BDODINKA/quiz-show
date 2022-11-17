@@ -129,6 +129,7 @@ export const Packs = () => {
             title={'Add New Pack'}
             onSubmit={(text, deckCover, privates) => addNewPack(text, deckCover, privates)}
             text={''}
+            deckCover={''}
           />
         </ModalMain>
       </div>

@@ -85,7 +85,7 @@ export const InputTypeFile: React.FC<InputTypeFilePropsType> = ({
       />
       <label>
         <input type={type} onChange={uploadHandler} style={{ display: 'none' }} ref={inputRef} />
-        <SuperButton title="Upload Image" onClick={selectFileHandler} type="submit" />
+        <SuperButton title="Upload Image" onClick={selectFileHandler} type={'button'} />
       </label>
       {error && <span className={finalSpanClassName}>{error}</span>}
     </div>
