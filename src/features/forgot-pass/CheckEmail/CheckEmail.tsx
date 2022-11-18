@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 
 import { RootStateType } from '../../../app/store'
 import SuperButton from '../../../common/components/SuperButton/SuperButton'
@@ -19,16 +19,12 @@ const CheckEmail = () => {
 
   const navigate = useNavigate()
 
-  useEffect(() => {
-    if (!email) {
-      navigate(PATH.LOGIN_PAGE)
-    }
-  }, [])
-
   const GoToLogin = () => {
     navigate(PATH.LOGIN_PAGE)
     dispatch(SetResetStateTC())
   }
+
+  if (!email) return <Navigate to={PATH.LOGIN_PAGE} />
 
   return (
     <div className={style.container}>

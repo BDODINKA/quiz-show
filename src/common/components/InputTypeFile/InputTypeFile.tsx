@@ -39,6 +39,7 @@ export const InputTypeFile: React.FC<InputTypeFilePropsType> = ({
 
   const selectFileHandler = () => {
     inputRef && inputRef.current?.click()
+    inputRef && inputRef.current?.value
   }
 
   const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -88,7 +89,13 @@ export const InputTypeFile: React.FC<InputTypeFilePropsType> = ({
         alt="image"
       />
       <label>
-        <input type={type} onChange={uploadHandler} style={{ display: 'none' }} ref={inputRef} />
+        <input
+          type={type}
+          onChange={uploadHandler}
+          style={{ display: 'none' }}
+          ref={inputRef}
+          value={''}
+        />
         <SuperButton title="Upload Image" onClick={selectFileHandler} type={'button'} />
       </label>
       {error && <span className={finalSpanClassName}>{error}</span>}

@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
-import { useNavigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 
 import { RootStateType } from '../../../app/store'
 import { PATH } from '../../../common/routes/const-routes'
@@ -13,15 +13,10 @@ const selectStatus = (state: RootStateType) => state.app.status
 const selectIsSend = (state: RootStateType) => state.forgotPass.isSend
 
 export const ForgotPass = () => {
-  const navigate = useNavigate()
   const status = useAppSelector(selectStatus)
   const IsSend = useAppSelector(selectIsSend)
 
-  useEffect(() => {
-    if (IsSend) {
-      navigate(PATH.CHECK_EMAIL_PAGE)
-    }
-  }, [IsSend])
+  if (IsSend) return <Navigate to={PATH.CHECK_EMAIL_PAGE} />
 
   return (
     <div>

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 
-import { useNavigate, useParams } from 'react-router-dom'
+import { Navigate, useParams } from 'react-router-dom'
 
 import ArrowBackTo from '../../../common/components/ArrowBackTo/ArrowBackTo'
 import { PATH } from '../../../common/routes/const-routes'
@@ -24,33 +24,39 @@ const Learn = () => {
   const isLogin = useAppSelector(selectorIsLogin)
   const card = useAppSelector(state => state.learn.card)
   const dispatch = useAppDispatch()
-  const navigate = useNavigate()
 
   useEffect(() => {
-    if (isLogin) {
-      if (cards !== null) {
-        dispatch(getCardTC(params.id as string))
-      } else {
-        const packId = sessionStorage.getItem('packId')
-
-        dispatch(getCardsTC(packId as string))
-      }
+    if (cards) {
+      console.log('if')
+      dispatch(getCardTC(params.id as string))
     } else {
-      navigate(PATH.LOGIN_PAGE)
+      console.log('else')
+      const packId = sessionStorage.getItem('packId')
+
+      dispatch(getCardsTC(packId as string))
     }
-  }, [isLogin, dispatch])
+  }, [cards, params])
 
   console.log(card)
+
+  const nextCard = () => {
+    sessionStorage.setItem('url', `${PATH.LEARN_PAGE}/${card && card._id}`)
+    dispatch(getCardTC())
+  }
+
+  if (!isLogin) return <Navigate to={PATH.LOGIN_PAGE} />
 
   return (
     <div className={style.packs_list_container}>
       <ArrowBackTo />
-      <div className={styles.box}>
-        <div className={styles.title}>
-          <h2>{`Learn ${packName}`}</h2>
+      {card ? (
+        <div className={styles.box}>
+          <div className={styles.title}>
+            <h2>{`Learn ${packName}`}</h2>
+          </div>
+          <LearnCard question={card.question} answer={card.answer} nextCard={nextCard} />
         </div>
-        <LearnCard question={card ? card.question : ''} answer={card ? card.answer : ''} />
-      </div>
+      ) : null}
     </div>
   )
 }

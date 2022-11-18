@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import { useLocation, useNavigate } from 'react-router-dom'
+import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 
 import { ModalMain } from '../../common/components/modal/ModalMain'
 import { ModalPack } from '../../common/components/modal/ModalPack/ModalPack'
@@ -45,13 +45,9 @@ export const Packs = () => {
   const [modalActive, setModalActive] = useState<boolean>(false)
 
   useEffect(() => {
-    if (!isLogin) {
-      navigate(PATH.LOGIN_PAGE)
-    } else {
-      sessionStorage.setItem('url', location.pathname)
-      dispatch(getPacksTC())
-    }
-  }, [isLogin, params])
+    sessionStorage.setItem('url', location.pathname)
+    dispatch(getPacksTC())
+  }, [params])
 
   const setPage = (value: number) => {
     dispatch(filterPageAC(value))
@@ -88,6 +84,8 @@ export const Packs = () => {
     sessionStorage.setItem('url', `${PATH.MY_PACK_PAGE}/${cardId}`)
     navigate(`${PATH.MY_PACK_PAGE}/${cardId}`)
   }
+
+  if (!isLogin) return <Navigate to={PATH.LOGIN_PAGE} />
 
   return (
     <div className={style.main}>
