@@ -3,7 +3,7 @@ import { Dispatch } from 'redux'
 
 import { ProfileType } from '../../api/authAPI'
 import { ChangeProfileType, LogOutType, profileAPI } from '../../api/profileAPI'
-import { setAppErrorAC, setAppStatusAC } from '../../app/app-reducer'
+import { setAppErrorAC, setAppStatusAC, setInitializeAC } from '../../app/app-reducer'
 import { AppThunk } from '../../types/HooksTypes'
 import { Nullable } from '../../types/Nullable'
 import { ServerError } from '../../utils/ServerErrorHandler'
@@ -67,6 +67,7 @@ export const authMeTC = (): AppThunk => dispatch => {
     .authMe()
     .then(res => {
       dispatch(loginAC(true))
+      dispatch(setInitializeAC(true))
       dispatch(setProfileAC(res.data))
       dispatch(setAppStatusAC('success'))
       dispatch(setAppErrorAC('You success Authorized'))
@@ -75,9 +76,11 @@ export const authMeTC = (): AppThunk => dispatch => {
       if (reason.response?.data.error) {
         ServerError<string>(reason.response.data.error, setAppErrorAC, dispatch)
         dispatch(setAppStatusAC(null))
+        dispatch(setInitializeAC(true))
       } else {
         ServerError<string>(reason.message, setAppErrorAC, dispatch)
         dispatch(setAppStatusAC(null))
+        dispatch(setInitializeAC(true))
       }
     })
 }

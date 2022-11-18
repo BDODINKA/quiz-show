@@ -6,6 +6,7 @@ import { Question } from './Question'
 type PropsType = {
   question: string
   answer: string
+  nextCard: () => void
 }
 
 export const LearnCard = (props: PropsType) => {
@@ -20,9 +21,12 @@ export const LearnCard = (props: PropsType) => {
   }
   const nextCard = () => {
     if (answer === 0) {
+      props.nextCard()
+      setShowAnswer(false)
       console.log('NextCard without Rating')
     } else {
-      console.log(answer)
+      props.nextCard()
+      setShowAnswer(false)
     }
   }
 

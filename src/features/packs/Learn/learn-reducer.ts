@@ -22,7 +22,7 @@ export const learnReducer = (state: learnStateType = learnState, action: LearnAc
   }
 }
 
-const setCardAC = (card: CardsType) => {
+export const setCardAC = (card: CardsType) => {
   return {
     type: 'LEARN/SET-LEARN-CARD',
     payload: card,
@@ -30,11 +30,17 @@ const setCardAC = (card: CardsType) => {
 }
 
 export const getCardTC =
-  (cardsId?: string): AppThunk =>
+  (cardId?: string): AppThunk =>
   (dispatch, getState: () => RootStateType) => {
     const cards = getState().card.cards
 
-    const random = getRandomCard(cards as CardsType[])
+    if (cardId) {
+      const card = cards && cards.filter(c => c._id === cardId)
 
-    dispatch(setCardAC(random))
+      card && dispatch(setCardAC(new Object(...card) as CardsType))
+    } else {
+      const random = getRandomCard(cards as CardsType[])
+
+      dispatch(setCardAC(random))
+    }
   }

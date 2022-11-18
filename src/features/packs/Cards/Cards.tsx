@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 
-import { useNavigate, useParams } from 'react-router-dom'
+import { Navigate, useNavigate, useParams } from 'react-router-dom'
 
-import { AddCardType, UpdateCardType } from '../../../api/cardAPI'
+import { UpdateCardType } from '../../../api/cardAPI'
 import ArrowBackTo from '../../../common/components/ArrowBackTo/ArrowBackTo'
 import { ModalCard } from '../../../common/components/modal/ModalCard/ModalCard'
 import { ModalMain } from '../../../common/components/modal/ModalMain'
@@ -60,12 +60,8 @@ export const Cards = () => {
   const [modalActive, setModalActive] = useState<boolean>(false)
 
   useEffect(() => {
-    if (isLogin) {
-      dispatch(getCardsTC(params.id))
-    } else {
-      navigate(PATH.LOGIN_PAGE)
-    }
-  }, [isLogin, dispatch])
+    dispatch(getCardsTC(params.id))
+  }, [dispatch])
   // }, [isLogin, cardsParams, params])
 
   const deleteCard = (_id: string, packId: string) => {
@@ -92,8 +88,11 @@ export const Cards = () => {
   const navigateLearnPage = (cardId: string) => {
     sessionStorage.setItem('url', `${PATH.LEARN_PAGE}/${cardId}`)
     sessionStorage.setItem('packId', `${params.id}`)
+    sessionStorage.setItem('cardId', `${cardId}`)
     navigate(`${PATH.LEARN_PAGE}/${cardId}`)
   }
+
+  if (!isLogin) return <Navigate to={PATH.LOGIN_PAGE} />
 
   return (
     <div className={style.packs_list_container}>

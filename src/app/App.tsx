@@ -7,7 +7,7 @@ import { HashRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { CustomAlertSnackBar } from '../common/components/CustomSnackBar/CustomAlertSnackBar'
 import PageNotFound from '../common/components/page-404/PageNotFound'
 import { PATH } from '../common/routes/const-routes'
-import { selectorError, selectorIsLogin, selectorStatus } from '../common/selectors/selectors'
+import { selectorError, selectorStatus } from '../common/selectors/selectors'
 import CheckEmail from '../features/forgot-pass/CheckEmail/CheckEmail'
 import CreateNewPassword from '../features/forgot-pass/CreateNewPass/CreateNewPassword'
 import { ForgotPass } from '../features/forgot-pass/ForgotPass/ForgotPass'
@@ -25,15 +25,13 @@ import { setAppErrorAC, setAppStatusAC } from './app-reducer'
 
 function App() {
   const dispatch = useAppDispatch()
-  const isLogin = useAppSelector(selectorIsLogin)
   const status = useAppSelector(selectorStatus)
   const message = useAppSelector(selectorError)
+  const isInitialize = useAppSelector(state => state.app.isInitialize)
 
   useEffect(() => {
-    if (!isLogin) {
-      dispatch(authMeTC())
-    }
-  }, [isLogin])
+    dispatch(authMeTC())
+  }, [])
 
   const closeHandlerSnackbar = () => {
     dispatch(setAppStatusAC(null))
@@ -43,28 +41,36 @@ function App() {
   return (
     <>
       <HashRouter>
-        <Header />
-        {status === 'progress' && <LinearProgress sx={{ width: '100%' }} />}
-        <Routes>
-          <Route path={'*'} element={<Navigate to={PATH.NOT_PAGE} />} />
-          <Route path={'/'} element={<Navigate to={PATH.LOGIN_PAGE} />} />
-          <Route path={PATH.LOGIN_PAGE} element={<Login />} />
-          <Route path={PATH.REGISTRATION_PAGE} element={<SignUp />} />
-          <Route path={PATH.PROFILE_PAGE} element={<Profile />} />
-          <Route path={PATH.NOT_PAGE} element={<PageNotFound />} />
-          <Route path={PATH.CHECK_EMAIL_PAGE} element={<CheckEmail />} />
-          <Route path={PATH.RESTORE_PASS_PAGE} element={<ForgotPass />} />
-          <Route path={PATH.NEW_PASS_PAGE} element={<CreateNewPassword />} />
-          <Route path={PATH.PACK_CARDS_PAGE} element={<Packs />} />
-          <Route path={`${PATH.MY_PACK_PAGE}/:id`} element={<Cards />} />
-          <Route path={`${PATH.LEARN_PAGE}/:id`} element={<Learn />} />
-        </Routes>
-        <CustomAlertSnackBar
-          status={status}
-          message={message}
-          autoHideDuration={6000}
-          closeHandlerSnackbar={closeHandlerSnackbar}
-        />
+        {!isInitialize ? (
+          <>
+            <Header /> {status === 'progress' && <LinearProgress sx={{ width: '100%' }} />}
+          </>
+        ) : (
+          <>
+            <Header />
+            {status === 'progress' && <LinearProgress sx={{ width: '100%' }} />}
+            <Routes>
+              <Route path={'*'} element={<Navigate to={PATH.NOT_PAGE} />} />
+              <Route path={'/'} element={<Navigate to={PATH.LOGIN_PAGE} />} />
+              <Route path={PATH.LOGIN_PAGE} element={<Login />} />
+              <Route path={PATH.REGISTRATION_PAGE} element={<SignUp />} />
+              <Route path={PATH.PROFILE_PAGE} element={<Profile />} />
+              <Route path={PATH.NOT_PAGE} element={<PageNotFound />} />
+              <Route path={PATH.CHECK_EMAIL_PAGE} element={<CheckEmail />} />
+              <Route path={PATH.RESTORE_PASS_PAGE} element={<ForgotPass />} />
+              <Route path={PATH.NEW_PASS_PAGE} element={<CreateNewPassword />} />
+              <Route path={PATH.PACK_CARDS_PAGE} element={<Packs />} />
+              <Route path={`${PATH.MY_PACK_PAGE}/:id`} element={<Cards />} />
+              <Route path={`${PATH.LEARN_PAGE}/:id`} element={<Learn />} />
+            </Routes>
+            <CustomAlertSnackBar
+              status={status}
+              message={message}
+              autoHideDuration={6000}
+              closeHandlerSnackbar={closeHandlerSnackbar}
+            />
+          </>
+        )}
       </HashRouter>
     </>
   )
