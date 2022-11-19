@@ -62,9 +62,11 @@ export const ModalPack = (props: PropsType) => {
                 onReset={formik.handleReset}
               >
                 <InputTypeFile
+                  title="Cover:"
                   type={'file'}
-                  {...formik.getFieldProps('questionImage')}
+                  {...formik.getFieldProps('deckCover')}
                   uploadImage={setDeckCover}
+                  defaultImg={deckCover}
                 />
                 <SuperInput
                   type={'text'}
