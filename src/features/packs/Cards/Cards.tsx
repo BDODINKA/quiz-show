@@ -104,7 +104,9 @@ export const Cards = () => {
               titlePack={packName as string}
               titleButton={packUserId === profileId ? 'Add new card' : 'Learn to pack'}
               image={<img className={s.dots} src={dots} alt="dots" />}
-              onClick={setModalActiveHandler}
+              onClick={() => {
+                packUserId === profileId ? setModalActiveHandler() : navigateLearnPage(cards[0]._id)
+              }}
               style={style}
             />
             <Search onSearchChange={() => {}} value={''} className={s.search} />
