@@ -135,7 +135,7 @@ export const Cards = () => {
             <ArrowBackTo />
             <TitleBlockTable
               titlePack={packName as string}
-              titleButton={'Add new card'}
+              titleButton={packUserId === profileId ? 'Add new card' : 'Learn to pack'}
               image={<img className={s.dots} src={dots} alt="dots" />}
               onClick={setModalActiveHandler}
               style={style}
