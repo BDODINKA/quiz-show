@@ -88,8 +88,7 @@ export const Cards = () => {
   const navigateLearnPage = (cardId: string) => {
     sessionStorage.setItem('url', `${PATH.LEARN_PAGE}/${cardId}`)
     sessionStorage.setItem('packId', `${params.id}`)
-    sessionStorage.setItem('cardId', `${cardId}`)
-    navigate(`${PATH.LEARN_PAGE}/${cardId}`)
+    navigate(`${PATH.LEARN_PAGE}/${params.id}/${cardId}`)
   }
 
   if (!isLogin) return <Navigate to={PATH.LOGIN_PAGE} />
@@ -137,7 +136,9 @@ export const Cards = () => {
               titlePack={packName as string}
               titleButton={packUserId === profileId ? 'Add new card' : 'Learn to pack'}
               image={<img className={s.dots} src={dots} alt="dots" />}
-              onClick={setModalActiveHandler}
+              onClick={() => {
+                packUserId === profileId && setModalActiveHandler()
+              }}
               style={style}
             />
           </>

@@ -35,9 +35,9 @@ export const getCardTC =
     const cards = getState().card.cards
 
     if (cardId) {
-      const card = cards && cards.filter(c => c._id === cardId)
+      const card = cards && cards.find(c => c._id === cardId)
 
-      card && dispatch(setCardAC(new Object(...card) as CardsType))
+      card && dispatch(setCardAC(card))
     } else {
       const random = getRandomCard(cards as CardsType[])
 
