@@ -57,9 +57,10 @@ export const CardsTableModal = (props: PropsType) => {
               setModalActive(true)
               setModalBtn('change')
             }}
+            learnHandler={() => navigateLearnPage(props.elem._id)}
           />
         ) : (
-          <ActionsButton showBtn={false} />
+          <ActionsButton showBtn={false} learnHandler={() => navigateLearnPage(props.elem._id)} />
         )}
         {modalActive && modalBtn === 'delete' ? (
           <ModalMain active={modalActive} setActive={setModalActive}>

@@ -53,7 +53,7 @@ export const PacksTableModal = ({
             }}
           />
         ) : (
-          <ActionsButton showBtn={false} />
+          <ActionsButton showBtn={false} learnHandler={() => navigateToCards(elem._id)} />
         )}
 
         {modalActive && modalBtn === 'delete' ? (
