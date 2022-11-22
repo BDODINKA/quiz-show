@@ -5,6 +5,7 @@ import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { ModalMain } from '../../common/components/modal/ModalMain'
 import { ModalPack } from '../../common/components/modal/ModalPack/ModalPack'
 import { Pagination } from '../../common/components/pagination/pagination'
+import { PortalModal } from '../../common/components/Portals/PortalModal'
 import { InitValueRangeSlider } from '../../common/constants/packsCard'
 import { maxPaginationPage } from '../../common/constants/pagination'
 import { PATH } from '../../common/routes/const-routes'
@@ -121,14 +122,18 @@ export const Packs = () => {
             maxPages={maxPaginationPage}
           />
         </div>
-        <ModalMain active={modalActive} setActive={setModalActive}>
-          <ModalPack
-            setActive={setModalActive}
-            title={'Add New Pack'}
-            onSubmit={(text, deckCover, privates) => addNewPack(text, deckCover, privates)}
-            text={''}
-          />
-        </ModalMain>
+        {modalActive && (
+          <PortalModal open={modalActive}>
+            <ModalMain active={modalActive} setActive={setModalActive}>
+              <ModalPack
+                setActive={setModalActive}
+                title={'Add New Pack'}
+                onSubmit={(text, deckCover, privates) => addNewPack(text, deckCover, privates)}
+                text={''}
+              />
+            </ModalMain>
+          </PortalModal>
+        )}
       </div>
     </div>
   )

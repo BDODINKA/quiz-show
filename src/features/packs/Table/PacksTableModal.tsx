@@ -4,6 +4,7 @@ import { CardPacks } from '../../../api/cardPacksAPI'
 import { ModalDelete } from '../../../common/components/modal/ModalDelete/ModalDelete'
 import { ModalMain } from '../../../common/components/modal/ModalMain'
 import { ModalPack } from '../../../common/components/modal/ModalPack/ModalPack'
+import { PortalModal } from '../../../common/components/Portals/PortalModal'
 
 import { ActionsButton } from './TableActionsButton/ActionsButton'
 import style from './TableCard.module.css'
@@ -15,7 +16,6 @@ type PropsType = {
   elem: CardPacks
   userId?: string
 }
-
 export const PacksTableModal = ({
   elem,
   deleteHandler,
@@ -56,30 +56,35 @@ export const PacksTableModal = ({
           <ActionsButton showBtn={false} learnHandler={() => navigateToCards(elem._id)} />
         )}
 
-        {modalActive && modalBtn === 'delete' ? (
-          <ModalMain active={modalActive} setActive={setModalActive}>
-            <ModalDelete
-              setActive={setModalActive}
-              title={'Delete Pack'}
-              name={elem.name}
-              deleteCallback={() => {
-                deleteHandler(elem._id)
-                console.log(elem._id)
-              }}
-            />
-          </ModalMain>
-        ) : (
-          <ModalMain active={modalActive} setActive={setModalActive}>
-            <ModalPack
-              text={elem.name}
-              setActive={setModalActive}
-              title={'Edit pack'}
-              onSubmit={(text, deckCover, privates) =>
-                changeFieldName(text, deckCover, privates, elem._id)
-              }
-            />
-          </ModalMain>
-        )}
+        {modalActive &&
+          (modalBtn === 'delete' ? (
+            <PortalModal open={modalActive}>
+              <ModalMain active={modalActive} setActive={setModalActive}>
+                <ModalDelete
+                  setActive={setModalActive}
+                  title={'Delete Pack'}
+                  name={elem.name}
+                  deleteCallback={() => {
+                    deleteHandler(elem._id)
+                    console.log(elem._id)
+                  }}
+                />
+              </ModalMain>
+            </PortalModal>
+          ) : (
+            <PortalModal open={modalActive}>
+              <ModalMain active={modalActive} setActive={setModalActive}>
+                <ModalPack
+                  text={elem.name}
+                  setActive={setModalActive}
+                  title={'Edit pack'}
+                  onSubmit={(text, deckCover, privates) =>
+                    changeFieldName(text, deckCover, privates, elem._id)
+                  }
+                />
+              </ModalMain>
+            </PortalModal>
+          ))}
       </td>
     </tr>
   )

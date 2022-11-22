@@ -34,7 +34,7 @@ export const ModalDelete = (props: PropsType) => {
       <div className={style.form}>
         <h2 className={style.title}>{props.title}</h2>
         {/*<div onClick={setActiveHandler}>{close_icon}</div>*/}
-        <div>Do you really want to remove ${props.name}? All cards will be deleted.</div>
+        <div>{`Do you really want to remove ${props.name}? All cards will be deleted.`}</div>
 
         <div className={style.btn_block}>
           <SuperButton title={'Cancel'} className={style.btn_cancel} onClick={setActiveHandler} />

@@ -13,17 +13,13 @@ export const PortalModal = (props: PropsType) => {
   const element = useMemo(() => {
     const divElement = document.createElement('div')
 
-    divElement.className = 'aaa'
+    divElement.className = 'modal_element'
 
     return divElement
   }, [])
 
   useEffect(() => {
-    console.log('use')
-
     if (modalRoot) {
-      console.log('modalRoot')
-
       modalRoot.appendChild(element)
     }
 
