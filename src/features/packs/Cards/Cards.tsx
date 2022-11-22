@@ -7,6 +7,7 @@ import ArrowBackTo from '../../../common/components/ArrowBackTo/ArrowBackTo'
 import { ModalCard } from '../../../common/components/modal/ModalCard/ModalCard'
 import { ModalMain } from '../../../common/components/modal/ModalMain'
 import { Pagination } from '../../../common/components/pagination/pagination'
+import { PortalModal } from '../../../common/components/Portals/PortalModal'
 import Search from '../../../common/components/Search/Search'
 import { PATH } from '../../../common/routes/const-routes'
 import {
@@ -144,17 +145,27 @@ export const Cards = () => {
           </>
         )}
       </div>
-      <ModalMain active={modalActive} setActive={setModalActive}>
-        <ModalCard
-          question={''}
-          answer={''}
-          setActive={setModalActive}
-          title={'Add New Card'}
-          onSubmit={(question, answer, questionImage, answerImage) =>
-            addNewCard({ cardsPack_id: params.id!, question, answer, questionImage, answerImage })
-          }
-        />
-      </ModalMain>
+      {modalActive && (
+        <PortalModal open={modalActive}>
+          <ModalMain active={modalActive} setActive={setModalActive}>
+            <ModalCard
+              question={''}
+              answer={''}
+              setActive={setModalActive}
+              title={'Add New Card'}
+              onSubmit={(question, answer, questionImage, answerImage) =>
+                addNewCard({
+                  cardsPack_id: params.id!,
+                  question,
+                  answer,
+                  questionImage,
+                  answerImage,
+                })
+              }
+            />
+          </ModalMain>
+        </PortalModal>
+      )}
     </div>
   )
 }
