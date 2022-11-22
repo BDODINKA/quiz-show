@@ -22,6 +22,7 @@ const initialState = {
   packName: null as Nullable<string>,
   packUserId: null as Nullable<string>,
   packPrivate: null as Nullable<boolean>,
+  packDeckCover: null as Nullable<string>,
   cardsTotalCount: null as Nullable<number>,
   minGrade: null as Nullable<number>,
   maxGrade: null as Nullable<number>,
@@ -50,6 +51,7 @@ export const cardsReducer = (state = initialState, action: CardActionsType): Ini
         cards: action.cards.cards,
         packUserId: action.cards.packUserId,
         packName: action.cards.packName,
+        packDeckCover: action.cards.packDeckCover,
         cardsTotalCount: action.cards.cardsTotalCount,
         minGrade: action.cards.minGrade,
         maxGrade: action.cards.maxGrade,
@@ -75,6 +77,7 @@ export const setCardsAC = (cards: CardsResponseType) => {
 export const setPackCardsIdAC = (cardId: string) => {
   return { type: 'CARDS/SET-PACK-CARDS-ID', cardId } as const
 }
+
 export const getCardsTC =
   (packId?: string): AppThunk =>
   (dispatch, getState: () => RootStateType) => {
@@ -85,7 +88,7 @@ export const getCardsTC =
     cardAPI.getCards(param as CardsParamsType).then((res: AxiosResponse<CardsResponseType>) => {
       dispatch(setCardsAC(res.data))
       // dispatch(setAppErrorAC('Cards is setted'))
-      console.log(res)
+      console.log(res.data)
     })
   }
 
@@ -157,7 +160,7 @@ export const updateCardTC =
     dispatch(setAppStatusAC('progress'))
     cardAPI
       .updateCard(updateCard)
-      .then((res: AxiosResponse<any>) => {
+      .then((res: AxiosResponse) => {
         dispatch(getCardsTC(updateCard.cardsPack_id))
         dispatch(setAppStatusAC('success'))
         dispatch(setAppErrorAC('Card updated'))

@@ -26,8 +26,6 @@ export const PacksTableModal = ({
   const [modalActive, setModalActive] = useState(false)
   const [modalBtn, setModalBtn] = useState('')
 
-  console.log(modalActive)
-
   return (
     <tr key={elem._id} className={style.title_table_body}>
       <td className={style.td}>

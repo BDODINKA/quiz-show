@@ -1,11 +1,14 @@
 import React, {
   ButtonHTMLAttributes,
-  ChangeEvent,
   DetailedHTMLProps,
   InputHTMLAttributes,
   useState,
 } from 'react'
 
+import { Formik } from 'formik'
+import * as Yup from 'yup'
+
+import style from '../modal/ModalCard/ModalCard.module.css'
 import SuperButton from '../SuperButton/SuperButton'
 import SuperInput from '../SuperInputText/SuperInput'
 
@@ -23,7 +26,6 @@ type PropsType = {
 const EditableSpan = (props: PropsType) => {
   const {
     classPlaceholder,
-    maxLength,
     classNameSpan,
     classNameInput,
     classNameBtn,
@@ -37,14 +39,14 @@ const EditableSpan = (props: PropsType) => {
 
   const editModeHandler = (value: boolean) => {
     setEditMode(value)
-    if (!value) {
-      if (text) changedText && changedText(text)
-    }
   }
 
-  const editTitleHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setText(e.currentTarget.value)
+  const editTitleHandler = (values: string) => {
+    setText(values)
+    changedText && changedText(values)
+    setEditMode(false)
   }
+
   const countTouchHandler = (count: number) => {
     if (count === 2) {
       setEditMode(true)
@@ -57,19 +59,34 @@ const EditableSpan = (props: PropsType) => {
   return editMode ? (
     <>
       <span className={classPlaceholder}>{placeholder}</span>
-      <SuperInput
-        value={text}
-        maxLength={maxLength}
-        className={classNameInput}
-        onChange={editTitleHandler}
-        onBlur={() => editModeHandler(false)}
-        autoFocus={true}
-      />
-      <SuperButton
-        title={titleBtn}
-        className={classNameBtn}
-        onClick={() => editModeHandler(false)}
-      />
+      <Formik
+        enableReinitialize
+        initialValues={{ field: props.text }}
+        validationSchema={Yup.object({
+          field: Yup.string()
+            .max(20, 'Max length should be max 20 Symbols')
+            .min(3, 'Max length should be min 3 Symbols')
+            .required('Field Required'),
+        })}
+        onSubmit={(values, { resetForm }) => {
+          editTitleHandler(values.field as string)
+          resetForm()
+        }}
+      >
+        {formik => (
+          <form onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
+            <SuperInput
+              type={'text'}
+              className={classNameInput}
+              {...formik.getFieldProps('field')}
+              error={formik.touched && formik.errors.field}
+              spanClassName={style.spanError}
+              autoFocus={true}
+            />
+            <SuperButton type={'submit'} title={titleBtn} className={classNameBtn} />
+          </form>
+        )}
+      </Formik>
     </>
   ) : (
     <span

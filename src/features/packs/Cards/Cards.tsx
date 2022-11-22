@@ -63,7 +63,6 @@ export const Cards = () => {
   useEffect(() => {
     dispatch(getCardsTC(params.id))
   }, [dispatch])
-  // }, [isLogin, cardsParams, params])
 
   const deleteCard = (_id: string, packId: string) => {
     dispatch(deleteCardTC(_id, packId))
