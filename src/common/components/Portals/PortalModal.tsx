@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from 'react'
 
 import { createPortal } from 'react-dom'
 
-const modalRoot = document.querySelector('#modal')
+const modalRoot = document.querySelector('body')
 
 type PropsType = {
   children: React.ReactNode
