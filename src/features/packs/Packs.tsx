@@ -79,10 +79,10 @@ export const Packs = () => {
     dispatch(addPackTC(text, deckCover, privates))
   }
 
-  const navigateToCards = (cardId: string) => {
-    dispatch(setPackCardsIdAC(cardId))
-    sessionStorage.setItem('url', `${PATH.MY_PACK_PAGE}/${cardId}`)
-    navigate(`${PATH.MY_PACK_PAGE}/${cardId}`)
+  const navigateToCards = (packId: string) => {
+    dispatch(setPackCardsIdAC(packId))
+    sessionStorage.setItem('url', `${PATH.MY_PACK_PAGE}/${packId}`)
+    navigate(`${PATH.MY_PACK_PAGE}/${packId}`)
   }
 
   if (!isLogin) return <Navigate to={PATH.LOGIN_PAGE} />
@@ -121,7 +121,8 @@ export const Packs = () => {
             maxPages={maxPaginationPage}
           />
         </div>
-        <ModalMain active={modalActive} setActive={setModalActive}>
+        {/*{modalActive && (*/}
+        <ModalMain open={modalActive} setActive={setModalActive}>
           <ModalPack
             setActive={setModalActive}
             title={'Add New Pack'}
@@ -130,6 +131,7 @@ export const Packs = () => {
             deckCover={''}
           />
         </ModalMain>
+        {/*)}*/}
       </div>
     </div>
   )

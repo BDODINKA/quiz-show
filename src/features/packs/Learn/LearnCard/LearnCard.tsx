@@ -23,7 +23,6 @@ export const LearnCard = (props: PropsType) => {
     if (answer === 0) {
       props.nextCard()
       setShowAnswer(false)
-      console.log('NextCard without Rating')
     } else {
       props.nextCard()
       setShowAnswer(false)

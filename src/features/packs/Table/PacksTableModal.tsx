@@ -15,7 +15,6 @@ type PropsType = {
   elem: CardPacks
   userId?: string
 }
-
 export const PacksTableModal = ({
   elem,
   deleteHandler,
@@ -25,8 +24,6 @@ export const PacksTableModal = ({
 }: PropsType) => {
   const [modalActive, setModalActive] = useState(false)
   const [modalBtn, setModalBtn] = useState('')
-
-  console.log(modalActive)
 
   return (
     <tr key={elem._id} className={style.title_table_body}>
@@ -62,11 +59,11 @@ export const PacksTableModal = ({
             }}
           />
         ) : (
-          <ActionsButton showBtn={false} />
+          <ActionsButton showBtn={false} learnHandler={() => navigateToCards(elem._id)} />
         )}
 
-        {modalActive && modalBtn === 'delete' ? (
-          <ModalMain active={modalActive} setActive={setModalActive}>
+        {modalBtn === 'delete' ? (
+          <ModalMain open={modalActive} setActive={setModalActive}>
             <ModalDelete
               setActive={setModalActive}
               title={'Delete Pack'}
@@ -78,7 +75,7 @@ export const PacksTableModal = ({
             />
           </ModalMain>
         ) : (
-          <ModalMain active={modalActive} setActive={setModalActive}>
+          <ModalMain open={modalActive} setActive={setModalActive}>
             <ModalPack
               text={elem.name}
               deckCover={elem.deckCover}

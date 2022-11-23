@@ -65,7 +65,6 @@ export const Cards = () => {
   useEffect(() => {
     dispatch(getCardsTC(params.id))
   }, [dispatch])
-  // }, [isLogin, cardsParams, params])
 
   const deleteCard = (_id: string, packId: string) => {
     dispatch(deleteCardTC(_id, packId))
@@ -91,8 +90,7 @@ export const Cards = () => {
   const navigateLearnPage = (cardId: string) => {
     sessionStorage.setItem('url', `${PATH.LEARN_PAGE}/${cardId}`)
     sessionStorage.setItem('packId', `${params.id}`)
-    sessionStorage.setItem('cardId', `${cardId}`)
-    navigate(`${PATH.LEARN_PAGE}/${cardId}`)
+    navigate(`${PATH.LEARN_PAGE}/${params.id}/${cardId}`)
   }
 
   if (!isLogin) return <Navigate to={PATH.LOGIN_PAGE} />
@@ -109,6 +107,9 @@ export const Cards = () => {
               image={<img className={s.dots} src={dots} alt="dots" />}
               deckCoverImg={packDeckCover!}
               onClick={setModalActiveHandler}
+              onClick={() => {
+                packUserId === profileId ? setModalActiveHandler() : navigateLearnPage(cards[0]._id)
+              }}
               style={style}
             />
             <Search onSearchChange={() => {}} value={''} className={s.search} />
@@ -137,25 +138,35 @@ export const Cards = () => {
             <ArrowBackTo />
             <TitleBlockTable
               titlePack={packName as string}
-              titleButton={'Add new card'}
+              titleButton={packUserId === profileId ? 'Add new card' : 'Learn to pack'}
               image={<img className={s.dots} src={dots} alt="dots" />}
-              onClick={setModalActiveHandler}
+              onClick={() => {
+                packUserId === profileId && setModalActiveHandler()
+              }}
               style={style}
             />
           </>
         )}
       </div>
-      <ModalMain active={modalActive} setActive={setModalActive}>
-        <ModalCard
-          question={''}
-          answer={''}
-          setActive={setModalActive}
-          title={'Add New Card'}
-          onSubmit={(question, answer, questionImage, answerImage) =>
-            addNewCard({ cardsPack_id: params.id!, question, answer, questionImage, answerImage })
-          }
-        />
-      </ModalMain>
+      {modalActive && (
+        <ModalMain open={modalActive} setActive={setModalActive}>
+          <ModalCard
+            question={''}
+            answer={''}
+            setActive={setModalActive}
+            title={'Add New Card'}
+            onSubmit={(question, answer, questionImage, answerImage) =>
+              addNewCard({
+                cardsPack_id: params.id!,
+                question,
+                answer,
+                questionImage,
+                answerImage,
+              })
+            }
+          />
+        </ModalMain>
+      )}
     </div>
   )
 }

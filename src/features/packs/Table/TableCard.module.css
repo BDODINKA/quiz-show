@@ -3,6 +3,7 @@
   flex-direction: column;
 
   border: 1px solid #efefef;
+  border-bottom: none;
   border-radius: 2px;
 }
 .tableImg img{

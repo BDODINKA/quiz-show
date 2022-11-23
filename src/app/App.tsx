@@ -61,7 +61,7 @@ function App() {
               <Route path={PATH.NEW_PASS_PAGE} element={<CreateNewPassword />} />
               <Route path={PATH.PACK_CARDS_PAGE} element={<Packs />} />
               <Route path={`${PATH.MY_PACK_PAGE}/:id`} element={<Cards />} />
-              <Route path={`${PATH.LEARN_PAGE}/:id`} element={<Learn />} />
+              <Route path={`${PATH.LEARN_PAGE}/:packId/:id`} element={<Learn />} />
             </Routes>
             <CustomAlertSnackBar
               status={status}
