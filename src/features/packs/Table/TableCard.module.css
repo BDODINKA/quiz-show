@@ -5,11 +5,15 @@
   border: 1px solid #efefef;
   border-radius: 2px;
 }
+.tableImg img{
+  width: 150px;
+  height: 35px;
+}
 
 .title_table_header,
 .title_table_body {
   display: grid;
-  grid-template-columns: 50% 10% 13% 15% 12%;
+  grid-template-columns: 30% 30% 13% 15% 12%;
   align-items: center;
   justify-items: center;
 

@@ -8,6 +8,7 @@ type PropsType = {
   titlePack: string
   titleButton: string
   image?: any
+  deckCoverImg?: string
   onClick: () => void
   style?: { [key: string]: string }
 }
@@ -18,14 +19,20 @@ export const TitleBlockTable: React.FC<PropsType> = ({
   image,
   onClick,
   style,
+  deckCoverImg,
 }) => {
   const finalClass = style ? style : styleDefault
 
   return (
     <div className={finalClass.packs_list_header}>
       <div className={finalClass.packs_list_name}>
-        {titlePack}
-        <span>{image}</span>
+        <div className={styleDefault.packTitle_and_button}>
+          <div className={styleDefault.titlePack}>{titlePack}</div>
+
+          <span>{image}</span>
+        </div>
+
+        <img className={styleDefault.deckCoverImg} src={deckCoverImg} />
       </div>
 
       <div>

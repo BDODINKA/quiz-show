@@ -40,3 +40,16 @@
   border-radius: 30px;
   box-shadow: 0 2px 5px rgb(54, 110, 255);
 }
+
+.deckCoverImg{
+  width: 170px;
+  height: 110px;
+}
+.packTitle_and_button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.titlePack {
+
+}

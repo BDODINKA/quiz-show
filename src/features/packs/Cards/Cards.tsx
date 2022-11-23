@@ -10,12 +10,14 @@ import { Pagination } from '../../../common/components/pagination/pagination'
 import Search from '../../../common/components/Search/Search'
 import { PATH } from '../../../common/routes/const-routes'
 import {
+  selectorCardPacks,
   selectorCards,
   selectorCardsParams,
   selectorCardsTotalCount,
   selectorIsLogin,
   selectorMaxGrade,
   selectorMinGrade,
+  selectorPackDeckCover,
   selectorPackName,
   selectorPackUserId,
   selectorProfileId,
@@ -56,6 +58,7 @@ export const Cards = () => {
   const profileId = useAppSelector(selectorProfileId)
   const cardsParams = useAppSelector(selectorCardsParams)
   const isLogin = useAppSelector(selectorIsLogin)
+  const packDeckCover = useAppSelector(selectorPackDeckCover)
 
   const [modalActive, setModalActive] = useState<boolean>(false)
 
@@ -104,6 +107,7 @@ export const Cards = () => {
               titlePack={packName as string}
               titleButton={packUserId === profileId ? 'Add new card' : 'Learn to pack'}
               image={<img className={s.dots} src={dots} alt="dots" />}
+              deckCoverImg={packDeckCover!}
               onClick={setModalActiveHandler}
               style={style}
             />

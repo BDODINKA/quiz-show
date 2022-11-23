@@ -82,7 +82,7 @@ export const InputTypeFile: React.FC<InputTypeFilePropsType> = ({
   const defaultImg = restProps.defaultImg !== '' ? restProps.defaultImg : defaultImage
 
   return (
-    <div>
+    <div className={s.container}>
       <div className={s.inputHeader}>
         <h4 className={s.inputTitle}>{title}</h4>
         <label>
@@ -103,12 +103,10 @@ export const InputTypeFile: React.FC<InputTypeFilePropsType> = ({
       </div>
       <img
         src={isImageBroken ? defaultImage : defaultImg}
-        //style={{ width: '100px' }}
         onError={errorHandler}
         className={`${finalInputClassName} ${s.inputImg}`}
         alt="image"
       />
-
       {error && <span className={finalSpanClassName}>{error}</span>}
     </div>
   )
