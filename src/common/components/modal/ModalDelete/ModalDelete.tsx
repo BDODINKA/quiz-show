@@ -26,7 +26,7 @@ export const ModalDelete = (props: PropsType) => {
       modal.style.opacity = '0'
       setTimeout(() => {
         props.setActive(false)
-      }, 1000)
+      }, 500)
     }
   }
 
@@ -43,7 +43,7 @@ export const ModalDelete = (props: PropsType) => {
         <div className={style.btn_block}>
           <SuperButton title={'Cancel'} className={style.btn_cancel} onClick={setActiveHandler} />
           <SuperButton
-            disabled={status === 'progress'}
+            disabled={!!status}
             className={style.btn}
             onClick={deleteHandler}
             title={props.title}
