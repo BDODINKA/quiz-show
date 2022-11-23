@@ -38,8 +38,8 @@
   width: auto;
 }
 .profileAva {
-  width: 36px;
-  height: 36px;
+  width: 36px !important;
+  height: 36px !important;
 
   background: url('../../assets/ProfileAva.jpg') no-repeat;
   background-size: cover;
