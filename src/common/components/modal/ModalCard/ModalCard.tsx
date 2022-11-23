@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 
 import { Formik } from 'formik'
-import { useParams } from 'react-router-dom'
 import * as Yup from 'yup'
 
 import { RootStateType } from '../../../../app/store'
@@ -33,16 +32,18 @@ export const ModalCard = (props: PropsType) => {
   const [questionImage, setQuestionImage] = useState('')
   const [answerImage, setAnswerImage] = useState('')
 
-  const { cardPackId } = useParams<'cardPackId'>()
-
-  //console.log(questionImage)
-  // console.log(cardPackId.id)
-
   const setActiveHandler = () => {
-    props.setActive(false)
-    props.onClose && props.onClose()
-    setQuestionImage('')
-    setAnswerImage('')
+    const modal = document.getElementById('overlay')
+
+    if (modal) {
+      modal.style.opacity = '0'
+      setTimeout(() => {
+        props.setActive(false)
+        props.onClose && props.onClose()
+        setQuestionImage('')
+        setAnswerImage('')
+      }, 1000)
+    }
   }
 
   const initial = {
@@ -51,8 +52,6 @@ export const ModalCard = (props: PropsType) => {
     questionImage,
     answerImage,
   }
-
-  console.log(initial)
 
   return (
     <Formik
@@ -74,8 +73,6 @@ export const ModalCard = (props: PropsType) => {
             })
       }
       onSubmit={(values, { resetForm }) => {
-        console.log(values)
-        // if (values.question || values.answer || values.questionImage || values.answerImage)
         props.onSubmit(values.question, values.answer, values.questionImage, values.answerImage)
         resetForm()
         setActiveHandler()
@@ -154,10 +151,6 @@ export const ModalCard = (props: PropsType) => {
                     title={'Save'}
                   />
                 </div>
-
-                {/*<div onClick={redirect} className={style.link}>
-                Comeback to PackList
-              </div>*/}
               </form>
             </div>
           </div>

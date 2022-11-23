@@ -25,8 +25,14 @@ export const ModalPack = (props: PropsType) => {
   const status = useAppSelector(selectorProgress)
 
   const setActiveHandler = () => {
-    props.setActive(false)
-    props.onClose && props.onClose
+    const modal = document.getElementById('overlay')
+
+    if (modal) {
+      modal.style.opacity = '0'
+      setTimeout(() => {
+        props.setActive(false)
+      }, 1000)
+    }
   }
 
   const initial = { text: props.text, private: false }

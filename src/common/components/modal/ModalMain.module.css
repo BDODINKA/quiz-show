@@ -1,6 +1,10 @@
-.modal {
-  pointer-events: none;
+.modal_active {
+  opacity: 0;
 
+  transition: all 0.5s ease-in;
+}
+
+.modal {
   position: fixed;
   top: 0;
   left: 0;
@@ -12,16 +16,7 @@
   width: 100vw;
   height: 100vh;
 
-  opacity: 0;
-  background-color: rgba(0,0,0,0.4);
-
-  transition: 0.5s;
-}
-
-.modal_active {
-  pointer-events: all;
-
-  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal__content {
