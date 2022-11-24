@@ -2,7 +2,8 @@ import React, { useEffect } from 'react'
 
 import { Navigate, useParams, useSearchParams } from 'react-router-dom'
 
-import ArrowBackTo from '../../../common/components/ArrowBackTo/ArrowBackTo'
+import { ArrowBackTo } from '../../../common/components/ArrowBackTo/ArrowBackTo'
+import { Wrapper } from '../../../common/components/Wrapper/Wrapper'
 import { PATH } from '../../../common/routes/const-routes'
 import {
   selectorCards,
@@ -17,7 +18,7 @@ import { getCardTC } from './learn-reducer'
 import styles from './Learn.module.css'
 import { LearnCard } from './LearnCard/LearnCard'
 
-const Learn = () => {
+export const Learn = () => {
   const params = useParams<'id'>()
   const [searchParams, setSearchParams] = useSearchParams({ id: params.id as string })
   const packName = useAppSelector(selectorPackName)
@@ -49,7 +50,7 @@ const Learn = () => {
   if (!isLogin) return <Navigate to={PATH.LOGIN_PAGE} />
 
   return (
-    <div className={style.packs_list_container}>
+    <Wrapper className={style.packs_list_container}>
       <ArrowBackTo />
       {card ? (
         <div className={styles.box}>
@@ -59,8 +60,6 @@ const Learn = () => {
           <LearnCard question={card.question} answer={card.answer} nextCard={nextCard} />
         </div>
       ) : null}
-    </div>
+    </Wrapper>
   )
 }
-
-export default Learn

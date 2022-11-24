@@ -6,9 +6,9 @@ import * as Yup from 'yup'
 import { CardsPackAddType } from '../../../../api/cardPacksAPI'
 import { RootStateType } from '../../../../app/store'
 import { useAppSelector } from '../../../../utils/hooks/customHooks'
-import SuperButton from '../../SuperButton/SuperButton'
+import { SuperButton } from '../../SuperButton/SuperButton'
 import { SuperCheckbox } from '../../SuperCheckbox/SuperCheckbox'
-import SuperInput from '../../SuperInputText/SuperInput'
+import { SuperInput } from '../../SuperInputText/SuperInput'
 
 import style from './ModalPack.module.css'
 

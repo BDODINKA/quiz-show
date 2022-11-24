@@ -2,7 +2,7 @@ import React from 'react'
 
 import { RootStateType } from '../../../../app/store'
 import { useAppSelector } from '../../../../utils/hooks/customHooks'
-import SuperButton from '../../SuperButton/SuperButton'
+import { SuperButton } from '../../SuperButton/SuperButton'
 
 import style from './ModalDelete.module.css'
 

@@ -14,7 +14,7 @@ type SuperInputTextPropsType = DefaultInputPropsType & {
   spanClassName?: string
 }
 
-const SuperInput: React.FC<SuperInputTextPropsType> = ({
+export const SuperInput: React.FC<SuperInputTextPropsType> = ({
   type, // достаём и игнорируем чтоб нельзя было задать другой тип инпута
   onChange,
   onChangeText,
@@ -45,7 +45,7 @@ const SuperInput: React.FC<SuperInputTextPropsType> = ({
       <input
         type={type}
         onChange={onChangeCallback}
-        onKeyPress={onKeyPressCallback}
+        onKeyDown={onKeyPressCallback}
         className={finalInputClassName}
         {...restProps}
       />
@@ -53,5 +53,3 @@ const SuperInput: React.FC<SuperInputTextPropsType> = ({
     </>
   )
 }
-
-export default SuperInput

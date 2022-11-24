@@ -4,29 +4,27 @@ import { Formik } from 'formik'
 import { NavLink } from 'react-router-dom'
 import * as Yup from 'yup'
 
-import { RootStateType } from '../../app/store'
 import hide_password from '../../assets/img/Login/close_eye_password.png'
 import show_password from '../../assets/img/Login/open_eye_password.png'
-import SuperButton from '../../common/components/SuperButton/SuperButton'
+import { SuperButton } from '../../common/components/SuperButton/SuperButton'
 import { SuperCheckbox } from '../../common/components/SuperCheckbox/SuperCheckbox'
-import SuperInput from '../../common/components/SuperInputText/SuperInput'
+import { SuperInput } from '../../common/components/SuperInputText/SuperInput'
 import { PATH } from '../../common/routes/const-routes'
+import { selectorStatus } from '../../common/selectors/selectors'
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/customHooks'
 
 import { loginTC } from './login-reducer'
 import s from './login.module.css'
 
-const selectStatus = (state: RootStateType) => state.app.status
-
-const SignInForm = () => {
+export const SignInForm = () => {
   const [shown, setShown] = useState<boolean>(true)
-  const status = useAppSelector(selectStatus)
+  const status = useAppSelector(selectorStatus)
 
   const dispatch = useAppDispatch()
 
   return (
     <div className={s.form_container}>
-      <div className={s.title_form}>Sing In</div>
+      <div className={s.title_form}>Sign In</div>
       <Formik
         initialValues={{ email: '', password: '', rememberMe: false }}
         validationSchema={Yup.object({
@@ -111,5 +109,3 @@ const SignInForm = () => {
     </div>
   )
 }
-
-export default SignInForm

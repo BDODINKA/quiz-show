@@ -2,14 +2,15 @@ import React, { useEffect } from 'react'
 
 import { useNavigate } from 'react-router-dom'
 
+import { Wrapper } from '../../common/components/Wrapper/Wrapper'
 import { PATH } from '../../common/routes/const-routes'
 import { selectorIsLogin } from '../../common/selectors/selectors'
 import { useAppSelector } from '../../utils/hooks/customHooks'
 
 import s from './login.module.css'
-import SingInForm from './SingInForm'
+import { SignInForm } from './SignInForm'
 
-const Login = () => {
+export const Login = () => {
   const isLoggedIn = useAppSelector(selectorIsLogin)
   const navigate = useNavigate()
 
@@ -22,12 +23,8 @@ const Login = () => {
   }, [isLoggedIn])
 
   return (
-    <div>
-      <div className={s.login_container}>
-        <SingInForm />
-      </div>
-    </div>
+    <Wrapper className={s.login_container}>
+      <SignInForm />
+    </Wrapper>
   )
 }
-
-export default Login

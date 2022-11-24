@@ -1,6 +1,6 @@
 import React, { ChangeEvent, DetailedHTMLProps, InputHTMLAttributes } from 'react'
 
-import SuperInput from '../SuperInputText/SuperInput'
+import { SuperInput } from '../SuperInputText/SuperInput'
 
 import style from './Search.module.css'
 
@@ -9,7 +9,7 @@ type PropsType = {
   value: string
 } & DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
-const Search = (props: PropsType) => {
+export const Search = (props: PropsType) => {
   const className = props.className
   const finalClassName = className ? `${style.search} ${className}` : style.search
 
@@ -25,5 +25,3 @@ const Search = (props: PropsType) => {
     </>
   )
 }
-
-export default Search
