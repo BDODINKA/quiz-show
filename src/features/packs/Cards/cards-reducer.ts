@@ -5,7 +5,7 @@ import {
   CardsParamsType,
   CardsResponseType,
   CardsType,
-  GradeCardResponseType,
+  ResponseGradeCardType,
   GradeCardType,
   UpdateCardType,
 } from '../../../api/cardAPI'
@@ -137,11 +137,10 @@ export const deleteCardTC =
     dispatch(setAppStatusAC('progress'))
     cardAPI
       .deleteCard(_id)
-      .then((res: AxiosResponse<CardsResponseType>) => {
+      .then(() => {
         dispatch(getCardsTC(packId))
         dispatch(setAppStatusAC('success'))
         dispatch(setAppErrorAC('Card deleted'))
-        console.log(res)
       })
       .catch((reason: AxiosError<{ error: string }>) => {
         if (reason.response?.data.error) {
@@ -184,7 +183,7 @@ export const changeRatingCardTC =
     dispatch(setAppStatusAC('progress'))
     cardAPI
       .changeRatingCard(grade)
-      .then((res: AxiosResponse<GradeCardResponseType>) => {
+      .then((res: AxiosResponse<ResponseGradeCardType>) => {
         console.log(res.data)
         dispatch(getCardsTC(res.data.updatedGrade.cardsPack_id))
         dispatch(setAppStatusAC('success'))

@@ -3,8 +3,9 @@ import { AxiosError } from 'axios'
 import {
   CardPacks,
   cardPacksAPI,
-  CardPacksResponseType,
+  CardsPackAddType,
   PacksParamsType,
+  ResponseCardPacksType,
 } from '../../api/cardPacksAPI'
 import { setAppErrorAC, setAppStatusAC } from '../../app/app-reducer'
 import { AppThunk } from '../../types/HooksTypes'
@@ -75,7 +76,7 @@ export const packsReducer = (
   }
 }
 
-export const setPacksAC = (cardPacks: CardPacksResponseType) => {
+export const setPacksAC = (cardPacks: ResponseCardPacksType) => {
   return { type: 'CRUD/SET-PACKS', cardPacks } as const
 }
 
@@ -131,11 +132,11 @@ export const getPacksTC = (): AppThunk => (dispatch, getState) => {
 }
 
 export const addPackTC =
-  (packName: string, deckCover: string, isPrivate: boolean): AppThunk =>
+  (pack: CardsPackAddType): AppThunk =>
   dispatch => {
     dispatch(setAppStatusAC('progress'))
     cardPacksAPI
-      .addPack(packName, deckCover, isPrivate)
+      .addPack(pack)
       .then(() => {
         dispatch(getPacksTC())
         dispatch(setAppStatusAC('success'))
@@ -175,15 +176,16 @@ export const deletePackTC =
   }
 
 export const updatePackTC =
-  (text: string, deckCover: string, privates: boolean, cardId: string): AppThunk =>
+  (pack: CardsPackAddType, cardId: string): AppThunk =>
   dispatch => {
     dispatch(setAppStatusAC('progress'))
     cardPacksAPI
-      .updatePack({ name: text, deckCover: '', private: privates, _id: cardId })
-      .then(() => {
+      .updatePack({ ...pack, _id: cardId })
+      .then(res => {
         dispatch(getPacksTC())
         dispatch(setAppStatusAC('success'))
         dispatch(setAppErrorAC('Pack updated'))
+        console.log(res)
       })
       .catch((reason: AxiosError<{ error: string }>) => {
         if (reason.response?.data.error) {

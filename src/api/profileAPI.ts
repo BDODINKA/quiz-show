@@ -1,5 +1,3 @@
-import { AxiosResponse } from 'axios'
-
 import { axiosInstance } from './apiConfig/axiosConfig'
 import { ProfileType } from './authAPI'
 
@@ -13,19 +11,19 @@ export type LogOutType = {
   error?: string
 }
 
-export type UpdateUserProfile = {
+export type UpdateProfileType = {
   updatedUser: ProfileType
   error?: string
 }
 
 export const profileAPI = {
-  async authMe() {
-    return axiosInstance.post<{}, AxiosResponse<ProfileType>>('auth/me', {})
+  authMe() {
+    return axiosInstance.post<ProfileType>('auth/me', {})
   },
-  async logOut() {
-    return axiosInstance.delete<AxiosResponse<LogOutType>>('auth/me', {})
+  logOut() {
+    return axiosInstance.delete<LogOutType>('auth/me', {})
   },
-  async updateProfile(data: ChangeProfileType) {
-    return axiosInstance.put<ChangeProfileType, AxiosResponse<UpdateUserProfile>>('auth/me', data)
+  updateProfile(data: ChangeProfileType) {
+    return axiosInstance.put<UpdateProfileType>('auth/me', data)
   },
 }

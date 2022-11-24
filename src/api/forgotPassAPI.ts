@@ -1,23 +1,22 @@
-import { AxiosResponse } from 'axios'
-
 import { axiosInstance } from './apiConfig/axiosConfig'
 
-export type forgotType = {
+export type ForgotType = {
   email: string
   from: string
   message: string
 }
 
-export type forgotNewPassword = {
+export type ForgotNewPasswordType = {
   password: string
   resetPasswordToken: string | undefined
 }
 
 export const forgotApi = {
-  sendFormToEmail(data: forgotType) {
-    return axiosInstance.post<forgotType, AxiosResponse>('auth/forgot', data)
+  sendFormToEmail(data: ForgotType) {
+    return axiosInstance.post<ForgotType>('auth/forgot', data)
   },
-  sendNewPassword(data: forgotNewPassword) {
-    return axiosInstance.post<forgotNewPassword>('auth/set-new-password', data)
+
+  sendNewPassword(data: ForgotNewPasswordType) {
+    return axiosInstance.post<ForgotNewPasswordType>('auth/set-new-password', data)
   },
 }
