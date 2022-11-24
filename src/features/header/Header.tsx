@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom'
 
 import { RootStateType } from '../../app/store'
 import logo from '../../assets/svg/logo-Incubator.svg'
+import { InputTypeFile } from '../../common/components/InputTypeFile/InputTypeFile'
 import SuperButton from '../../common/components/SuperButton/SuperButton'
 import { PATH } from '../../common/routes/const-routes'
 import { useAppSelector } from '../../utils/hooks/customHooks'
@@ -32,7 +33,14 @@ const Header = () => {
             <NavLink className={style.profileName} to={PATH.PROFILE_PAGE}>
               {name}
             </NavLink>
-            <div className={style.profileAva}>{avatar}</div>
+            <InputTypeFile
+              defaultImg={avatar as string}
+              className={style.profileAva}
+              uploadImage={() => {}}
+              hiddenBtn={true}
+            >
+              {avatar}
+            </InputTypeFile>
           </div>
         ) : (
           <NavLink to={PATH.LOGIN_PAGE}>

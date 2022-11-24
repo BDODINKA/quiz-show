@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { CardPacks } from '../../../api/cardPacksAPI'
+import { CardPacks, CardsPackAddType } from '../../../api/cardPacksAPI'
 import { Nullable } from '../../../types/Nullable'
 
 import poligon from './../../../assets/img/Table/Polygon 2.svg'
@@ -12,7 +12,7 @@ type PropsType = {
   userId?: string
   sort: (value: boolean) => void
   deleteHandler?: (id: string) => void
-  changeFieldName?: (text: string, deckCover: string, privates: boolean, cardId: string) => void
+  changeFieldName?: (pack: CardsPackAddType, cardId: string) => void
   navigateToCards?: (cardId: string) => void
 }
 export const TableCard = (props: PropsType) => {
@@ -29,8 +29,8 @@ export const TableCard = (props: PropsType) => {
     props.navigateToCards && props.navigateToCards(cardId)
   }
 
-  const setFieldName = (text: string, deckCover: string, privates: boolean, cardId: string) => {
-    props.changeFieldName && props.changeFieldName(text, deckCover, privates, cardId)
+  const setFieldName = (pack: CardsPackAddType, cardId: string) => {
+    props.changeFieldName && props.changeFieldName(pack, cardId)
   }
 
   return (
@@ -67,9 +67,7 @@ export const TableCard = (props: PropsType) => {
                   <PacksTableModal
                     key={elem._id}
                     deleteHandler={id => deleteHandler(id)}
-                    changeFieldName={(text, deckCover, privates, id) =>
-                      setFieldName(text, deckCover, privates, id)
-                    }
+                    changeFieldName={(pack, id) => setFieldName(pack, id)}
                     navigateToCards={cardId => navigateToCards(cardId)}
                     elem={elem}
                     userId={props.userId}

@@ -10,16 +10,7 @@ export type PacksParamsType = {
   user_id?: string // чьи колоды не обязательно, или придут все
   block?: boolean
 }
-export type CardPacksResponseType = {
-  cardPacks: CardPacks[]
-  page: number
-  pageCount: number
-  cardPacksTotalCount: number
-  minCardsCount: number
-  maxCardsCount: number
-  token: string
-  tokenDeathTime: number
-}
+
 export type CardPacks = {
   _id: string
   user_id: string
@@ -38,52 +29,36 @@ export type CardPacks = {
   __v: number
   deckCover?: string
 }
-export type DeleteType = {
-  deletedCardsPack: DeleteTypeDeletedCardsPack
+
+export type ResponseDeletePackType = {
+  deletedCardsPack: CardPacks
   token: string
   tokenDeathTime: number
 }
-export type DeleteTypeDeletedCardsPack = {
-  _id: string
-  user_id: string
-  user_name: string
-  private: boolean
-  name: string
-  path: string
-  grade: number
-  shots: number
-  deckCover: string
-  cardsCount: number
-  type: string
-  rating: number
-  created: string
-  updated: string
-  more_id: string
-  __v: number
+
+export type ResponseUpdatePackType = {
+  updatedCardsPack: CardPacks
+  token: string
+  tokenDeathTime: number
 }
+
+export type ResponseCardPacksType = {
+  cardPacks: CardPacks[]
+  page: number
+  pageCount: number
+  cardPacksTotalCount: number
+  minCardsCount: number
+  maxCardsCount: number
+  token: string
+  tokenDeathTime: number
+}
+
 export type AddPackType = {
-  newCardsPack: AddPackTypeNewCardsPack
+  newCardsPack: CardPacks
   token: string
   tokenDeathTime: number
 }
-export type AddPackTypeNewCardsPack = {
-  _id: string
-  user_id: string
-  user_name: string
-  private: boolean
-  name: string
-  path: string
-  grade: number
-  shots: number
-  deckCover: string
-  cardsCount: number
-  type: string
-  rating: number
-  created: string
-  updated: string
-  more_id: string
-  __v: number
-}
+
 export type CardsPackUpdateType = {
   _id: string
   name: string
@@ -91,34 +66,30 @@ export type CardsPackUpdateType = {
   private: boolean
 }
 
+export type CardsPackAddType = {
+  name: string
+  deckCover: string
+  private: boolean
+}
+
 export const cardPacksAPI = {
-  getPacks(data: PacksParamsType) {
-    return axiosInstance.get<CardPacksResponseType>('/cards/pack', {
-      params: {
-        ...data,
-      },
-    })
+  getPacks(params: PacksParamsType) {
+    return axiosInstance.get<ResponseCardPacksType>('/cards/pack', { params })
   },
 
-  addPack(packName: string, deckCover: string, isPrivate: boolean) {
-    return axiosInstance.post<AddPackType>('/cards/pack', {
-      cardsPack: {
-        name: packName,
-        deckCover: deckCover,
-        private: isPrivate,
-      },
-    })
+  addPack(cardsPack: CardsPackAddType) {
+    return axiosInstance.post<AddPackType>('/cards/pack', { cardsPack })
   },
 
   deletePack(id: string) {
-    return axiosInstance.delete<DeleteType>('/cards/pack', {
+    return axiosInstance.delete<ResponseDeletePackType>('/cards/pack', {
       params: {
-        id: id,
+        id,
       },
     })
   },
 
   updatePack(cardsPack: CardsPackUpdateType) {
-    return axiosInstance.put('/cards/pack', { cardsPack })
+    return axiosInstance.put<ResponseUpdatePackType>('/cards/pack', { cardsPack })
   },
 }

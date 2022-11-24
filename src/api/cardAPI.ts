@@ -1,5 +1,68 @@
 import { axiosInstance } from './apiConfig/axiosConfig'
 
+export type CardsType = {
+  _id: string
+  cardsPack_id: string
+  user_id: string
+  answer: string
+  question: string
+  grade: number
+  shots: number
+  questionImg: string
+  answerImg: string
+  comments: string
+  type: string
+  rating: number
+  more_id: string
+  created: string
+  updated: string
+  __v: number
+  answerVideo: string
+  questionVideo: string
+}
+
+export type CardsParamsType = {
+  cardAnswer?: string
+  cardQuestion?: string
+  cardsPack_id?: string
+  min?: number
+  max?: number
+  sortCards?: string
+  page?: number
+  pageCount?: number
+}
+
+export type AddAndUpdateCardType = {
+  cardsPack_id: string
+  _id?: string
+  question?: string
+  answer?: string
+  grade?: number
+  shots?: number
+  answerImg?: string
+  questionImg?: string
+  questionVideo?: string
+  answerVideo?: string
+}
+
+// export type UpdateCardType = {
+//   cardsPack_id: string
+//   _id: string
+//   question?: string
+//   answer?: string
+//   grade?: number
+//   shots?: number
+//   answerImg?: string
+//   questionImg?: string
+//   questionVideo?: string
+//   answerVideo?: string
+// }
+
+export type GradeCardType = {
+  card_id: string
+  grade: number
+}
+
 export type CardsResponseType = {
   cards: CardsType[]
   packUserId: string
@@ -16,95 +79,56 @@ export type CardsResponseType = {
   token: string
   tokenDeathTime: number
 }
-export type CardsType = {
-  answer: string
-  question: string
+
+export type ResponseUpdateCard = {
+  updatedCard: CardsType
+  token: string
+  tokenDeathTime: number
+}
+
+export type ResponseGradeCardType = {
+  updatedGrade: ResponseGradeUpdatedGrade
+  token: string
+  tokenDeathTime: number
+}
+
+export type ResponseGradeUpdatedGrade = {
+  _id: string
   cardsPack_id: string
+  card_id: string
+  user_id: string
   grade: number
   shots: number
-  user_id: string
+  more_id: string
   created: string
   updated: string
-  _id: string
-  answerImg?: string
-  questionImg?: string
-  questionVideo?: string
-  answerVideo?: string
-}
-export type CardsParamsType = {
-  cardAnswer?: string
-  cardQuestion?: string
-  cardsPack_id?: string
-  min?: number
-  max?: number
-  sortCards?: string
-  page?: number
-  pageCount?: number
+  __v: number
 }
 
-export type AddCardType = {
-  cardsPack_id: string
-  question?: string
-  answer?: string
-  grade?: number
-  shots?: number
-  answerImg?: string
-  questionImg?: string
-  questionVideo?: string
-  answerVideo?: string
-}
-
-export type UpdateCardType = {
-  cardsPack_id: string
-  _id: string
-  question?: string
-  answer?: string
-  grade?: number
-  shots?: number
-  answerImg?: string
-  questionImg?: string
-  questionVideo?: string
-  answerVideo?: string
-}
-
-export type GradeCardType = {
-  card_id: string
-  grade: number
-}
-
-export type GradeCardResponseType = {
-  updatedGrade: {
-    _id: string
-    cardsPack_id: string
-    card_id: string
-    user_id: string
-    grade: number
-    shots: number
-  }
+export type ResponseDeletedCard = {
+  deletedCard: CardsType
+  token: string
+  tokenDeathTime: number
 }
 
 export const cardAPI = {
   getCards(params: CardsParamsType) {
     return axiosInstance.get<CardsResponseType>('/cards/card', { params })
   },
-  addCard(card: AddCardType) {
-    return axiosInstance.post('/cards/card', { card: card })
+
+  addCard(card: AddAndUpdateCardType) {
+    return axiosInstance.post<CardsResponseType>('/cards/card', { card })
   },
 
-  deleteCard(_id: string) {
-    return axiosInstance.delete(`/cards/card?id=${_id}`)
+  deleteCard(id: string) {
+    return axiosInstance.delete<ResponseDeletedCard>(`/cards/card?id=${id}`)
   },
-  updateCard(updateCard: UpdateCardType) {
-    return axiosInstance.put('/cards/card', {
-      card: {
-        cardsPack_id: updateCard.cardsPack_id,
-        _id: updateCard._id,
-        question: updateCard.question,
-        answer: updateCard.answer,
-      },
-    })
+
+  updateCard(card: AddAndUpdateCardType) {
+    return axiosInstance.put<ResponseUpdateCard>('/cards/card', { card })
   },
+
   changeRatingCard(grade: GradeCardType) {
-    return axiosInstance.put('/cards/grade', grade)
+    return axiosInstance.put<ResponseGradeCardType>('/cards/grade', grade)
   },
 }

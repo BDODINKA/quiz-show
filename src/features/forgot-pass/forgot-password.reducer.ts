@@ -1,8 +1,7 @@
 import { AxiosError } from 'axios'
 
-import { forgotApi, forgotNewPassword } from '../../api/forgotPassAPI'
+import { forgotApi, ForgotNewPasswordType } from '../../api/forgotPassAPI'
 import { setAppErrorAC, setAppStatusAC } from '../../app/app-reducer'
-import { RootStateType } from '../../app/store'
 import { AppThunk } from '../../types/HooksTypes'
 import { ServerError } from '../../utils/ServerErrorHandler'
 
@@ -13,9 +12,9 @@ export type ForgotActionsType =
   | ReturnType<typeof SetResetStateAC>
   | ReturnType<typeof SetIsSendAC>
 
-export type ForgotStateType = typeof initialState
+export type ForgotStateType = typeof forgotState
 
-const initialState = {
+const forgotState = {
   sendFormToEmail: {
     email: '',
     from: 'Friday Team',
@@ -25,7 +24,7 @@ const initialState = {
 }
 
 export const forgotPasswordReducer = (
-  state: ForgotStateType = initialState,
+  state: ForgotStateType = forgotState,
   action: ForgotActionsType
 ): ForgotStateType => {
   switch (action.type) {
@@ -35,15 +34,18 @@ export const forgotPasswordReducer = (
         sendFormToEmail: { ...state.sendFormToEmail, email: action.payload.email },
       }
     }
+
     case 'FORGOT-PASS/SET-RESET-STATE': {
       return {
         ...state,
         sendFormToEmail: { ...state.sendFormToEmail, email: '' },
       }
     }
+
     case 'FORGOT-PASS/SET-IS-SEND': {
       return { ...state, isSend: action.payload.value }
     }
+
     default: {
       return state
     }
@@ -72,7 +74,7 @@ export const SetIsSendAC = (value: boolean) => {
 
 export const SendForgotFormTC =
   (values: string): AppThunk =>
-  (dispatch, getState: () => RootStateType) => {
+  (dispatch, getState) => {
     dispatch(SendForgotEmailAC(values))
     dispatch(setAppStatusAC('progress'))
     const data = getState().forgotPass.sendFormToEmail
@@ -101,8 +103,9 @@ export const SetResetStateTC = (): AppThunk => dispatch => {
   dispatch(setAppStatusAC(null))
   dispatch(setAppErrorAC(null))
 }
+
 export const SendNewPasswordFormTC =
-  (data: forgotNewPassword): AppThunk =>
+  (data: ForgotNewPasswordType): AppThunk =>
   dispatch => {
     dispatch(setAppStatusAC('progress'))
     forgotApi

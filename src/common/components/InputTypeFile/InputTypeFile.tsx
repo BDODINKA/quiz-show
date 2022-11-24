@@ -1,7 +1,6 @@
 import React, { ChangeEvent, DetailedHTMLProps, InputHTMLAttributes, useRef, useState } from 'react'
 
 import defaultImage from '../../../assets/img/defaultImage.jpg'
-import SuperButton from '../SuperButton/SuperButton'
 
 import s from './InputTypeFile.module.css'
 
@@ -17,7 +16,8 @@ type InputTypeFilePropsType = DefaultInputPropsType & {
   spanClassName?: string
   uploadImage: (data: string) => void
   defaultImg: string
-  title: string
+  hiddenBtn?: boolean
+  classNameBtn?: string
 }
 
 export const InputTypeFile: React.FC<InputTypeFilePropsType> = ({
@@ -29,8 +29,9 @@ export const InputTypeFile: React.FC<InputTypeFilePropsType> = ({
   error,
   className,
   spanClassName,
+  classNameBtn,
   uploadImage,
-  title,
+  hiddenBtn,
 
   ...restProps
 }) => {
@@ -39,10 +40,10 @@ export const InputTypeFile: React.FC<InputTypeFilePropsType> = ({
 
   const inputRef = useRef<HTMLInputElement>(null)
 
-  const selectFileHandler = () => {
-    inputRef && inputRef.current?.click()
-    inputRef && inputRef.current?.value
-  }
+  // const selectFileHandler = () => {
+  //   inputRef && inputRef.current?.click()
+  //   inputRef && inputRef.current?.value
+  // }
 
   const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length) {
@@ -78,14 +79,21 @@ export const InputTypeFile: React.FC<InputTypeFilePropsType> = ({
 
   const finalSpanClassName = `${s.error} ${spanClassName ? spanClassName : ''}`
   const finalInputClassName = `${s.superInput} ${className ? className : error && s.errorInput}`
+  const finalBtnClassName = `${classNameBtn ? s.btn && classNameBtn : s.btn}`
 
   const defaultImg = restProps.defaultImg !== '' ? restProps.defaultImg : defaultImage
 
   return (
-    <div className={s.container}>
-      <div className={s.inputHeader}>
-        <h4 className={s.inputTitle}>{title}</h4>
-        <label>
+    <>
+      <img
+        src={isImageBroken ? defaultImage : defaultImg}
+        style={{ width: '100px' }}
+        onError={errorHandler}
+        className={finalInputClassName}
+        alt="image"
+      />
+      {!hiddenBtn && (
+        <label style={{ height: '100px' }}>
           <input
             type={type}
             onChange={uploadHandler}
@@ -93,21 +101,10 @@ export const InputTypeFile: React.FC<InputTypeFilePropsType> = ({
             ref={inputRef}
             value={''}
           />
-          <SuperButton
-            className={s.inputButton}
-            title="Upload Image"
-            onClick={selectFileHandler}
-            type={'button'}
-          />
+          <span title="Upload Image" className={finalBtnClassName} />
         </label>
-      </div>
-      <img
-        src={isImageBroken ? defaultImage : defaultImg}
-        onError={errorHandler}
-        className={`${finalInputClassName} ${s.inputImg}`}
-        alt="image"
-      />
+      )}
       {error && <span className={finalSpanClassName}>{error}</span>}
-    </div>
+    </>
   )
 }

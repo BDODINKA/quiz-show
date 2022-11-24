@@ -1,7 +1,5 @@
 import React, { ChangeEvent } from 'react'
 
-import { Nullable } from '../../../types/Nullable'
-
 import style from './pagination.module.css'
 
 type PropsType = {

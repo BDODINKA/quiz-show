@@ -1,5 +1,3 @@
-import { AxiosResponse } from 'axios'
-
 import { axiosInstance } from './apiConfig/axiosConfig'
 
 export type SignUpUserType = {
@@ -14,6 +12,6 @@ export type ResponseType = {
 
 export const signUpAPI = {
   signUp(data: SignUpUserType) {
-    return axiosInstance.post<SignUpUserType, AxiosResponse<ResponseType>>('/auth/register', data)
+    return axiosInstance.post<ResponseType>('/auth/register', data)
   },
 }

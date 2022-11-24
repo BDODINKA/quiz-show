@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { CardPacks } from '../../../api/cardPacksAPI'
+import { CardPacks, CardsPackAddType } from '../../../api/cardPacksAPI'
 import { ModalDelete } from '../../../common/components/modal/ModalDelete/ModalDelete'
 import { ModalMain } from '../../../common/components/modal/ModalMain'
 import { ModalPack } from '../../../common/components/modal/ModalPack/ModalPack'
@@ -10,7 +10,7 @@ import style from './TableCard.module.css'
 
 type PropsType = {
   deleteHandler: (id: string) => void
-  changeFieldName: (text: string, deckCover: string, privates: boolean, id: string) => void
+  changeFieldName: (pack: CardsPackAddType, id: string) => void
   navigateToCards: (cardId: string) => void
   elem: CardPacks
   userId?: string
@@ -81,9 +81,7 @@ export const PacksTableModal = ({
               deckCover={elem.deckCover}
               setActive={setModalActive}
               title={'Edit pack'}
-              onSubmit={(text, deckCover, privates) =>
-                changeFieldName(text, deckCover, privates, elem._id)
-              }
+              onSubmit={pack => changeFieldName(pack, elem._id)}
             />
           </ModalMain>
         )}

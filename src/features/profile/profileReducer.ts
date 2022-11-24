@@ -9,33 +9,36 @@ import { Nullable } from '../../types/Nullable'
 import { ServerError } from '../../utils/ServerErrorHandler'
 import { loginAC } from '../login/login-reducer'
 
-export type ProfileStateType = typeof initialState
+export type ProfileStateType = typeof profileState
 export type ProfileActionType =
   | ReturnType<typeof setProfileAC>
   | ReturnType<typeof logOutAC>
   | ReturnType<typeof updateProfileAC>
 
-const initialState = {
+const profileState = {
   profile: null as Nullable<ProfileType>,
 }
 
-export const ProfileReducer = (
-  state: ProfileStateType = initialState,
+export const profileReducer = (
+  state: ProfileStateType = profileState,
   action: ProfileActionType
 ): ProfileStateType => {
   switch (action.type) {
     case 'PROFILE/SET-PROFILE': {
       return { ...state, profile: action.payload.profile }
     }
+
     case 'PROFILE/SET-LOGOUT': {
       return { ...state, profile: action.payload }
     }
+
     case 'PROFILE/UPDATE-PROFILE': {
       return {
         ...state,
         profile: action.payload,
       }
     }
+
     default: {
       return state
     }
@@ -48,12 +51,14 @@ export const setProfileAC = (profile: ProfileType) => {
     payload: { profile },
   } as const
 }
+
 const logOutAC = (data: null) => {
   return {
     type: 'PROFILE/SET-LOGOUT',
     payload: data,
   } as const
 }
+
 const updateProfileAC = (data: ProfileType) => {
   return {
     type: 'PROFILE/UPDATE-PROFILE',
@@ -84,6 +89,7 @@ export const authMeTC = (): AppThunk => dispatch => {
       }
     })
 }
+
 export const LogOutTC = (): AppThunk => dispatch => {
   dispatch(setAppStatusAC('progress'))
   profileAPI
@@ -104,6 +110,7 @@ export const LogOutTC = (): AppThunk => dispatch => {
       }
     })
 }
+
 export const UpdateUserProfile =
   (data: ChangeProfileType): AppThunk =>
   (dispatch: Dispatch) => {

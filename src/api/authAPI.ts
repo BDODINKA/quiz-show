@@ -1,5 +1,3 @@
-import { AxiosResponse } from 'axios'
-
 import { axiosInstance } from './apiConfig/axiosConfig'
 
 export type LoginFieldsType = {
@@ -7,6 +5,7 @@ export type LoginFieldsType = {
   password: string
   rememberMe: boolean
 }
+
 export type ProfileType = {
   _id: string
   email: string
@@ -24,9 +23,7 @@ export type ProfileType = {
 }
 
 export const authAPI = {
-  async login(data: LoginFieldsType) {
-    await new Promise(resolve => setTimeout(resolve, 500))
-
-    return axiosInstance.post<LoginFieldsType, AxiosResponse<ProfileType>>('auth/login', data)
+  login(data: LoginFieldsType) {
+    return axiosInstance.post<ProfileType>('auth/login', data)
   },
 }

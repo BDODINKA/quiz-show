@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 
+import { CardsPackAddType } from '../../api/cardPacksAPI'
 import { ModalMain } from '../../common/components/modal/ModalMain'
 import { ModalPack } from '../../common/components/modal/ModalPack/ModalPack'
 import { Pagination } from '../../common/components/pagination/pagination'
@@ -71,12 +72,12 @@ export const Packs = () => {
     setModalActive(true)
   }
 
-  const changeFieldName = (text: string, deckCover: string, privates: boolean, cardId: string) => {
-    dispatch(updatePackTC(text, deckCover, privates, cardId))
+  const changeFieldName = (pack: CardsPackAddType, cardId: string) => {
+    dispatch(updatePackTC(pack, cardId))
   }
 
-  const addNewPack = (text: string, deckCover: string, privates: boolean) => {
-    dispatch(addPackTC(text, deckCover, privates))
+  const addNewPack = (pack: CardsPackAddType) => {
+    dispatch(addPackTC(pack))
   }
 
   const navigateToCards = (packId: string) => {
@@ -108,9 +109,7 @@ export const Packs = () => {
             sort={setLastUpdate}
             deleteHandler={id => deleteMyPack(id)}
             navigateToCards={cardId => navigateToCards(cardId)}
-            changeFieldName={(text, deckCover, privates, cardId) =>
-              changeFieldName(text, deckCover, privates, cardId)
-            }
+            changeFieldName={(pack, cardId) => changeFieldName(pack, cardId)}
           />
           <Pagination
             pageCount={params.pageCount}
@@ -126,7 +125,7 @@ export const Packs = () => {
           <ModalPack
             setActive={setModalActive}
             title={'Add New Pack'}
-            onSubmit={(text, deckCover, privates) => addNewPack(text, deckCover, privates)}
+            onSubmit={pack => addNewPack(pack)}
             text={''}
             deckCover={''}
           />

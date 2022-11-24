@@ -1,17 +1,16 @@
 import { CardsType } from '../../../api/cardAPI'
-import { RootStateType } from '../../../app/store'
 import { AppThunk } from '../../../types/HooksTypes'
 import { Nullable } from '../../../types/Nullable'
 import { getRandomCard } from '../../../utils/getRandomCard'
 
-type learnStateType = typeof learnState
+type LearnStateType = typeof learnState
 export type LearnActionsType = ReturnType<typeof setCardAC>
 
 const learnState = {
   card: null as Nullable<CardsType>,
 }
 
-export const learnReducer = (state: learnStateType = learnState, action: LearnActionsType) => {
+export const learnReducer = (state: LearnStateType = learnState, action: LearnActionsType) => {
   switch (action.type) {
     case 'LEARN/SET-LEARN-CARD': {
       return { card: action.payload }
@@ -31,7 +30,7 @@ export const setCardAC = (card: CardsType) => {
 
 export const getCardTC =
   (cardId?: string): AppThunk =>
-  (dispatch, getState: () => RootStateType) => {
+  (dispatch, getState) => {
     const cards = getState().card.cards
 
     if (cardId) {

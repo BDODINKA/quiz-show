@@ -17,11 +17,7 @@ const Login = () => {
     if (isLoggedIn) {
       const url = sessionStorage.getItem('url')
 
-      if (url) {
-        navigate(url)
-      } else {
-        navigate(PATH.PACK_CARDS_PAGE)
-      }
+      navigate(url ? url : PATH.PACK_CARDS_PAGE)
     }
   }, [isLoggedIn])
 

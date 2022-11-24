@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { CardsType, UpdateCardType } from '../../../api/cardAPI'
+import { AddAndUpdateCardType, CardsType } from '../../../api/cardAPI'
 import { ModalCard } from '../../../common/components/modal/ModalCard/ModalCard'
 import { ModalDelete } from '../../../common/components/modal/ModalDelete/ModalDelete'
 import { ModalMain } from '../../../common/components/modal/ModalMain'
@@ -15,7 +15,7 @@ type PropsType = {
   profileId?: string
   changeRating?: (grade: number) => void
   deleteHandler: (_id: string, packId: string) => void
-  editCardHandler: (updateCard: UpdateCardType) => void
+  editCardHandler: (updateCard: AddAndUpdateCardType) => void
   navigateLearnPage: (cardId: string) => void
   userId?: string
 }
@@ -75,6 +75,8 @@ export const CardsTableModal = (props: PropsType) => {
         ) : (
           <ActionsButton showBtn={false} learnHandler={() => navigateLearnPage(props.elem._id)} />
         )}
+
+        {/*modal add  */}
         {modalBtn === 'delete' ? (
           <ModalMain open={modalActive} setActive={setModalActive}>
             <ModalDelete
@@ -94,12 +96,11 @@ export const CardsTableModal = (props: PropsType) => {
               setActive={setModalActive}
               title={'Edit card'}
               answer={props.elem.answer}
-              onSubmit={(question, answer) =>
+              onSubmit={card =>
                 props.editCardHandler({
+                  ...card,
                   cardsPack_id: props.elem.cardsPack_id,
                   _id: props.elem._id,
-                  question,
-                  answer,
                 })
               }
             />

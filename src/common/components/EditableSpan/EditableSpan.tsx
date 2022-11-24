@@ -95,7 +95,6 @@ const EditableSpan = (props: PropsType) => {
       onTouchStart={() => countTouchHandler(touchCount)}
     >
       {text}
-      <span></span>
     </span>
   )
 }

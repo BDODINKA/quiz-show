@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 
-import { UpdateCardType } from '../../../api/cardAPI'
+import { AddAndUpdateCardType } from '../../../api/cardAPI'
 import ArrowBackTo from '../../../common/components/ArrowBackTo/ArrowBackTo'
 import { ModalCard } from '../../../common/components/modal/ModalCard/ModalCard'
 import { ModalMain } from '../../../common/components/modal/ModalMain'
@@ -37,14 +37,6 @@ import {
 import { CardsTable } from './Cards-Table'
 import s from './Cards.module.css'
 
-type addNewCardType = {
-  cardsPack_id: string
-  question: string
-  answer: string
-  questionImage: string
-  answerImage: string
-}
-
 export const Cards = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
@@ -70,7 +62,7 @@ export const Cards = () => {
     dispatch(deleteCardTC(_id, packId))
   }
 
-  const editCard = (updateCard: UpdateCardType) => {
+  const editCard = (updateCard: AddAndUpdateCardType) => {
     dispatch(updateCardTC(updateCard))
   }
 
@@ -78,10 +70,8 @@ export const Cards = () => {
     setModalActive(true)
   }
 
-  const addNewCard = (card: addNewCardType) => {
-    dispatch(
-      addCardTC(card.cardsPack_id, card.question, card.answer, card.questionImage, card.answerImage)
-    )
+  const addNewCard = (card: AddAndUpdateCardType, cardsPack_id: string) => {
+    dispatch(addCardTC({ ...card, cardsPack_id }))
   }
 
   const changeRating = (cardId: string, value: number) => {
@@ -155,15 +145,7 @@ export const Cards = () => {
             answer={''}
             setActive={setModalActive}
             title={'Add New Card'}
-            onSubmit={(question, answer, questionImage, answerImage) =>
-              addNewCard({
-                cardsPack_id: params.id!,
-                question,
-                answer,
-                questionImage,
-                answerImage,
-              })
-            }
+            onSubmit={card => addNewCard(card, params.id!)}
           />
         </ModalMain>
       )}

@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 
+import { CardsPackAddType } from '../../../../api/cardPacksAPI'
 import { RootStateType } from '../../../../app/store'
 import { useAppSelector } from '../../../../utils/hooks/customHooks'
 import { InputTypeFile } from '../../InputTypeFile/InputTypeFile'
@@ -16,7 +17,7 @@ type PropsType = {
   onClose?: () => void
   setActive: (modalActive: boolean) => void
   title: string
-  onSubmit: (text: string, deckCover: string, privates: boolean) => void
+  onSubmit: (pack: CardsPackAddType) => void
   text: string
   deckCover: string | undefined
 }
@@ -50,8 +51,13 @@ export const ModalPack = (props: PropsType) => {
           .required('Field Required'),
       })}
       onSubmit={(values, { resetForm }) => {
-        if (values.text || values.deckCover)
-          props.onSubmit(values.text, values.deckCover, values.private)
+        if (values) {
+          props.onSubmit({
+            name: values.text,
+            private: values.private,
+            deckCover: values.deckCover,
+          })
+        }
         resetForm()
         setActiveHandler()
       }}
