@@ -106,7 +106,7 @@ export const Cards = () => {
               titleButton={packUserId === profileId ? 'Add new card' : 'Learn to pack'}
               image={<img className={s.dots} src={dots} alt="dots" />}
               deckCoverImg={packDeckCover!}
-              onClick={setModalActiveHandler}
+              //onClick={setModalActiveHandler}
               onClick={() => {
                 packUserId === profileId ? setModalActiveHandler() : navigateLearnPage(cards[0]._id)
               }}
