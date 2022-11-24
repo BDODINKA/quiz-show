@@ -1,4 +1,4 @@
-import { AxiosError, AxiosResponse } from 'axios'
+import { AxiosError } from 'axios'
 
 import {
   cardAPI,
@@ -36,7 +36,10 @@ const cardsState = {
   },
 }
 
-export type CardActionsType = ReturnType<typeof setCardsAC> | ReturnType<typeof setPackCardsIdAC>
+export type CardActionsType =
+  | ReturnType<typeof setCardsAC>
+  | ReturnType<typeof setPackCardsIdAC>
+  | ReturnType<typeof setPackNameAC>
 
 export const cardsReducer = (
   state: CardsStateType = cardsState,
@@ -46,6 +49,7 @@ export const cardsReducer = (
     case 'CARDS/SET-PACK-CARDS-ID': {
       return { ...state, params: { ...state.params, cardsPack_id: action.cardId } }
     }
+
     case 'CARDS/SET-CARDS': {
       return {
         ...state,
@@ -57,6 +61,9 @@ export const cardsReducer = (
         minGrade: action.cards.minGrade,
         maxGrade: action.cards.maxGrade,
       }
+    }
+    case 'CARDS/SET-PACK-NAME': {
+      return { ...state, packName: action.name }
     }
 
     default:
@@ -72,6 +79,10 @@ export const setPackCardsIdAC = (cardId: string) => {
   return { type: 'CARDS/SET-PACK-CARDS-ID', cardId } as const
 }
 
+export const setPackNameAC = (name: string) => {
+  return { type: 'CARDS/SET-PACK-NAME', name } as const
+}
+
 export const getCardsTC =
   (packId?: string): AppThunk =>
   (dispatch, getState) => {
@@ -83,7 +94,6 @@ export const getCardsTC =
       .getCards(param as CardsParamsType)
       .then(res => {
         dispatch(setCardsAC(res.data))
-        console.log(res.data)
       })
       .catch((reason: AxiosError<{ error: string }>) => {
         if (reason.response?.data.error) {
@@ -147,11 +157,11 @@ export const updateCardTC =
     dispatch(setAppStatusAC('progress'))
     cardAPI
       .updateCard(updateCard)
-      .then((res: AxiosResponse) => {
+      .then(res => {
+        console.log(res)
         dispatch(getCardsTC(updateCard.cardsPack_id))
         dispatch(setAppStatusAC('success'))
         dispatch(setAppErrorAC('Card updated'))
-        console.log(res)
       })
       .catch((reason: AxiosError<{ error: string }>) => {
         if (reason.response?.data.error) {

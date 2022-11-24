@@ -12,6 +12,8 @@ import { AppThunk } from '../../types/HooksTypes'
 import { Nullable } from '../../types/Nullable'
 import { ServerError } from '../../utils/ServerErrorHandler'
 
+import { setPackNameAC } from './Cards/cards-reducer'
+
 type PacksStateType = typeof packsState
 
 const packsState = {
@@ -192,6 +194,7 @@ export const updatePackTC =
       .updatePack({ ...pack, _id: cardId })
       .then(res => {
         dispatch(getPacksTC())
+        dispatch(setPackNameAC(pack.name))
         dispatch(setAppStatusAC('success'))
         dispatch(setAppErrorAC('Pack updated'))
         console.log(res)

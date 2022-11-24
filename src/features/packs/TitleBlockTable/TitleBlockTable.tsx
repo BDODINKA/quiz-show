@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { SuperButton } from '../../../common/components/SuperButton/SuperButton'
 
@@ -9,8 +9,12 @@ type PropsType = {
   titleButton: string
   image?: any
   deckCoverImg?: string
-  onClick: () => void
+      //onClick: () => void
+  onClick?: () => void
   style?: { [key: string]: string }
+  deleteModal?: () => void
+  navigateToLearn?: () => void
+  changeModal?: () => void
 }
 
 export const TitleBlockTable: React.FC<PropsType> = ({
@@ -20,8 +24,17 @@ export const TitleBlockTable: React.FC<PropsType> = ({
   onClick,
   style,
   deckCoverImg,
+  changeModal,
+  deleteModal,
+  navigateToLearn,
 }) => {
+  const [openMenu, setOpenMenu] = useState(false)
+
   const finalClass = style ? style : styleDefault
+
+  const open = () => {
+    setOpenMenu(!openMenu)
+  }
 
   return (
     <div className={finalClass.packs_list_header}>
@@ -33,6 +46,17 @@ export const TitleBlockTable: React.FC<PropsType> = ({
         </div>
 
         <img className={styleDefault.deckCoverImg} src={deckCoverImg} />
+        {titlePack}
+        <span onClick={open}>
+          {image}
+          {openMenu && (
+            <div onMouseLeave={open}>
+              <div onClick={changeModal}>change</div>
+              <div onClick={deleteModal}>delete</div>
+              <div onClick={navigateToLearn}>learn</div>
+            </div>
+          )}
+        </span>
       </div>
 
       <div>
