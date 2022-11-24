@@ -3,9 +3,12 @@ import React, { useEffect, useState } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 
 import { AddAndUpdateCardType } from '../../../api/cardAPI'
+import { CardsPackAddType } from '../../../api/cardPacksAPI'
 import { ArrowBackTo } from '../../../common/components/ArrowBackTo/ArrowBackTo'
 import { ModalCard } from '../../../common/components/modal/ModalCard/ModalCard'
+import { ModalDelete } from '../../../common/components/modal/ModalDelete/ModalDelete'
 import { ModalMain } from '../../../common/components/modal/ModalMain'
+import { ModalPack } from '../../../common/components/modal/ModalPack/ModalPack'
 import { Pagination } from '../../../common/components/pagination/pagination'
 import { Search } from '../../../common/components/Search/Search'
 import { Wrapper } from '../../../common/components/Wrapper/Wrapper'
@@ -22,6 +25,7 @@ import {
   selectorProfileId,
 } from '../../../common/selectors/selectors'
 import { useAppDispatch, useAppSelector } from '../../../utils/hooks/customHooks'
+import { deletePackTC, updatePackTC } from '../Packs-reducer'
 import { TitleBlockTable } from '../TitleBlockTable/TitleBlockTable'
 import style from '../TitleBlockTable/TitleBlockTable.module.css'
 
@@ -51,6 +55,7 @@ export const Cards = () => {
   const isLogin = useAppSelector(selectorIsLogin)
 
   const [modalActive, setModalActive] = useState<boolean>(false)
+  const [modalName, setModalName] = useState('')
 
   useEffect(() => {
     dispatch(getCardsTC(params.id))
@@ -75,6 +80,19 @@ export const Cards = () => {
   const changeRating = (cardId: string, value: number) => {
     dispatch(changeRatingCardTC({ card_id: cardId, grade: value }))
   }
+
+  const changePackTitle = (pack: CardsPackAddType) => {
+    dispatch(updatePackTC(pack, params.id as string))
+  }
+  const deletePack = () => {
+    dispatch(deletePackTC(params.id as string))
+    navigate(PATH.PACK_CARDS_PAGE)
+  }
+  const addModal = () => {
+    setModalActiveHandler()
+    setModalName('add')
+  }
+
   const navigateLearnPage = (cardId: string) => {
     sessionStorage.setItem('url', `${PATH.LEARN_PAGE}/${cardId}`)
     sessionStorage.setItem('packId', `${params.id}`)
@@ -90,13 +108,22 @@ export const Cards = () => {
           <>
             <ArrowBackTo />
             <TitleBlockTable
-              titlePack={packName as string}
+              titlePack={packName ? packName : ''}
               titleButton={packUserId === profileId ? 'Add new card' : 'Learn to pack'}
               image={<img className={s.dots} src={dots} alt="dots" />}
               onClick={() => {
-                packUserId === profileId ? setModalActiveHandler() : navigateLearnPage(cards[0]._id)
+                packUserId === profileId ? addModal() : navigateLearnPage(cards[0]._id)
               }}
               style={style}
+              navigateToLearn={() => navigateLearnPage(cards[0]._id)}
+              changeModal={() => {
+                setModalName('changeField')
+                setModalActiveHandler()
+              }}
+              deleteModal={() => {
+                setModalName('delete')
+                setModalActiveHandler()
+              }}
             />
             <Search onSearchChange={() => {}} value={''} className={s.search} />
             <CardsTable
@@ -125,16 +152,24 @@ export const Cards = () => {
             <TitleBlockTable
               titlePack={packName as string}
               titleButton={packUserId === profileId ? 'Add new card' : 'Learn to pack'}
-              image={<img className={s.dots} src={dots} alt="dots" />}
               onClick={() => {
-                packUserId === profileId && setModalActiveHandler()
+                packUserId === profileId && addModal()
+              }}
+              image={packUserId === profileId && <img className={s.dots} src={dots} alt="dots" />}
+              changeModal={() => {
+                setModalName('changeField')
+                setModalActiveHandler()
+              }}
+              deleteModal={() => {
+                setModalName('delete')
+                setModalActiveHandler()
               }}
               style={style}
             />
           </>
         )}
       </div>
-      {modalActive && (
+      {modalName === 'add' && (
         <ModalMain open={modalActive} setActive={setModalActive}>
           <ModalCard
             question={''}
@@ -142,6 +177,26 @@ export const Cards = () => {
             setActive={setModalActive}
             title={'Add New Card'}
             onSubmit={card => addNewCard(card, params.id!)}
+          />
+        </ModalMain>
+      )}
+      {modalName === 'changeField' && (
+        <ModalMain open={modalActive} setActive={setModalActive}>
+          <ModalPack
+            setActive={setModalActive}
+            title={packName as string}
+            onSubmit={pack => changePackTitle(pack)}
+            text={packName as string}
+          />
+        </ModalMain>
+      )}
+      {modalName === 'delete' && (
+        <ModalMain open={modalActive} setActive={setModalActive}>
+          <ModalDelete
+            setActive={setModalActive}
+            title={'delete'}
+            deleteCallback={deletePack}
+            name={packName as string}
           />
         </ModalMain>
       )}

@@ -5,6 +5,7 @@ import { ModalCard } from '../../../common/components/modal/ModalCard/ModalCard'
 import { ModalDelete } from '../../../common/components/modal/ModalDelete/ModalDelete'
 import { ModalMain } from '../../../common/components/modal/ModalMain'
 import { RatingComponent } from '../../../common/components/Rating/RatingComponent'
+import { selectorStatus } from '../../../common/selectors/selectors'
 import { useAppSelector } from '../../../utils/hooks/customHooks'
 
 import { ActionsButton } from './TableActionsButton/ActionsButton'
@@ -21,7 +22,8 @@ type PropsType = {
 }
 
 export const CardsTableModal = (props: PropsType) => {
-  const isProgress = useAppSelector(state => state.app.status)
+  const isProgress = useAppSelector(selectorStatus)
+
   const [modalActive, setModalActive] = useState(false)
   const [modalBtn, setModalBtn] = useState('')
 

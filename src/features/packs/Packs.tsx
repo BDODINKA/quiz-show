@@ -38,6 +38,7 @@ export const Packs = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const location = useLocation()
+
   const cardPacks = useAppSelector(selectorCardPacks)
   const totalCount = useAppSelector(selectorPacksTotalCount)
   const profileId = useAppSelector(selectorProfileId)
@@ -105,7 +106,7 @@ export const Packs = () => {
             paramsId={params.user_id}
           />
           <TableCard
-            cards={cardPacks}
+            packs={cardPacks}
             userId={profileId}
             sort={setLastUpdate}
             deleteHandler={id => deleteMyPack(id)}

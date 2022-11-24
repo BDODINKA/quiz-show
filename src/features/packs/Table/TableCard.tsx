@@ -8,7 +8,7 @@ import { PacksTableModal } from './PacksTableModal'
 import style from './TableCard.module.css'
 
 type PropsType = {
-  cards?: Nullable<CardPacks[]>
+  packs?: Nullable<CardPacks[]>
   userId?: string
   sort: (value: boolean) => void
   deleteHandler?: (id: string) => void
@@ -62,8 +62,8 @@ export const TableCard = (props: PropsType) => {
             </tr>
           </thead>
           <tbody>
-            {props.cards
-              ? props.cards.map(elem => (
+            {props.packs
+              ? props.packs.map(elem => (
                   <PacksTableModal
                     key={elem._id}
                     deleteHandler={id => deleteHandler(id)}
