@@ -1,5 +1,4 @@
 import { AppActionsType } from '../app/app-reducer'
-import { ActionsPaginationType } from '../common/components/pagination/pagination-reducer'
 import { ForgotActionsType } from '../features/forgot-pass/forgot-password.reducer'
 import { LoginActionType } from '../features/login/login-reducer'
 import { CardActionsType } from '../features/packs/Cards/cards-reducer'
@@ -16,5 +15,4 @@ export type ActionsType =
   | AppActionsType
   | CardPacksActionsType
   | CardActionsType
-  | ActionsPaginationType
   | LearnActionsType

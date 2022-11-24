@@ -84,7 +84,7 @@ export const cardAPI = {
     return axiosInstance.get<CardsResponseType>('/cards/card', { params })
   },
   addCard(card: AddCardType) {
-    return axiosInstance.post('/cards/card', { card: card })
+    return axiosInstance.post('/cards/card', { card })
   },
 
   deleteCard(_id: string) {
@@ -92,12 +92,13 @@ export const cardAPI = {
   },
   updateCard(updateCard: UpdateCardType) {
     return axiosInstance.put('/cards/card', {
-      card: {
-        cardsPack_id: updateCard.cardsPack_id,
-        _id: updateCard._id,
-        question: updateCard.question,
-        answer: updateCard.answer,
-      },
+      // card: {
+      //   cardsPack_id: updateCard.cardsPack_id,
+      //   _id: updateCard._id,
+      //   question: updateCard.question,
+      //   answer: updateCard.answer,
+      // },
+      card: updateCard,
     })
   },
   changeRatingCard(grade: GradeCardType) {

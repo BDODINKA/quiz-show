@@ -92,12 +92,16 @@ export type CardsPackUpdateType = {
 }
 
 export const cardPacksAPI = {
-  getPacks(data: PacksParamsType) {
-    return axiosInstance.get<CardPacksResponseType>('/cards/pack', {
-      params: {
-        ...data,
-      },
-    })
+  // getPacks(data: PacksParamsType) {
+  //   return axiosInstance.get<CardPacksResponseType>('/cards/pack', {
+  //     params: {
+  //       ...data,
+  //     },
+  //   })
+  // },
+
+  getPacks(params: PacksParamsType) {
+    return axiosInstance.get<CardPacksResponseType>('/cards/pack', { params })
   },
 
   addPack(packName: string, deckCover: string, isPrivate: boolean) {

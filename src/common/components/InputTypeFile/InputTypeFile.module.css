@@ -22,3 +22,11 @@
 /*.error {*/
 /*  !*color: black;*!*/
 /*}*/
+.btn {
+  display: flex;
+
+  width: 100px;
+  height: 20px;
+
+  background-color: black;
+}

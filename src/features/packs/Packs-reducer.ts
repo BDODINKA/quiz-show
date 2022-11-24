@@ -7,7 +7,6 @@ import {
   PacksParamsType,
 } from '../../api/cardPacksAPI'
 import { setAppErrorAC, setAppStatusAC } from '../../app/app-reducer'
-import { RootStateType } from '../../app/store'
 import { AppThunk } from '../../types/HooksTypes'
 import { Nullable } from '../../types/Nullable'
 import { ServerError } from '../../utils/ServerErrorHandler'
@@ -108,7 +107,7 @@ export const filterResetAC = () => {
   return { type: 'CARD-PACKS/SET-RESET-FILTER' } as const
 }
 
-export const getPacksTC = (): AppThunk => (dispatch, getState: () => RootStateType) => {
+export const getPacksTC = (): AppThunk => (dispatch, getState) => {
   dispatch(setAppStatusAC('progress'))
 
   const params = getState().cardPacks.params
@@ -181,7 +180,7 @@ export const updatePackTC =
     dispatch(setAppStatusAC('progress'))
     cardPacksAPI
       .updatePack({ name: text, deckCover: '', private: privates, _id: cardId })
-      .then(res => {
+      .then(() => {
         dispatch(getPacksTC())
         dispatch(setAppStatusAC('success'))
         dispatch(setAppErrorAC('Pack updated'))

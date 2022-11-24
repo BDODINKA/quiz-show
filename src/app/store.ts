@@ -1,7 +1,6 @@
 import { combineReducers, createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 
-import { paginationReducer } from '../common/components/pagination/pagination-reducer'
 import { forgotPasswordReducer } from '../features/forgot-pass/forgot-password.reducer'
 import { loginReducer } from '../features/login/login-reducer'
 import { cardsReducer } from '../features/packs/Cards/cards-reducer'
@@ -20,7 +19,6 @@ export const rootReducer = combineReducers({
   app: appReducer,
   cardPacks: packsReducer,
   card: cardsReducer,
-  pagination: paginationReducer,
   learn: learnReducer,
 })
 
