@@ -5,19 +5,17 @@ import {
   CardsParamsType,
   CardsResponseType,
   CardsType,
-  ResponseGradeCardType,
   GradeCardType,
-  UpdateCardType,
+  AddAndUpdateCardType,
 } from '../../../api/cardAPI'
 import { setAppErrorAC, setAppStatusAC } from '../../../app/app-reducer'
-import { RootStateType } from '../../../app/store'
 import { AppThunk } from '../../../types/HooksTypes'
 import { Nullable } from '../../../types/Nullable'
 import { ServerError } from '../../../utils/ServerErrorHandler'
 
-type InitialStateType = typeof initialState
+type CardsStateType = typeof cardsState
 
-const initialState = {
+const cardsState = {
   cards: null as Nullable<CardsType[]>,
   packName: null as Nullable<string>,
   packUserId: null as Nullable<string>,
@@ -40,7 +38,10 @@ const initialState = {
 
 export type CardActionsType = ReturnType<typeof setCardsAC> | ReturnType<typeof setPackCardsIdAC>
 
-export const cardsReducer = (state = initialState, action: CardActionsType): InitialStateType => {
+export const cardsReducer = (
+  state: CardsStateType = cardsState,
+  action: CardActionsType
+): CardsStateType => {
   switch (action.type) {
     case 'CARDS/SET-PACK-CARDS-ID': {
       return { ...state, params: { ...state.params, cardsPack_id: action.cardId } }
@@ -57,6 +58,7 @@ export const cardsReducer = (state = initialState, action: CardActionsType): Ini
         maxGrade: action.cards.maxGrade,
       }
     }
+
     default:
       return state
   }
@@ -65,57 +67,43 @@ export const cardsReducer = (state = initialState, action: CardActionsType): Ini
 export const setCardsAC = (cards: CardsResponseType) => {
   return { type: 'CARDS/SET-CARDS', cards } as const
 }
-// export const addCardAC = () => {
-//   return { type: 'CARDS/ADD-CARD', card } as const
-// }
-// export const deleteCardAC = (id: string) => {
-//   return { type: 'CARDS/DELETE-CARD', id } as const
-// }
-// export const updateCardAC = (card: CardResponceType) => {
-//   return { type: 'CARDS/UPDATE-CARD', card } as const
-// }
+
 export const setPackCardsIdAC = (cardId: string) => {
   return { type: 'CARDS/SET-PACK-CARDS-ID', cardId } as const
 }
 
 export const getCardsTC =
   (packId?: string): AppThunk =>
-  (dispatch, getState: () => RootStateType) => {
+  (dispatch, getState) => {
     const params = getState().card.params
 
     const param = packId ? { ...params, cardsPack_id: packId } : params
 
-    cardAPI.getCards(param as CardsParamsType).then((res: AxiosResponse<CardsResponseType>) => {
-      dispatch(setCardsAC(res.data))
-      // dispatch(setAppErrorAC('Cards is setted'))
-      console.log(res.data)
-    })
+    cardAPI
+      .getCards(param as CardsParamsType)
+      .then(res => {
+        dispatch(setCardsAC(res.data))
+        console.log(res.data)
+      })
+      .catch((reason: AxiosError<{ error: string }>) => {
+        if (reason.response?.data.error) {
+          ServerError<string>(reason.response.data.error, setAppErrorAC, dispatch)
+          dispatch(setAppStatusAC('error'))
+        } else {
+          ServerError<string>(reason.message, setAppErrorAC, dispatch)
+          dispatch(setAppStatusAC('error'))
+        }
+      })
   }
 
 export const addCardTC =
-  (
-    cardsPack_id: string,
-    question?: string,
-    answer?: string,
-    answerImg?: string,
-    questionImg?: string,
-    questionVideo?: string,
-    answerVideo?: string
-  ): AppThunk =>
+  (card: AddAndUpdateCardType): AppThunk =>
   dispatch => {
     dispatch(setAppStatusAC('progress'))
     cardAPI
-      .addCard({
-        cardsPack_id,
-        question,
-        answer,
-        answerImg,
-        questionImg,
-        questionVideo,
-        answerVideo,
-      })
+      .addCard(card)
       .then(res => {
-        dispatch(getCardsTC(cardsPack_id))
+        dispatch(getCardsTC(card.cardsPack_id))
         dispatch(setAppStatusAC('success'))
         dispatch(setAppErrorAC('Card added'))
         console.log(res)
@@ -154,7 +142,7 @@ export const deleteCardTC =
   }
 
 export const updateCardTC =
-  (updateCard: UpdateCardType): AppThunk =>
+  (updateCard: AddAndUpdateCardType): AppThunk =>
   dispatch => {
     dispatch(setAppStatusAC('progress'))
     cardAPI
@@ -183,7 +171,7 @@ export const changeRatingCardTC =
     dispatch(setAppStatusAC('progress'))
     cardAPI
       .changeRatingCard(grade)
-      .then((res: AxiosResponse<ResponseGradeCardType>) => {
+      .then(res => {
         console.log(res.data)
         dispatch(getCardsTC(res.data.updatedGrade.cardsPack_id))
         dispatch(setAppStatusAC('success'))

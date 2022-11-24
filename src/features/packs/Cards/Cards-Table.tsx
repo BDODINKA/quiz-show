@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { CardsType, UpdateCardType } from '../../../api/cardAPI'
+import { AddAndUpdateCardType, CardsType } from '../../../api/cardAPI'
 import poligon from '../../../assets/img/Table/Polygon 2.svg'
 import { Nullable } from '../../../types/Nullable'
 import { CardsTableModal } from '../Table/CardsTableModal'
@@ -13,7 +13,7 @@ type PropsType = {
   profileId?: string
   changeRating?: (cardId: string, value: number) => void
   deleteHandler: (_id: string, packId: string) => void
-  editCardHandler: (updateCard: UpdateCardType) => void
+  editCardHandler: (updateCard: AddAndUpdateCardType) => void
   navigateLearnPage: (cardId: string) => void
   userId?: string
 }
@@ -23,7 +23,7 @@ export const CardsTable = (props: PropsType) => {
     props.deleteHandler && props.deleteHandler(_id, packId)
   }
 
-  const editCardHandler = (updateCard: UpdateCardType) => {
+  const editCardHandler = (updateCard: AddAndUpdateCardType) => {
     props.editCardHandler && props.editCardHandler(updateCard)
   }
   const changeRatingHandler = (cardId: string, value: number) => {

@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 
+import { AddAndUpdateCardType } from '../../../../api/cardAPI'
 import { RootStateType } from '../../../../app/store'
 import { useAppSelector } from '../../../../utils/hooks/customHooks'
 import { InputTypeFile } from '../../InputTypeFile/InputTypeFile'
@@ -16,7 +17,7 @@ type PropsType = {
   onClose?: () => void
   setActive: (modalActive: boolean) => void
   title: string
-  onSubmit: (question: string, answer: string, questionImage: string, answerImage: string) => void
+  onSubmit: (card: AddAndUpdateCardType) => void
   question: string
   answer: string
 }
@@ -73,7 +74,12 @@ export const ModalCard = (props: PropsType) => {
             })
       }
       onSubmit={(values, { resetForm }) => {
-        props.onSubmit(values.question, values.answer, values.questionImage, values.answerImage)
+        props.onSubmit({
+          question: values.question,
+          answer: values.answer,
+          questionImg: values.questionImage,
+          answerImg: values.answerImage,
+        } as AddAndUpdateCardType)
         resetForm()
         setActiveHandler()
       }}

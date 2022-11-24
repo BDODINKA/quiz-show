@@ -32,8 +32,9 @@ export type CardsParamsType = {
   pageCount?: number
 }
 
-export type AddCardType = {
+export type AddAndUpdateCardType = {
   cardsPack_id: string
+  _id?: string
   question?: string
   answer?: string
   grade?: number
@@ -44,18 +45,18 @@ export type AddCardType = {
   answerVideo?: string
 }
 
-export type UpdateCardType = {
-  cardsPack_id: string
-  _id: string
-  question?: string
-  answer?: string
-  grade?: number
-  shots?: number
-  answerImg?: string
-  questionImg?: string
-  questionVideo?: string
-  answerVideo?: string
-}
+// export type UpdateCardType = {
+//   cardsPack_id: string
+//   _id: string
+//   question?: string
+//   answer?: string
+//   grade?: number
+//   shots?: number
+//   answerImg?: string
+//   questionImg?: string
+//   questionVideo?: string
+//   answerVideo?: string
+// }
 
 export type GradeCardType = {
   card_id: string
@@ -115,7 +116,7 @@ export const cardAPI = {
     return axiosInstance.get<CardsResponseType>('/cards/card', { params })
   },
 
-  addCard(card: AddCardType) {
+  addCard(card: AddAndUpdateCardType) {
     return axiosInstance.post<CardsResponseType>('/cards/card', { card })
   },
 
@@ -123,7 +124,7 @@ export const cardAPI = {
     return axiosInstance.delete<ResponseDeletedCard>(`/cards/card?id=${id}`)
   },
 
-  updateCard(card: UpdateCardType) {
+  updateCard(card: AddAndUpdateCardType) {
     return axiosInstance.put<ResponseUpdateCard>('/cards/card', { card })
   },
 

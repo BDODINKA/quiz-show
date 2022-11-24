@@ -11,7 +11,7 @@ import { PATH } from '../../common/routes/const-routes'
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/customHooks'
 
 import style from './profile.module.css'
-import { LogOutTC, UpdateUserProfile } from './profile.reducer'
+import { LogOutTC, UpdateUserProfile } from './profileReducer'
 
 const selectProfile = (state: RootStateType) => state.profile.profile
 const selectStatus = (state: RootStateType) => state.app.status

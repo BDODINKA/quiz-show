@@ -12,8 +12,9 @@ import { AppThunk } from '../../types/HooksTypes'
 import { Nullable } from '../../types/Nullable'
 import { ServerError } from '../../utils/ServerErrorHandler'
 
-type InitialStateType = typeof initialState
-const initialState = {
+type PacksStateType = typeof packsState
+
+const packsState = {
   cardPacks: null as Nullable<CardPacks[]>,
   cardPacksTotalCount: null as Nullable<number>,
   params: {
@@ -30,88 +31,96 @@ const initialState = {
 
 export type CardPacksActionsType =
   | ReturnType<typeof setPacksAC>
+  | ReturnType<typeof setUserIdAC>
   | ReturnType<typeof filterPageAC>
   | ReturnType<typeof filterPageCountAC>
   | ReturnType<typeof filterLastUpdateAC>
   | ReturnType<typeof filterPackNameAC>
   | ReturnType<typeof filterRangeSliderAC>
-  | ReturnType<typeof setUserIdAC>
   | ReturnType<typeof filterResetAC>
 
 export const packsReducer = (
-  state = initialState,
+  state: PacksStateType = packsState,
   action: CardPacksActionsType
-): InitialStateType => {
+): PacksStateType => {
   switch (action.type) {
-    case 'CRUD/SET-PACKS': {
+    case 'PACKS/SET-PACKS': {
       return {
         ...state,
         cardPacks: action.cardPacks.cardPacks,
         cardPacksTotalCount: action.cardPacks.cardPacksTotalCount,
       }
     }
-    case 'CARD-PACKS/SET-FILTER-PACK-NAME': {
+
+    case 'PACKS/SET-FILTER-PACK-NAME': {
       return { ...state, params: { ...state.params, packName: action.value } }
     }
-    case 'CARD-PACKS/SET-FILTER-PAGE': {
+
+    case 'PACKS/SET-FILTER-PAGE': {
       return { ...state, params: { ...state.params, page: action.value } }
     }
-    case 'CARD-PACKS/SET-FILTER-PAGE-COUNT': {
+
+    case 'PACKS/SET-FILTER-PAGE-COUNT': {
       return { ...state, params: { ...state.params, pageCount: action.value } }
     }
-    case 'CARD-PACKS/SET-FILTER-RANGE-SLIDER': {
+
+    case 'PACKS/SET-FILTER-RANGE-SLIDER': {
       return { ...state, params: { ...state.params, min: action.value[0], max: action.value[1] } }
     }
-    case 'CARD-PACKS/SET-FILTER-LAST-UPDATE': {
+
+    case 'PACKS/SET-FILTER-LAST-UPDATE': {
       return { ...state, params: { ...state.params, sortPacks: action.value } }
     }
-    case 'CARD-PACKS/SET-USER-ID': {
+
+    case 'PACKS/SET-USER-ID': {
       return { ...state, params: { ...state.params, user_id: action.value } }
     }
-    case 'CARD-PACKS/SET-RESET-FILTER': {
+
+    case 'PACKS/SET-RESET-FILTER': {
       return { ...state, params: { ...state.params, min: 0, max: 52 } }
     }
+
     default:
       return state
   }
 }
 
 export const setPacksAC = (cardPacks: ResponseCardPacksType) => {
-  return { type: 'CRUD/SET-PACKS', cardPacks } as const
+  return { type: 'PACKS/SET-PACKS', cardPacks } as const
 }
 
 export const filterPageAC = (value: number) => {
-  return { type: 'CARD-PACKS/SET-FILTER-PAGE', value } as const
+  return { type: 'PACKS/SET-FILTER-PAGE', value } as const
 }
 
 export const filterPageCountAC = (value: number) => {
-  return { type: 'CARD-PACKS/SET-FILTER-PAGE-COUNT', value } as const
+  return { type: 'PACKS/SET-FILTER-PAGE-COUNT', value } as const
 }
 
 export const filterLastUpdateAC = (value: string) => {
-  return { type: 'CARD-PACKS/SET-FILTER-LAST-UPDATE', value } as const
+  return { type: 'PACKS/SET-FILTER-LAST-UPDATE', value } as const
 }
 
 export const filterPackNameAC = (value: string) => {
-  return { type: 'CARD-PACKS/SET-FILTER-PACK-NAME', value } as const
+  return { type: 'PACKS/SET-FILTER-PACK-NAME', value } as const
 }
 
 export const filterRangeSliderAC = (value: number[]) => {
-  return { type: 'CARD-PACKS/SET-FILTER-RANGE-SLIDER', value } as const
+  return { type: 'PACKS/SET-FILTER-RANGE-SLIDER', value } as const
 }
 
 export const setUserIdAC = (value: Nullable<string>) => {
-  return { type: 'CARD-PACKS/SET-USER-ID', value } as const
+  return { type: 'PACKS/SET-USER-ID', value } as const
 }
 
 export const filterResetAC = () => {
-  return { type: 'CARD-PACKS/SET-RESET-FILTER' } as const
+  return { type: 'PACKS/SET-RESET-FILTER' } as const
 }
 
 export const getPacksTC = (): AppThunk => (dispatch, getState) => {
   dispatch(setAppStatusAC('progress'))
 
-  const params = getState().cardPacks.params
+  const params = getState().packs.params
 
   cardPacksAPI
     .getPacks(params as PacksParamsType)
