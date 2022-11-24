@@ -25,11 +25,9 @@ export const HeaderMenu = (props: PropsType) => {
   }
 
   return (
-    <nav onMouseLeave={() => props.closeMenu()}>
-      <ul>
-        <li onClick={navigateToProfile}>Profile</li>
-        <li onClick={goToLogout}>Log Out</li>
-      </ul>
-    </nav>
+    <ul>
+      <li onClick={navigateToProfile}>Profile</li>
+      <li onClick={goToLogout}>Log Out</li>
+    </ul>
   )
 }

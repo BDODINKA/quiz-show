@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 
 import logo from '../../assets/svg/logo-Incubator.svg'
+import { DropDownMenu } from '../../common/components/DropDownMenu/DropDownMenu'
 import { InputTypeFile } from '../../common/components/InputTypeFile/InputTypeFile'
 import { SuperButton } from '../../common/components/SuperButton/SuperButton'
 import { Wrapper } from '../../common/components/Wrapper/Wrapper'
@@ -47,7 +48,11 @@ export const Header = () => {
               >
                 {avatar}
               </InputTypeFile>
-              {openMenu && <HeaderMenu closeMenu={() => setOpenMenu(!openMenu)} />}
+              {openMenu && (
+                <DropDownMenu closeMenu={() => setOpenMenu(!openMenu)}>
+                  <HeaderMenu closeMenu={() => setOpenMenu(!openMenu)} />
+                </DropDownMenu>
+              )}
             </div>
           </div>
         ) : (
