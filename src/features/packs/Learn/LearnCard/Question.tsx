@@ -1,6 +1,6 @@
 import React from 'react'
 
-import SuperButton from '../../../../common/components/SuperButton/SuperButton'
+import { SuperButton } from '../../../../common/components/SuperButton/SuperButton'
 
 import style from './Question.module.css'
 

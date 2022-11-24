@@ -6,6 +6,7 @@ import { CardsPackAddType } from '../../api/cardPacksAPI'
 import { ModalMain } from '../../common/components/modal/ModalMain'
 import { ModalPack } from '../../common/components/modal/ModalPack/ModalPack'
 import { Pagination } from '../../common/components/pagination/pagination'
+import { Wrapper } from '../../common/components/Wrapper/Wrapper'
 import { InitValueRangeSlider } from '../../common/constants/packsCard'
 import { maxPaginationPage } from '../../common/constants/pagination'
 import { PATH } from '../../common/routes/const-routes'
@@ -89,8 +90,8 @@ export const Packs = () => {
   if (!isLogin) return <Navigate to={PATH.LOGIN_PAGE} />
 
   return (
-    <div className={style.main}>
-      <div className={style.container}>
+    <section className={style.main}>
+      <Wrapper className={style.container}>
         <div className={style.table_container}>
           <TitleBlockTable
             titlePack="Packs list"
@@ -120,7 +121,6 @@ export const Packs = () => {
             maxPages={maxPaginationPage}
           />
         </div>
-        {/*{modalActive && (*/}
         <ModalMain open={modalActive} setActive={setModalActive}>
           <ModalPack
             setActive={setModalActive}
@@ -130,8 +130,7 @@ export const Packs = () => {
             deckCover={''}
           />
         </ModalMain>
-        {/*)}*/}
-      </div>
-    </div>
+      </Wrapper>
+    </section>
   )
 }

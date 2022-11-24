@@ -2,11 +2,13 @@ import React from 'react'
 
 import { NavLink } from 'react-router-dom'
 
+import { Wrapper } from '../Wrapper/Wrapper'
+
 import style from './NotFound404.module.css'
 
-const PageNotFound = () => {
+export const PageNotFound = () => {
   return (
-    <div className={style.block}>
+    <Wrapper className={style.block}>
       <div className={style.content}>
         <h1 className={style.title}>Page not Found</h1>
         <p className={style.description}>Something Wrong</p>
@@ -14,8 +16,6 @@ const PageNotFound = () => {
           ComeBack
         </NavLink>
       </div>
-    </div>
+    </Wrapper>
   )
 }
-
-export default PageNotFound

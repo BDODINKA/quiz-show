@@ -3,6 +3,7 @@ import React from 'react'
 import { Navigate } from 'react-router-dom'
 
 import { RootStateType } from '../../../app/store'
+import { Wrapper } from '../../../common/components/Wrapper/Wrapper'
 import { PATH } from '../../../common/routes/const-routes'
 import { useAppSelector } from '../../../utils/hooks/customHooks'
 
@@ -19,8 +20,8 @@ export const ForgotPass = () => {
   if (IsSend) return <Navigate to={PATH.CHECK_EMAIL_PAGE} />
 
   return (
-    <div>
+    <Wrapper>
       <ForgotPassForm status={status} style={style} />
-    </div>
+    </Wrapper>
   )
 }

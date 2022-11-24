@@ -35,15 +35,9 @@ export const InputTypeFile: React.FC<InputTypeFilePropsType> = ({
 
   ...restProps
 }) => {
-  // const [image, setImage] = useState(defaultImage)
   const [isImageBroken, setIsImageBroken] = useState(false)
 
   const inputRef = useRef<HTMLInputElement>(null)
-
-  // const selectFileHandler = () => {
-  //   inputRef && inputRef.current?.click()
-  //   inputRef && inputRef.current?.value
-  // }
 
   const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length) {

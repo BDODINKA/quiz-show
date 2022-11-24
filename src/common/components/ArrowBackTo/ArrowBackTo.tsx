@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom'
 import style from '../../../features/profile/profile.module.css'
 import { PATH } from '../../routes/const-routes'
 
-const ArrowBackTo = () => {
+export const ArrowBackTo = () => {
   return (
     <div className={style.backBlock}>
       <NavLink to={PATH.PACK_CARDS_PAGE} className={style.arrow} />
@@ -15,5 +15,3 @@ const ArrowBackTo = () => {
     </div>
   )
 }
-
-export default ArrowBackTo

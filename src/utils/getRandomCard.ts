@@ -1,6 +1,6 @@
 import { CardsType } from '../api/cardAPI'
 
-export const getRandomCard = (cards: CardsType[], cardId?: string) => {
+export const getRandomCard = (cards: CardsType[]) => {
   const sum = cards && cards.reduce((acc, card) => acc + (6 - card.grade) * (6 - card.grade), 0)
   const rand = Math.random() * sum
   const res =

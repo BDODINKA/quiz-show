@@ -9,8 +9,8 @@ import { Formik } from 'formik'
 import * as Yup from 'yup'
 
 import style from '../modal/ModalCard/ModalCard.module.css'
-import SuperButton from '../SuperButton/SuperButton'
-import SuperInput from '../SuperInputText/SuperInput'
+import { SuperButton } from '../SuperButton/SuperButton'
+import { SuperInput } from '../SuperInputText/SuperInput'
 
 type PropsType = {
   text?: string
@@ -23,7 +23,7 @@ type PropsType = {
 } & DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> &
   DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
 
-const EditableSpan = (props: PropsType) => {
+export const EditableSpan = (props: PropsType) => {
   const {
     classPlaceholder,
     classNameSpan,
@@ -98,5 +98,3 @@ const EditableSpan = (props: PropsType) => {
     </span>
   )
 }
-
-export default EditableSpan

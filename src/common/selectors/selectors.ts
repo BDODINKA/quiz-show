@@ -6,6 +6,7 @@ export const selectorError = (state: RootStateType) => state.app.error
 
 export const selectorIsLogin = (state: RootStateType) => state.auth.isLoggedIn
 
+export const selectorProfile = (state: RootStateType) => state.profile.profile
 export const selectorProfileId = (state: RootStateType) => state.profile.profile?._id
 
 export const selectorPackParams = (state: RootStateType) => state.packs.params

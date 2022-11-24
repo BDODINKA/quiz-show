@@ -3,6 +3,7 @@ import React from 'react'
 import { Navigate, useParams } from 'react-router-dom'
 
 import { RootStateType } from '../../../app/store'
+import { Wrapper } from '../../../common/components/Wrapper/Wrapper'
 import { PATH } from '../../../common/routes/const-routes'
 import { useAppSelector } from '../../../utils/hooks/customHooks'
 
@@ -11,17 +12,15 @@ import CreateNewPasswordForm from './CreateNewPasswordForm'
 
 const selectStatus = (state: RootStateType) => state.app.status
 
-const CreateNewPassword = () => {
+export const CreateNewPassword = () => {
   const { token } = useParams()
   const status = useAppSelector(selectStatus)
 
   if (status === 'success') return <Navigate to={PATH.LOGIN_PAGE} />
 
   return (
-    <div className={style.container}>
+    <Wrapper className={style.container}>
       <CreateNewPasswordForm status={status} token={token} />
-    </div>
+    </Wrapper>
   )
 }
-
-export default CreateNewPassword

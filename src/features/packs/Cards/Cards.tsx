@@ -3,11 +3,12 @@ import React, { useEffect, useState } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 
 import { AddAndUpdateCardType } from '../../../api/cardAPI'
-import ArrowBackTo from '../../../common/components/ArrowBackTo/ArrowBackTo'
+import { ArrowBackTo } from '../../../common/components/ArrowBackTo/ArrowBackTo'
 import { ModalCard } from '../../../common/components/modal/ModalCard/ModalCard'
 import { ModalMain } from '../../../common/components/modal/ModalMain'
 import { Pagination } from '../../../common/components/pagination/pagination'
-import Search from '../../../common/components/Search/Search'
+import { Search } from '../../../common/components/Search/Search'
+import { Wrapper } from '../../../common/components/Wrapper/Wrapper'
 import { PATH } from '../../../common/routes/const-routes'
 import {
   selectorCardPacks,
@@ -86,7 +87,7 @@ export const Cards = () => {
   if (!isLogin) return <Navigate to={PATH.LOGIN_PAGE} />
 
   return (
-    <div className={style.packs_list_container}>
+    <Wrapper className={style.packs_list_container}>
       <div className={style.table_container}>
         {cards && cards.length ? (
           <>
@@ -149,6 +150,6 @@ export const Cards = () => {
           />
         </ModalMain>
       )}
-    </div>
+    </Wrapper>
   )
 }

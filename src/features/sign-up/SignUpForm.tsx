@@ -7,8 +7,8 @@ import * as Yup from 'yup'
 import { RootStateType } from '../../app/store'
 import hide_password from '../../assets/img/SignUp/close_eye_password.png'
 import show_password from '../../assets/img/SignUp/open_eye_password.png'
-import SuperButton from '../../common/components/SuperButton/SuperButton'
-import SuperInput from '../../common/components/SuperInputText/SuperInput'
+import { SuperButton } from '../../common/components/SuperButton/SuperButton'
+import { SuperInput } from '../../common/components/SuperInputText/SuperInput'
 import { PATH } from '../../common/routes/const-routes'
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/customHooks'
 
@@ -35,7 +35,7 @@ export const SignUpForm = () => {
 
   return (
     <div className={s.form_container}>
-      <div className={s.title_form}>Sing Up</div>
+      <div className={s.title_form}>Sign Up</div>
       <Formik
         initialValues={{
           email: '',
