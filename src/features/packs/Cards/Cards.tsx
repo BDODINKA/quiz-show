@@ -188,6 +188,7 @@ export const Cards = () => {
       {modalName === 'changeField' && (
         <ModalMain open={modalActive} setActive={setModalActive}>
           <ModalPack
+            deckCover={packDeckCover!}
             setActive={setModalActive}
             title={packName as string}
             onSubmit={pack => changePackTitle(pack)}

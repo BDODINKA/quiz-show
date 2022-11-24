@@ -9,7 +9,7 @@ type PropsType = {
   titleButton: string
   image?: any
   deckCoverImg?: string
-      //onClick: () => void
+  //onClick: () => void
   onClick?: () => void
   style?: { [key: string]: string }
   deleteModal?: () => void
@@ -39,12 +39,6 @@ export const TitleBlockTable: React.FC<PropsType> = ({
   return (
     <div className={finalClass.packs_list_header}>
       <div className={finalClass.packs_list_name}>
-        <div className={styleDefault.packTitle_and_button}>
-          <div className={styleDefault.titlePack}>{titlePack}</div>
-
-          <span>{image}</span>
-        </div>
-
         <img className={styleDefault.deckCoverImg} src={deckCoverImg} />
         {titlePack}
         <span onClick={open}>
