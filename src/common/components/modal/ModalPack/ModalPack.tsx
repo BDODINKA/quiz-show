@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Formik } from 'formik'
 import * as Yup from 'yup'
@@ -7,7 +7,6 @@ import { CardsPackAddType } from '../../../../api/cardPacksAPI'
 import { RootStateType } from '../../../../app/store'
 import { useAppSelector } from '../../../../utils/hooks/customHooks'
 import { InputTypeFile } from '../../InputTypeFile/InputTypeFile'
-import SuperButton from '../../SuperButton/SuperButton'
 import { SuperButton } from '../../SuperButton/SuperButton'
 import { SuperCheckbox } from '../../SuperCheckbox/SuperCheckbox'
 import { SuperInput } from '../../SuperInputText/SuperInput'
@@ -80,6 +79,7 @@ export const ModalPack = (props: PropsType) => {
                   {...formik.getFieldProps('deckCover')}
                   uploadImage={setDeckCover}
                   defaultImg={deckCover}
+                  hiddenBtn={false}
                 />
                 <SuperInput
                   type={'text'}

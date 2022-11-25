@@ -18,7 +18,7 @@ type InputTypeFilePropsType = DefaultInputPropsType & {
   defaultImg: string
   hiddenBtn?: boolean
   classNameBtn?: string
-  title: string
+  title?: string
 }
 
 export const InputTypeFile: React.FC<InputTypeFilePropsType> = ({
@@ -83,49 +83,27 @@ export const InputTypeFile: React.FC<InputTypeFilePropsType> = ({
     <div className={s.container}>
       <div className={s.inputHeader}>
         <h4 className={s.inputTitle}>{title}</h4>
-        <label>
-          <input
-            type={type}
-            onChange={uploadHandler}
-            style={{ display: 'none' }}
-            ref={inputRef}
-            value={''}
-          />
-          <SuperButton
-            className={s.inputButton}
-            title="Upload Image"
-            onClick={selectFileHandler}
-            type={'button'}
-          />
-        </label>
+        <img
+          src={isImageBroken ? defaultImage : defaultImg}
+          style={{ width: '100px' }}
+          onError={errorHandler}
+          className={finalInputClassName}
+          alt="image"
+        />
+        {!hiddenBtn && (
+          <label style={{ height: '20px', width: '100px', background: 'black' }}>
+            <input
+              type={type}
+              onChange={uploadHandler}
+              style={{ display: 'none' }}
+              ref={inputRef}
+              value={''}
+            />
+            <span title="Upload Image" className={finalBtnClassName} />
+          </label>
+        )}
+        {error && <span className={finalSpanClassName}>{error}</span>}
       </div>
-      <img
-        src={isImageBroken ? defaultImage : defaultImg}
-        onError={errorHandler}
-        className={`${finalInputClassName} ${s.inputImg}`}
-        alt="image"
-      />
-    <div>
-      <img
-        src={isImageBroken ? defaultImage : defaultImg}
-        style={{ width: '100px' }}
-        onError={errorHandler}
-        className={finalInputClassName}
-        alt="image"
-      />
-      {!hiddenBtn && (
-        <label style={{ height: '100px' }}>
-          <input
-            type={type}
-            onChange={uploadHandler}
-            style={{ display: 'none' }}
-            ref={inputRef}
-            value={''}
-          />
-          <span title="Upload Image" className={finalBtnClassName} />
-        </label>
-      )}
-      {error && <span className={finalSpanClassName}>{error}</span>}
     </div>
   )
 }

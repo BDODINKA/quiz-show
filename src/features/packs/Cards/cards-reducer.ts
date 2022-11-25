@@ -21,7 +21,6 @@ const cardsState = {
   packUserId: null as Nullable<string>,
   packDeckCover: null as Nullable<string>,
   packPrivate: null as Nullable<boolean>,
-  packDeckCover: null as Nullable<string>,
   cardsTotalCount: null as Nullable<number>,
   minGrade: null as Nullable<number>,
   maxGrade: null as Nullable<number>,
@@ -41,6 +40,7 @@ export type CardActionsType =
   | ReturnType<typeof setCardsAC>
   | ReturnType<typeof setPackCardsIdAC>
   | ReturnType<typeof setPackNameAC>
+  | ReturnType<typeof setDeckCoverAC>
 
 export const cardsReducer = (
   state: CardsStateType = cardsState,
@@ -58,7 +58,6 @@ export const cardsReducer = (
         packUserId: action.cards.packUserId,
         packDeckCover: action.cards.packDeckCover,
         packName: action.cards.packName,
-        packDeckCover: action.cards.packDeckCover,
         cardsTotalCount: action.cards.cardsTotalCount,
         minGrade: action.cards.minGrade,
         maxGrade: action.cards.maxGrade,
@@ -66,6 +65,9 @@ export const cardsReducer = (
     }
     case 'CARDS/SET-PACK-NAME': {
       return { ...state, packName: action.name }
+    }
+    case 'CARDS/SET-DECK-COVER': {
+      return { ...state, packDeckCover: action.deckCover }
     }
 
     default:
@@ -83,6 +85,10 @@ export const setPackCardsIdAC = (cardId: string) => {
 
 export const setPackNameAC = (name: string) => {
   return { type: 'CARDS/SET-PACK-NAME', name } as const
+}
+
+export const setDeckCoverAC = (deckCover: string) => {
+  return { type: 'CARDS/SET-DECK-COVER', deckCover } as const
 }
 
 export const getCardsTC =
