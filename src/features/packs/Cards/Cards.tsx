@@ -14,7 +14,6 @@ import { Search } from '../../../common/components/Search/Search'
 import { Wrapper } from '../../../common/components/Wrapper/Wrapper'
 import { PATH } from '../../../common/routes/const-routes'
 import {
-  selectorCardPacks,
   selectorCards,
   selectorCardsParams,
   selectorCardsTotalCount,
@@ -113,9 +112,8 @@ export const Cards = () => {
             <TitleBlockTable
               titlePack={packName ? packName : ''}
               titleButton={packUserId === profileId ? 'Add new card' : 'Learn to pack'}
-              image={<img className={s.dots} src={dots} alt="dots" />}
-              deckCoverImg={packDeckCover!}
-              //onClick={setModalActiveHandler}
+              image={packUserId === profileId && <img className={s.dots} src={dots} alt="dots" />}
+              deckCoverImg={packDeckCover as string}
               onClick={() => {
                 packUserId === profileId ? addModal() : navigateLearnPage(cards[0]._id)
               }}
@@ -157,17 +155,9 @@ export const Cards = () => {
             <TitleBlockTable
               titlePack={packName as string}
               titleButton={packUserId === profileId ? 'Add new card' : 'Learn to pack'}
+              deckCoverImg={packDeckCover as string}
               onClick={() => {
                 packUserId === profileId && addModal()
-              }}
-              image={packUserId === profileId && <img className={s.dots} src={dots} alt="dots" />}
-              changeModal={() => {
-                setModalName('changeField')
-                setModalActiveHandler()
-              }}
-              deleteModal={() => {
-                setModalName('delete')
-                setModalActiveHandler()
               }}
               style={style}
             />
@@ -188,11 +178,11 @@ export const Cards = () => {
       {modalName === 'changeField' && (
         <ModalMain open={modalActive} setActive={setModalActive}>
           <ModalPack
-            deckCover={packDeckCover!}
             setActive={setModalActive}
             title={packName as string}
             onSubmit={pack => changePackTitle(pack)}
             text={packName as string}
+            deckCover={packDeckCover ? packDeckCover : ''}
           />
         </ModalMain>
       )}

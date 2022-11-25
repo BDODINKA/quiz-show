@@ -18,6 +18,7 @@ type InputTypeFilePropsType = DefaultInputPropsType & {
   defaultImg: string
   hiddenBtn?: boolean
   classNameBtn?: string
+  title?: string
 }
 
 export const InputTypeFile: React.FC<InputTypeFilePropsType> = ({
@@ -31,6 +32,7 @@ export const InputTypeFile: React.FC<InputTypeFilePropsType> = ({
   spanClassName,
   classNameBtn,
   uploadImage,
+  title,
   hiddenBtn,
 
   ...restProps
@@ -78,27 +80,30 @@ export const InputTypeFile: React.FC<InputTypeFilePropsType> = ({
   const defaultImg = restProps.defaultImg !== '' ? restProps.defaultImg : defaultImage
 
   return (
-    <>
-      <img
-        src={isImageBroken ? defaultImage : defaultImg}
-        style={{ width: '100px' }}
-        onError={errorHandler}
-        className={finalInputClassName}
-        alt="image"
-      />
-      {!hiddenBtn && (
-        <label style={{ height: '100px' }}>
-          <input
-            type={type}
-            onChange={uploadHandler}
-            style={{ display: 'none' }}
-            ref={inputRef}
-            value={''}
-          />
-          <span title="Upload Image" className={finalBtnClassName} />
-        </label>
-      )}
-      {error && <span className={finalSpanClassName}>{error}</span>}
-    </>
+    <div className={s.container}>
+      <div className={s.inputHeader}>
+        <h4 className={s.inputTitle}>{title}</h4>
+        <img
+          src={isImageBroken ? defaultImage : defaultImg}
+          style={{ width: '100px' }}
+          onError={errorHandler}
+          className={finalInputClassName}
+          alt="image"
+        />
+        {!hiddenBtn && (
+          <label style={{ height: '20px', width: '100px', background: 'black' }}>
+            <input
+              type={type}
+              onChange={uploadHandler}
+              style={{ display: 'none' }}
+              ref={inputRef}
+              value={''}
+            />
+            <span title="Upload Image" className={finalBtnClassName} />
+          </label>
+        )}
+        {error && <span className={finalSpanClassName}>{error}</span>}
+      </div>
+    </div>
   )
 }

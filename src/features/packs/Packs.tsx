@@ -99,7 +99,6 @@ export const Packs = () => {
             titleButton="Add new pack"
             onClick={setModalActiveHandler}
           />
-
           <Filtration
             user_id={profileId}
             initialValueSlider={InitValueRangeSlider}

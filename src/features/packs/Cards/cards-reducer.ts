@@ -40,6 +40,7 @@ export type CardActionsType =
   | ReturnType<typeof setCardsAC>
   | ReturnType<typeof setPackCardsIdAC>
   | ReturnType<typeof setPackNameAC>
+  | ReturnType<typeof setDeckCoverAC>
 
 export const cardsReducer = (
   state: CardsStateType = cardsState,
@@ -65,6 +66,9 @@ export const cardsReducer = (
     case 'CARDS/SET-PACK-NAME': {
       return { ...state, packName: action.name }
     }
+    case 'CARDS/SET-DECK-COVER': {
+      return { ...state, packDeckCover: action.deckCover }
+    }
 
     default:
       return state
@@ -81,6 +85,10 @@ export const setPackCardsIdAC = (cardId: string) => {
 
 export const setPackNameAC = (name: string) => {
   return { type: 'CARDS/SET-PACK-NAME', name } as const
+}
+
+export const setDeckCoverAC = (deckCover: string) => {
+  return { type: 'CARDS/SET-DECK-COVER', deckCover } as const
 }
 
 export const getCardsTC =

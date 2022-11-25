@@ -16,25 +16,26 @@
 .inputButton{
     color: #366eff;
 
+/*.error {*/
+/*  !*color: black;*!*/
+/*}*/
+.btn {
+  display: flex;
+
+  width: 100px;
+  height: 20px;
+
+  background-color: black;
+}
 background: transparent;
     border: none;
 }
 .inputButton:hover {
     cursor: pointer;
-/*.error {*/
-/*  !*color: black;*!*/
-/*}*/
+
     text-decoration-line: underline ;
 }
 .inputImg {
     width: 100%;
     height: 120px;
 }
-.btn {
-     display: flex;
-
-     width: 100px;
-     height: 20px;
-
-     background-color: black;
- }

@@ -8,9 +8,8 @@ type PropsType = {
   titlePack: string
   titleButton: string
   image?: any
-  deckCoverImg?: string
-  //onClick: () => void
   onClick?: () => void
+  deckCoverImg?: string
   style?: { [key: string]: string }
   deleteModal?: () => void
   navigateToLearn?: () => void
@@ -39,8 +38,12 @@ export const TitleBlockTable: React.FC<PropsType> = ({
   return (
     <div className={finalClass.packs_list_header}>
       <div className={finalClass.packs_list_name}>
-        <img className={styleDefault.deckCoverImg} src={deckCoverImg} />
-        {titlePack}
+        <div className={styleDefault.packTitle_and_button}>
+          <div className={styleDefault.titlePack}>{titlePack}</div>
+          {deckCoverImg && (
+            <img className={styleDefault.deckCoverImg} src={deckCoverImg} alt={'picture'} />
+          )}
+        </div>
         <span onClick={open}>
           {image}
           {openMenu && (
@@ -63,28 +66,3 @@ export const TitleBlockTable: React.FC<PropsType> = ({
     </div>
   )
 }
-
-// import React from 'react'
-//
-// import SuperButton from '../../../common/components/SuperButton/SuperButton'
-// import s from '../TitleBlockTable/TitleBlockTable.module.css'
-//
-// import style from './NamePack.module.css'
-//
-// const NamePack = () => {
-//   return (
-//       <div className={style.name_pack_container}>
-//         <div className={style.content_container}>
-//           <div className={style.title}>Name Pack</div>
-//           <div className={style.button_add_new_card}>
-//             <div className={style.sentence}>
-//               This is pack empty. Click add new card to fill this pack
-//             </div>
-//             <SuperButton title="Add new card" className={s.btn_add_new_pack} />
-//           </div>
-//         </div>
-//       </div>
-//   )
-// }
-//
-// export default NamePack

@@ -79,6 +79,7 @@ export const ModalPack = (props: PropsType) => {
                   {...formik.getFieldProps('deckCover')}
                   uploadImage={setDeckCover}
                   defaultImg={deckCover}
+                  hiddenBtn={false}
                 />
                 <SuperInput
                   type={'text'}
