@@ -6,9 +6,5 @@ type PropsType = {
 }
 
 export const DropDownMenu = (props: PropsType) => {
-  return (
-    <nav onMouseLeave={() => props.closeMenu()} {...props}>
-      {props.children}
-    </nav>
-  )
+  return <nav onMouseLeave={() => props.closeMenu()}>{props.children}</nav>
 }
