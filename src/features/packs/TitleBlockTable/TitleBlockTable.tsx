@@ -41,7 +41,7 @@ export const TitleBlockTable: React.FC<PropsType> = ({
         <div className={styleDefault.packTitle_and_button}>
           <div className={styleDefault.titlePack}>{titlePack}</div>
           {deckCoverImg && (
-            <img className={styleDefault.deckCoverImg} src={deckCoverImg} alt={'picture'} />
+            <img className={styleDefault.deckCoverImg} src={deckCoverImg} alt="picture" />
           )}
         </div>
         <span onClick={open}>

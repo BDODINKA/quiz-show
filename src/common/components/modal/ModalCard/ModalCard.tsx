@@ -15,7 +15,7 @@ import style from './ModalCard.module.css'
 
 type PropsType = {
   onClose?: () => void
-  setActive: (modalActive: boolean) => void
+  setOpenModal: (modalActive: boolean) => void
   title: string
   onSubmit: (card: AddAndUpdateCardType) => void
   question: string
@@ -39,7 +39,7 @@ export const ModalCard = (props: PropsType) => {
     if (modal) {
       modal.style.opacity = '0'
       setTimeout(() => {
-        props.setActive(false)
+        props.setOpenModal(false)
         props.onClose && props.onClose()
         setQuestionImage('')
         setAnswerImage('')

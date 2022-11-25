@@ -5,10 +5,8 @@ import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { AddAndUpdateCardType } from '../../../api/cardAPI'
 import { CardsPackAddType } from '../../../api/cardPacksAPI'
 import { ArrowBackTo } from '../../../common/components/ArrowBackTo/ArrowBackTo'
-import { ModalCard } from '../../../common/components/modal/ModalCard/ModalCard'
-import { ModalDelete } from '../../../common/components/modal/ModalDelete/ModalDelete'
 import { ModalMain } from '../../../common/components/modal/ModalMain'
-import { ModalPack } from '../../../common/components/modal/ModalPack/ModalPack'
+import { ModalsAll } from '../../../common/components/modal/ModalsAll'
 import { Pagination } from '../../../common/components/pagination/pagination'
 import { Search } from '../../../common/components/Search/Search'
 import { Wrapper } from '../../../common/components/Wrapper/Wrapper'
@@ -56,8 +54,8 @@ export const Cards = () => {
   const isLogin = useAppSelector(selectorIsLogin)
   const packDeckCover = useAppSelector(selectorPackDeckCover)
 
-  const [modalActive, setModalActive] = useState<boolean>(false)
-  const [modalName, setModalName] = useState('')
+  const [openModal, setOpenModal] = useState<boolean>(false)
+  const [modalName, setModalName] = useState<'modalCard' | 'modalDelete' | 'modalPack' | ''>('')
 
   useEffect(() => {
     dispatch(getCardsTC(params.id))
@@ -71,8 +69,8 @@ export const Cards = () => {
     dispatch(updateCardTC(updateCard))
   }
 
-  const setModalActiveHandler = () => {
-    setModalActive(true)
+  const setOpenModalHandler = () => {
+    setOpenModal(true)
   }
 
   const addNewCard = (card: AddAndUpdateCardType, cardsPack_id: string) => {
@@ -90,9 +88,9 @@ export const Cards = () => {
     dispatch(deletePackTC(params.id as string))
     navigate(PATH.PACK_CARDS_PAGE)
   }
-  const addModal = () => {
-    setModalActiveHandler()
-    setModalName('add')
+  const addPackModal = () => {
+    setOpenModalHandler()
+    setModalName('modalPack')
   }
 
   const navigateLearnPage = (cardId: string) => {
@@ -115,17 +113,17 @@ export const Cards = () => {
               image={packUserId === profileId && <img className={s.dots} src={dots} alt="dots" />}
               deckCoverImg={packDeckCover as string}
               onClick={() => {
-                packUserId === profileId ? addModal() : navigateLearnPage(cards[0]._id)
+                packUserId === profileId ? addPackModal() : navigateLearnPage(cards[0]._id)
               }}
               style={style}
               navigateToLearn={() => navigateLearnPage(cards[0]._id)}
               changeModal={() => {
-                setModalName('changeField')
-                setModalActiveHandler()
+                setModalName('modalPack')
+                setOpenModalHandler()
               }}
               deleteModal={() => {
-                setModalName('delete')
-                setModalActiveHandler()
+                setModalName('modalDelete')
+                setOpenModalHandler()
               }}
             />
             <Search onSearchChange={() => {}} value={''} className={s.search} />
@@ -157,42 +155,25 @@ export const Cards = () => {
               titleButton={packUserId === profileId ? 'Add new card' : 'Learn to pack'}
               deckCoverImg={packDeckCover as string}
               onClick={() => {
-                packUserId === profileId && addModal()
+                packUserId === profileId && addPackModal()
               }}
               style={style}
             />
           </>
         )}
       </div>
-      {modalName === 'add' && (
-        <ModalMain open={modalActive} setActive={setModalActive}>
-          <ModalCard
-            question={''}
-            answer={''}
-            setActive={setModalActive}
-            title={'Add New Card'}
-            onSubmit={card => addNewCard(card, params.id!)}
-          />
-        </ModalMain>
-      )}
-      {modalName === 'changeField' && (
-        <ModalMain open={modalActive} setActive={setModalActive}>
-          <ModalPack
-            setActive={setModalActive}
-            title={packName as string}
-            onSubmit={pack => changePackTitle(pack)}
+      {modalName !== '' && (
+        <ModalMain open={openModal} setOpenModal={setOpenModal}>
+          <ModalsAll
+            nameModal={modalName}
+            setOpenModal={setOpenModal}
+            onSubmitCard={card => addNewCard(card, params.id!)}
+            onSubmitPack={pack => changePackTitle(pack)}
             text={packName as string}
             deckCover={packDeckCover ? packDeckCover : ''}
-          />
-        </ModalMain>
-      )}
-      {modalName === 'delete' && (
-        <ModalMain open={modalActive} setActive={setModalActive}>
-          <ModalDelete
-            setActive={setModalActive}
-            title={'delete'}
-            deleteCallback={deletePack}
-            name={packName as string}
+            onSubmitDelete={deletePack}
+            deleteName={packName as string}
+            title={{ card: 'card', pack: 'pack', delete: 'delete' }}
           />
         </ModalMain>
       )}
