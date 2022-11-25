@@ -6,6 +6,8 @@ import * as Yup from 'yup'
 import { CardsPackAddType } from '../../../../api/cardPacksAPI'
 import { RootStateType } from '../../../../app/store'
 import { useAppSelector } from '../../../../utils/hooks/customHooks'
+import { InputTypeFile } from '../../InputTypeFile/InputTypeFile'
+import SuperButton from '../../SuperButton/SuperButton'
 import { SuperButton } from '../../SuperButton/SuperButton'
 import { SuperCheckbox } from '../../SuperCheckbox/SuperCheckbox'
 import { SuperInput } from '../../SuperInputText/SuperInput'
@@ -18,12 +20,14 @@ type PropsType = {
   title: string
   onSubmit: (pack: CardsPackAddType) => void
   text: string
+  deckCover: string | undefined
 }
 
 const selectorProgress = (state: RootStateType) => state.app.status
 
 export const ModalPack = (props: PropsType) => {
   const status = useAppSelector(selectorProgress)
+  const [deckCover, setDeckCover] = useState('')
 
   const setActiveHandler = () => {
     const modal = document.getElementById('overlay')
@@ -36,7 +40,7 @@ export const ModalPack = (props: PropsType) => {
     }
   }
 
-  const initial = { text: props.text, private: false, deckCover: '' }
+  const initial = { text: props.text, deckCover, private: false }
 
   return (
     <Formik
@@ -70,6 +74,13 @@ export const ModalPack = (props: PropsType) => {
                 className={style.forma}
                 onReset={formik.handleReset}
               >
+                <InputTypeFile
+                  title="Cover:"
+                  type={'file'}
+                  {...formik.getFieldProps('deckCover')}
+                  uploadImage={setDeckCover}
+                  defaultImg={deckCover}
+                />
                 <SuperInput
                   type={'text'}
                   placeholder={'New Pack Name'}

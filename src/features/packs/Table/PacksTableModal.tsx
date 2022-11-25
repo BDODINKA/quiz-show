@@ -28,6 +28,15 @@ export const PacksTableModal = ({
   return (
     <tr key={elem._id} className={style.title_table_body}>
       <td className={style.td}>
+        {elem.deckCover ? (
+          <img
+            className={style.linkImage}
+            src={elem.deckCover}
+            alt="deckCover"
+            onClick={() => navigateToCards(elem._id)}
+          />
+        ) : null}
+
         <span className={style.linkName} onClick={() => navigateToCards(elem._id)}>
           {elem.name}
         </span>
@@ -69,6 +78,7 @@ export const PacksTableModal = ({
           <ModalMain open={modalActive} setActive={setModalActive}>
             <ModalPack
               text={elem.name}
+              deckCover={elem.deckCover}
               setActive={setModalActive}
               title={'Edit pack'}
               onSubmit={pack => changeFieldName(pack, elem._id)}

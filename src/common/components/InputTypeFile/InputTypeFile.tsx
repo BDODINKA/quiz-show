@@ -18,6 +18,7 @@ type InputTypeFilePropsType = DefaultInputPropsType & {
   defaultImg: string
   hiddenBtn?: boolean
   classNameBtn?: string
+  title: string
 }
 
 export const InputTypeFile: React.FC<InputTypeFilePropsType> = ({
@@ -31,6 +32,7 @@ export const InputTypeFile: React.FC<InputTypeFilePropsType> = ({
   spanClassName,
   classNameBtn,
   uploadImage,
+  title,
   hiddenBtn,
 
   ...restProps
@@ -78,7 +80,32 @@ export const InputTypeFile: React.FC<InputTypeFilePropsType> = ({
   const defaultImg = restProps.defaultImg !== '' ? restProps.defaultImg : defaultImage
 
   return (
-    <>
+    <div className={s.container}>
+      <div className={s.inputHeader}>
+        <h4 className={s.inputTitle}>{title}</h4>
+        <label>
+          <input
+            type={type}
+            onChange={uploadHandler}
+            style={{ display: 'none' }}
+            ref={inputRef}
+            value={''}
+          />
+          <SuperButton
+            className={s.inputButton}
+            title="Upload Image"
+            onClick={selectFileHandler}
+            type={'button'}
+          />
+        </label>
+      </div>
+      <img
+        src={isImageBroken ? defaultImage : defaultImg}
+        onError={errorHandler}
+        className={`${finalInputClassName} ${s.inputImg}`}
+        alt="image"
+      />
+    <div>
       <img
         src={isImageBroken ? defaultImage : defaultImg}
         style={{ width: '100px' }}
@@ -99,6 +126,6 @@ export const InputTypeFile: React.FC<InputTypeFilePropsType> = ({
         </label>
       )}
       {error && <span className={finalSpanClassName}>{error}</span>}
-    </>
+    </div>
   )
 }

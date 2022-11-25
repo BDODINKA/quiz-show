@@ -6,6 +6,10 @@
   border-bottom: none;
   border-radius: 2px;
 }
+.tableImg img{
+  width: 150px;
+  height: 35px;
+}
 
 .title_table_header,
 .title_table_body {
@@ -28,10 +32,16 @@
 }
 
 .title_table_body {
-  font-size: 14px;
+  font-family: Montserrat;
+  font-size: 13px;
   font-weight: 400;
+  line-height: 16px;
+  text-align: left;
+  letter-spacing: 0em;
 
   border-bottom: 1px solid #efefef;
+
+
 }
 
 .actions_button_container,
@@ -53,13 +63,33 @@
 }
 .td {
   overflow: hidden;
+  display: flex;
+  align-items: center;
 
   width: 100%;
-  padding-left: 100px;
+  padding-left: 24px;
 }
+.linkImage{
+  width:57px;
+  height:36px;
+}
+.linkImage:hover{
+  cursor: pointer;
+}
+
 .linkName {
+  margin-left: 12px;
+
+  font-family: Montserrat;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 16px;
+  text-align: left;
   text-decoration: none;
+  letter-spacing: 0em;
+
 }
+
 .linkName:hover {
   cursor: pointer;
 

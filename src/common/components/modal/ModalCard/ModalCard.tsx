@@ -101,9 +101,9 @@ export const ModalCard = (props: PropsType) => {
                 className={style.forma}
                 onReset={formik.handleReset}
               >
-                <div>Question</div>
                 {optionValue === 'Picture' ? (
                   <InputTypeFile
+                    title="Question:"
                     type={'file'}
                     {...formik.getFieldProps('questionImage')}
                     error={formik.touched && formik.errors.questionImage}
@@ -112,19 +112,21 @@ export const ModalCard = (props: PropsType) => {
                     defaultImg={questionImage}
                   />
                 ) : (
-                  <SuperInput
-                    type={'text'}
-                    placeholder={'Question'}
-                    {...formik.getFieldProps('question')}
-                    error={formik.touched && formik.errors.question}
-                    className={style.input}
-                    spanClassName={style.spanError}
-                  />
+                  <div>
+                    <h4>Question</h4>
+                    <SuperInput
+                      type={'text'}
+                      placeholder={'Question'}
+                      {...formik.getFieldProps('question')}
+                      error={formik.touched && formik.errors.question}
+                      className={style.input}
+                      spanClassName={style.spanError}
+                    />
+                  </div>
                 )}
-
-                <div>Answer</div>
                 {optionValue === 'Picture' ? (
                   <InputTypeFile
+                    title="Answer:"
                     type={'file'}
                     {...formik.getFieldProps('answerImage')}
                     error={formik.touched && formik.errors.answerImage}
@@ -133,14 +135,17 @@ export const ModalCard = (props: PropsType) => {
                     defaultImg={answerImage}
                   />
                 ) : (
-                  <SuperInput
-                    type={'text'}
-                    placeholder={'Answer'}
-                    {...formik.getFieldProps('answer')}
-                    error={formik.touched && formik.errors.answer}
-                    className={style.input}
-                    spanClassName={style.spanError}
-                  />
+                  <div>
+                    <h4>Answer</h4>
+                    <SuperInput
+                      type={'text'}
+                      placeholder={'Answer'}
+                      {...formik.getFieldProps('answer')}
+                      error={formik.touched && formik.errors.answer}
+                      className={style.input}
+                      spanClassName={style.spanError}
+                    />
+                  </div>
                 )}
 
                 <div className={style.btn_block}>

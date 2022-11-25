@@ -37,8 +37,21 @@ export const CardsTableModal = (props: PropsType) => {
 
   return (
     <tr key={props.elem._id} className={style.title_table_body}>
-      <td onClick={() => navigateLearnPage(props.elem._id)}>{props.elem.question}</td>
-      <td>{props.elem.answer}</td>
+      {props.elem.questionImg ? (
+        <td className={style.tableImg} onClick={() => navigateLearnPage(props.elem._id)}>
+          <img src={props.elem.questionImg} alt="questionImg" />
+        </td>
+      ) : (
+        <td onClick={() => navigateLearnPage(props.elem._id)}>{props.elem.question}</td>
+      )}
+      {props.elem.answerImg ? (
+        <td className={style.tableImg}>
+          <img src={props.elem.answerImg} alt="answerImg" />
+        </td>
+      ) : (
+        <td>{props.elem.answer}</td>
+      )}
+
       <td>{new Date(Date.parse(props.elem.updated)).toLocaleDateString('ru-RU')}</td>
       <td>
         <RatingComponent

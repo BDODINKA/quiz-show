@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react'
 
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 
-import { AddAndUpdateCardType } from '../../../api/cardAPI'
-import { CardsPackAddType } from '../../../api/cardPacksAPI'
-import { ArrowBackTo } from '../../../common/components/ArrowBackTo/ArrowBackTo'
+import { UpdateCardType } from '../../../api/cardAPI'
+import ArrowBackTo from '../../../common/components/ArrowBackTo/ArrowBackTo'
 import { ModalCard } from '../../../common/components/modal/ModalCard/ModalCard'
 import { ModalDelete } from '../../../common/components/modal/ModalDelete/ModalDelete'
 import { ModalMain } from '../../../common/components/modal/ModalMain'
@@ -53,6 +52,7 @@ export const Cards = () => {
   const profileId = useAppSelector(selectorProfileId)
   const cardsParams = useAppSelector(selectorCardsParams)
   const isLogin = useAppSelector(selectorIsLogin)
+  const packDeckCover = useAppSelector(selectorPackDeckCover)
 
   const [modalActive, setModalActive] = useState<boolean>(false)
   const [modalName, setModalName] = useState('')
@@ -102,7 +102,7 @@ export const Cards = () => {
   if (!isLogin) return <Navigate to={PATH.LOGIN_PAGE} />
 
   return (
-    <Wrapper className={style.packs_list_container}>
+    <div className={style.packs_list_container}>
       <div className={style.table_container}>
         {cards && cards.length ? (
           <>
@@ -111,6 +111,7 @@ export const Cards = () => {
               titlePack={packName ? packName : ''}
               titleButton={packUserId === profileId ? 'Add new card' : 'Learn to pack'}
               image={<img className={s.dots} src={dots} alt="dots" />}
+              deckCoverImg={packDeckCover!}
               onClick={() => {
                 packUserId === profileId ? addModal() : navigateLearnPage(cards[0]._id)
               }}

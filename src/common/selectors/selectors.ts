@@ -14,6 +14,7 @@ export const selectorCardPacks = (state: RootStateType) => state.packs.cardPacks
 export const selectorPacksTotalCount = (state: RootStateType) => state.packs.cardPacksTotalCount
 
 export const selectorCards = (state: RootStateType) => state.card.cards
+export const selectorPackDeckCover = (state: RootStateType) => state.card.packDeckCover
 export const selectorPackUserId = (state: RootStateType) => state.card.packUserId
 export const selectorPackName = (state: RootStateType) => state.card.packName
 export const selectorMinGrade = (state: RootStateType) => state.card.minGrade
