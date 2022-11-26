@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 
 import { CardPacks, CardsPackAddType } from '../../../api/cardPacksAPI'
-import { ModalMain } from '../../../common/components/modal/ModalMain'
-import { ModalsAll } from '../../../common/components/modal/ModalsAll'
+import { ModalMain } from '../../../common/components/Modal/ModalMain'
+import { ModalsAll } from '../../../common/components/Modal/ModalsAll'
 
 import { ActionsButton } from './TableActionsButton/ActionsButton'
 import style from './TableCard.module.css'

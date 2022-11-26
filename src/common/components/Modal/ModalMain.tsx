@@ -15,7 +15,7 @@ export const ModalMain = (props: PropsType) => {
   const [container, setContainer] = useState(undefined)
 
   useEffect(() => {
-    setContainer(document.querySelector('#modal') as SetStateAction<any>)
+    setContainer(document.querySelector('#Modal') as SetStateAction<any>)
   }, [])
 
   useEffect(() => {

@@ -40,15 +40,15 @@ export const Pagination = (props: PropsType) => {
         onClick={() => setPage(props.currentPage - 1)}
       ></button>
       <div className={style.blockPages}>
-        {totalPages.map(p => (
+        {totalPages.map(page => (
           <div
-            key={p}
-            onClick={() => setPage(p)}
+            key={page}
+            onClick={() => setPage(page)}
             className={
-              p === props.currentPage ? `${style.pagesActive} ${style.pages}` : style.pages
+              page === props.currentPage ? `${style.pagesActive} ${style.pages}` : style.pages
             }
           >
-            {p}
+            {page}
           </div>
         ))}
       </div>

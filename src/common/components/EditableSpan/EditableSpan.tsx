@@ -8,7 +8,7 @@ import React, {
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 
-import style from '../modal/ModalCard/ModalCard.module.css'
+import style from '../Modal/ModalCard/ModalCard.module.css'
 import { SuperButton } from '../SuperButton/SuperButton'
 import { SuperInput } from '../SuperInputText/SuperInput'
 

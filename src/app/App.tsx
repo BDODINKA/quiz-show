@@ -5,7 +5,7 @@ import { LinearProgress } from '@mui/material'
 import { HashRouter, Navigate, Route, Routes } from 'react-router-dom'
 
 import { CustomAlertSnackBar } from '../common/components/CustomSnackBar/CustomAlertSnackBar'
-import { PageNotFound } from '../common/components/page-404/PageNotFound'
+import { PageNotFound } from '../common/components/Page-404/PageNotFound'
 import { PATH } from '../common/routes/const-routes'
 import { selectorError, selectorIsInitialize, selectorStatus } from '../common/selectors/selectors'
 import { CheckEmail } from '../features/forgot-pass/CheckEmail/CheckEmail'
