@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 
+import { DropDownMenu } from '../../../common/components/DropDownMenu/DropDownMenu'
 import { SuperButton } from '../../../common/components/SuperButton/SuperButton'
 
 import styleDefault from './TitleBlockTable.module.css'
@@ -35,6 +36,21 @@ export const TitleBlockTable: React.FC<PropsType> = ({
     setOpenMenu(!openMenu)
   }
 
+  const editHandler = () => {
+    setOpenMenu(!openMenu)
+    changeModal && changeModal()
+  }
+
+  const deleteHandler = () => {
+    setOpenMenu(!openMenu)
+    deleteModal && deleteModal()
+  }
+
+  const learnHandler = () => {
+    setOpenMenu(!openMenu)
+    navigateToLearn && navigateToLearn()
+  }
+
   return (
     <div className={finalClass.packs_list_header}>
       <div className={finalClass.packs_list_name}>
@@ -47,11 +63,13 @@ export const TitleBlockTable: React.FC<PropsType> = ({
         <span onClick={open}>
           {image}
           {openMenu && (
-            <div onMouseLeave={open}>
-              <div onClick={changeModal}>change</div>
-              <div onClick={deleteModal}>delete</div>
-              <div onClick={navigateToLearn}>learn</div>
-            </div>
+            <DropDownMenu closeMenu={() => setOpenMenu(!openMenu)}>
+              <ul>
+                <li onClick={deleteHandler}>Delete</li>
+                <li onClick={editHandler}>Edit</li>
+                <li onClick={learnHandler}>Learn</li>
+              </ul>
+            </DropDownMenu>
           )}
         </span>
       </div>
