@@ -4,7 +4,7 @@ import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 
 import { CardsPackAddType } from '../../api/cardPacksAPI'
 import { ModalMain } from '../../common/components/modal/ModalMain'
-import { ModalPack } from '../../common/components/modal/ModalPack/ModalPack'
+import { ModalsAll } from '../../common/components/modal/ModalsAll'
 import { Pagination } from '../../common/components/pagination/pagination'
 import { Wrapper } from '../../common/components/Wrapper/Wrapper'
 import { InitValueRangeSlider } from '../../common/constants/packsCard'
@@ -45,7 +45,8 @@ export const Packs = () => {
   const isLogin = useAppSelector(selectorIsLogin)
   const params = useAppSelector(selectorPackParams)
 
-  const [modalActive, setModalActive] = useState<boolean>(false)
+  const [openModal, setOpenModal] = useState<boolean>(false)
+  const [modalName, setModalName] = useState<'modalCard' | 'modalDelete' | 'modalPack' | ''>('')
 
   useEffect(() => {
     sessionStorage.setItem('url', location.pathname)
@@ -70,8 +71,9 @@ export const Packs = () => {
     dispatch(deletePackTC(id))
   }
 
-  const setModalActiveHandler = () => {
-    setModalActive(true)
+  const setOpenModalHandler = () => {
+    setOpenModal(true)
+    setModalName('modalPack')
   }
 
   const changeFieldName = (pack: CardsPackAddType, cardId: string) => {
@@ -97,7 +99,7 @@ export const Packs = () => {
           <TitleBlockTable
             titlePack="Packs list"
             titleButton="Add new pack"
-            onClick={setModalActiveHandler}
+            onClick={setOpenModalHandler}
           />
           <Filtration
             user_id={profileId}
@@ -121,15 +123,18 @@ export const Packs = () => {
             maxPages={maxPaginationPage}
           />
         </div>
-        <ModalMain open={modalActive} setActive={setModalActive}>
-          <ModalPack
-            setActive={setModalActive}
-            title={'Add New Pack'}
-            onSubmit={pack => addNewPack(pack)}
-            text={''}
-            deckCover={''}
-          />
-        </ModalMain>
+        {modalName !== '' && (
+          <ModalMain open={openModal} setOpenModal={setOpenModal}>
+            <ModalsAll
+              title={{ pack: 'Add New Pack' }}
+              setOpenModal={setOpenModal}
+              onSubmitPack={pack => addNewPack(pack)}
+              text={''}
+              deckCover={''}
+              nameModal={modalName}
+            />
+          </ModalMain>
+        )}
       </Wrapper>
     </section>
   )

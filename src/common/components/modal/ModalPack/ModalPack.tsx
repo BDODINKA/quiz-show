@@ -15,7 +15,7 @@ import style from './ModalPack.module.css'
 
 type PropsType = {
   onClose?: () => void
-  setActive: (modalActive: boolean) => void
+  setOpenModal: (modalActive: boolean) => void
   title: string
   onSubmit: (pack: CardsPackAddType) => void
   text: string
@@ -34,7 +34,7 @@ export const ModalPack = (props: PropsType) => {
     if (modal) {
       modal.style.opacity = '0'
       setTimeout(() => {
-        props.setActive(false)
+        props.setOpenModal(false)
       }, 1000)
     }
   }

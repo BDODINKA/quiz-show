@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 
 import { AddAndUpdateCardType, CardsType } from '../../../api/cardAPI'
-import { ModalCard } from '../../../common/components/modal/ModalCard/ModalCard'
-import { ModalDelete } from '../../../common/components/modal/ModalDelete/ModalDelete'
 import { ModalMain } from '../../../common/components/modal/ModalMain'
+import { ModalsAll } from '../../../common/components/modal/ModalsAll'
 import { RatingComponent } from '../../../common/components/Rating/RatingComponent'
 import { selectorStatus } from '../../../common/selectors/selectors'
 import { useAppSelector } from '../../../utils/hooks/customHooks'
@@ -24,8 +23,8 @@ type PropsType = {
 export const CardsTableModal = (props: PropsType) => {
   const isProgress = useAppSelector(selectorStatus)
 
-  const [modalActive, setModalActive] = useState(false)
-  const [modalBtn, setModalBtn] = useState('')
+  const [openModal, setOpenModal] = useState<boolean>(false)
+  const [modalName, setModalName] = useState<'modalCard' | 'modalDelete' | 'modalPack' | ''>('')
 
   const changeRating = (value: number) => {
     props.changeRating && props.changeRating(value)
@@ -65,12 +64,12 @@ export const CardsTableModal = (props: PropsType) => {
           <ActionsButton
             showBtn={true}
             deleteHandler={() => {
-              setModalActive(true)
-              setModalBtn('delete')
+              setOpenModal(true)
+              setModalName('modalDelete')
             }}
             changeName={() => {
-              setModalActive(true)
-              setModalBtn('change')
+              setOpenModal(true)
+              setModalName('modalCard')
             }}
             learnHandler={() => navigateLearnPage(props.elem._id)}
           />
@@ -78,27 +77,19 @@ export const CardsTableModal = (props: PropsType) => {
           <ActionsButton showBtn={false} learnHandler={() => navigateLearnPage(props.elem._id)} />
         )}
 
-        {/*modal add  */}
-        {modalBtn === 'delete' ? (
-          <ModalMain open={modalActive} setActive={setModalActive}>
-            <ModalDelete
-              setActive={setModalActive}
-              title={'Delete Card'}
-              name={props.elem.question}
-              deleteCallback={() => {
+        {modalName !== '' && (
+          <ModalMain open={openModal} setOpenModal={setOpenModal}>
+            <ModalsAll
+              nameModal={modalName}
+              setOpenModal={setOpenModal}
+              deleteName={props.elem.question}
+              onSubmitDelete={() => {
                 props.deleteHandler(props.elem._id, props.elem.cardsPack_id)
-                console.log(props.elem._id)
               }}
-            />
-          </ModalMain>
-        ) : (
-          <ModalMain open={modalActive} setActive={setModalActive}>
-            <ModalCard
-              question={props.elem.question}
-              setActive={setModalActive}
-              title={'Edit card'}
-              answer={props.elem.answer}
-              onSubmit={card =>
+              questionCard={props.elem.question}
+              title={{ card: 'Edit card' }}
+              answerCard={props.elem.answer}
+              onSubmitCard={card =>
                 props.editCardHandler({
                   ...card,
                   cardsPack_id: props.elem.cardsPack_id,

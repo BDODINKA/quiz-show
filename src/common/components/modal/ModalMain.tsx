@@ -6,7 +6,7 @@ import style from './ModalMain.module.css'
 
 type PropsType = {
   children: React.ReactNode
-  setActive: (modalActive: boolean) => void
+  setOpenModal: (modalActive: boolean) => void
   open: boolean
 }
 
@@ -29,7 +29,7 @@ export const ModalMain = (props: PropsType) => {
   const setActive = () => {
     ref.current.style.opacity = '0'
     setTimeout(() => {
-      props.setActive(false)
+      props.setOpenModal(false)
     }, 1000)
   }
 

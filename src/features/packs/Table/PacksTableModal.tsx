@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 
 import { CardPacks, CardsPackAddType } from '../../../api/cardPacksAPI'
-import { ModalDelete } from '../../../common/components/modal/ModalDelete/ModalDelete'
 import { ModalMain } from '../../../common/components/modal/ModalMain'
-import { ModalPack } from '../../../common/components/modal/ModalPack/ModalPack'
+import { ModalsAll } from '../../../common/components/modal/ModalsAll'
 
 import { ActionsButton } from './TableActionsButton/ActionsButton'
 import style from './TableCard.module.css'
@@ -22,21 +21,20 @@ export const PacksTableModal = ({
   navigateToCards,
   changeFieldName,
 }: PropsType) => {
-  const [modalActive, setModalActive] = useState(false)
-  const [modalBtn, setModalBtn] = useState('')
+  const [openModal, setOpenModal] = useState<boolean>(false)
+  const [modalName, setModalName] = useState<'modalCard' | 'modalDelete' | 'modalPack' | ''>('')
 
   return (
     <tr key={elem._id} className={style.title_table_body}>
       <td className={style.td}>
-        {elem.deckCover ? (
+        {elem.deckCover && (
           <img
             className={style.linkImage}
             src={elem.deckCover}
             alt="deckCover"
             onClick={() => navigateToCards(elem._id)}
           />
-        ) : null}
-
+        )}
         <span className={style.linkName} onClick={() => navigateToCards(elem._id)}>
           {elem.name}
         </span>
@@ -50,38 +48,32 @@ export const PacksTableModal = ({
             showBtn={true}
             learnHandler={() => navigateToCards(elem._id)}
             deleteHandler={() => {
-              setModalActive(true)
-              setModalBtn('delete')
+              setOpenModal(true)
+              setModalName('modalDelete')
             }}
             changeName={() => {
-              setModalActive(true)
-              setModalBtn('change')
+              setOpenModal(true)
+              setModalName('modalPack')
             }}
           />
         ) : (
           <ActionsButton showBtn={false} learnHandler={() => navigateToCards(elem._id)} />
         )}
 
-        {modalBtn === 'delete' ? (
-          <ModalMain open={modalActive} setActive={setModalActive}>
-            <ModalDelete
-              setActive={setModalActive}
-              title={'Delete Pack'}
-              name={elem.name}
-              deleteCallback={() => {
+        {modalName !== '' && (
+          <ModalMain open={openModal} setOpenModal={setOpenModal}>
+            <ModalsAll
+              title={{ pack: 'Edit pack', delete: 'Delete Pack' }}
+              setOpenModal={setOpenModal}
+              onSubmitPack={pack => changeFieldName(pack, elem._id)}
+              text={elem.name}
+              deckCover={elem.deckCover}
+              nameModal={modalName}
+              onSubmitDelete={() => {
                 deleteHandler(elem._id)
                 console.log(elem._id)
               }}
-            />
-          </ModalMain>
-        ) : (
-          <ModalMain open={modalActive} setActive={setModalActive}>
-            <ModalPack
-              text={elem.name}
-              deckCover={elem.deckCover}
-              setActive={setModalActive}
-              title={'Edit pack'}
-              onSubmit={pack => changeFieldName(pack, elem._id)}
+              deleteName={elem.name}
             />
           </ModalMain>
         )}

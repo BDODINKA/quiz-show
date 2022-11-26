@@ -8,7 +8,7 @@ import style from './ModalDelete.module.css'
 
 type PropsType = {
   onClose?: () => void
-  setActive: (modalActive: boolean) => void
+  setOpenModal: (modalActive: boolean) => void
   title: string
   name: string
   deleteCallback?: () => void
@@ -25,7 +25,7 @@ export const ModalDelete = (props: PropsType) => {
     if (modal) {
       modal.style.opacity = '0'
       setTimeout(() => {
-        props.setActive(false)
+        props.setOpenModal(false)
       }, 500)
     }
   }
