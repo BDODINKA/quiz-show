@@ -6,7 +6,7 @@ import style from './ModalMain.module.css'
 
 type PropsType = {
   children: React.ReactNode
-  setOpenModal: (modalActive: boolean) => void
+  setOpenModal: (setOpenModal: boolean) => void
   open: boolean
 }
 

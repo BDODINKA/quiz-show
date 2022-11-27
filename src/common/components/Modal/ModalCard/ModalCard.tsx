@@ -15,7 +15,7 @@ import style from './ModalCard.module.css'
 
 type PropsType = {
   onClose?: () => void
-  setOpenModal: (modalActive: boolean) => void
+  setOpenModal: (setOpenModal: boolean) => void
   title: string
   onSubmit: (card: AddAndUpdateCardType) => void
   question: string
