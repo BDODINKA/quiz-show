@@ -74,6 +74,7 @@ export const Cards = () => {
   }
 
   const addNewCard = (card: AddAndUpdateCardType, cardsPack_id: string) => {
+    console.log(card)
     dispatch(addCardTC({ ...card, cardsPack_id }))
   }
 
@@ -88,9 +89,10 @@ export const Cards = () => {
     dispatch(deletePackTC(params.id as string))
     navigate(PATH.PACK_CARDS_PAGE)
   }
-  const addPackModal = () => {
+
+  const addCardModal = () => {
     setOpenModalHandler()
-    setModalName('modalPack')
+    setModalName('modalCard')
   }
 
   const navigateLearnPage = (cardId: string) => {
@@ -113,7 +115,7 @@ export const Cards = () => {
               image={packUserId === profileId && <img className={s.dots} src={dots} alt="dots" />}
               deckCoverImg={packDeckCover as string}
               onClick={() => {
-                packUserId === profileId ? addPackModal() : navigateLearnPage(cards[0]._id)
+                packUserId === profileId ? addCardModal() : navigateLearnPage(cards[0]._id)
               }}
               style={style}
               navigateToLearn={() => navigateLearnPage(cards[0]._id)}
@@ -155,7 +157,7 @@ export const Cards = () => {
               titleButton={packUserId === profileId ? 'Add new card' : 'Learn to pack'}
               deckCoverImg={packDeckCover as string}
               onClick={() => {
-                packUserId === profileId && addPackModal()
+                packUserId === profileId && addCardModal()
               }}
               style={style}
             />

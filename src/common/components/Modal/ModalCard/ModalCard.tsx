@@ -20,6 +20,8 @@ type PropsType = {
   onSubmit: (card: AddAndUpdateCardType) => void
   question: string
   answer: string
+  questionCardImg?: string
+  answerCardImg?: string
 }
 
 const selectArr = ['Text', 'Picture']
@@ -30,8 +32,8 @@ export const ModalCard = (props: PropsType) => {
   const [optionValue, onChangeOption] = useState(selectArr[0])
   const status = useAppSelector(selectorProgress)
 
-  const [questionImage, setQuestionImage] = useState('')
-  const [answerImage, setAnswerImage] = useState('')
+  const [questionImage, setQuestionImage] = useState(props.questionCardImg)
+  const [answerImage, setAnswerImage] = useState(props.answerCardImg)
 
   const setActiveHandler = () => {
     const modal = document.getElementById('overlay')
@@ -109,7 +111,7 @@ export const ModalCard = (props: PropsType) => {
                     error={formik.touched && formik.errors.questionImage}
                     spanClassName={style.spanError}
                     uploadImage={setQuestionImage}
-                    defaultImg={questionImage}
+                    defaultImg={questionImage ? questionImage : ''}
                   />
                 ) : (
                   <div>
@@ -132,7 +134,7 @@ export const ModalCard = (props: PropsType) => {
                     error={formik.touched && formik.errors.answerImage}
                     spanClassName={style.spanError}
                     uploadImage={setAnswerImage}
-                    defaultImg={answerImage}
+                    defaultImg={answerImage ? answerImage : ''}
                   />
                 ) : (
                   <div>

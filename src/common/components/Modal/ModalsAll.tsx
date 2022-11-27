@@ -16,7 +16,8 @@ type PropsType = {
   setOpenModal: (modalActive: boolean) => void
   onSubmitCard?: (card: AddAndUpdateCardType) => void
   onSubmitDelete?: () => void
-
+  questionCardImg?: string
+  answerCardImg?: string
   questionCard?: string
   answerCard?: string
   deleteName?: string
@@ -34,6 +35,8 @@ export const ModalsAll = (props: PropsType) => {
     deckCover,
     text,
     title,
+    questionCardImg,
+    answerCardImg,
   } = props
 
   if (nameModal === 'modalCard')
@@ -44,6 +47,8 @@ export const ModalsAll = (props: PropsType) => {
         setOpenModal={setOpenModal}
         title={title.card}
         onSubmit={card => onSubmitCard && onSubmitCard(card)}
+        questionCardImg={questionCardImg ? questionCardImg : ''}
+        answerCardImg={answerCardImg ? answerCardImg : ''}
       />
     )
 
@@ -54,7 +59,7 @@ export const ModalsAll = (props: PropsType) => {
         title={title.pack}
         onSubmit={pack => onSubmitPack && onSubmitPack(pack)}
         text={text as string}
-        deckCover={deckCover}
+        deckCover={deckCover ? deckCover : ''}
       />
     )
 
@@ -65,6 +70,7 @@ export const ModalsAll = (props: PropsType) => {
         title={title.delete}
         deleteCallback={onSubmitDelete}
         name={deleteName as string}
+        deckCover={deckCover}
       />
     )
   else {

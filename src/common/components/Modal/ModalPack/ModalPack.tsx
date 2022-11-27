@@ -19,14 +19,14 @@ type PropsType = {
   title: string
   onSubmit: (pack: CardsPackAddType) => void
   text: string
-  deckCover: string | undefined
+  deckCover: string
 }
 
 const selectorProgress = (state: RootStateType) => state.app.status
 
 export const ModalPack = (props: PropsType) => {
   const status = useAppSelector(selectorProgress)
-  const [deckCover, setDeckCover] = useState('')
+  const [deckCover, setDeckCover] = useState(props.deckCover)
 
   const setActiveHandler = () => {
     const modal = document.getElementById('overlay')
@@ -70,7 +70,7 @@ export const ModalPack = (props: PropsType) => {
               <h2 className={style.title}>{props.title}</h2>
               <form
                 onSubmit={formik.handleSubmit}
-                className={style.forma}
+                className={style.forms}
                 onReset={formik.handleReset}
               >
                 <InputTypeFile

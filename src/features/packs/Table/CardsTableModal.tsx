@@ -81,14 +81,12 @@ export const CardsTableModal = (props: PropsType) => {
           <ModalMain open={openModal} setOpenModal={setOpenModal}>
             <ModalsAll
               nameModal={modalName}
+              title={{ card: 'Edit card', delete: 'Delete' }}
               setOpenModal={setOpenModal}
               deleteName={props.elem.question}
               onSubmitDelete={() => {
                 props.deleteHandler(props.elem._id, props.elem.cardsPack_id)
               }}
-              questionCard={props.elem.question}
-              title={{ card: 'Edit card' }}
-              answerCard={props.elem.answer}
               onSubmitCard={card =>
                 props.editCardHandler({
                   ...card,
@@ -96,6 +94,11 @@ export const CardsTableModal = (props: PropsType) => {
                   _id: props.elem._id,
                 })
               }
+              questionCard={props.elem.question}
+              answerCard={props.elem.answer}
+              questionCardImg={props.elem.questionImg ? props.elem.questionImg : ''}
+              answerCardImg={props.elem.answerImg ? props.elem.answerImg : ''}
+              deckCover={props.elem.questionImg}
             />
           </ModalMain>
         )}
