@@ -14,7 +14,7 @@ type InputTypeFilePropsType = DefaultInputPropsType & {
   onEnter?: () => void
   error?: string
   spanClassName?: string
-  uploadImage: (data: string) => void
+  uploadImage?: (data: string) => void
   defaultImg: string
   hiddenBtn?: boolean
   classNameBtn?: string
@@ -47,9 +47,7 @@ export const InputTypeFile: React.FC<InputTypeFilePropsType> = ({
 
       if (file.size < 4000000) {
         convertFileToBase64(file, (file64: string) => {
-          // setImage(file64)
-
-          uploadImage(file64)
+          uploadImage && uploadImage(file64)
         })
       } else {
         console.error('Error: ', 'Файл слишком большого размера')

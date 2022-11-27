@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 
 import { Formik } from 'formik'
-import * as Yup from 'yup'
 
 import { CardsPackAddType } from '../../../../api/cardPacksAPI'
 import { RootStateType } from '../../../../app/store'
 import { useAppSelector } from '../../../../utils/hooks/customHooks'
+import { modalPackSchema } from '../../../constants/validationSchema'
 import { InputTypeFile } from '../../InputTypeFile/InputTypeFile'
 import { SuperButton } from '../../SuperButton/SuperButton'
 import { SuperCheckbox } from '../../SuperCheckbox/SuperCheckbox'
@@ -45,11 +45,7 @@ export const ModalPack = (props: PropsType) => {
     <Formik
       enableReinitialize
       initialValues={initial}
-      validationSchema={Yup.object({
-        text: Yup.string()
-          .max(20, 'Max length should be max 20 Symbols')
-          .required('Field Required'),
-      })}
+      validationSchema={modalPackSchema}
       onSubmit={(values, { resetForm }) => {
         if (values) {
           props.onSubmit({

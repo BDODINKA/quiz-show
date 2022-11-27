@@ -1,24 +1,25 @@
-.container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-    width: 100%;
+  width: 100%;
 }
 
 .inputHeader {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-    width: 100%;
+  width: 100%;
 }
-.inputButton{
-    color: #366eff;
+.inputButton {
+  color: #366eff;
 
-/*.error {*/
-/*  !*color: black;*!*/
-/*}*/
+  background: transparent;
+  border: none;
+}
+
 .btn {
   display: flex;
 
@@ -27,15 +28,13 @@
 
   background-color: black;
 }
-background: transparent;
-    border: none;
-}
-.inputButton:hover {
-    cursor: pointer;
 
-    text-decoration-line: underline ;
+.inputButton:hover {
+  cursor: pointer;
+
+  text-decoration-line: underline;
 }
 .inputImg {
-    width: 100%;
-    height: 120px;
+  width: 100%;
+  height: 120px;
 }

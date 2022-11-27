@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 
 import { Formik } from 'formik'
-import * as Yup from 'yup'
 
 import { AddAndUpdateCardType } from '../../../../api/cardAPI'
 import { RootStateType } from '../../../../app/store'
 import { useAppSelector } from '../../../../utils/hooks/customHooks'
+import { modalCardImg, modalCardSchema } from '../../../constants/validationSchema'
 import { InputTypeFile } from '../../InputTypeFile/InputTypeFile'
 import { SuperButton } from '../../SuperButton/SuperButton'
 import { SuperInput } from '../../SuperInputText/SuperInput'
@@ -60,21 +60,7 @@ export const ModalCard = (props: PropsType) => {
     <Formik
       enableReinitialize
       initialValues={initial}
-      validationSchema={
-        optionValue === 'Text'
-          ? Yup.object({
-              question: Yup.string()
-                .max(20, 'Max length should be max 20 Symbols')
-                .required('Field Required'),
-              answer: Yup.string()
-                .max(20, 'Max length should be max 20 Symbols')
-                .required('Field Required'),
-            })
-          : Yup.object({
-              questionImage: Yup.string().required('Image Required'),
-              answerImage: Yup.string().required('Image Required'),
-            })
-      }
+      validationSchema={optionValue === 'Text' ? modalCardSchema : modalCardImg}
       onSubmit={(values, { resetForm }) => {
         props.onSubmit({
           question: values.question,

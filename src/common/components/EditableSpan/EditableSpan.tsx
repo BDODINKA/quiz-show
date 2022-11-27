@@ -6,8 +6,8 @@ import React, {
 } from 'react'
 
 import { Formik } from 'formik'
-import * as Yup from 'yup'
 
+import { profileField } from '../../constants/validationSchema'
 import style from '../Modal/ModalCard/ModalCard.module.css'
 import { SuperButton } from '../SuperButton/SuperButton'
 import { SuperInput } from '../SuperInputText/SuperInput'
@@ -62,12 +62,7 @@ export const EditableSpan = (props: PropsType) => {
       <Formik
         enableReinitialize
         initialValues={{ field: props.text }}
-        validationSchema={Yup.object({
-          field: Yup.string()
-            .max(20, 'Max length should be max 20 Symbols')
-            .min(3, 'Max length should be min 3 Symbols')
-            .required('Field Required'),
-        })}
+        validationSchema={profileField}
         onSubmit={(values, { resetForm }) => {
           editTitleHandler(values.field as string)
           resetForm()

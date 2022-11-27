@@ -42,8 +42,8 @@ export const ModalsAll = (props: PropsType) => {
   if (nameModal === 'modalCard')
     return (
       <ModalCard
-        question={questionCard as string}
-        answer={answerCard as string}
+        question={questionCard ? questionCard : ''}
+        answer={answerCard ? answerCard : ''}
         setOpenModal={setOpenModal}
         title={title.card}
         onSubmit={card => onSubmitCard && onSubmitCard(card)}
