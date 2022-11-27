@@ -15,7 +15,7 @@ import style from './ModalPack.module.css'
 
 type PropsType = {
   onClose?: () => void
-  setOpenModal: (modalActive: boolean) => void
+  setOpenModal: (setOpenModal: boolean) => void
   title: string
   onSubmit: (pack: CardsPackAddType) => void
   text: string

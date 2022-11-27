@@ -8,7 +8,7 @@ import style from './ModalDelete.module.css'
 
 type PropsType = {
   onClose?: () => void
-  setOpenModal: (modalActive: boolean) => void
+  setOpenModal: (setOpenModal: boolean) => void
   title: string
   name: string
   deleteCallback?: () => void
