@@ -70,7 +70,7 @@ export const cardsReducer = (
     case 'CARDS/SET-DECK-COVER': {
       return { ...state, packDeckCover: action.deckCover }
     }
-    case 'CARDS/SET-FILTER-PACK-NAME': {
+    case 'CARDS/SET-FILTER-QUESTION': {
       return { ...state, params: { ...state.params, cardQuestion: action.value } }
     }
 
@@ -95,7 +95,7 @@ export const setDeckCoverAC = (deckCover: string) => {
   return { type: 'CARDS/SET-DECK-COVER', deckCover } as const
 }
 export const searchCardNameAC = (value: string) => {
-  return { type: 'CARDS/SET-FILTER-PACK-NAME', value } as const
+  return { type: 'CARDS/SET-FILTER-QUESTION', value } as const
 }
 
 export const getCardsTC =
