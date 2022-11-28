@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 
@@ -23,7 +23,7 @@ import {
   selectorPackUserId,
   selectorProfileId,
 } from '../../../common/selectors/selectors'
-import { useAppDispatch, useAppSelector } from '../../../utils/hooks/customHooks'
+import { useAppDispatch, useAppSelector, useDebounce } from '../../../utils/hooks/customHooks'
 import { deletePackTC, updatePackTC } from '../Packs-reducer'
 import { TitleBlockTable } from '../TitleBlockTable/TitleBlockTable'
 import style from '../TitleBlockTable/TitleBlockTable.module.css'
@@ -33,6 +33,7 @@ import {
   addCardTC,
   changeRatingCardTC,
   deleteCardTC,
+  searchCardNameAC,
   getCardsTC,
   updateCardTC,
 } from './cards-reducer'
@@ -54,12 +55,17 @@ export const Cards = () => {
   const isLogin = useAppSelector(selectorIsLogin)
   const packDeckCover = useAppSelector(selectorPackDeckCover)
 
+  const [searchValue, setSearchValue] = useState<string>('')
+  const debounceSearch = useDebounce<string>(searchValue, 700)
   const [openModal, setOpenModal] = useState<boolean>(false)
   const [modalName, setModalName] = useState<'modalCard' | 'modalDelete' | 'modalPack' | ''>('')
 
   useEffect(() => {
+    if (debounceSearch !== '') {
+      dispatch(searchCardNameAC(debounceSearch))
+    }
     dispatch(getCardsTC(params.id))
-  }, [dispatch])
+  }, [dispatch, debounceSearch])
 
   const deleteCard = (_id: string, packId: string) => {
     dispatch(deleteCardTC(_id, packId))
@@ -103,32 +109,36 @@ export const Cards = () => {
 
   if (!isLogin) return <Navigate to={PATH.LOGIN_PAGE} />
 
+  const onSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.currentTarget.value)
+  }
+
   return (
     <Wrapper className={style.packs_list_container}>
       <div className={style.table_container}>
+        <ArrowBackTo />
+        <TitleBlockTable
+          titlePack={packName ? packName : ''}
+          titleButton={packUserId === profileId ? 'Add new card' : 'Learn to pack'}
+          image={packUserId === profileId && <img className={s.dots} src={dots} alt="dots" />}
+          deckCoverImg={packDeckCover as string}
+          onClick={() => {
+            packUserId === profileId ? addCardModal() : navigateLearnPage(cards ? cards[0]._id : '')
+          }}
+          style={style}
+          navigateToLearn={() => navigateLearnPage(cards ? cards[0]._id : '')}
+          changeModal={() => {
+            setModalName('modalPack')
+            setOpenModalHandler()
+          }}
+          deleteModal={() => {
+            setModalName('modalDelete')
+            setOpenModalHandler()
+          }}
+        />
+        <Search onSearchChange={onSearchChange} value={searchValue} className={s.search} />
         {cards && cards.length ? (
           <>
-            <ArrowBackTo />
-            <TitleBlockTable
-              titlePack={packName ? packName : ''}
-              titleButton={packUserId === profileId ? 'Add new card' : 'Learn to pack'}
-              image={packUserId === profileId && <img className={s.dots} src={dots} alt="dots" />}
-              deckCoverImg={packDeckCover as string}
-              onClick={() => {
-                packUserId === profileId ? addCardModal() : navigateLearnPage(cards[0]._id)
-              }}
-              style={style}
-              navigateToLearn={() => navigateLearnPage(cards[0]._id)}
-              changeModal={() => {
-                setModalName('modalPack')
-                setOpenModalHandler()
-              }}
-              deleteModal={() => {
-                setModalName('modalDelete')
-                setOpenModalHandler()
-              }}
-            />
-            <Search onSearchChange={() => {}} value={''} className={s.search} />
             <CardsTable
               cards={cards}
               userId={profileId}
@@ -150,18 +160,7 @@ export const Cards = () => {
             />
           </>
         ) : (
-          <>
-            <ArrowBackTo />
-            <TitleBlockTable
-              titlePack={packName as string}
-              titleButton={packUserId === profileId ? 'Add new card' : 'Learn to pack'}
-              deckCoverImg={packDeckCover as string}
-              onClick={() => {
-                packUserId === profileId && addCardModal()
-              }}
-              style={style}
-            />
-          </>
+          <div>Cards not found</div>
         )}
       </div>
       {modalName !== '' && (

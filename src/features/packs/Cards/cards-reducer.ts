@@ -41,6 +41,7 @@ export type CardActionsType =
   | ReturnType<typeof setPackCardsIdAC>
   | ReturnType<typeof setPackNameAC>
   | ReturnType<typeof setDeckCoverAC>
+  | ReturnType<typeof searchCardNameAC>
 
 export const cardsReducer = (
   state: CardsStateType = cardsState,
@@ -69,6 +70,9 @@ export const cardsReducer = (
     case 'CARDS/SET-DECK-COVER': {
       return { ...state, packDeckCover: action.deckCover }
     }
+    case 'CARDS/SET-FILTER-PACK-NAME': {
+      return { ...state, params: { ...state.params, cardQuestion: action.value } }
+    }
 
     default:
       return state
@@ -90,6 +94,9 @@ export const setPackNameAC = (name: string) => {
 export const setDeckCoverAC = (deckCover: string) => {
   return { type: 'CARDS/SET-DECK-COVER', deckCover } as const
 }
+export const searchCardNameAC = (value: string) => {
+  return { type: 'CARDS/SET-FILTER-PACK-NAME', value } as const
+}
 
 export const getCardsTC =
   (packId?: string): AppThunk =>
@@ -101,7 +108,14 @@ export const getCardsTC =
     cardAPI
       .getCards(param as CardsParamsType)
       .then(res => {
-        dispatch(setCardsAC(res.data))
+        if (res.data.cards.length) {
+          dispatch(setCardsAC(res.data))
+          dispatch(setAppStatusAC(null))
+        } else {
+          dispatch(setCardsAC(res.data))
+          dispatch(setAppStatusAC('warning'))
+          dispatch(setAppErrorAC('Current Card not found '))
+        }
       })
       .catch((reason: AxiosError<{ error: string }>) => {
         if (reason.response?.data.error) {
