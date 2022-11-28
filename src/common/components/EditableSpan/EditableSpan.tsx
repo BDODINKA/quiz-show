@@ -7,7 +7,6 @@ import React, {
 
 import { Formik } from 'formik'
 
-import { profileField } from '../../constants/validationSchema'
 import style from '../Modal/ModalCard/ModalCard.module.css'
 import { SuperButton } from '../SuperButton/SuperButton'
 import { SuperInput } from '../SuperInputText/SuperInput'
@@ -62,7 +61,7 @@ export const EditableSpan = (props: PropsType) => {
       <Formik
         enableReinitialize
         initialValues={{ field: props.text }}
-        validationSchema={profileField}
+        // validationSchema={validateSchema([{ name: 'field', variant: 'field', max: 20, min: 3 }])}
         onSubmit={(values, { resetForm }) => {
           editTitleHandler(values.field as string)
           resetForm()

@@ -5,7 +5,7 @@ import { Formik } from 'formik'
 import { AddAndUpdateCardType } from '../../../../api/cardAPI'
 import { RootStateType } from '../../../../app/store'
 import { useAppSelector } from '../../../../utils/hooks/customHooks'
-import { modalCardImg, modalCardSchema } from '../../../constants/validationSchema'
+import { validateCardField, validateCardImage } from '../../../constants/validate'
 import { InputTypeFile } from '../../InputTypeFile/InputTypeFile'
 import { SuperButton } from '../../SuperButton/SuperButton'
 import { SuperInput } from '../../SuperInputText/SuperInput'
@@ -60,7 +60,7 @@ export const ModalCard = (props: PropsType) => {
     <Formik
       enableReinitialize
       initialValues={initial}
-      validationSchema={optionValue === 'Text' ? modalCardSchema : modalCardImg}
+      validationSchema={optionValue === 'Text' ? validateCardField : validateCardImage}
       onSubmit={(values, { resetForm }) => {
         props.onSubmit({
           question: values.question,

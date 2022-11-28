@@ -3,9 +3,9 @@ import React, { useState } from 'react'
 import { Formik } from 'formik'
 
 import { CardsPackAddType } from '../../../../api/cardPacksAPI'
-import { RootStateType } from '../../../../app/store'
 import { useAppSelector } from '../../../../utils/hooks/customHooks'
-import { modalPackSchema } from '../../../constants/validationSchema'
+import { validatePack } from '../../../constants/validate'
+import { selectorStatus } from '../../../selectors/selectors'
 import { InputTypeFile } from '../../InputTypeFile/InputTypeFile'
 import { SuperButton } from '../../SuperButton/SuperButton'
 import { SuperCheckbox } from '../../SuperCheckbox/SuperCheckbox'
@@ -22,10 +22,8 @@ type PropsType = {
   deckCover: string
 }
 
-const selectorProgress = (state: RootStateType) => state.app.status
-
 export const ModalPack = (props: PropsType) => {
-  const status = useAppSelector(selectorProgress)
+  const status = useAppSelector(selectorStatus)
   const [deckCover, setDeckCover] = useState(props.deckCover)
 
   const setActiveHandler = () => {
@@ -45,7 +43,7 @@ export const ModalPack = (props: PropsType) => {
     <Formik
       enableReinitialize
       initialValues={initial}
-      validationSchema={modalPackSchema}
+      validationSchema={validatePack}
       onSubmit={(values, { resetForm }) => {
         if (values) {
           props.onSubmit({
