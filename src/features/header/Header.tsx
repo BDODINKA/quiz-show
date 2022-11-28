@@ -9,7 +9,7 @@ import { SuperButton } from '../../common/components/SuperButton/SuperButton'
 import { Wrapper } from '../../common/components/Wrapper/Wrapper'
 import { PATH } from '../../common/routes/const-routes'
 import { selectorIsLogin, selectorProfile } from '../../common/selectors/selectors'
-import { useAppSelector } from '../../utils/hooks/customHooks'
+import { useAppSelector } from '../../utils/hooks/useAppSelector'
 
 import style from './header.module.css'
 import { HeaderMenu } from './HeaderMenu'

@@ -4,23 +4,22 @@ import { Formik } from 'formik'
 import { NavLink } from 'react-router-dom'
 import * as Yup from 'yup'
 
-import { RootStateType } from '../../app/store'
 import hide_password from '../../assets/img/SignUp/close_eye_password.png'
 import show_password from '../../assets/img/SignUp/open_eye_password.png'
 import { SuperButton } from '../../common/components/SuperButton/SuperButton'
 import { SuperInput } from '../../common/components/SuperInputText/SuperInput'
 import { PATH } from '../../common/routes/const-routes'
-import { useAppDispatch, useAppSelector } from '../../utils/hooks/customHooks'
+import { selectorStatus } from '../../common/selectors/selectors'
+import { useAppDispatch } from '../../utils/hooks/useAppDispatch'
+import { useAppSelector } from '../../utils/hooks/useAppSelector'
 
 import s from './/signUp.module.css'
 import { signUpTC } from './signUpReducer'
 
-const selectStatus = (state: RootStateType) => state.app.status
-
 export const SignUpForm = () => {
   const [passShown, setPassShown] = useState<boolean>(true)
   const [confPassShown, setConfPassShown] = useState<boolean>(true)
-  const status = useAppSelector(selectStatus)
+  const status = useAppSelector(selectorStatus)
 
   const dispatch = useAppDispatch()
 

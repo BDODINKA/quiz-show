@@ -3,7 +3,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { PATH } from '../../common/routes/const-routes'
-import { useAppDispatch } from '../../utils/hooks/customHooks'
+import { useAppDispatch } from '../../utils/hooks/useAppDispatch'
 import { LogOutTC } from '../profile/profileReducer'
 
 type PropsType = {

@@ -8,7 +8,7 @@ import { SuperButton } from '../../../common/components/SuperButton/SuperButton'
 import { SuperInput } from '../../../common/components/SuperInputText/SuperInput'
 import { PATH } from '../../../common/routes/const-routes'
 import { Nullable } from '../../../types/Nullable'
-import { useAppDispatch } from '../../../utils/hooks/customHooks'
+import { useAppDispatch } from '../../../utils/hooks/useAppDispatch'
 import { SendForgotFormTC } from '../forgot-password.reducer'
 
 import style from './ForgotPasswordForm.module.css'

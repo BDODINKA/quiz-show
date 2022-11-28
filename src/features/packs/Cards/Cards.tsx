@@ -23,7 +23,9 @@ import {
   selectorPackUserId,
   selectorProfileId,
 } from '../../../common/selectors/selectors'
-import { useAppDispatch, useAppSelector, useDebounce } from '../../../utils/hooks/customHooks'
+import { useAppDispatch } from '../../../utils/hooks/useAppDispatch'
+import { useAppSelector } from '../../../utils/hooks/useAppSelector'
+import { useDebounce } from '../../../utils/hooks/useDebounce'
 import { deletePackTC, updatePackTC } from '../Packs-reducer'
 import { TitleBlockTable } from '../TitleBlockTable/TitleBlockTable'
 import style from '../TitleBlockTable/TitleBlockTable.module.css'

@@ -6,11 +6,13 @@ import { ArrowBackTo } from '../../../common/components/ArrowBackTo/ArrowBackTo'
 import { Wrapper } from '../../../common/components/Wrapper/Wrapper'
 import { PATH } from '../../../common/routes/const-routes'
 import {
+  selectorCard,
   selectorCards,
   selectorIsLogin,
   selectorPackName,
 } from '../../../common/selectors/selectors'
-import { useAppDispatch, useAppSelector } from '../../../utils/hooks/customHooks'
+import { useAppDispatch } from '../../../utils/hooks/useAppDispatch'
+import { useAppSelector } from '../../../utils/hooks/useAppSelector'
 import { getCardsTC } from '../Cards/cards-reducer'
 import style from '../TitleBlockTable/TitleBlockTable.module.css'
 
@@ -24,7 +26,7 @@ export const Learn = () => {
   const packName = useAppSelector(selectorPackName)
   const cards = useAppSelector(selectorCards)
   const isLogin = useAppSelector(selectorIsLogin)
-  const card = useAppSelector(state => state.learn.card)
+  const card = useAppSelector(selectorCard)
   const dispatch = useAppDispatch()
 
   useEffect(() => {

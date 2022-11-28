@@ -21,3 +21,7 @@ export const selectorMinGrade = (state: RootStateType) => state.card.minGrade
 export const selectorMaxGrade = (state: RootStateType) => state.card.maxGrade
 export const selectorCardsTotalCount = (state: RootStateType) => state.card.cardsTotalCount
 export const selectorCardsParams = (state: RootStateType) => state.card.params
+export const selectorCard = (state: RootStateType) => state.learn.card
+export const selectorSignUp = (state: RootStateType) => state.reg.isSignUp
+export const selectorEmail = (state: RootStateType) => state.forgotPass.sendFormToEmail.email
+export const selectorIsSend = (state: RootStateType) => state.forgotPass.isSend

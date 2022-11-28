@@ -17,7 +17,8 @@ import {
   selectorProfileId,
   selectorPacksTotalCount,
 } from '../../common/selectors/selectors'
-import { useAppDispatch, useAppSelector } from '../../utils/hooks/customHooks'
+import { useAppDispatch } from '../../utils/hooks/useAppDispatch'
+import { useAppSelector } from '../../utils/hooks/useAppSelector'
 
 import { setPackCardsIdAC } from './Cards/cards-reducer'
 import { Filtration } from './Filtration/Filtration'

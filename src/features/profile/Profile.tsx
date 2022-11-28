@@ -2,24 +2,22 @@ import React, { useState } from 'react'
 
 import { Navigate } from 'react-router-dom'
 
-import { RootStateType } from '../../app/store'
 import { ArrowBackTo } from '../../common/components/ArrowBackTo/ArrowBackTo'
 import { EditableSpan } from '../../common/components/EditableSpan/EditableSpan'
 import { InputTypeFile } from '../../common/components/InputTypeFile/InputTypeFile'
 import { SuperButton } from '../../common/components/SuperButton/SuperButton'
 import { Wrapper } from '../../common/components/Wrapper/Wrapper'
 import { PATH } from '../../common/routes/const-routes'
-import { useAppDispatch, useAppSelector } from '../../utils/hooks/customHooks'
+import { selectorProfile, selectorStatus } from '../../common/selectors/selectors'
+import { useAppDispatch } from '../../utils/hooks/useAppDispatch'
+import { useAppSelector } from '../../utils/hooks/useAppSelector'
 
 import style from './profile.module.css'
 import { LogOutTC, UpdateUserProfile } from './profileReducer'
 
-const selectProfile = (state: RootStateType) => state.profile.profile
-const selectStatus = (state: RootStateType) => state.app.status
-
 export const Profile = () => {
-  const profile = useAppSelector(selectProfile)
-  const status = useAppSelector(selectStatus)
+  const profile = useAppSelector(selectorProfile)
+  const status = useAppSelector(selectorStatus)
 
   const dispatch = useAppDispatch()
 

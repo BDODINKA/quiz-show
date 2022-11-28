@@ -1,5 +1,7 @@
 import React, { ChangeEvent, useState } from 'react'
 
+import { DropDownMenu } from '../DropDownMenu/DropDownMenu'
+
 import style from './pagination.module.css'
 
 type PropsType = {
@@ -62,21 +64,26 @@ export const Pagination = (props: PropsType) => {
               </div>
               <div onClick={() => setOpen(!open)}>
                 {open && (
-                  <div className={style.blockPages} style={{ width: '500px', overflowX: 'scroll' }}>
-                    {selectMenuPages.map(p => (
-                      <div
-                        key={p}
-                        className={
-                          p === props.currentPage
-                            ? `${style.pagesActive} ${style.pages}`
-                            : style.pages
-                        }
-                        onClick={() => setPage(p)}
-                      >
-                        {p}
-                      </div>
-                    ))}
-                  </div>
+                  <DropDownMenu closeMenu={() => setOpen(!open)}>
+                    <div
+                      className={style.blockPages}
+                      style={{ width: '500px', overflowX: 'scroll' }}
+                    >
+                      {selectMenuPages.map(p => (
+                        <div
+                          key={p}
+                          className={
+                            p === props.currentPage
+                              ? `${style.pagesActive} ${style.pages}`
+                              : style.pages
+                          }
+                          onClick={() => setPage(p)}
+                        >
+                          {p}
+                        </div>
+                      ))}
+                    </div>
+                  </DropDownMenu>
                 )}
                 open
               </div>

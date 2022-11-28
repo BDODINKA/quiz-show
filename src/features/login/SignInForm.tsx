@@ -11,7 +11,8 @@ import { SuperCheckbox } from '../../common/components/SuperCheckbox/SuperCheckb
 import { SuperInput } from '../../common/components/SuperInputText/SuperInput'
 import { PATH } from '../../common/routes/const-routes'
 import { selectorStatus } from '../../common/selectors/selectors'
-import { useAppDispatch, useAppSelector } from '../../utils/hooks/customHooks'
+import { useAppDispatch } from '../../utils/hooks/useAppDispatch'
+import { useAppSelector } from '../../utils/hooks/useAppSelector'
 
 import { loginTC } from './login-reducer'
 import s from './login.module.css'

@@ -7,7 +7,7 @@ import { SnackBarType } from '../../../common/components/CustomSnackBar/CustomAl
 import { SuperButton } from '../../../common/components/SuperButton/SuperButton'
 import { SuperInput } from '../../../common/components/SuperInputText/SuperInput'
 import { Nullable } from '../../../types/Nullable'
-import { useAppDispatch } from '../../../utils/hooks/customHooks'
+import { useAppDispatch } from '../../../utils/hooks/useAppDispatch'
 import { SendNewPasswordFormTC } from '../forgot-password.reducer'
 
 import style from './CreateNewPassword.module.css'

@@ -3,9 +3,9 @@ import React, { useState } from 'react'
 import { Formik } from 'formik'
 
 import { AddAndUpdateCardType } from '../../../../api/cardAPI'
-import { RootStateType } from '../../../../app/store'
-import { useAppSelector } from '../../../../utils/hooks/customHooks'
+import { useAppSelector } from '../../../../utils/hooks/useAppSelector'
 import { validateCardField, validateCardImage } from '../../../constants/validate'
+import { selectorStatus } from '../../../selectors/selectors'
 import { InputTypeFile } from '../../InputTypeFile/InputTypeFile'
 import { SuperButton } from '../../SuperButton/SuperButton'
 import { SuperInput } from '../../SuperInputText/SuperInput'
@@ -26,11 +26,9 @@ type PropsType = {
 
 const selectArr = ['Text', 'Picture']
 
-const selectorProgress = (state: RootStateType) => state.app.status
-
 export const ModalCard = (props: PropsType) => {
   const [optionValue, onChangeOption] = useState(selectArr[0])
-  const status = useAppSelector(selectorProgress)
+  const status = useAppSelector(selectorStatus)
 
   const [questionImage, setQuestionImage] = useState(props.questionCardImg)
   const [answerImage, setAnswerImage] = useState(props.answerCardImg)

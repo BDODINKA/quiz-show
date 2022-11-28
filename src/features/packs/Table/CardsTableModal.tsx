@@ -5,7 +5,7 @@ import { ModalMain } from '../../../common/components/Modal/ModalMain'
 import { ModalsAll } from '../../../common/components/Modal/ModalsAll'
 import { RatingComponent } from '../../../common/components/Rating/RatingComponent'
 import { selectorStatus } from '../../../common/selectors/selectors'
-import { useAppSelector } from '../../../utils/hooks/customHooks'
+import { useAppSelector } from '../../../utils/hooks/useAppSelector'
 
 import { ActionsButton } from './TableActionsButton/ActionsButton'
 import style from './TableCard.module.css'

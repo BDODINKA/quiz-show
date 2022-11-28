@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { RootStateType } from '../../../../app/store'
-import { useAppSelector } from '../../../../utils/hooks/customHooks'
+import { useAppSelector } from '../../../../utils/hooks/useAppSelector'
+import { selectorStatus } from '../../../selectors/selectors'
 import { InputTypeFile } from '../../InputTypeFile/InputTypeFile'
 import { SuperButton } from '../../SuperButton/SuperButton'
 
@@ -16,10 +16,8 @@ type PropsType = {
   deleteCallback?: () => void
 }
 
-const selectorProgress = (state: RootStateType) => state.app.status
-
 export const ModalDelete = (props: PropsType) => {
-  const status = useAppSelector(selectorProgress)
+  const status = useAppSelector(selectorStatus)
 
   const setActiveHandler = () => {
     const modal = document.getElementById('overlay')

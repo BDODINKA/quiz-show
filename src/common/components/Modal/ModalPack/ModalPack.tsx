@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { Formik } from 'formik'
 
 import { CardsPackAddType } from '../../../../api/cardPacksAPI'
-import { useAppSelector } from '../../../../utils/hooks/customHooks'
+import { useAppSelector } from '../../../../utils/hooks/useAppSelector'
 import { validatePack } from '../../../constants/validate'
 import { selectorStatus } from '../../../selectors/selectors'
 import { InputTypeFile } from '../../InputTypeFile/InputTypeFile'

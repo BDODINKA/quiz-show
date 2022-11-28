@@ -19,7 +19,8 @@ import { Packs } from '../features/packs/Packs'
 import { Profile } from '../features/profile/Profile'
 import { authMeTC } from '../features/profile/profileReducer'
 import { SignUp } from '../features/sign-up/SignUp'
-import { useAppDispatch, useAppSelector } from '../utils/hooks/customHooks'
+import { useAppDispatch } from '../utils/hooks/useAppDispatch'
+import { useAppSelector } from '../utils/hooks/useAppSelector'
 
 import { setAppErrorAC, setAppStatusAC } from './app-reducer'
 

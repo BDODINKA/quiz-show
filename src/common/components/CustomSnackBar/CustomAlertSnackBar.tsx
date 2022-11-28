@@ -6,7 +6,7 @@ import Snackbar from '@mui/material/Snackbar'
 
 import { setAppErrorAC, setAppStatusAC } from '../../../app/app-reducer'
 import { Nullable } from '../../../types/Nullable'
-import { useAppDispatch } from '../../../utils/hooks/customHooks'
+import { useAppDispatch } from '../../../utils/hooks/useAppDispatch'
 
 import { themeSnackBar } from './Theme'
 
