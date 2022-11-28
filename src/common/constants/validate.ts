@@ -15,3 +15,5 @@ export const validateCardImage = validateSchema([
 export const validatePack = validateSchema([
   { variant: 'Field', name: 'text', max: maxValidate, min: minValidate },
 ])
+
+export const validateField = validateSchema([{ variant: 'Field', name: 'field', max: 20, min: 3 }])

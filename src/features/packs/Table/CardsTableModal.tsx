@@ -43,6 +43,7 @@ export const CardsTableModal = (props: PropsType) => {
       ) : (
         <td onClick={() => navigateLearnPage(props.elem._id)}>{props.elem.question}</td>
       )}
+
       {props.elem.answerImg ? (
         <td className={style.tableImg}>
           <img src={props.elem.answerImg} alt="answerImg" />
