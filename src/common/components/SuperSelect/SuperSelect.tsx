@@ -1,4 +1,4 @@
-import React, { ChangeEvent, DetailedHTMLProps, SelectHTMLAttributes, useState } from 'react'
+import React, { ChangeEvent, DetailedHTMLProps, SelectHTMLAttributes } from 'react'
 
 import s from './SuperSelect.module.css'
 
@@ -22,7 +22,7 @@ export const SuperSelect: React.FC<SuperSelectPropsType> = ({
   const mappedOptions: any[] = options
     ? options.map((o, i) => {
         return (
-          <option className={s.option} key={o + '-' + 1} value={o}>
+          <option className={s.option} key={o + '-' + i} value={o}>
             {o}
           </option>
         )

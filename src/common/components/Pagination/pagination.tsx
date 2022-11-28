@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 
 import style from './pagination.module.css'
 
@@ -12,17 +12,24 @@ type PropsType = {
 }
 
 export const Pagination = (props: PropsType) => {
-  const totalPages = []
+  const [open, setOpen] = useState<boolean>(false)
+
+  const totalPages: number[] = []
+
+  const selectMenuPages: number[] = []
+
   const maxPages = Math.ceil(props.totalCount / props.pageCount)
 
-  const pages = maxPages >= props.maxPages ? props.currentPage + props.maxPages : maxPages
+  for (let i = 1; i < maxPages; i++) {
+    selectMenuPages.push(i)
+  }
 
-  for (let i = props.currentPage; i < pages; i++) {
+  for (let i = props.currentPage; i < maxPages; i++) {
     totalPages.push(i)
   }
 
   const setPage = (value: number) => {
-    if (value > 0 && value < pages) {
+    if (value > 0 && value < maxPages && value !== props.currentPage) {
       props.setPage(value)
     }
   }
@@ -33,6 +40,12 @@ export const Pagination = (props: PropsType) => {
     props.setPageCount(value)
   }
 
+  console.log(props.currentPage)
+  console.log(props.pageCount)
+  console.log(props.totalCount)
+  console.log(totalPages.length - 1)
+  totalPages.length = props.maxPages
+
   return totalPages.length ? (
     <div className={style.container}>
       <button
@@ -40,17 +53,50 @@ export const Pagination = (props: PropsType) => {
         onClick={() => setPage(props.currentPage - 1)}
       ></button>
       <div className={style.blockPages}>
-        {totalPages.map(page => (
-          <div
-            key={page}
-            onClick={() => setPage(page)}
-            className={
-              page === props.currentPage ? `${style.pagesActive} ${style.pages}` : style.pages
-            }
-          >
-            {page}
-          </div>
-        ))}
+        {totalPages.map((page, i) =>
+          i === totalPages.length - 2 ? (
+            <div key={page} style={{ display: 'flex' }}>
+              <div
+                onClick={() => setPage(page)}
+                className={
+                  page === props.currentPage ? `${style.pagesActive} ${style.pages}` : style.pages
+                }
+              >
+                {page}
+              </div>
+              <div onClick={() => setOpen(!open)}>
+                {open && (
+                  <div className={style.blockPages} style={{ width: '500px', overflowX: 'scroll' }}>
+                    {selectMenuPages.map(p => (
+                      <div
+                        key={p}
+                        className={
+                          p === props.currentPage
+                            ? `${style.pagesActive} ${style.pages}`
+                            : style.pages
+                        }
+                        onClick={() => setPage(p)}
+                      >
+                        {p}
+                      </div>
+                    ))}
+                  </div>
+                )}
+                open
+              </div>
+            </div>
+          ) : (
+            <div
+              key={page}
+              onClick={() => setPage(page)}
+              className={
+                page === props.currentPage ? `${style.pagesActive} ${style.pages}` : style.pages
+              }
+            >
+              {page}
+            </div>
+          )
+        )}
       </div>
       <button
         className={`${style.btn} ${style.nextBtn}`}
