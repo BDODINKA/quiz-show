@@ -71,7 +71,6 @@ export const PacksTableModal = ({
               nameModal={modalName}
               onSubmitDelete={() => {
                 deleteHandler(elem._id)
-                console.log(elem._id)
               }}
               deleteName={elem.name}
             />

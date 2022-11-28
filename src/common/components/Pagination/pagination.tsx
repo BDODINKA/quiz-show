@@ -40,13 +40,9 @@ export const Pagination = (props: PropsType) => {
     props.setPageCount(value)
   }
 
-  console.log(props.currentPage)
-  console.log(props.pageCount)
-  console.log(props.totalCount)
-  console.log(totalPages.length - 1)
   totalPages.length = props.maxPages
 
-  return totalPages.length ? (
+  return maxPages !== 1 ? (
     <div className={style.container}>
       <button
         className={`${style.btn} ${style.prevBtn}`}

@@ -43,7 +43,9 @@ export const Filtration = (props: PropsType) => {
   }
   const getAllPacks = () => {
     dispatch(setUserIdAC(null))
+    dispatch(filterPackNameAC(''))
   }
+
   const resetFilter = () => {
     setSearchValue('')
     setRangeValue(props.initialValueSlider)
