@@ -39,6 +39,8 @@ import {
   searchCardNameAC,
   getCardsTC,
   updateCardTC,
+  setCardPageAC,
+  setCardPageCountAC,
 } from './cards-reducer'
 import { CardsTable } from './Cards-Table'
 import s from './Cards.module.css'
@@ -66,7 +68,7 @@ export const Cards = () => {
   useEffect(() => {
     dispatch(searchCardNameAC(debounceSearch))
     dispatch(getCardsTC(params.id))
-  }, [dispatch, debounceSearch])
+  }, [dispatch, debounceSearch, cardsParams.page, cardsParams.pageCount])
 
   const deleteCard = (_id: string, packId: string) => {
     dispatch(deleteCardTC(_id, packId))
@@ -81,7 +83,6 @@ export const Cards = () => {
   }
 
   const addNewCard = (card: AddAndUpdateCardType, cardsPack_id: string) => {
-    console.log(card)
     dispatch(addCardTC({ ...card, cardsPack_id }))
   }
 
@@ -92,6 +93,7 @@ export const Cards = () => {
   const changePackTitle = (pack: CardsPackAddType) => {
     dispatch(updatePackTC(pack, params.id as string))
   }
+
   const deletePack = () => {
     dispatch(deletePackTC(params.id as string))
     navigate(PATH.PACK_CARDS_PAGE)
@@ -108,15 +110,24 @@ export const Cards = () => {
     navigate(`${PATH.LEARN_PAGE}/${params.id}/${cardId}`)
   }
 
-  if (!isLogin) return <Navigate to={PATH.LOGIN_PAGE} />
-
   const onSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.currentTarget.value)
   }
+
   const clearSearchHandler = () => {
     setSearchValue('')
     dispatch(searchCardNameAC(debounceSearch))
   }
+
+  const setPage = (value: number) => {
+    dispatch(setCardPageAC(value))
+  }
+
+  const setPageCount = (value: number) => {
+    dispatch(setCardPageCountAC(value))
+  }
+
+  if (!isLogin) return <Navigate to={PATH.LOGIN_PAGE} />
 
   return (
     <Wrapper className={style.packs_list_container}>
@@ -160,8 +171,8 @@ export const Cards = () => {
               pageCount={cardsParams.pageCount}
               currentPage={cardsParams.page}
               totalCount={cardsTotalCount as number}
-              setPage={() => () => {}}
-              setPageCount={() => () => {}}
+              setPage={value => setPage(value)}
+              setPageCount={value => setPageCount(value)}
               maxPages={cardsParams.max}
             />
           </>

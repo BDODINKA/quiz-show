@@ -12,7 +12,7 @@ export const getPaginationPage = (data: DataType) => {
 
   if (data.totalCount && data.currentPage) {
     if (data.maxPages <= data.maxBtn) {
-      for (let i = 1; i <= data.pageCount; i++) {
+      for (let i = 1; i <= data.maxPages; i++) {
         totalPages.push(i)
       }
     } else if (data.currentPage >= 4 && data.currentPage < data.maxPages) {

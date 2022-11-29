@@ -42,6 +42,8 @@ export type CardActionsType =
   | ReturnType<typeof setPackNameAC>
   | ReturnType<typeof setDeckCoverAC>
   | ReturnType<typeof searchCardNameAC>
+  | ReturnType<typeof setCardPageAC>
+  | ReturnType<typeof setCardPageCountAC>
 
 export const cardsReducer = (
   state: CardsStateType = cardsState,
@@ -73,6 +75,15 @@ export const cardsReducer = (
     case 'CARDS/SET-FILTER-QUESTION': {
       return { ...state, params: { ...state.params, cardQuestion: action.value } }
     }
+    case 'CARDS/SET-PAGE': {
+      return {
+        ...state,
+        params: { ...state.params, page: action.page },
+      }
+    }
+    case 'CARDS/SET-PAGE-COUNT': {
+      return { ...state, params: { ...state.params, pageCount: action.pageCount } }
+    }
 
     default:
       return state
@@ -94,8 +105,17 @@ export const setPackNameAC = (name: string) => {
 export const setDeckCoverAC = (deckCover: string) => {
   return { type: 'CARDS/SET-DECK-COVER', deckCover } as const
 }
+
 export const searchCardNameAC = (value: string) => {
   return { type: 'CARDS/SET-FILTER-QUESTION', value } as const
+}
+
+export const setCardPageAC = (page: number) => {
+  return { type: 'CARDS/SET-PAGE', page } as const
+}
+
+export const setCardPageCountAC = (pageCount: number) => {
+  return { type: 'CARDS/SET-PAGE-COUNT', pageCount } as const
 }
 
 export const getCardsTC =
@@ -103,7 +123,6 @@ export const getCardsTC =
   (dispatch, getState) => {
     const params = getState().card.params
 
-    console.log(params.cardQuestion)
     const param = packId ? { ...params, cardsPack_id: packId } : params
 
     cardAPI

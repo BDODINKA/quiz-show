@@ -18,9 +18,6 @@ type PropsType = {
 }
 
 export const PaginationNumBtn = (props: PropsType) => {
-  console.log(props.page)
-  console.log(props.currentPage)
-
   const finalClass =
     props.page === props.currentPage ? `${style.pagesActive} ${style.pages}` : style.pages
 

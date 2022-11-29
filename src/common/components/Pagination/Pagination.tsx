@@ -22,10 +22,14 @@ type pagesType = {
 }
 export const Pagination = (props: PropsType) => {
   const status = useAppSelector(selectorStatus)
+
   const [open, setOpen] = useState<boolean>(false)
   const [pagesObj, setPagesObj] = useState({} as pagesType)
 
   const maxPages = Math.ceil(props.totalCount / props.pageCount)
+
+  console.log(maxPages)
+  console.log(pagesObj.totalPages)
 
   useEffect(() => {
     setPagesObj(
