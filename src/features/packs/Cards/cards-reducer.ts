@@ -103,6 +103,7 @@ export const getCardsTC =
   (dispatch, getState) => {
     const params = getState().card.params
 
+    console.log(params.cardQuestion)
     const param = packId ? { ...params, cardsPack_id: packId } : params
 
     cardAPI

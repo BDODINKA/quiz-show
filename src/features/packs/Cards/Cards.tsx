@@ -9,6 +9,7 @@ import { ModalMain } from '../../../common/components/Modal/ModalMain'
 import { ModalsAll } from '../../../common/components/Modal/ModalsAll'
 import { Pagination } from '../../../common/components/Pagination/pagination'
 import { Search } from '../../../common/components/Search/Search'
+import { SuperButton } from '../../../common/components/SuperButton/SuperButton'
 import { Wrapper } from '../../../common/components/Wrapper/Wrapper'
 import { PATH } from '../../../common/routes/const-routes'
 import {
@@ -63,9 +64,7 @@ export const Cards = () => {
   const [modalName, setModalName] = useState<'modalCard' | 'modalDelete' | 'modalPack' | ''>('')
 
   useEffect(() => {
-    if (debounceSearch !== '') {
-      dispatch(searchCardNameAC(debounceSearch))
-    }
+    dispatch(searchCardNameAC(debounceSearch))
     dispatch(getCardsTC(params.id))
   }, [dispatch, debounceSearch])
 
@@ -114,6 +113,10 @@ export const Cards = () => {
   const onSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.currentTarget.value)
   }
+  const clearSearchHandler = () => {
+    setSearchValue('')
+    dispatch(searchCardNameAC(debounceSearch))
+  }
 
   return (
     <Wrapper className={style.packs_list_container}>
@@ -139,6 +142,7 @@ export const Cards = () => {
           }}
         />
         <Search onSearchChange={onSearchChange} value={searchValue} className={s.search} />
+        <SuperButton onClick={clearSearchHandler} title="X" />
         {cards && cards.length ? (
           <>
             <CardsTable
