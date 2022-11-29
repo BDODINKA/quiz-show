@@ -1,1 +1,1 @@
-export const maxPaginationPage = 5
+export const maxPaginationPage = 6
