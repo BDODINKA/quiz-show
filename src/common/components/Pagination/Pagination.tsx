@@ -37,7 +37,7 @@ export const Pagination = (props: PropsType) => {
         maxBtn: props.maxPages,
       })
     )
-  }, [maxPages])
+  }, [maxPages, props.currentPage])
 
   const setPage = (value: number) => {
     if (value > 0 && value <= maxPages && value !== props.currentPage) {
@@ -49,6 +49,7 @@ export const Pagination = (props: PropsType) => {
     const value = Number(e.currentTarget.value)
 
     props.setPageCount(value)
+    props.setPage(1)
   }
 
   if (!pagesObj.totalPages) return null
