@@ -28,12 +28,14 @@ export const validateSchema = (data: DataType[]) => {
 
     if (data[i].variant === 'Field') {
       obj = {
+        ...obj,
         [data[i].name]: Yup.string()
           .max(max, `Max length should be max ${max} Symbols`)
           .min(min, `Min length should be min ${min} Symbols`)
           .required(`${data[i].variant} Required`),
       }
     }
+
     if (data[i].variant === 'Image') {
       obj = {
         [data[i].name]: Yup.string().required(`${data[i].variant} Required`),

@@ -76,3 +76,21 @@
 .nextBtn {
   background: url('../../../assets/img/Pagination/nextBtn.png') no-repeat center;
 }
+.drop{
+  cursor: pointer;
+
+  position: relative;
+}
+.blockPagesDrop{
+  position: absolute;
+  right: 50%;
+  bottom: 30px;
+  left: -150px;
+
+  overflow-x: scroll;
+  display: flex;
+  gap: 12px;
+
+  width: 300px;
+  padding: 0 10px;
+}
