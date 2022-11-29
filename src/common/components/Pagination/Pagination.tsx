@@ -1,5 +1,6 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 
+import { getPaginationPage } from '../../../utils/getPaginationPage'
 import { useAppSelector } from '../../../utils/hooks/useAppSelector'
 import { selectorStatus } from '../../selectors/selectors'
 
@@ -15,40 +16,28 @@ type PropsType = {
   setPageCount: (value: number) => void
   maxPages: number
 }
-
+type pagesType = {
+  totalPages: number[]
+  selectMenuPages: number[]
+}
 export const Pagination = (props: PropsType) => {
   const status = useAppSelector(selectorStatus)
-
   const [open, setOpen] = useState<boolean>(false)
+  const [pagesObj, setPagesObj] = useState({} as pagesType)
+
   const maxPages = Math.ceil(props.totalCount / props.pageCount)
 
-  let totalPages: number[] = []
-
-  const selectMenuPages: number[] = []
-
-  if (props.totalCount && props.currentPage) {
-    if (maxPages <= 6) {
-      for (let i = 1; i <= props.pageCount; i++) {
-        totalPages.push(i)
-      }
-    } else if (props.currentPage >= 4 && props.currentPage !== maxPages) {
-      for (let i = props.currentPage - 2; i <= props.currentPage + 2; i++) {
-        totalPages.push(i)
-      }
-    } else if (props.currentPage >= 4 && props.currentPage === maxPages) {
-      for (let i = props.currentPage - 4; i <= props.currentPage; i++) {
-        totalPages.push(i)
-      }
-    } else if (props.currentPage <= maxPages) {
-      totalPages = Array(props.maxPages)
-        .fill(0)
-        .map((_, i) => i + 1)
-    }
-  }
-
-  for (let i = 1; i < maxPages + 1; i++) {
-    selectMenuPages.push(i)
-  }
+  useEffect(() => {
+    setPagesObj(
+      getPaginationPage({
+        maxPages,
+        pageCount: props.pageCount,
+        totalCount: props.totalCount,
+        currentPage: props.currentPage,
+        maxBtn: props.maxPages,
+      })
+    )
+  }, [maxPages])
 
   const setPage = (value: number) => {
     if (value > 0 && value <= maxPages && value !== props.currentPage) {
@@ -62,7 +51,7 @@ export const Pagination = (props: PropsType) => {
     props.setPageCount(value)
   }
 
-  if (!totalPages.length) return null
+  if (!pagesObj.totalPages) return null
 
   return (
     <div className={style.container}>
@@ -72,18 +61,18 @@ export const Pagination = (props: PropsType) => {
         disabled={status === 'progress'}
       />
       <div className={style.blockPages}>
-        {totalPages.map((page, i) => (
+        {pagesObj.totalPages.map((page, i) => (
           <PaginationNumBtn
             setOpen={() => setOpen(!open)}
             key={page}
             setPage={page => setPage(page)}
-            page={totalPages.length - 1 === i ? maxPages : page}
-            selectMenuPages={selectMenuPages}
-            totalPages={totalPages}
+            page={pagesObj.totalPages.length - 1 === i ? maxPages : page}
+            selectMenuPages={pagesObj.selectMenuPages}
+            totalPages={pagesObj.totalPages}
             status={status === 'progress'}
             currentPage={props.currentPage}
             openDropDown={open}
-            showDropBtn={i === totalPages.length - 2}
+            showDropBtn={i === pagesObj.totalPages.length - 2}
           />
         ))}
       </div>
