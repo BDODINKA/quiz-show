@@ -31,6 +31,8 @@
 }
 
 .profileBlock {
+  position: relative;
+
   display: flex;
   gap: 12px;
   align-items: center;
@@ -44,6 +46,15 @@
   background: url('../../assets/ProfileAva.jpg') no-repeat;
   background-size: cover;
   border-radius: 50%;
+}
+.drop {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+
+  height: 200px;
+
+  background: #61dafb;
 }
 .profileName {
   display: flex;

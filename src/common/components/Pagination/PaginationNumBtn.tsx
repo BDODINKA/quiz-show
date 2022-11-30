@@ -33,7 +33,7 @@ export const PaginationNumBtn = (props: PropsType) => {
       {props.showDropBtn && (
         <div onClick={() => props.setOpen()} className={style.drop}>
           {props.openDropDown && (
-            <DropDownMenu closeMenu={() => props.setOpen()}>
+            <DropDownMenu closeMenu={() => props.setOpen()} className={''}>
               <div className={style.blockPagesDrop}>
                 {props.selectMenuPages.map(p => (
                   <button

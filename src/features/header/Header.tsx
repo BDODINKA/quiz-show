@@ -4,7 +4,6 @@ import { NavLink, useNavigate } from 'react-router-dom'
 
 import logo from '../../assets/svg/logo-Incubator.svg'
 import { DropDownMenu } from '../../common/components/DropDownMenu/DropDownMenu'
-import { InputTypeFile } from '../../common/components/InputTypeFile/InputTypeFile'
 import { SuperButton } from '../../common/components/SuperButton/SuperButton'
 import { Wrapper } from '../../common/components/Wrapper/Wrapper'
 import { PATH } from '../../common/routes/const-routes'
@@ -32,28 +31,23 @@ export const Header = () => {
   return (
     <header className={style.header_container}>
       <Wrapper className={style.navbar_form_container}>
-        <img src={logo} alt="IT-Incubator" onClick={navigateToPacks} />
-
+        <img src={logo} alt="IT-Incubator" onClick={() => isLogin && navigateToPacks()} />
         {isLogin ? (
           <div className={style.profileBlock}>
             <NavLink className={style.profileName} to={PATH.PROFILE_PAGE}>
               {name}
             </NavLink>
-            <div onClick={() => setOpenMenu(!openMenu)}>
-              <InputTypeFile
-                defaultImg={avatar as string}
-                className={style.profileAva}
-                uploadImage={() => {}}
-                hiddenBtn={true}
-              >
-                {avatar}
-              </InputTypeFile>
-              {openMenu && (
-                <DropDownMenu closeMenu={() => setOpenMenu(!openMenu)}>
-                  <HeaderMenu closeMenu={() => setOpenMenu(!openMenu)} />
-                </DropDownMenu>
-              )}
-            </div>
+            <img
+              src={avatar ? avatar : ''}
+              alt=""
+              className={style.profileAva}
+              onClick={() => setOpenMenu(!openMenu)}
+            />
+            {openMenu && (
+              <DropDownMenu closeMenu={() => setOpenMenu(!openMenu)} className={style.drop}>
+                <HeaderMenu closeMenu={() => setOpenMenu(!openMenu)} />
+              </DropDownMenu>
+            )}
           </div>
         ) : (
           <NavLink to={PATH.LOGIN_PAGE}>
