@@ -7,6 +7,8 @@ type PropsType = {
   question: string
   answer: string
   nextCard: () => void
+  questionImg: string
+  answerImg: string
 }
 
 export const LearnCard = (props: PropsType) => {
@@ -32,11 +34,23 @@ export const LearnCard = (props: PropsType) => {
   return (
     <div>
       {showAnswer ? (
-        <Question nextCardHandler={nextCard} question={props.question}>
-          <Answer onChangeRadio={value => onChangeAnswer(value)} answer={props.answer} />
+        <Question
+          nextCardHandler={nextCard}
+          question={props.question}
+          questionImg={props.questionImg}
+        >
+          <Answer
+            onChangeRadio={value => onChangeAnswer(value)}
+            answer={props.answer}
+            answerImg={props.answerImg}
+          />
         </Question>
       ) : (
-        <Question showAnswer={showAnswerHandler} question={props.question} />
+        <Question
+          showAnswer={showAnswerHandler}
+          question={props.question}
+          questionImg={props.questionImg}
+        />
       )}
     </div>
   )

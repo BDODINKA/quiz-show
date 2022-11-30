@@ -9,6 +9,7 @@ type PropsType = {
   showAnswer?: () => void
   nextCardHandler?: () => void
   question?: string
+  questionImg?: string
 }
 
 export const Question = (props: PropsType) => {
@@ -23,7 +24,11 @@ export const Question = (props: PropsType) => {
     <div className={style.box}>
       <div className={style.question}>
         <strong>Question:</strong>
-        <span>{props.question}</span>
+        {props.questionImg ? (
+          <img src={props.questionImg} alt="" style={{ width: '100px', height: '100px' }} />
+        ) : (
+          <span>{props.question}</span>
+        )}
       </div>
       <div className={style.attempts}>{`Количество попыток ответов на вопрос: ${10}`}</div>
       {props.children}
@@ -33,7 +38,11 @@ export const Question = (props: PropsType) => {
     <div className={style.box}>
       <div className={style.question}>
         <strong>Question:</strong>
-        <span>{props.question}</span>
+        {props.questionImg ? (
+          <img src={props.questionImg} alt="" style={{ width: '100px', height: '100px' }} />
+        ) : (
+          <span>{props.question}</span>
+        )}
       </div>
       <div className={style.attempts}>{`Количество попыток ответов на вопрос: ${10}`}</div>
       <SuperButton title={'Show answer'} className={style.btn} onClick={showAnswerHandler} />

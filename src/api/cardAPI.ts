@@ -45,19 +45,6 @@ export type AddAndUpdateCardType = {
   answerVideo?: string
 }
 
-// export type UpdateCardType = {
-//   cardsPack_id: string
-//   _id: string
-//   question?: string
-//   answer?: string
-//   grade?: number
-//   shots?: number
-//   answerImg?: string
-//   questionImg?: string
-//   questionVideo?: string
-//   answerVideo?: string
-// }
-
 export type GradeCardType = {
   card_id: string
   grade: number

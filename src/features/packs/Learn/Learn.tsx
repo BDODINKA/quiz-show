@@ -59,7 +59,13 @@ export const Learn = () => {
           <div className={styles.title}>
             <h2>{`Learn ${packName}`}</h2>
           </div>
-          <LearnCard question={card.question} answer={card.answer} nextCard={nextCard} />
+          <LearnCard
+            question={card.question}
+            answer={card.answer}
+            nextCard={nextCard}
+            questionImg={card.questionImg}
+            answerImg={card.answerImg}
+          />
         </div>
       ) : null}
     </Wrapper>
