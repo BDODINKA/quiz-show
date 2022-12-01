@@ -1,0 +1,10 @@
+@mixin media-mw($width) {
+  @media (max-width: $width + 'px') {
+    @content;
+  }
+}
+@mixin font-S-W-lH-($size, $width, $line-H) {
+  font-size: $size;
+  font-weight: $width;
+  line-height: $line-H;
+}

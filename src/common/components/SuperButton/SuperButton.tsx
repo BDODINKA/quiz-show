@@ -18,7 +18,7 @@ export const SuperButton: React.FC<SuperButtonPropsType> = ({
   title,
   ...restProps
 }) => {
-  const finalClassName = `${red ? s.red : s.default} ${className}`
+  const finalClassName = red ? `${s.red} ${s.default}` : `${className}`
 
   return (
     <button className={finalClassName} {...restProps}>

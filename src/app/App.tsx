@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 
 import './App.css'
-import { LinearProgress } from '@mui/material'
 import { HashRouter, Navigate, Route, Routes } from 'react-router-dom'
 
 import { CustomAlertSnackBar } from '../common/components/CustomSnackBar/CustomAlertSnackBar'
@@ -44,12 +43,11 @@ export function App() {
       <HashRouter>
         {!isInitialize ? (
           <>
-            <Header /> {status === 'progress' && <LinearProgress sx={{ width: '100%' }} />}
+            <Header />
           </>
         ) : (
           <>
             <Header />
-            {status === 'progress' && <LinearProgress sx={{ width: '100%' }} />}
             <Routes>
               <Route path={'*'} element={<Navigate to={PATH.NOT_PAGE} />} />
               <Route path={'/'} element={<Navigate to={PATH.LOGIN_PAGE} />} />

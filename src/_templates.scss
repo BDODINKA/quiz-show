@@ -1,0 +1,22 @@
+@import '_variables';
+
+%for-menu-shadow {
+  color: $color-primary;
+  box-shadow: $box-shadow-third;
+}
+
+%for-btn-light {
+  background: $color-light;
+  color: $color-primary;
+  box-shadow: $box-shadow-third;
+  border: none;
+  outline: none;
+}
+
+%for-btn-dark {
+  background: $color-primary;
+  color: $color-light;
+  box-shadow: $box-shadow-third;
+  border: none;
+  outline: none;
+}

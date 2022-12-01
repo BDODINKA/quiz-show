@@ -1,6 +1,15 @@
+@import '../../../_variables';
+@import '../../../_mixins';
+
 .default {
+  cursor: pointer;
+  color: $color-light;
+  background-color: $color-primary;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 1px 1px 2px #0479fd;
 }
 
-/*.red {*/
-/*  background: red;*/
-/*}*/
+.red {
+  background: $error;
+}
