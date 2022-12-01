@@ -4,6 +4,7 @@ import { LinearProgress } from '@mui/material'
 import { NavLink, useNavigate } from 'react-router-dom'
 
 import { ReactComponent as Logo } from '../../assets/svg/logo-Incubator.svg'
+import { ReactComponent as NoAva } from '../../assets/svg/noAva.svg'
 import { DropDownMenu } from '../../common/components/DropDownMenu/DropDownMenu'
 import { SuperButton } from '../../common/components/SuperButton/SuperButton'
 import { Wrapper } from '../../common/components/Wrapper/Wrapper'
@@ -39,12 +40,17 @@ export const Header = () => {
             <NavLink className={style.name} to={PATH.PROFILE_PAGE}>
               {name}
             </NavLink>
-            <img
-              src={avatar ? avatar : ''}
-              alt="avatar"
-              className={style.ava}
-              onClick={() => setOpenMenu(!openMenu)}
-            />
+            {avatar ? (
+              <img
+                src={avatar}
+                alt="avatar"
+                className={style.ava}
+                onClick={() => setOpenMenu(!openMenu)}
+              />
+            ) : (
+              <NoAva className={style.ava} />
+            )}
+
             {openMenu && (
               <DropDownMenu closeMenu={() => setOpenMenu(!openMenu)} className={style.drop}>
                 <HeaderMenu closeMenu={() => setOpenMenu(!openMenu)} className={style.menu} />
