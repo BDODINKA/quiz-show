@@ -19,6 +19,11 @@
   .button {
     width: 100px;
     height: 30px;
+    @extend %for-btn-dark;
+    border-radius: 30px;
+    &:hover {
+      @extend %for-btn-light;
+    }
   }
 
   .logo {

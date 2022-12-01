@@ -8,15 +8,17 @@
 %for-btn-light {
   background: $color-light;
   color: $color-primary;
-  box-shadow: $box-shadow-third;
+  box-shadow: $box-shadow-primary;
   border: none;
   outline: none;
+  cursor: pointer;
 }
 
 %for-btn-dark {
   background: $color-primary;
   color: $color-light;
-  box-shadow: $box-shadow-third;
+  box-shadow: $box-shadow-four;
   border: none;
   outline: none;
+  cursor: pointer;
 }
