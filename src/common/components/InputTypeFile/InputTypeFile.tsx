@@ -2,7 +2,7 @@ import React, { ChangeEvent, DetailedHTMLProps, InputHTMLAttributes, useRef, use
 
 import defaultImage from '../../../assets/img/defaultImage.jpg'
 
-import s from './InputTypeFile.module.css'
+import style from './InputTypeFile.module.scss'
 
 type DefaultInputPropsType = DetailedHTMLProps<
   InputHTMLAttributes<HTMLInputElement>,
@@ -71,25 +71,20 @@ export const InputTypeFile: React.FC<InputTypeFilePropsType> = ({
     alert('Кривая картинка')
   }
 
-  const finalSpanClassName = `${s.error} ${spanClassName ? spanClassName : ''}`
-  const finalInputClassName = `${s.superInput} ${className ? className : error && s.errorInput}`
-  const finalBtnClassName = `${classNameBtn ? s.btn && classNameBtn : s.btn}`
+  const finalSpanClassName = `${spanClassName ? style.error && spanClassName : ''}`
+  const finalInputClassName = `${
+    className ? style.superInput && className : error && style.error__input
+  }`
+  const finalBtnClassName = `${classNameBtn ? style.btn && classNameBtn : style.btn}`
 
   const defaultImg = restProps.defaultImg !== '' ? restProps.defaultImg : defaultImage
 
   return (
-    <div className={s.container}>
-      <div className={s.inputHeader}>
-        <h4 className={s.inputTitle}>{title}</h4>
-        <img
-          src={isImageBroken ? defaultImage : defaultImg}
-          style={{ width: '100px' }}
-          onError={errorHandler}
-          className={finalInputClassName}
-          alt="image"
-        />
+    <div className={style.container}>
+      <div className={style.input__header}>
+        <h4 className={style.input__title}>{title}</h4>
         {!hiddenBtn && (
-          <label style={{ height: '20px', width: '100px', background: 'black' }}>
+          <label style={{ height: '20px', width: '100px', background: 'transparent' }}>
             <input
               type={type}
               onChange={uploadHandler}
@@ -97,11 +92,18 @@ export const InputTypeFile: React.FC<InputTypeFilePropsType> = ({
               ref={inputRef}
               value={''}
             />
-            <span title="Upload Image" className={finalBtnClassName} />
+            <span className={finalBtnClassName}>Upload Image</span>
           </label>
         )}
         {error && <span className={finalSpanClassName}>{error}</span>}
       </div>
+      <img
+        src={isImageBroken ? defaultImage : defaultImg}
+        style={{ width: '100px' }}
+        onError={errorHandler}
+        className={finalInputClassName}
+        alt="image"
+      />
     </div>
   )
 }
