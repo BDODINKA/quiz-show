@@ -6,7 +6,7 @@
 
   padding-top: 60px;
 }
-.backBlock {
+/*.backBlock {
   position: absolute;
   top: 84px;
   left: 13%;
@@ -16,8 +16,8 @@
   justify-content: center;
 
   width: 158px;
-}
-.link {
+}*/
+/*.link {
   position: absolute;
   left: 24px;
 
@@ -30,8 +30,9 @@
   font-style: normal;
   line-height: 24px;
   color: #000000;
-}
+}*/
 
+/*
 .arrow {
   position: absolute;
   top: 7px;
@@ -42,6 +43,7 @@
 
   background: url('../../assets/svg/arrowProfile.svg');
 }
+*/
 
 .card {
   position: relative;

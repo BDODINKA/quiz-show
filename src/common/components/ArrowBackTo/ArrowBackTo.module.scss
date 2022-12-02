@@ -1,0 +1,44 @@
+@import '../../../_variables';
+@import '../../../_mixins';
+@import '../../../_templates';
+
+.block {
+  position: absolute;
+  top: 84px;
+  left: 13%;
+
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+
+  width: 158px;
+}
+
+.arrow {
+  position: absolute;
+  top: 7px;
+  left: 0;
+
+  width: 14px;
+  height: 9px;
+  &:hover {
+    path{
+      stroke: $color-primary;
+    }
+  }
+}
+.link {
+  font-family: $font-primary;
+  @include font-S-W-lH-(14px, 400, 24px);
+
+  position: absolute;
+  left: 24px;
+
+  display: flex;
+  align-items: center;
+  color: $color-dark;
+  text-decoration: none;
+  &:hover {
+    color: $color-primary;
+  }
+}
