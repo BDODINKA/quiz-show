@@ -22,7 +22,7 @@ export const Header = () => {
 
   const navigate = useNavigate()
 
-  const [openMenu, setOpenMenu] = useState(true)
+  const [openMenu, setOpenMenu] = useState(false)
 
   const name = profile && profile.name
   const avatar = profile && profile.avatar

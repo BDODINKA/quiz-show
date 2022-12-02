@@ -6,7 +6,6 @@ import { CardsPackAddType } from '../../api/cardPacksAPI'
 import { ModalMain } from '../../common/components/Modal/ModalMain'
 import { ModalsAll } from '../../common/components/Modal/ModalsAll'
 import { Pagination } from '../../common/components/Pagination/Pagination'
-import { Wrapper } from '../../common/components/Wrapper/Wrapper'
 import { InitValueRangeSlider } from '../../common/constants/packs'
 import { maxPaginationPage } from '../../common/constants/pagination'
 import { PATH } from '../../common/routes/const-routes'
@@ -94,36 +93,34 @@ export const Packs = () => {
   if (!isLogin) return <Navigate to={PATH.LOGIN_PAGE} />
 
   return (
-    <section className={style.main}>
-      <Wrapper className={style.container}>
-        <div className={style.table_container}>
-          <TitleBlockTable
-            titlePack="Packs list"
-            titleButton="Add new pack"
-            onClick={setOpenModalHandler}
-          />
-          <Filtration
-            user_id={profileId}
-            initialValueSlider={InitValueRangeSlider}
-            paramsId={params.user_id}
-          />
-          <TableCard
-            packs={cardPacks}
-            userId={profileId}
-            sort={setLastUpdate}
-            deleteHandler={id => deleteMyPack(id)}
-            navigateToCards={cardId => navigateToCards(cardId)}
-            changeFieldName={(pack, cardId) => changeFieldName(pack, cardId)}
-          />
-          <Pagination
-            pageCount={params.pageCount}
-            currentPage={params.page}
-            setPage={value => setPage(value)}
-            setPageCount={value => setPageCount(value)}
-            totalCount={totalCount as number}
-            maxPages={maxPaginationPage}
-          />
-        </div>
+    <main className={style.main}>
+      <>
+        <TitleBlockTable
+          titlePack="Packs list"
+          titleButton="Add new pack"
+          onClick={setOpenModalHandler}
+        />
+        <Filtration
+          user_id={profileId}
+          initialValueSlider={InitValueRangeSlider}
+          paramsId={params.user_id}
+        />
+        <TableCard
+          packs={cardPacks}
+          userId={profileId}
+          sort={setLastUpdate}
+          deleteHandler={id => deleteMyPack(id)}
+          navigateToCards={cardId => navigateToCards(cardId)}
+          changeFieldName={(pack, cardId) => changeFieldName(pack, cardId)}
+        />
+        <Pagination
+          pageCount={params.pageCount}
+          currentPage={params.page}
+          setPage={value => setPage(value)}
+          setPageCount={value => setPageCount(value)}
+          totalCount={totalCount as number}
+          maxPages={maxPaginationPage}
+        />
         {modalName !== '' && (
           <ModalMain open={openModal} setOpenModal={setOpenModal}>
             <ModalsAll
@@ -136,7 +133,7 @@ export const Packs = () => {
             />
           </ModalMain>
         )}
-      </Wrapper>
-    </section>
+      </>
+    </main>
   )
 }

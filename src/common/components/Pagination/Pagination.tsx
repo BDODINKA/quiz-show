@@ -3,6 +3,7 @@ import React, { ChangeEvent, useEffect, useState } from 'react'
 import { getPaginationPage } from '../../../utils/getPaginationPage'
 import { useAppSelector } from '../../../utils/hooks/useAppSelector'
 import { selectorStatus } from '../../selectors/selectors'
+import { Wrapper } from '../Wrapper/Wrapper'
 
 import style from './pagination.module.css'
 import { PaginationArrowBtn } from './PaginationArrowBtn'
@@ -56,10 +57,10 @@ export const Pagination = (props: PropsType) => {
     props.setPage(1)
   }
 
-  if (!pagesObj.totalPages) return null
+  if (!pagesObj.totalPages || pagesObj.totalPages.length === 0) return null
 
   return (
-    <div className={style.container}>
+    <Wrapper className={style.container}>
       <PaginationArrowBtn
         arrow={'prev'}
         setPage={() => setPage(props.currentPage - 1)}
@@ -95,6 +96,6 @@ export const Pagination = (props: PropsType) => {
         </select>
         Cards per Page
       </div>
-    </div>
+    </Wrapper>
   )
 }

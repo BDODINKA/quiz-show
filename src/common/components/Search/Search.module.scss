@@ -1,0 +1,27 @@
+@import '../../../_variables.scss';
+@import '../../../_mixins.scss';
+
+.search {
+  width: 413px;
+  height: 34px;
+  text-indent: 17px;
+
+  background: $color-light;
+  border: 1px solid $border-third;
+  border-radius: 2px;
+  &::placeholder {
+    position: relative;
+    left: 17px;
+    font-size: $font-secondary;
+    line-height: 24px;
+    text-indent: 40px;
+    opacity: 0.5;
+    background: url('../../../assets/img/Filter/SearchIcon.png') no-repeat left;
+  }
+  &:active {
+    border: red;
+  }
+}
+.title {
+  @include font-S-W-lH-($font-secondary, 500, 17px);
+}

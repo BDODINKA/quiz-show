@@ -1,0 +1,27 @@
+@import '../../../_variables';
+
+.main {
+  width: 100vw;
+  .arrow {
+    padding: 24px 0 0;
+    max-width: $width-container;
+  }
+  .searchBlock {
+    display: flex;
+    flex-wrap: wrap;
+    height: 62px;
+    align-content: flex-end;
+
+    > span {
+      flex-basis: 100%;
+    }
+    > input {
+      flex-grow: 1;
+    }
+    .searchBtn {
+      width: 36px;
+      height: 36px;
+      flex-grow: 0;
+    }
+  }
+}

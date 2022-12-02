@@ -1,0 +1,18 @@
+@import '../../../_variables';
+
+.backBlock {
+  display: flex;
+  height: 24px;
+  align-items: center;
+  gap: 10px;
+  .arrow {
+    width: 16px;
+    height: 11px;
+    stroke: $color-dark;
+  }
+  .link {
+    font-size: 14px;
+    line-height: 24px;
+    color: $color-dark;
+  }
+}

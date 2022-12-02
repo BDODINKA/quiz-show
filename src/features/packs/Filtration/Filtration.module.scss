@@ -1,0 +1,109 @@
+@import '../../../_variables.scss';
+@import '../../../_mixins.scss';
+
+.container {
+  align-items: center;
+  justify-content: space-between;
+  flex-basis: 100%;
+  flex-wrap: wrap;
+  .title {
+    @include font-S-W-lH-($font-secondary, 500, 17px);
+  }
+  .btn {
+    width: 97px;
+    height: 36px;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+
+    background: $color-light;
+    border: 1px solid $border-third;
+    border-radius: 2px;
+    &:hover {
+      color: $color-light;
+      background: $color-primary;
+      box-shadow: $box-shadow-third;
+    }
+  }
+  .activeBtn {
+    color: #ffffff;
+    background: $color-primary;
+    &:hover {
+      color: $color-primary;
+      background: $color-light;
+      box-shadow: $box-shadow-primary;
+    }
+  }
+  .range {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    .rangeWindow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 34px;
+      height: 34px;
+
+      font-weight: 600;
+      background: $color-light;
+      border: 1px solid $border-third;
+      border-radius: 2px;
+    }
+  }
+  .resetIcon {
+    align-items: center;
+    align-self: flex-end;
+
+    border: 1px solid #d9d9d9;
+    border-radius: 2px;
+    cursor: pointer;
+    fill: $color-dark;
+    &:hover {
+      fill: $color-primary;
+      border-radius: 0 2px 2px 0;
+      box-shadow: $box-shadow-primary;
+    }
+  }
+
+  @include media-mw($break-lg) {
+    gap: 10px;
+    .boxSearch {
+      flex-basis: 100%;
+      > input {
+        width: 100%;
+      }
+    }
+  }
+  @include media-mw($break-sm) {
+    .boxPacks,
+    .range {
+      flex-basis: 100%;
+    }
+    .boxPacks {
+      text-align: center;
+      > div {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        > button {
+          width: 40%;
+        }
+      }
+    }
+  }
+  @include media-mw($break-xs) {
+    .range {
+      max-width: 200px;
+    }
+    .boxPacks {
+      > div {
+        > button {
+          width: 45%;
+        }
+      }
+    }
+  }
+}

@@ -1,17 +1,18 @@
 import React, { useState } from 'react'
 
+import { ReactComponent as ImgBtn } from '../../../assets/svg/dotsBtn.svg'
 import { DropDownMenu } from '../../../common/components/DropDownMenu/DropDownMenu'
 import { SuperButton } from '../../../common/components/SuperButton/SuperButton'
+import { Wrapper } from '../../../common/components/Wrapper/Wrapper'
 
-import styleDefault from './TitleBlockTable.module.css'
+import style from './TitleBlockTable.module.scss'
 
 type PropsType = {
   titlePack: string
   titleButton: string
-  image?: any
+  dropMenu?: boolean
   onClick?: () => void
   deckCoverImg?: string
-  style?: { [key: string]: string }
   deleteModal?: () => void
   navigateToLearn?: () => void
   changeModal?: () => void
@@ -20,17 +21,14 @@ type PropsType = {
 export const TitleBlockTable: React.FC<PropsType> = ({
   titlePack,
   titleButton,
-  image,
+  dropMenu,
   onClick,
-  style,
   deckCoverImg,
   changeModal,
   deleteModal,
   navigateToLearn,
 }) => {
   const [openMenu, setOpenMenu] = useState(false)
-
-  const finalClass = style ? style : styleDefault
 
   const open = () => {
     setOpenMenu(!openMenu)
@@ -52,16 +50,12 @@ export const TitleBlockTable: React.FC<PropsType> = ({
   }
 
   return (
-    <div className={finalClass.packs_list_header}>
-      <div className={finalClass.packs_list_name}>
-        <div className={styleDefault.packTitle_and_button}>
-          <div className={styleDefault.titlePack}>{titlePack}</div>
-          {deckCoverImg && (
-            <img className={styleDefault.deckCoverImg} src={deckCoverImg} alt="picture" />
-          )}
-        </div>
-        <span onClick={open}>
-          {image}
+    <Wrapper>
+      <div className={style.container}>
+        <div className={style.titleBlock}>
+          <div className={style.title}>{titlePack}</div>
+          {deckCoverImg && <img className={style.img} src={deckCoverImg} alt="picture" />}
+          {dropMenu && <ImgBtn onClick={open} className={style.btnImg} />}
           {openMenu && (
             <DropDownMenu closeMenu={() => setOpenMenu(!openMenu)} className={''}>
               <ul>
@@ -71,16 +65,11 @@ export const TitleBlockTable: React.FC<PropsType> = ({
               </ul>
             </DropDownMenu>
           )}
-        </span>
+        </div>
+        <div>
+          <SuperButton title={titleButton} className={style.btn} onClick={onClick} />
+        </div>
       </div>
-
-      <div>
-        <SuperButton
-          title={titleButton}
-          className={finalClass.btn_add_new_pack}
-          onClick={onClick}
-        />
-      </div>
-    </div>
+    </Wrapper>
   )
 }

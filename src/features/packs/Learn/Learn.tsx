@@ -14,7 +14,7 @@ import {
 import { useAppDispatch } from '../../../utils/hooks/useAppDispatch'
 import { useAppSelector } from '../../../utils/hooks/useAppSelector'
 import { getCardsTC } from '../Cards/cards-reducer'
-import style from '../TitleBlockTable/TitleBlockTable.module.css'
+import style from '../TitleBlockTable/TitleBlockTable.module.scss'
 
 import { getCardTC } from './learn-reducer'
 import styles from './Learn.module.css'

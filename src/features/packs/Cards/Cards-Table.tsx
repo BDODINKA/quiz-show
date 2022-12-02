@@ -1,10 +1,10 @@
 import React from 'react'
 
 import { AddAndUpdateCardType, CardsType } from '../../../api/cardAPI'
-import poligon from '../../../assets/img/Table/Polygon 2.svg'
+import polygon from '../../../assets/img/Table/Polygon 2.svg'
 import { Nullable } from '../../../types/Nullable'
 import { CardsTableModal } from '../Table/CardsTableModal'
-import style from '../Table/TableCard.module.css'
+import style from '../Table/TableCard.module.scss'
 
 type PropsType = {
   cards: Nullable<CardsType[]>
@@ -34,35 +34,33 @@ export const CardsTable = (props: PropsType) => {
   }
 
   return (
-    <>
-      <table className={style.table}>
-        <thead>
-          <tr className={style.title_table_header}>
-            <th>Question</th>
-            <th>Answer</th>
-            <th>
-              Last Updated
-              <img style={{ marginLeft: '5px' }} src={poligon} alt="poligon" />
-            </th>
-            <th>Grade</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {props.cards &&
-            props.cards.map(elem => (
-              <CardsTableModal
-                key={elem._id}
-                deleteHandler={(_id, packId) => deleteHandler(_id, packId)}
-                editCardHandler={updateCard => editCardHandler(updateCard)}
-                navigateLearnPage={cardId => navigateLearnPage(cardId)}
-                elem={elem}
-                userId={props.userId}
-                changeRating={value => changeRatingHandler(elem._id, value)}
-              />
-            ))}
-        </tbody>
-      </table>
-    </>
+    <table className={style.table}>
+      <thead>
+        <tr className={style.title_table_header}>
+          <th scope="col">Question</th>
+          <th scope="col">Answer</th>
+          <th scope="col">
+            Last Updated
+            <img style={{ marginLeft: '5px' }} src={polygon} alt="polygon" />
+          </th>
+          <th scope="col">Grade</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {props.cards &&
+          props.cards.map(elem => (
+            <CardsTableModal
+              key={elem._id}
+              deleteHandler={(_id, packId) => deleteHandler(_id, packId)}
+              editCardHandler={updateCard => editCardHandler(updateCard)}
+              navigateLearnPage={cardId => navigateLearnPage(cardId)}
+              elem={elem}
+              userId={props.userId}
+              changeRating={value => changeRatingHandler(elem._id, value)}
+            />
+          ))}
+      </tbody>
+    </table>
   )
 }

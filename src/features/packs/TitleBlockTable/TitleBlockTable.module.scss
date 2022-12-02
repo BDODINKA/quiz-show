@@ -1,0 +1,53 @@
+@import '../../../_variables';
+@import '../../../_mixins.scss';
+
+.container {
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 36px 0 34px;
+  .title {
+    font-size: 22px;
+    font-weight: 600;
+  }
+  .img {
+    width: 170px;
+    height: 110px;
+  }
+  .titleBlock {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .btn {
+    cursor: pointer;
+
+    width: 175px;
+    height: 36px;
+
+    font-size: $font-primary;
+    font-weight: 500;
+    color: $color-light;
+
+    background-color: $color-primary;
+    border: none;
+    border-radius: 30px;
+    box-shadow: $box-shadow-primary;
+  }
+  .btnImg {
+    width: 70px;
+    height: 70px;
+  }
+  @include media-mw($break-sm) {
+    padding: 16px 0 14px;
+    .title {
+      font-size: $font-primary;
+    }
+    .btn {
+      width: 105px;
+      height: 26px;
+      font-size: $font-sm;
+    }
+  }
+}

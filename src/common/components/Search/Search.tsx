@@ -2,7 +2,7 @@ import React, { ChangeEvent, DetailedHTMLProps, InputHTMLAttributes } from 'reac
 
 import { SuperInput } from '../SuperInputText/SuperInput'
 
-import style from './Search.module.css'
+import style from './Search.module.scss'
 
 type PropsType = {
   onSearchChange: (e: ChangeEvent<HTMLInputElement>) => void
@@ -11,12 +11,12 @@ type PropsType = {
 } & DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
 export const Search = (props: PropsType) => {
-  const className = props.className
+  const { className } = props
   const finalClassName = className ? `${style.search} ${className}` : style.search
 
   return (
     <>
-      <span className={style.span}>Search</span>
+      <h4 className={style.title}>Search</h4>
       <SuperInput
         onChange={props.onSearchChange}
         onClick={props.clearSearchHandler}

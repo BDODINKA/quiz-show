@@ -8,9 +8,8 @@
   box-shadow: 0 2px 10px rgba(109, 109, 109, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3);
 
   .container {
-    gap: 32%;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     height: 60px;
     > img {
       cursor: pointer;
@@ -64,6 +63,8 @@
       border-radius: 10px;
       border: 2px solid $border-secondary;
       background: $color-light;
+      z-index: 1;
+
       &:before,
       &:after {
         content: '';
@@ -94,6 +95,7 @@
         gap: 4px;
         padding: 12px 0;
         box-sizing: content-box;
+
         > li {
           cursor: pointer;
           display: flex;
@@ -113,6 +115,28 @@
             stroke: $color-primary;
             fill: $color-light;
           }
+        }
+      }
+    }
+  }
+
+  @include media-mw($break-sm) {
+    .container {
+      .drop {
+        left: 30%;
+        @include media-mw($break-xs) {
+          left: -200%;
+        }
+      }
+      .logo {
+        width: 150px;
+      }
+      .name {
+        font-size: 10px;
+        border: none;
+        pointer-events: none;
+        @include media-mw($break-xs) {
+          display: none;
         }
       }
     }

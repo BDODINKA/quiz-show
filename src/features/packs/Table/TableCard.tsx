@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 
 import { CardPacks, CardsPackAddType } from '../../../api/cardPacksAPI'
+import { Wrapper } from '../../../common/components/Wrapper/Wrapper'
 import { Nullable } from '../../../types/Nullable'
 
 import poligon from './../../../assets/img/Table/Polygon 2.svg'
 import { PacksTableModal } from './PacksTableModal'
-import style from './TableCard.module.css'
+import style from './TableCard.module.scss'
 
 type PropsType = {
   packs?: Nullable<CardPacks[]>
@@ -34,49 +35,43 @@ export const TableCard = (props: PropsType) => {
   }
 
   return (
-    <>
-      <div>
-        <table className={style.table}>
-          <thead>
-            <tr className={style.title_table_header}>
-              <th>Name</th>
-              <th>Cards</th>
-              {sort ? (
-                <th onClick={() => sortHandler(false)}>
-                  Last Updated
-                  <img style={{ marginLeft: '5px' }} src={poligon} alt="poligon" />
-                </th>
-              ) : (
-                <th onClick={() => sortHandler(true)}>
-                  Last Updated
-                  <img
-                    style={{ marginLeft: '5px', rotate: '180deg' }}
-                    src={poligon}
-                    alt="poligon"
-                  />
-                </th>
-              )}
+    <Wrapper>
+      <table className={style.table}>
+        <thead>
+          <tr className={style.title_table_header}>
+            <th>Name</th>
+            <th>Cards</th>
+            {sort ? (
+              <th onClick={() => sortHandler(false)}>
+                Last Updated
+                <img style={{ marginLeft: '5px' }} src={poligon} alt="poligon" />
+              </th>
+            ) : (
+              <th onClick={() => sortHandler(true)}>
+                Last Updated
+                <img style={{ marginLeft: '5px', rotate: '180deg' }} src={poligon} alt="poligon" />
+              </th>
+            )}
 
-              <th>Created by</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {props.packs
-              ? props.packs.map(elem => (
-                  <PacksTableModal
-                    key={elem._id}
-                    deleteHandler={id => deleteHandler(id)}
-                    changeFieldName={(pack, id) => setFieldName(pack, id)}
-                    navigateToCards={cardId => navigateToCards(cardId)}
-                    elem={elem}
-                    userId={props.userId}
-                  />
-                ))
-              : null}
-          </tbody>
-        </table>
-      </div>
-    </>
+            <th>Created by</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {props.packs
+            ? props.packs.map(elem => (
+                <PacksTableModal
+                  key={elem._id}
+                  deleteHandler={id => deleteHandler(id)}
+                  changeFieldName={(pack, id) => setFieldName(pack, id)}
+                  navigateToCards={cardId => navigateToCards(cardId)}
+                  elem={elem}
+                  userId={props.userId}
+                />
+              ))
+            : null}
+        </tbody>
+      </table>
+    </Wrapper>
   )
 }

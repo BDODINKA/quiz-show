@@ -3,6 +3,19 @@
 
 .container {
   max-width: $width-container;
+  padding: 0 136px;
   display: flex;
   margin: 0 auto;
+  @include media-mw($break-lg) {
+    padding: 0 106px;
+  }
+  @include media-mw($break-md) {
+    padding: 0 76px;
+  }
+  @include media-mw($break-sm) {
+    padding: 0 46px;
+  }
+  @include media-mw($break-xs) {
+    padding: 0 26px;
+  }
 }

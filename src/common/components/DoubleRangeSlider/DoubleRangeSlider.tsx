@@ -15,7 +15,7 @@ export const DoubleRangeSlider = (props: PropsType) => {
   }
 
   return (
-    <Box sx={{ width: 155 }}>
+    <Box sx={{ width: 155, height: 36 }}>
       <Slider
         value={props.currentValue}
         onChange={handleChange}

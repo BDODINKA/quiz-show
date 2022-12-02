@@ -10,5 +10,5 @@ type PropsType = {
 export const Wrapper = (props: PropsType) => {
   const className = props.className ? `${props.className} ${style.container}` : `${style.container}`
 
-  return <div className={className}>{props.children}</div>
+  return <section className={className}>{props.children}</section>
 }

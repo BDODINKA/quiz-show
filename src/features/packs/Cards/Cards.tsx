@@ -29,9 +29,7 @@ import { useAppSelector } from '../../../utils/hooks/useAppSelector'
 import { useDebounce } from '../../../utils/hooks/useDebounce'
 import { deletePackTC, updatePackTC } from '../Packs-reducer'
 import { TitleBlockTable } from '../TitleBlockTable/TitleBlockTable'
-import style from '../TitleBlockTable/TitleBlockTable.module.css'
 
-import dots from './../../../assets/img/Table/dots.svg'
 import {
   addCardTC,
   changeRatingCardTC,
@@ -43,7 +41,7 @@ import {
   setCardPageCountAC,
 } from './cards-reducer'
 import { CardsTable } from './Cards-Table'
-import s from './Cards.module.css'
+import style from './Cards.module.scss'
 
 export const Cards = () => {
   const navigate = useNavigate()
@@ -130,56 +128,59 @@ export const Cards = () => {
   if (!isLogin) return <Navigate to={PATH.LOGIN_PAGE} />
 
   return (
-    <Wrapper className={style.packs_list_container}>
-      <div className={style.table_container}>
+    <main className={style.main}>
+      <Wrapper className={style.arrow}>
         <ArrowBackTo />
-        <TitleBlockTable
-          titlePack={packName ? packName : ''}
-          titleButton={packUserId === profileId ? 'Add new card' : 'Learn to pack'}
-          image={packUserId === profileId && <img className={s.dots} src={dots} alt="dots" />}
-          deckCoverImg={packDeckCover as string}
-          onClick={() => {
-            packUserId === profileId ? addCardModal() : navigateLearnPage(cards ? cards[0]._id : '')
-          }}
-          style={style}
-          navigateToLearn={() => navigateLearnPage(cards ? cards[0]._id : '')}
-          changeModal={() => {
-            setModalName('modalPack')
-            setOpenModalHandler()
-          }}
-          deleteModal={() => {
-            setModalName('modalDelete')
-            setOpenModalHandler()
-          }}
-        />
-        <Search onSearchChange={onSearchChange} value={searchValue} className={s.search} />
-        <SuperButton onClick={clearSearchHandler} title="X" />
-        {cards && cards.length ? (
-          <>
-            <CardsTable
-              cards={cards}
-              userId={profileId}
-              minGrade={minGrade}
-              maxGrade={maxGrade}
-              profileId={profileId}
-              deleteHandler={(_id, packId) => deleteCard(_id, packId)}
-              editCardHandler={updateCard => editCard(updateCard)}
-              changeRating={(cardId, value) => changeRating(cardId, value)}
-              navigateLearnPage={cardId => navigateLearnPage(cardId)}
-            />
-            <Pagination
-              pageCount={cardsParams.pageCount}
-              currentPage={cardsParams.page}
-              totalCount={cardsTotalCount as number}
-              setPage={value => setPage(value)}
-              setPageCount={value => setPageCount(value)}
-              maxPages={cardsParams.max}
-            />
-          </>
-        ) : (
-          <div>Cards not found</div>
-        )}
-      </div>
+      </Wrapper>
+      <TitleBlockTable
+        titlePack={packName ? packName : ''}
+        titleButton={packUserId === profileId ? 'Add new card' : 'Learn to pack'}
+        dropMenu={packUserId === profileId}
+        deckCoverImg={packDeckCover as string}
+        onClick={() => {
+          packUserId === profileId ? addCardModal() : navigateLearnPage(cards ? cards[0]._id : '')
+        }}
+        navigateToLearn={() => navigateLearnPage(cards ? cards[0]._id : '')}
+        changeModal={() => {
+          setModalName('modalPack')
+          setOpenModalHandler()
+        }}
+        deleteModal={() => {
+          setModalName('modalDelete')
+          setOpenModalHandler()
+        }}
+      />
+      <Wrapper className={style.searchBlock}>
+        <Search onSearchChange={onSearchChange} value={searchValue} className={style.search} />
+        <SuperButton onClick={clearSearchHandler} title="X" className={style.searchBtn} />
+      </Wrapper>
+
+      {cards && cards.length ? (
+        <>
+          <CardsTable
+            cards={cards}
+            userId={profileId}
+            minGrade={minGrade}
+            maxGrade={maxGrade}
+            profileId={profileId}
+            deleteHandler={(_id, packId) => deleteCard(_id, packId)}
+            editCardHandler={updateCard => editCard(updateCard)}
+            changeRating={(cardId, value) => changeRating(cardId, value)}
+            navigateLearnPage={cardId => navigateLearnPage(cardId)}
+          />
+          <Pagination
+            pageCount={cardsParams.pageCount}
+            currentPage={cardsParams.page}
+            totalCount={cardsTotalCount as number}
+            setPage={value => setPage(value)}
+            setPageCount={value => setPageCount(value)}
+            maxPages={cardsParams.max}
+          />
+        </>
+      ) : (
+        <div>Cards not found</div>
+      )}
+
       {modalName !== '' && (
         <ModalMain open={openModal} setOpenModal={setOpenModal}>
           <ModalsAll
@@ -195,6 +196,6 @@ export const Cards = () => {
           />
         </ModalMain>
       )}
-    </Wrapper>
+    </main>
   )
 }

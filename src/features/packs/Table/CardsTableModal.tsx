@@ -8,7 +8,7 @@ import { selectorStatus } from '../../../common/selectors/selectors'
 import { useAppSelector } from '../../../utils/hooks/useAppSelector'
 
 import { ActionsButton } from './TableActionsButton/ActionsButton'
-import style from './TableCard.module.css'
+import style from './TableCard.module.scss'
 
 type PropsType = {
   elem: CardsType
@@ -37,30 +37,38 @@ export const CardsTableModal = (props: PropsType) => {
   return (
     <tr key={props.elem._id} className={style.title_table_body}>
       {props.elem.questionImg ? (
-        <td className={style.tableImg} onClick={() => navigateLearnPage(props.elem._id)}>
+        <td
+          className={style.tableImg}
+          onClick={() => navigateLearnPage(props.elem._id)}
+          data-label="Question"
+        >
           <img src={props.elem.questionImg} alt="questionImg" />
         </td>
       ) : (
-        <td onClick={() => navigateLearnPage(props.elem._id)}>{props.elem.question}</td>
+        <td onClick={() => navigateLearnPage(props.elem._id)} data-label="Question">
+          {props.elem.question}
+        </td>
       )}
 
       {props.elem.answerImg ? (
-        <td className={style.tableImg}>
+        <td className={style.tableImg} data-label="Answer">
           <img src={props.elem.answerImg} alt="answerImg" />
         </td>
       ) : (
-        <td>{props.elem.answer}</td>
+        <td data-label="Answer">{props.elem.answer}</td>
       )}
 
-      <td>{new Date(Date.parse(props.elem.updated)).toLocaleDateString('ru-RU')}</td>
-      <td>
+      <td data-label="Last Updated">
+        {new Date(Date.parse(props.elem.updated)).toLocaleDateString('ru-RU')}
+      </td>
+      <td data-label="Grade">
         <RatingComponent
           changeRating={value => changeRating(value)}
           valueRating={props.elem.grade}
           disabled={isProgress === 'progress'}
         />
       </td>
-      <td className={style.actions_button_my_pack}>
+      <td className={style.actions_button_my_pack} data-label="Actions">
         {props.elem._id && props.userId === props.elem.user_id ? (
           <ActionsButton
             showBtn={true}

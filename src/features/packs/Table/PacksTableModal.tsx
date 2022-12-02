@@ -5,7 +5,7 @@ import { ModalMain } from '../../../common/components/Modal/ModalMain'
 import { ModalsAll } from '../../../common/components/Modal/ModalsAll'
 
 import { ActionsButton } from './TableActionsButton/ActionsButton'
-import style from './TableCard.module.css'
+import style from './TableCard.module.scss'
 
 type PropsType = {
   deleteHandler: (id: string) => void
