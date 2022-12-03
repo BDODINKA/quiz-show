@@ -11,7 +11,7 @@ import { SuperButton } from '../../SuperButton/SuperButton'
 import { SuperCheckbox } from '../../SuperCheckbox/SuperCheckbox'
 import { SuperInput } from '../../SuperInputText/SuperInput'
 
-import style from './ModalPack.module.css'
+import style from './ModalPack.module.scss'
 
 type PropsType = {
   onClose?: () => void
@@ -90,15 +90,15 @@ export const ModalPack = (props: PropsType) => {
                     {...formik.getFieldProps('private')}
                     className={style.checkBox}
                   />
-                  <label className={style.privateBox_label} htmlFor="private">
+                  <label className={style.privateBox__label} htmlFor="private">
                     Private
                   </label>
                 </div>
-                <div className={style.btn_block}>
+                <div className={style.btn__block}>
                   <SuperButton
                     type={'reset'}
                     title={'Cancel'}
-                    className={style.btn_cancel}
+                    className={style.btn__cancel}
                     onClick={setActiveHandler}
                   />
                   <SuperButton

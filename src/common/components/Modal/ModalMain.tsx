@@ -2,7 +2,7 @@ import React, { MutableRefObject, SetStateAction, useEffect, useRef, useState } 
 
 import { createPortal } from 'react-dom'
 
-import style from './ModalMain.module.css'
+import style from './ModalMain.module.scss'
 
 type PropsType = {
   children: React.ReactNode
@@ -40,7 +40,7 @@ export const ModalMain = (props: PropsType) => {
       {createPortal(
         <div
           ref={ref}
-          className={props.open ? `${style.modal} ${style.modal_active}` : style.modal}
+          className={props.open ? `${style.modal} ${style.modal__active}` : style.modal}
           onClick={setActive}
           id={'overlay'}
         >
