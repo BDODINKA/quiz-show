@@ -9,6 +9,14 @@
   .title {
     @include font-S-W-lH-($font-secondary, 500, 17px);
   }
+  .boxSearch {
+    > input {
+      &:focus {
+        outline: none;
+        box-shadow: $box-shadow-primary;
+      }
+    }
+  }
   .btn {
     width: 97px;
     height: 36px;
