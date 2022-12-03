@@ -4,8 +4,8 @@ import { CardPacks, CardsPackAddType } from '../../../api/cardPacksAPI'
 import { ModalMain } from '../../../common/components/Modal/ModalMain'
 import { ModalsAll } from '../../../common/components/Modal/ModalsAll'
 
+import style from './Table.module.scss'
 import { ActionsButton } from './TableActionsButton/ActionsButton'
-import style from './TableCard.module.scss'
 
 type PropsType = {
   deleteHandler: (id: string) => void
@@ -25,8 +25,8 @@ export const PacksTableModal = ({
   const [modalName, setModalName] = useState<'modalCard' | 'modalDelete' | 'modalPack' | ''>('')
 
   return (
-    <tr key={elem._id} className={style.title_table_body}>
-      <td className={style.td}>
+    <tr key={elem._id} className={style.row}>
+      <td className={style.td} data-label="Name">
         {elem.deckCover && (
           <img
             className={style.linkImage}
@@ -35,14 +35,20 @@ export const PacksTableModal = ({
             onClick={() => navigateToCards(elem._id)}
           />
         )}
-        <span className={style.linkName} onClick={() => navigateToCards(elem._id)}>
+        <p className={style.linkName} onClick={() => navigateToCards(elem._id)}>
           {elem.name}
-        </span>
+        </p>
       </td>
-      <td>{elem.cardsCount}</td>
-      <td>{new Date(Date.parse(elem.updated)).toLocaleDateString('ru-RU')}</td>
-      <td>{elem.user_name}</td>
-      <td className={style.actions_button_container}>
+      <td data-label="Cards" className={style.td}>
+        {elem.cardsCount}
+      </td>
+      <td data-label="Last Updated" className={style.td}>
+        {new Date(Date.parse(elem.updated)).toLocaleDateString('ru-RU')}
+      </td>
+      <td data-label="Created by" className={style.td}>
+        {elem.user_name}
+      </td>
+      <td className={style.td} data-label="Actions">
         {userId === elem.user_id ? (
           <ActionsButton
             showBtn={true}
@@ -59,24 +65,23 @@ export const PacksTableModal = ({
         ) : (
           <ActionsButton showBtn={false} learnHandler={() => navigateToCards(elem._id)} />
         )}
-
-        {modalName !== '' && (
-          <ModalMain open={openModal} setOpenModal={setOpenModal}>
-            <ModalsAll
-              title={{ pack: 'Edit pack', delete: 'Delete Pack' }}
-              setOpenModal={setOpenModal}
-              onSubmitPack={pack => changeFieldName(pack, elem._id)}
-              text={elem.name}
-              deckCover={elem.deckCover}
-              nameModal={modalName}
-              onSubmitDelete={() => {
-                deleteHandler(elem._id)
-              }}
-              deleteName={elem.name}
-            />
-          </ModalMain>
-        )}
       </td>
+      {modalName !== '' && (
+        <ModalMain open={openModal} setOpenModal={setOpenModal}>
+          <ModalsAll
+            title={{ pack: 'Edit pack', delete: 'Delete Pack' }}
+            setOpenModal={setOpenModal}
+            onSubmitPack={pack => changeFieldName(pack, elem._id)}
+            text={elem.name}
+            deckCover={elem.deckCover}
+            nameModal={modalName}
+            onSubmitDelete={() => {
+              deleteHandler(elem._id)
+            }}
+            deleteName={elem.name}
+          />
+        </ModalMain>
+      )}
     </tr>
   )
 }

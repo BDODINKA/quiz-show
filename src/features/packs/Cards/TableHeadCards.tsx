@@ -4,7 +4,7 @@ import { AddAndUpdateCardType, CardsType } from '../../../api/cardAPI'
 import polygon from '../../../assets/img/Table/Polygon 2.svg'
 import { Nullable } from '../../../types/Nullable'
 import { CardsTableModal } from '../Table/CardsTableModal'
-import style from '../Table/TableCard.module.scss'
+import style from '../Table/Table.module.scss'
 
 type PropsType = {
   cards: Nullable<CardsType[]>
@@ -18,7 +18,7 @@ type PropsType = {
   userId?: string
 }
 
-export const CardsTable = (props: PropsType) => {
+export const TableHeadCards = (props: PropsType) => {
   const deleteHandler = (_id: string, packId: string) => {
     props.deleteHandler && props.deleteHandler(_id, packId)
   }

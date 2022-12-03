@@ -6,7 +6,7 @@ import { Nullable } from '../../../types/Nullable'
 
 import poligon from './../../../assets/img/Table/Polygon 2.svg'
 import { PacksTableModal } from './PacksTableModal'
-import style from './TableCard.module.scss'
+import style from './Table.module.scss'
 
 type PropsType = {
   packs?: Nullable<CardPacks[]>
@@ -16,7 +16,7 @@ type PropsType = {
   changeFieldName?: (pack: CardsPackAddType, cardId: string) => void
   navigateToCards?: (cardId: string) => void
 }
-export const TableCard = (props: PropsType) => {
+export const TableHeadPacks = (props: PropsType) => {
   const [sort, setSort] = useState(false)
 
   const sortHandler = (value: boolean) => {
@@ -35,26 +35,26 @@ export const TableCard = (props: PropsType) => {
   }
 
   return (
-    <Wrapper>
+    <Wrapper className={style.container}>
       <table className={style.table}>
-        <thead>
-          <tr className={style.title_table_header}>
-            <th>Name</th>
-            <th>Cards</th>
+        <thead className={style.head}>
+          <tr className={style.head_row}>
+            <th scope="col">Name</th>
+            <th scope="col">Cards</th>
             {sort ? (
-              <th onClick={() => sortHandler(false)}>
+              <th onClick={() => sortHandler(false)} scope="col">
                 Last Updated
                 <img style={{ marginLeft: '5px' }} src={poligon} alt="poligon" />
               </th>
             ) : (
-              <th onClick={() => sortHandler(true)}>
+              <th onClick={() => sortHandler(true)} scope="col">
                 Last Updated
                 <img style={{ marginLeft: '5px', rotate: '180deg' }} src={poligon} alt="poligon" />
               </th>
             )}
 
-            <th>Created by</th>
-            <th>Actions</th>
+            <th scope="col">Created by</th>
+            <th scope="col">Actions</th>
           </tr>
         </thead>
         <tbody>

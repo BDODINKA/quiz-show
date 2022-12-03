@@ -7,8 +7,8 @@ import { RatingComponent } from '../../../common/components/Rating/RatingCompone
 import { selectorStatus } from '../../../common/selectors/selectors'
 import { useAppSelector } from '../../../utils/hooks/useAppSelector'
 
+import style from './Table.module.scss'
 import { ActionsButton } from './TableActionsButton/ActionsButton'
-import style from './TableCard.module.scss'
 
 type PropsType = {
   elem: CardsType

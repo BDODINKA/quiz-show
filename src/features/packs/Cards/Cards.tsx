@@ -40,8 +40,8 @@ import {
   setCardPageAC,
   setCardPageCountAC,
 } from './cards-reducer'
-import { CardsTable } from './Cards-Table'
 import style from './Cards.module.scss'
+import { TableHeadCards } from './TableHeadCards'
 
 export const Cards = () => {
   const navigate = useNavigate()
@@ -157,7 +157,7 @@ export const Cards = () => {
 
       {cards && cards.length ? (
         <>
-          <CardsTable
+          <TableHeadCards
             cards={cards}
             userId={profileId}
             minGrade={minGrade}

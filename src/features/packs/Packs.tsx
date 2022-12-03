@@ -31,7 +31,7 @@ import {
   updatePackTC,
 } from './Packs-reducer'
 import style from './Packs.module.css'
-import { TableCard } from './Table/TableCard'
+import { TableHeadPacks } from './Table/TableHeadPacks'
 import { TitleBlockTable } from './TitleBlockTable/TitleBlockTable'
 
 export const Packs = () => {
@@ -105,7 +105,7 @@ export const Packs = () => {
           initialValueSlider={InitValueRangeSlider}
           paramsId={params.user_id}
         />
-        <TableCard
+        <TableHeadPacks
           packs={cardPacks}
           userId={profileId}
           sort={setLastUpdate}
