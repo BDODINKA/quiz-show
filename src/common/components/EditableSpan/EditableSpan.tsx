@@ -8,7 +8,7 @@ import React, {
 import { Formik } from 'formik'
 
 import { validateField } from '../../constants/validate'
-import style from '../Modal/ModalCard/ModalCard.module.css'
+import style from '../Modal/ModalCard/ModalCard.module.scss'
 import { SuperButton } from '../SuperButton/SuperButton'
 import { SuperInput } from '../SuperInputText/SuperInput'
 

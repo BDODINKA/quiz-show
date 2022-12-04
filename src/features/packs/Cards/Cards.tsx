@@ -191,7 +191,7 @@ export const Cards = () => {
             deckCover={packDeckCover ? packDeckCover : ''}
             onSubmitDelete={deletePack}
             deleteName={packName as string}
-            title={{ card: 'card', pack: 'pack', delete: 'delete' }}
+            title={{ card: 'Add new card', pack: 'Edit pack', delete: 'Delete pack' }}
           />
         </ModalMain>
       )}

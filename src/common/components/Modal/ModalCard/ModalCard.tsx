@@ -11,7 +11,7 @@ import { SuperButton } from '../../SuperButton/SuperButton'
 import { SuperInput } from '../../SuperInputText/SuperInput'
 import { SuperSelect } from '../../SuperSelect/SuperSelect'
 
-import style from './ModalCard.module.css'
+import style from './ModalCard.module.scss'
 
 type PropsType = {
   onClose?: () => void
@@ -73,10 +73,9 @@ export const ModalCard = (props: PropsType) => {
       {formik => (
         <div className={style.modal}>
           <div className={style.form}>
-            <div className="container">
-              <h2 className={style.title}>{props.title}</h2>
-              {/*<div onClick={setActiveHandler}>{close_icon}</div>*/}
-              <div>Choose a question format</div>
+            <h2 className={style.title}>{props.title}</h2>
+            <div className={style.container}>
+              <div className={style.forma__title}>Choose a question format</div>
               <SuperSelect
                 options={selectArr}
                 value={optionValue}
@@ -88,18 +87,19 @@ export const ModalCard = (props: PropsType) => {
                 onReset={formik.handleReset}
               >
                 {optionValue === 'Picture' ? (
-                  <InputTypeFile
-                    title="Question:"
-                    type={'file'}
-                    {...formik.getFieldProps('questionImage')}
-                    error={formik.touched && formik.errors.questionImage}
-                    spanClassName={style.spanError}
-                    uploadImage={setQuestionImage}
-                    defaultImg={questionImage ? questionImage : ''}
-                  />
+                  <div className={style.question__image}>
+                    <InputTypeFile
+                      title="Question:"
+                      type={'file'}
+                      {...formik.getFieldProps('questionImage')}
+                      error={formik.touched && formik.errors.questionImage}
+                      spanClassName={style.spanError}
+                      uploadImage={setQuestionImage}
+                      defaultImg={questionImage ? questionImage : ''}
+                    />
+                  </div>
                 ) : (
-                  <div>
-                    <h4>Question</h4>
+                  <div className={style.question}>
                     <SuperInput
                       type={'text'}
                       placeholder={'Question'}
@@ -111,18 +111,19 @@ export const ModalCard = (props: PropsType) => {
                   </div>
                 )}
                 {optionValue === 'Picture' ? (
-                  <InputTypeFile
-                    title="Answer:"
-                    type={'file'}
-                    {...formik.getFieldProps('answerImage')}
-                    error={formik.touched && formik.errors.answerImage}
-                    spanClassName={style.spanError}
-                    uploadImage={setAnswerImage}
-                    defaultImg={answerImage ? answerImage : ''}
-                  />
+                  <div className={style.question__image}>
+                    <InputTypeFile
+                      title="Answer:"
+                      type={'file'}
+                      {...formik.getFieldProps('answerImage')}
+                      error={formik.touched && formik.errors.answerImage}
+                      spanClassName={style.spanError}
+                      uploadImage={setAnswerImage}
+                      defaultImg={answerImage ? answerImage : ''}
+                    />
+                  </div>
                 ) : (
-                  <div>
-                    <h4>Answer</h4>
+                  <div className={style.question}>
                     <SuperInput
                       type={'text'}
                       placeholder={'Answer'}
@@ -134,11 +135,11 @@ export const ModalCard = (props: PropsType) => {
                   </div>
                 )}
 
-                <div className={style.btn_block}>
+                <div className={style.btn__block}>
                   <SuperButton
                     type={'reset'}
                     title={'Cancel'}
-                    className={style.btn_cancel}
+                    className={style.btn__cancel}
                     onClick={setActiveHandler}
                   />
                   <SuperButton

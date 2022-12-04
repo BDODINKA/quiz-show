@@ -15,8 +15,9 @@ type variantName =
 type DataType = {
   variant: 'Field' | 'Image'
   name: variantName
-  max: number
-  min: number
+  max?: number
+  min?: number
+  required?: 'Required'
 }
 
 export const validateSchema = (data: DataType[]) => {
@@ -30,8 +31,8 @@ export const validateSchema = (data: DataType[]) => {
       obj = {
         ...obj,
         [data[i].name]: Yup.string()
-          .max(max, `Max length should be max ${max} Symbols`)
-          .min(min, `Min length should be min ${min} Symbols`)
+          .max(max!, `Max length should be max ${max} Symbols`)
+          .min(min!, `Min length should be min ${min} Symbols`)
           .required(`${data[i].variant} Required`),
       }
     }

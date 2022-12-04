@@ -71,7 +71,7 @@ export const InputTypeFile: React.FC<InputTypeFilePropsType> = ({
     alert('Кривая картинка')
   }
 
-  const finalSpanClassName = `${spanClassName ? style.error && spanClassName : ''}`
+  //const finalSpanClassName = `${spanClassName ? style.error && spanClassName : ''}`
   const finalInputClassName = `${
     className ? style.superInput && className : error && style.error__input
   }`
@@ -95,7 +95,7 @@ export const InputTypeFile: React.FC<InputTypeFilePropsType> = ({
             <span className={finalBtnClassName}>Upload Image</span>
           </label>
         )}
-        {error && <span className={finalSpanClassName}>{error}</span>}
+        {error && <span className={spanClassName}>{error}</span>}
       </div>
       <img
         src={isImageBroken ? defaultImage : defaultImg}
