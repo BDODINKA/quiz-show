@@ -59,9 +59,8 @@ export const ModalPack = (props: PropsType) => {
       {formik => (
         <div className={style.modal}>
           <div className={style.form}>
-            <div className="container">
-              {/*<div onClick={setActiveHandler}>{'close_icon'}</div>*/}
-              <h2 className={style.title}>{props.title}</h2>
+            <h2 className={style.title}>{props.title}</h2>
+            <div className={style.container}>
               <form
                 onSubmit={formik.handleSubmit}
                 className={style.forms}
