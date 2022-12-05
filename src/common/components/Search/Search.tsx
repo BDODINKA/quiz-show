@@ -2,7 +2,7 @@ import React, { ChangeEvent, DetailedHTMLProps, InputHTMLAttributes } from 'reac
 
 import { SuperInput } from '../SuperInputText/SuperInput'
 
-import style from './Search.module.css'
+import style from './Search.module.scss'
 
 type PropsType = {
   onSearchChange: (e: ChangeEvent<HTMLInputElement>) => void
