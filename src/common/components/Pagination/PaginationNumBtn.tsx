@@ -2,7 +2,7 @@ import React from 'react'
 
 import { DropDownMenu } from '../DropDownMenu/DropDownMenu'
 
-import style from './pagination.module.css'
+import style from './pagination.module.scss'
 
 type PropsType = {
   setPage: (page: number) => void

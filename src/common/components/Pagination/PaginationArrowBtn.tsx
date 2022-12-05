@@ -1,6 +1,6 @@
 import React from 'react'
 
-import style from './pagination.module.css'
+import style from './pagination.module.scss'
 type PropsType = {
   arrow: 'prev' | 'next'
   setPage: () => void
