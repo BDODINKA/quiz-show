@@ -70,90 +70,96 @@ export const ModalCard = (props: PropsType) => {
         setActiveHandler()
       }}
     >
-      {formik => (
-        <div className={style.modal}>
-          <div className={style.form}>
-            <h2 className={style.title}>{props.title}</h2>
-            <div className={style.container}>
-              <div className={style.forma__title}>Choose a question format</div>
-              <SuperSelect
-                options={selectArr}
-                value={optionValue}
-                onChangeOption={onChangeOption}
-              />
-              <form
-                onSubmit={formik.handleSubmit}
-                className={style.forma}
-                onReset={formik.handleReset}
-              >
-                {optionValue === 'Picture' ? (
-                  <div className={style.question__image}>
-                    <InputTypeFile
-                      title="Question:"
-                      type={'file'}
-                      {...formik.getFieldProps('questionImage')}
-                      error={formik.touched && formik.errors.questionImage}
-                      spanClassName={style.spanError}
-                      uploadImage={setQuestionImage}
-                      defaultImg={questionImage ? questionImage : ''}
-                    />
-                  </div>
-                ) : (
-                  <div className={style.question}>
-                    <SuperInput
-                      type={'text'}
-                      placeholder={'Question'}
-                      {...formik.getFieldProps('question')}
-                      error={formik.touched && formik.errors.question}
-                      className={style.input}
-                      spanClassName={style.spanError}
-                    />
-                  </div>
-                )}
-                {optionValue === 'Picture' ? (
-                  <div className={style.question__image}>
-                    <InputTypeFile
-                      title="Answer:"
-                      type={'file'}
-                      {...formik.getFieldProps('answerImage')}
-                      error={formik.touched && formik.errors.answerImage}
-                      spanClassName={style.spanError}
-                      uploadImage={setAnswerImage}
-                      defaultImg={answerImage ? answerImage : ''}
-                    />
-                  </div>
-                ) : (
-                  <div className={style.question}>
-                    <SuperInput
-                      type={'text'}
-                      placeholder={'Answer'}
-                      {...formik.getFieldProps('answer')}
-                      error={formik.touched && formik.errors.answer}
-                      className={style.input}
-                      spanClassName={style.spanError}
-                    />
-                  </div>
-                )}
+      {formik => {
+        console.log('log', formik.errors)
 
-                <div className={style.btn__block}>
-                  <SuperButton
-                    type={'reset'}
-                    title={'Cancel'}
-                    className={style.btn__cancel}
-                    onClick={setActiveHandler}
-                  />
-                  <SuperButton
-                    type={'submit'}
-                    disabled={status === 'progress'}
-                    className={style.btn}
-                    title={'Save'}
-                  />
-                </div>
-              </form>
+        return (
+          <div className={style.modal}>
+            <div className={style.form}>
+              <h2 className={style.title}>{props.title}</h2>
+              <div className={style.container}>
+                <div className={style.forma__title}>Choose a question format</div>
+                <SuperSelect
+                  options={selectArr}
+                  value={optionValue}
+                  onChangeOption={onChangeOption}
+                />
+                <form
+                  onSubmit={formik.handleSubmit}
+                  className={style.forma}
+                  onReset={formik.handleReset}
+                >
+                  {optionValue === 'Picture' ? (
+                    <>
+                      <div className={style.question__image}>
+                        <InputTypeFile
+                          title="Question:"
+                          type={'file'}
+                          {...formik.getFieldProps('questionImage')}
+                          // error={formik.touched && formik.errors.questionImage}
+                          error={formik.errors.questionImage}
+                          spanClassName={style.spanError}
+                          uploadImage={setQuestionImage}
+                          defaultImg={questionImage ? questionImage : ''}
+                        />
+                      </div>
+                      <div className={style.question__image}>
+                        <InputTypeFile
+                          title="Answer:"
+                          type={'file'}
+                          {...formik.getFieldProps('answerImage')}
+                          // error={formik.touched && formik.errors.answerImage}
+                          error={formik.errors.answerImage}
+                          spanClassName={style.spanError}
+                          uploadImage={setAnswerImage}
+                          defaultImg={answerImage ? answerImage : ''}
+                        />
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className={style.question}>
+                        <SuperInput
+                          type={'text'}
+                          placeholder={'Question'}
+                          {...formik.getFieldProps('question')}
+                          error={formik.touched && formik.errors.question}
+                          className={style.input}
+                          spanClassName={style.spanError}
+                        />
+                      </div>
+                      <div className={style.question}>
+                        <SuperInput
+                          type={'text'}
+                          placeholder={'Answer'}
+                          {...formik.getFieldProps('answer')}
+                          error={formik.touched && formik.errors.answer}
+                          className={style.input}
+                          spanClassName={style.spanError}
+                        />
+                      </div>
+                    </>
+                  )}
+                  <div className={style.btn__block}>
+                    <SuperButton
+                      type={'reset'}
+                      title={'Cancel'}
+                      className={style.btn__cancel}
+                      onClick={setActiveHandler}
+                    />
+                    <SuperButton
+                      type={'submit'}
+                      disabled={status === 'progress'}
+                      className={style.btn}
+                      title={'Save'}
+                    />
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )
+      }}
     </Formik>
   )
 }

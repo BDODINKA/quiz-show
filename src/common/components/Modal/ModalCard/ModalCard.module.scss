@@ -4,7 +4,7 @@
 @import '../../../../_templates';
 
 .modal {
-  width: 395px;
+  min-width: 395px;
 
   background-color: rgba(0, 0, 0, 0.5);
 }
@@ -196,7 +196,7 @@
 
 .question {
   margin: 0;
-  padding: 32px 0 12px;
+  padding-top: 32px;
 
   font-family: $font-primary;
   @include font-S-W-lH-(14px, 600, 24px);
@@ -222,10 +222,8 @@
   text-decoration-line: underline;
 }
 .spanError {
-  position: fixed;
-  top: 207px;
-
-  display: block;
+  height: 20px;
+   display: flex;
 
   font-size: 16px;
   color: $error;

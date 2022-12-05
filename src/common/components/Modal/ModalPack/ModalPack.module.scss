@@ -199,10 +199,8 @@
   text-decoration-line: underline;
 }
 .spanError {
-  position: fixed;
-  top: 207px;
-
-  display: block;
+  height: 20px;
+  display: flex;
 
   font-size: 16px;
   color: $error;
@@ -218,7 +216,7 @@
   display: flex;
   width: 102px;
   height: 20px;
-  padding: 30px 20px 0 0;
+  padding: 10px 20px 0 0;
 
   font-family: $font-primary;
   @include font-S-W-lH-(16px, 500, 18.5px);

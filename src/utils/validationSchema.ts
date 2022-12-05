@@ -39,6 +39,7 @@ export const validateSchema = (data: DataType[]) => {
 
     if (data[i].variant === 'Image') {
       obj = {
+        ...obj,
         [data[i].name]: Yup.string().required(`${data[i].variant} Required`),
       }
     }

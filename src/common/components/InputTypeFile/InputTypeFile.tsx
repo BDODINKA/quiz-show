@@ -95,7 +95,6 @@ export const InputTypeFile: React.FC<InputTypeFilePropsType> = ({
             <span className={finalBtnClassName}>Upload Image</span>
           </label>
         )}
-        {error && <span className={spanClassName}>{error}</span>}
       </div>
       <img
         src={isImageBroken ? defaultImage : defaultImg}
@@ -104,6 +103,7 @@ export const InputTypeFile: React.FC<InputTypeFilePropsType> = ({
         className={finalInputClassName}
         alt="image"
       />
+      <div className={spanClassName}>{error && <span>{error}</span>}</div>
     </div>
   )
 }

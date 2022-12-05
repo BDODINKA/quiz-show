@@ -49,7 +49,7 @@ export const SuperInput: React.FC<SuperInputTextPropsType> = ({
         className={finalInputClassName}
         {...restProps}
       />
-      {error && <span className={finalSpanClassName}>{error}</span>}
+      <div className={finalSpanClassName}>{error && <span>{error}</span>}</div>
     </>
   )
 }
