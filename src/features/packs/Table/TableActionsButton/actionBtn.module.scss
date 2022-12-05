@@ -1,0 +1,31 @@
+@import 'src/_variables.scss';
+
+.btnLearn,
+.btnDelete,
+.btnEdit {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+}
+.btnLearn {
+  stroke: $color-dark;
+}
+.btnEdit,
+.btnDelete {
+  fill: $color-dark;
+}
+
+.disabledLearn,
+.disabledEdit,
+.disabledDelete {
+  pointer-events: none;
+  width: 30px;
+  height: 30px;
+}
+.disabledLearn {
+  stroke: $color-light;
+}
+.disabledEdit,
+.disabledDelete {
+  fill: $color-light;
+}

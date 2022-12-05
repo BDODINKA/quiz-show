@@ -6,7 +6,7 @@ import { ReactComponent as LearnBtn } from '../../../../assets/img/Table/teacher
 import { selectorStatus } from '../../../../common/selectors/selectors'
 import { useAppSelector } from '../../../../utils/hooks/useAppSelector'
 
-import style from './actionBtn.module.css'
+import style from './actionBtn.module.scss'
 
 type PropsType = {
   deleteHandler?: () => void
@@ -29,19 +29,29 @@ export const ActionsButton = (props: PropsType) => {
   const learnHandler = () => {
     props.learnHandler && props.learnHandler()
   }
-  const finalClassName = disabled && status === 'progress' ? `${style.disabledBtn}` : `${style.btn}`
 
   return (
     <>
-      {props.showBtn ? (
+      <LearnBtn
+        className={
+          disabled && status === 'progress' ? `${style.disabledLearn}` : `${style.btnLearn}`
+        }
+        onClick={learnHandler}
+      />
+      {props.showBtn && (
         <>
-          <LearnBtn className={finalClassName} onClick={learnHandler} />
-          <EditBtn className={finalClassName} onClick={changeNameHandler} />
-          <DeleteBtn className={finalClassName} onClick={deleteHandler} />
-        </>
-      ) : (
-        <>
-          <LearnBtn className={finalClassName} onClick={learnHandler} />
+          <EditBtn
+            className={
+              disabled && status === 'progress' ? `${style.disabledEdit}` : `${style.btnEdit}`
+            }
+            onClick={changeNameHandler}
+          />
+          <DeleteBtn
+            className={
+              disabled && status === 'progress' ? `${style.disabledDelete}` : `${style.btnDelete}`
+            }
+            onClick={deleteHandler}
+          />
         </>
       )}
     </>

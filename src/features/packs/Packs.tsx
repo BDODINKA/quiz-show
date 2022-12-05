@@ -113,6 +113,7 @@ export const Packs = () => {
           navigateToCards={cardId => navigateToCards(cardId)}
           changeFieldName={(pack, cardId) => changeFieldName(pack, cardId)}
         />
+
         <Pagination
           pageCount={params.pageCount}
           currentPage={params.page}
