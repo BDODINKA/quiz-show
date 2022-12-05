@@ -1,6 +1,6 @@
 import React, { ButtonHTMLAttributes, DetailedHTMLProps } from 'react'
 
-import s from './SuperButton.module.scss'
+import style from './SuperButton.module.scss'
 
 type DefaultButtonPropsType = DetailedHTMLProps<
   ButtonHTMLAttributes<HTMLButtonElement>,
@@ -18,7 +18,7 @@ export const SuperButton: React.FC<SuperButtonPropsType> = ({
   title,
   ...restProps
 }) => {
-  const finalClassName = red ? `${s.red} ${s.default}` : `${className}`
+  const finalClassName = red ? `${style.red} ${style.default}` : `${className}`
 
   return (
     <button className={finalClassName} {...restProps}>
