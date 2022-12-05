@@ -5,7 +5,8 @@ import { selectorStatus } from '../../../selectors/selectors'
 import { InputTypeFile } from '../../InputTypeFile/InputTypeFile'
 import { SuperButton } from '../../SuperButton/SuperButton'
 
-import style from './ModalDelete.module.css'
+import defaultImage from './../../../../assets/img/defaultImage.jpg'
+import style from './ModalDelete.module.scss'
 
 type PropsType = {
   onClose?: () => void
@@ -38,23 +39,43 @@ export const ModalDelete = (props: PropsType) => {
     <div className={style.modal}>
       <div className={style.form}>
         <h2 className={style.title}>{props.title}</h2>
-        {props.deckCover ? (
-          <div>
-            Do you really want to remove
-            <InputTypeFile uploadImage={() => {}} defaultImg={props.deckCover} hiddenBtn={true} />?
-            All cards will be deleted.
+        <div className={style.container}>
+          {props.deckCover ? (
+            <div>
+              <div className={style.description__img}>
+                <InputTypeFile
+                  uploadImage={() => {}}
+                  defaultImg={props.deckCover}
+                  hiddenBtn={true}
+                />
+              </div>
+              Do you really want to remove
+              <span className={style.description__title}> {props.name}</span>? All cards will be
+              deleted.
+            </div>
+          ) : (
+            <div>
+              <img className={style.description__img} src={defaultImage} alt="default image" />
+              <div className={style.description}>
+                Do you really want to remove
+                <span className={style.description__title}> {props.name}</span>?
+                <p>All cards will be deleted.</p>
+              </div>
+            </div>
+          )}
+          <div className={style.btn__block}>
+            <SuperButton
+              title={'Cancel'}
+              className={style.btn__cancel}
+              onClick={setActiveHandler}
+            />
+            <SuperButton
+              disabled={!!status}
+              className={style.btn}
+              onClick={deleteHandler}
+              title={props.title}
+            />
           </div>
-        ) : (
-          <div>{`Do you really want to remove ${props.name}? All cards will be deleted.`}</div>
-        )}
-        <div className={style.btn_block}>
-          <SuperButton title={'Cancel'} className={style.btn_cancel} onClick={setActiveHandler} />
-          <SuperButton
-            disabled={!!status}
-            className={style.btn}
-            onClick={deleteHandler}
-            title={props.title}
-          />
         </div>
       </div>
     </div>

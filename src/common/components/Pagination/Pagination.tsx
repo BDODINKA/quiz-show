@@ -5,7 +5,7 @@ import { useAppSelector } from '../../../utils/hooks/useAppSelector'
 import { selectorStatus } from '../../selectors/selectors'
 import { Wrapper } from '../Wrapper/Wrapper'
 
-import style from './pagination.module.css'
+import style from './pagination.module.scss'
 import { PaginationArrowBtn } from './PaginationArrowBtn'
 import { PaginationNumBtn } from './PaginationNumBtn'
 
@@ -66,7 +66,7 @@ export const Pagination = (props: PropsType) => {
         setPage={() => setPage(props.currentPage - 1)}
         disabled={status === 'progress'}
       />
-      <div className={style.blockPages}>
+      <div className={style.block__pages}>
         {pagesObj.totalPages.map((page, i) => (
           <PaginationNumBtn
             setOpen={() => setOpen(!open)}
@@ -87,7 +87,7 @@ export const Pagination = (props: PropsType) => {
         setPage={() => setPage(props.currentPage + 1)}
         disabled={status === 'progress'}
       />
-      <div className={style.selectBlock}>
+      <div className={style.select__block}>
         Show
         <select value={props.pageCount} onChange={setPageCount} className={style.select}>
           <option value="10">10</option>

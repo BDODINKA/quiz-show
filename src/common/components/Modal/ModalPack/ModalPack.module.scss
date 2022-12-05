@@ -1,0 +1,227 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
+@import '../../../../_variables';
+@import '../../../../_mixins';
+@import '../../../../_templates';
+
+.modal {
+  width: 390px;
+
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.form {
+  background: $color-light;
+  border-radius: 2px;
+}
+
+.container {
+  padding: 30px 20px;
+}
+.title {
+  font-family: $font-primary;
+  @include font-S-W-lH-(18px, 500, 22px);
+  font-style: normal;
+  color: $color-dark;
+
+  border-bottom: 1.51px solid $color-dark;
+ padding: 20px;
+}
+
+.input {
+  width: 100%;
+
+  font-family: $font-primary;
+  @include font-S-W-lH-(16px, 400, 24px);
+  font-style: normal;
+  color: $color-dark;
+
+  opacity: 0.9;
+  background: $color-light !important;
+  border: none;
+  border-bottom: 1.51px solid $color-dark;
+  border-radius: 0;
+
+  appearance: none;
+
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    font-family: $font-primary;
+    @include font-S-W-lH-(16px, 400, 24px);
+    font-style: normal;
+    color: $color-dark;
+
+    opacity: 0.5;
+    background: $color-light !important;
+    border: none;
+    border-bottom: 1.51px solid $color-dark;
+    border-radius: 0;
+    outline: none;
+    box-shadow: 0 0 0 30px $color-light inset !important;
+
+    appearance: none;
+  }
+  &:focus,
+  &:active,
+  &::placeholder {
+    display: flex;
+
+    font-family: $font-primary;
+    @include font-S-W-lH-(16px, 400, 24px);
+    font-style: normal;
+    color: $color-dark;
+
+    opacity: 0.5;
+    background: $color-light !important;
+    border: none;
+
+    appearance: none;
+  }
+  &:focus,
+  &:active {
+    border-bottom: 1.51px solid $color-dark;
+    border-radius: 0;
+    outline: none;
+  }
+}
+
+
+
+.description {
+  width: 84.02%;
+  margin: 0;
+  padding-top: 27px;
+  padding-bottom: 65px;
+
+
+  font-family: $font-primary;
+  @include font-S-W-lH-(14px, 400, 24px);
+  font-style: normal;
+  color: $color-dark;
+  letter-spacing: -0.016em;
+  word-break: break-word;
+
+  opacity: 0.5;
+}
+
+
+.btn {
+      cursor: pointer;
+
+      width: 35%;
+      height: 36px;
+
+
+      font-family: $font-primary;
+      @include font-S-W-lH-(16px, 500, 20px);
+      font-style: normal;
+      color: $color-light;
+      text-align: center;
+
+      background: $color-primary;
+      border: none;
+      border-radius: 30px;
+      box-shadow: $box-shadow-third, inset $box-shadow-secondary;
+      &__block{
+        display: flex;
+        justify-content: space-between;
+
+        padding-top: 35px;
+      }
+      &:disabled,
+      &:disabled:hover {
+        cursor: auto;
+
+        color: $color-primary;
+    background-color: $bg-primary;
+    border: none;
+    border-radius: 30px;
+    box-shadow: none;
+  }
+  &:active,
+  &:hover {
+    color: $color-primary;
+
+    background-color: $color-light;
+    border: none;
+    border-radius: 30px;
+    box-shadow: $box-shadow-primary, inset $box-shadow-four;
+  }
+  &__cancel {
+    cursor: pointer;
+
+    width: 35%;
+    height: 36px;
+
+    font-family: $font-primary;
+    @include font-S-W-lH-(16px, 500, 20px);
+    font-style: normal;
+    color: $color-dark;
+    text-align: center;
+
+    background: $color-light;
+    border: none;
+    border-radius: 30px;
+    box-shadow: $box-shadow-secondary, inset $box-shadow-four;
+    &:hover {
+      color: $color-primary;
+
+      background-color: $color-light;
+      border: none;
+      border-radius: 30px;
+      box-shadow: $box-shadow-primary, inset $box-shadow-four;
+    }
+  }
+}
+
+.question {
+  margin: 0;
+  padding: 32px 0 12px;
+
+  font-family: $font-primary;
+  @include font-S-W-lH-(14px, 600, 24px);
+  font-style: normal;
+  color: $color-light;
+  text-align: center;
+
+  opacity: 0.5;
+}
+.link {
+  cursor: pointer;
+
+  padding-top: 20px;
+
+  font-family: $font-primary;
+  @include font-S-W-lH-(16px, 600, 24px);
+  font-style: normal;
+  color: $color-primary;
+  text-align: center;
+  text-decoration-line: underline;
+}
+.spanError {
+  height: 20px;
+  display: flex;
+
+  font-size: 16px;
+  color: $error;
+}
+.checkBox {
+  width: 18px;
+  height: 18px;
+  padding-top: 20px;
+
+  color: $color-primary;
+}
+.privateBox {
+  display: flex;
+  width: 102px;
+  height: 20px;
+  padding: 10px 20px 0 0;
+
+  font-family: $font-primary;
+  @include font-S-W-lH-(16px, 500, 18.5px);
+  &__label {
+    padding-left: 12px;
+    align-self: baseline;
+  }
+}

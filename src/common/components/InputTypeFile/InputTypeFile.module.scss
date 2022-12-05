@@ -1,0 +1,45 @@
+@import '../../../_variables';
+@import '../../../_mixins';
+@import '../../../_templates';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 350px;
+}
+
+.input__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  &title{
+    font-family: $font-primary;
+    @include font-S-W-lH-(16px, 500, 20px);
+  }
+  &img{
+    width: 100%;
+    height: 120px;
+    padding-top: 7px;
+  }
+}
+.btn {
+  display: flex;
+
+  width: 110px;
+  height: 20px;
+
+  font-family: $font-primary;
+  @include font-S-W-lH-(14px, 500, 20px);
+
+  color: $color-primary;
+
+  background: transparent;
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}

@@ -90,7 +90,7 @@ export const CardsTableModal = (props: PropsType) => {
           <ModalMain open={openModal} setOpenModal={setOpenModal}>
             <ModalsAll
               nameModal={modalName}
-              title={{ card: 'Edit card', delete: 'Delete' }}
+              title={{ card: 'Edit card', delete: 'Delete card' }}
               setOpenModal={setOpenModal}
               deleteName={props.elem.question}
               onSubmitDelete={() => {

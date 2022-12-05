@@ -1,3 +1,7 @@
+@import '../../../_variables';
+@import '../../../_mixins';
+@import '../../../_templates';
+
 .container {
   display: flex;
   justify-content: flex-start;
@@ -8,14 +12,16 @@
 
   background: none;
   border: none;
-}
-.btn:active,
-.btn:hover {
-  cursor: pointer;
 
-  color: #ffffff;
+  &:active,
+  &:hover {
+    cursor: pointer;
 
-  border-radius: 2px;
+    color: $color-light;
+
+    border-radius: 2px;
+    border: none;
+  }
 }
 .pages {
   display: flex;
@@ -25,46 +31,49 @@
   width: 24px;
   height: 24px;
 
-  font-family: 'Montserrat', sans-serif;
-  font-size: 12px;
-  font-weight: 400;
+  font-family: $font-primary;
+  @include font-S-W-lH-(12px, 400, 15px);
   font-style: normal;
-  line-height: 15px;
-  color: #000000;
+  color: $color-dark;
+  background-color: transparent;
 
   border-radius: 2px;
-}
+  border: none;
+  &:hover,
+  &:active{
+    cursor: pointer;
 
-.pages:hover,
-.pages:active {
-  cursor: pointer;
+    color: $color-light;
 
-  color: #ffffff;
-
-  background: #366eff;
-  border-radius: 2px;
-}
-.selectBlock {
-  display: flex;
-  gap: 5px;
-
-  padding: 0 0 0 30px;
+    background: $color-primary;
+    border-radius: 2px;
+  }
 }
 .select {
-  color: #000000;
+  color: $color-dark;
 
   opacity: 0.4;
-  background: #ffffff;
+  background: $color-light;
   border: 1px solid #d9d9d9;
   border-radius: 2px;
+  &__block{
+    display: flex;
+    align-items: center;
+    font-family: $font-primary;
+    @include font-S-W-lH-(12px, 400, 15px);
+    display: flex;
+    gap: 5px;
+
+    padding: 0 0 0 30px;
+  }
 }
 .pagesActive {
-  color: #ffffff;
+  color: $color-light;
 
   background: #366eff;
   border-radius: 2px;
 }
-.blockPages {
+.block__pages {
   display: flex;
   gap: 12px;
 

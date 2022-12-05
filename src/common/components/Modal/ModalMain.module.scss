@@ -1,4 +1,4 @@
-.modal_active {
+.modal__active {
   opacity: 0;
 
   transition: all 0.5s ease-in;
@@ -17,18 +17,17 @@
   height: 100vh;
 
   background-color: rgba(0, 0, 0, 0.4);
-}
+  &__content {
+    transform: scale(0.5);
 
-.modal__content {
-  transform: scale(0.5);
 
-  padding: 20px;
+    background-color: white;
+    border-radius: 12px;
 
-  background-color: white;
-  border-radius: 12px;
+    transition: 0.4s all;
+    &_active {
+      transform: scale(1);
+    }
+  }
 
-  transition: 0.4s all;
-}
-.modal__content_active {
-  transform: scale(1);
 }

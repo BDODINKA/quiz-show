@@ -1,6 +1,6 @@
 import { validateSchema } from '../../utils/validationSchema'
 
-import { maxValidate, minValidate } from './card'
+import { maxValidate, minValidate, requiredValidate } from './card'
 
 export const validateCardField = () =>
   validateSchema([
@@ -10,8 +10,8 @@ export const validateCardField = () =>
 
 export const validateCardImage = () =>
   validateSchema([
-    { variant: 'Image', name: 'questionImage', min: minValidate, max: maxValidate },
-    { variant: 'Image', name: 'answerImage', min: minValidate, max: maxValidate },
+    { variant: 'Image', name: 'questionImage', required: requiredValidate },
+    { variant: 'Image', name: 'answerImage', required: requiredValidate },
   ])
 
 export const validatePack = () =>
