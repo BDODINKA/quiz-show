@@ -42,12 +42,12 @@ export const TableHeadPacks = (props: PropsType) => {
             <th scope="col">Name</th>
             <th scope="col">Cards</th>
             {sort ? (
-              <th onClick={() => sortHandler(false)} scope="col">
+              <th onClick={() => sortHandler(false)} scope="col" className={style.head_update}>
                 Last Updated
                 <img style={{ marginLeft: '5px' }} src={poligon} alt="poligon" />
               </th>
             ) : (
-              <th onClick={() => sortHandler(true)} scope="col">
+              <th onClick={() => sortHandler(true)} scope="col" className={style.head_update}>
                 Last Updated
                 <img style={{ marginLeft: '5px', rotate: '180deg' }} src={poligon} alt="poligon" />
               </th>

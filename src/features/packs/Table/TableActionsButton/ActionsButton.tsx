@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 
-import { SuperButton } from '../../../../common/components/SuperButton/SuperButton'
+import { ReactComponent as DeleteBtn } from '../../../../assets/img/Table/Delete.svg'
+import { ReactComponent as EditBtn } from '../../../../assets/img/Table/Edit.svg'
+import { ReactComponent as LearnBtn } from '../../../../assets/img/Table/teacher.svg'
 import { selectorStatus } from '../../../../common/selectors/selectors'
 import { useAppSelector } from '../../../../utils/hooks/useAppSelector'
 
@@ -27,34 +29,19 @@ export const ActionsButton = (props: PropsType) => {
   const learnHandler = () => {
     props.learnHandler && props.learnHandler()
   }
+  const finalClassName = disabled && status === 'progress' ? `${style.disabledBtn}` : `${style.btn}`
 
   return (
     <>
       {props.showBtn ? (
         <>
-          <SuperButton
-            onClick={learnHandler}
-            disabled={disabled && status === 'progress'}
-            className={style.learn}
-          />
-          <SuperButton
-            onClick={changeNameHandler}
-            disabled={disabled && status === 'progress'}
-            className={style.editBtn}
-          />
-          <SuperButton
-            onClick={deleteHandler}
-            disabled={disabled && status === 'progress'}
-            className={style.deleteBtn}
-          />
+          <LearnBtn className={finalClassName} onClick={learnHandler} />
+          <EditBtn className={finalClassName} onClick={changeNameHandler} />
+          <DeleteBtn className={finalClassName} onClick={deleteHandler} />
         </>
       ) : (
         <>
-          <SuperButton
-            onClick={learnHandler}
-            disabled={disabled && status === 'progress'}
-            className={style.learn}
-          />
+          <LearnBtn className={finalClassName} onClick={learnHandler} />
         </>
       )}
     </>

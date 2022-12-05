@@ -27,44 +27,52 @@ export const PacksTableModal = ({
   return (
     <tr key={elem._id} className={style.row}>
       <td className={style.td} data-label="Name">
-        {elem.deckCover && (
-          <img
-            className={style.linkImage}
-            src={elem.deckCover}
-            alt="deckCover"
-            onClick={() => navigateToCards(elem._id)}
-          />
-        )}
-        <p className={style.linkName} onClick={() => navigateToCards(elem._id)}>
-          {elem.name}
-        </p>
+        <div className={style.td_name}>
+          {elem.deckCover && (
+            <img
+              className={style.linkImage}
+              src={elem.deckCover}
+              alt="deckCover"
+              onClick={() => navigateToCards(elem._id)}
+            />
+          )}
+          <p className={style.linkName} onClick={() => navigateToCards(elem._id)}>
+            {elem.name}
+          </p>
+        </div>
       </td>
       <td data-label="Cards" className={style.td}>
-        {elem.cardsCount}
+        <div className={style.card_update_create}>{elem.cardsCount}</div>
       </td>
       <td data-label="Last Updated" className={style.td}>
-        {new Date(Date.parse(elem.updated)).toLocaleDateString('ru-RU')}
+        <div className={style.card_update_create}>
+          {new Date(Date.parse(elem.updated)).toLocaleDateString('ru-RU')}
+        </div>
       </td>
       <td data-label="Created by" className={style.td}>
-        {elem.user_name}
+        <div className={style.card_update_create}>
+          <p>{elem.user_name}</p>
+        </div>
       </td>
       <td className={style.td} data-label="Actions">
-        {userId === elem.user_id ? (
-          <ActionsButton
-            showBtn={true}
-            learnHandler={() => navigateToCards(elem._id)}
-            deleteHandler={() => {
-              setOpenModal(true)
-              setModalName('modalDelete')
-            }}
-            changeName={() => {
-              setOpenModal(true)
-              setModalName('modalPack')
-            }}
-          />
-        ) : (
-          <ActionsButton showBtn={false} learnHandler={() => navigateToCards(elem._id)} />
-        )}
+        <div className={style.td_btn}>
+          {userId === elem.user_id ? (
+            <ActionsButton
+              showBtn={true}
+              learnHandler={() => navigateToCards(elem._id)}
+              deleteHandler={() => {
+                setOpenModal(true)
+                setModalName('modalDelete')
+              }}
+              changeName={() => {
+                setOpenModal(true)
+                setModalName('modalPack')
+              }}
+            />
+          ) : (
+            <ActionsButton showBtn={false} learnHandler={() => navigateToCards(elem._id)} />
+          )}
+        </div>
       </td>
       {modalName !== '' && (
         <ModalMain open={openModal} setOpenModal={setOpenModal}>

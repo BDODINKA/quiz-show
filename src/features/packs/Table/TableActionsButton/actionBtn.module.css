@@ -1,36 +1,17 @@
-.deleteBtn {
+.btn {
   cursor: pointer;
 
   width: 30px;
   height: 30px;
 
-  background: url('../../../../assets/img/Table/Delete.svg') no-repeat;
-  border: none;
+  stroke: black;
 }
-.deleteBtn:disabled {
-  background: white;
-}
-.editBtn {
-  cursor: pointer;
+.disabledBtn {
+  pointer-events: none;
 
   width: 30px;
   height: 30px;
 
-  background: url('../../../../assets/img/Table/Edit.svg') no-repeat;
-  border: none;
-}
-.editBtn:disabled {
-  background: white;
-}
-.learn{
-  cursor: pointer;
-
-  width: 30px;
-  height: 30px;
-
-  background: url('../../../../assets/img/Table/teacher.svg') no-repeat;
-  border: none;
-}
-.learn:disabled {
-  background: white;
+  fill: #eb5757;
+  stroke: #eb5757;
 }
