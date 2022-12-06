@@ -28,6 +28,7 @@ import { useAppDispatch } from '../../../utils/hooks/useAppDispatch'
 import { useAppSelector } from '../../../utils/hooks/useAppSelector'
 import { useDebounce } from '../../../utils/hooks/useDebounce'
 import { deletePackTC, updatePackTC } from '../Packs-reducer'
+import { TableHeadCards } from '../Table/TableHeadCards'
 import { TitleBlockTable } from '../TitleBlockTable/TitleBlockTable'
 
 import {
@@ -41,7 +42,6 @@ import {
   setCardPageCountAC,
 } from './cards-reducer'
 import style from './Cards.module.scss'
-import { TableHeadCards } from './TableHeadCards'
 
 export const Cards = () => {
   const navigate = useNavigate()

@@ -3,8 +3,9 @@ import React from 'react'
 import { AddAndUpdateCardType, CardsType } from '../../../api/cardAPI'
 import { Wrapper } from '../../../common/components/Wrapper/Wrapper'
 import { Nullable } from '../../../types/Nullable'
-import { CardsTableModal } from '../Table/CardsTableModal'
-import style from '../Table/Table.module.scss'
+
+import { CardsTableModal } from './CardsTableModal'
+import style from './Table.module.scss'
 
 type PropsType = {
   cards: Nullable<CardsType[]>
