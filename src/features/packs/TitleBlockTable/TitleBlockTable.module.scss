@@ -1,25 +1,99 @@
 @import '../../../_variables';
 @import '../../../_mixins.scss';
+@import '../../../_templates';
 
 .container {
-  width: 100vw;
-  display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 36px 0 34px;
+  padding-top: 36px;
+  padding-bottom: 34px;
   .title {
+    display: flex;
+    align-items: center;
     font-size: 22px;
     font-weight: 600;
+    gap: 9px;
   }
   .img {
     width: 170px;
     height: 110px;
   }
-  .titleBlock {
+  .titleBlock,
+  .titleBlockImg {
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    position: relative;
   }
+  .titleBlockImg {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 13px;
+  }
+  .drop {
+    position: absolute;
+    top: 32px;
+    left: 17%;
+    width: 122px;
+    height: 136px;
+
+    border: 2px solid $border-secondary;
+    background: $color-light;
+    border-radius: 10px;
+    z-index: 2;
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+    }
+    &:before {
+      top: -19px;
+      left: 70px;
+      border-width: 10px 10px;
+      border-color: transparent transparent $border-secondary transparent;
+      border-radius: 10px;
+    }
+    &:after {
+      top: -14px;
+      left: 72px;
+      border-width: 8px 8px;
+      border-color: transparent transparent $color-light transparent;
+    }
+
+    .menu {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 12px 0;
+      box-sizing: content-box;
+
+      > li {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        height: 36px;
+        gap: 12px;
+        padding-left: 20px;
+        @include font-S-W-lH-(14px, 500, 24px);
+        &:hover {
+          @extend %for-menu-shadow;
+        }
+        .logoBtn {
+          stroke: $color-dark;
+          fill: $color-light;
+        }
+        &:hover .logoBtn {
+          stroke: $color-primary;
+          fill: $color-light;
+        }
+      }
+    }
+  }
+
   .btn {
     cursor: pointer;
 
@@ -36,11 +110,13 @@
     box-shadow: $box-shadow-primary;
   }
   .btnImg {
-    width: 70px;
-    height: 70px;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
   }
   @include media-mw($break-sm) {
-    padding: 16px 0 14px;
+    padding-top: 16px;
+    padding-bottom: 14px;
     .title {
       font-size: $font-primary;
     }

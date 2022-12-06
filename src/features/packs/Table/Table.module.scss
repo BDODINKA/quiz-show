@@ -75,19 +75,18 @@
         }
         > svg {
           cursor: pointer;
-          padding-left: 10px;
           width: 16px;
         }
       }
       .td_btn {
+        padding: 0 30px;
         justify-content: space-between;
-        padding-right: 20px;
       }
       .td_name,
       .question_answer {
         justify-content: flex-start;
         gap: 10px;
-        &.question_answer{
+        &.question_answer {
           pointer-events: none;
         }
         .linkImage {
@@ -97,7 +96,6 @@
             cursor: pointer;
           }
         }
-
       }
     }
   }

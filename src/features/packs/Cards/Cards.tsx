@@ -150,13 +150,12 @@ export const Cards = () => {
           setOpenModalHandler()
         }}
       />
-      <Wrapper className={style.searchBlock}>
-        <Search onSearchChange={onSearchChange} value={searchValue} className={style.search} />
-        <SuperButton onClick={clearSearchHandler} title="X" className={style.searchBtn} />
-      </Wrapper>
-
       {cards && cards.length ? (
         <>
+          <Wrapper className={style.searchBlock}>
+            <Search onSearchChange={onSearchChange} value={searchValue} className={style.search} />
+            <SuperButton onClick={clearSearchHandler} title="X" className={style.searchBtn} />
+          </Wrapper>
           <TableHeadCards
             cards={cards}
             userId={profileId}
@@ -178,7 +177,9 @@ export const Cards = () => {
           />
         </>
       ) : (
-        <div>Cards not found</div>
+        <Wrapper>
+          <h3>Cards not found</h3>
+        </Wrapper>
       )}
 
       {modalName !== '' && (
