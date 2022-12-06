@@ -87,6 +87,9 @@
       .question_answer {
         justify-content: flex-start;
         gap: 10px;
+        &.question_answer{
+          pointer-events: none;
+        }
         .linkImage {
           width: 57px;
           height: 36px;
@@ -94,6 +97,7 @@
             cursor: pointer;
           }
         }
+
       }
     }
   }
