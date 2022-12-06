@@ -5,6 +5,17 @@
 .container {
   display: flex;
   justify-content: flex-start;
+  @include media-mw($break-sm) {
+    padding-top: 30px;
+    gap: 10px;
+    justify-content: center;
+    > div {
+      padding: 0;
+    }
+  }
+  @include media-mw($break-xs) {
+    flex-wrap: wrap;
+  }
 }
 .btn {
   width: 24px;
@@ -40,7 +51,7 @@
   border-radius: 2px;
   border: none;
   &:hover,
-  &:active{
+  &:active {
     cursor: pointer;
 
     color: $color-light;
@@ -56,12 +67,11 @@
   background: $color-light;
   border: 1px solid #d9d9d9;
   border-radius: 2px;
-  &__block{
+  &__block {
     display: flex;
     align-items: center;
     font-family: $font-primary;
     @include font-S-W-lH-(12px, 400, 15px);
-    display: flex;
     gap: 5px;
 
     padding: 0 0 0 30px;
@@ -85,12 +95,12 @@
 .nextBtn {
   background: url('../../../assets/img/Pagination/nextBtn.png') no-repeat center;
 }
-.drop{
+.drop {
   cursor: pointer;
 
   position: relative;
 }
-.blockPagesDrop{
+.blockPagesDrop {
   position: absolute;
   right: 50%;
   bottom: 30px;

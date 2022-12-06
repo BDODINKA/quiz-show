@@ -35,43 +35,47 @@ export const CardsTableModal = (props: PropsType) => {
   }
 
   return (
-    <tr key={props.elem._id} className={style.title_table_body}>
-      {props.elem.questionImg ? (
-        <td
-          className={style.tableImg}
-          onClick={() => navigateLearnPage(props.elem._id)}
-          data-label="Question"
-        >
-          <img src={props.elem.questionImg} alt="questionImg" />
-        </td>
-      ) : (
-        <td onClick={() => navigateLearnPage(props.elem._id)} data-label="Question">
-          {props.elem.question}
-        </td>
-      )}
-
-      {props.elem.answerImg ? (
-        <td className={style.tableImg} data-label="Answer">
-          <img src={props.elem.answerImg} alt="answerImg" />
-        </td>
-      ) : (
-        <td data-label="Answer">{props.elem.answer}</td>
-      )}
-
-      <td data-label="Last Updated">
-        {new Date(Date.parse(props.elem.updated)).toLocaleDateString('ru-RU')}
+    <tr key={props.elem._id} className={style.row}>
+      <td
+        className={style.td}
+        onClick={() => navigateLearnPage(props.elem._id)}
+        data-label="Question"
+      >
+        <div className={style.question_answer}>
+          {props.elem.questionImg ? (
+            <img className={style.linkImage} src={props.elem.questionImg} alt="questionImg" />
+          ) : (
+            <p className={style.linkName}>{props.elem.question}</p>
+          )}
+        </div>
       </td>
-      <td data-label="Grade">
-        <RatingComponent
-          changeRating={value => changeRating(value)}
-          valueRating={props.elem.grade}
-          disabled={isProgress === 'progress'}
-        />
+      <td className={style.td} data-label="Answer">
+        <div className={style.question_answer}>
+          {props.elem.answerImg ? (
+            <img className={style.linkImage} src={props.elem.answerImg} alt="answerImg" />
+          ) : (
+            <p className={style.linkName}>{props.elem.answer}</p>
+          )}
+        </div>
       </td>
-      <td className={style.actions_button_my_pack} data-label="Actions">
-        {props.elem._id && props.userId === props.elem.user_id ? (
+      <td className={style.td} data-label="Last Updated">
+        <div className={style.card_update_create}>
+          {new Date(Date.parse(props.elem.updated)).toLocaleDateString('ru-RU')}
+        </div>
+      </td>
+      <td className={style.td} data-label="Grade">
+        <div className={style.rating}>
+          <RatingComponent
+            changeRating={value => changeRating(value)}
+            valueRating={props.elem.grade}
+            disabled={isProgress === 'progress'}
+          />
+        </div>
+      </td>
+      <td className={style.td} data-label="Actions">
+        <div className={style.td_btn}>
           <ActionsButton
-            showBtn={true}
+            showBtn={props.userId === props.elem.user_id}
             deleteHandler={() => {
               setOpenModal(true)
               setModalName('modalDelete')
@@ -82,36 +86,33 @@ export const CardsTableModal = (props: PropsType) => {
             }}
             learnHandler={() => navigateLearnPage(props.elem._id)}
           />
-        ) : (
-          <ActionsButton showBtn={false} learnHandler={() => navigateLearnPage(props.elem._id)} />
-        )}
-
-        {modalName !== '' && (
-          <ModalMain open={openModal} setOpenModal={setOpenModal}>
-            <ModalsAll
-              nameModal={modalName}
-              title={{ card: 'Edit card', delete: 'Delete card' }}
-              setOpenModal={setOpenModal}
-              deleteName={props.elem.question}
-              onSubmitDelete={() => {
-                props.deleteHandler(props.elem._id, props.elem.cardsPack_id)
-              }}
-              onSubmitCard={card =>
-                props.editCardHandler({
-                  ...card,
-                  cardsPack_id: props.elem.cardsPack_id,
-                  _id: props.elem._id,
-                })
-              }
-              questionCard={props.elem.question}
-              answerCard={props.elem.answer}
-              questionCardImg={props.elem.questionImg ? props.elem.questionImg : ''}
-              answerCardImg={props.elem.answerImg ? props.elem.answerImg : ''}
-              deckCover={props.elem.questionImg}
-            />
-          </ModalMain>
-        )}
+        </div>
       </td>
+      {modalName !== '' && (
+        <ModalMain open={openModal} setOpenModal={setOpenModal}>
+          <ModalsAll
+            nameModal={modalName}
+            title={{ card: 'Edit card', delete: 'Delete card' }}
+            setOpenModal={setOpenModal}
+            deleteName={props.elem.question}
+            onSubmitDelete={() => {
+              props.deleteHandler(props.elem._id, props.elem.cardsPack_id)
+            }}
+            onSubmitCard={card =>
+              props.editCardHandler({
+                ...card,
+                cardsPack_id: props.elem.cardsPack_id,
+                _id: props.elem._id,
+              })
+            }
+            questionCard={props.elem.question}
+            answerCard={props.elem.answer}
+            questionCardImg={props.elem.questionImg ? props.elem.questionImg : ''}
+            answerCardImg={props.elem.answerImg ? props.elem.answerImg : ''}
+            deckCover={props.elem.questionImg}
+          />
+        </ModalMain>
+      )}
     </tr>
   )
 }

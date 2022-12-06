@@ -30,7 +30,7 @@
         cursor: pointer;
         position: relative;
         .triangle_top,
-        .triangle_down{
+        .triangle_down {
           position: absolute;
           width: 0;
           height: 0;
@@ -38,25 +38,24 @@
           border-style: solid;
           border-width: 5px 5px 5px 5px;
         }
-        .triangle_top{
+        .triangle_top {
           top: 38%;
           border-color: transparent transparent $color-dark transparent;
         }
-        .triangle_down{
+        .triangle_down {
           top: 46%;
           border-color: $color-dark transparent transparent transparent;
         }
       }
-
-
     }
 
     .row {
       border: 1px solid #ddd;
 
-
       .td_btn,
       .td_name,
+      .question_answer,
+      .rating,
       .card_update_create {
         display: flex;
         align-items: center;
@@ -65,16 +64,15 @@
         text-overflow: ellipsis;
         overflow: hidden;
         height: 48px;
-
-        > p {
+        .linkName {
           overflow: hidden;
           text-overflow: ellipsis;
-            &:hover {
-              cursor: pointer;
-              border-bottom: 1px solid black;
-            }
+          &:hover {
+            cursor: pointer;
+            border-bottom: 1px solid black;
+            outline: none;
+          }
         }
-
         > svg {
           cursor: pointer;
           padding-left: 10px;
@@ -85,7 +83,8 @@
         justify-content: space-between;
         padding-right: 20px;
       }
-      .td_name {
+      .td_name,
+      .question_answer {
         justify-content: flex-start;
         gap: 10px;
         .linkImage {
@@ -94,8 +93,7 @@
           &:hover {
             cursor: pointer;
           }
-          }
-
+        }
       }
     }
   }
@@ -132,7 +130,9 @@
       .td {
         .td_btn,
         .td_name,
-        .card_update_create {
+        .card_update_create,
+        .question_answer,
+        .rating {
           justify-content: flex-end;
           padding-right: 20px;
           gap: 10px;

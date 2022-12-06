@@ -56,22 +56,18 @@ export const PacksTableModal = ({
       </td>
       <td className={style.td} data-label="Actions">
         <div className={style.td_btn}>
-          {userId === elem.user_id ? (
-            <ActionsButton
-              showBtn={true}
-              learnHandler={() => navigateToCards(elem._id)}
-              deleteHandler={() => {
-                setOpenModal(true)
-                setModalName('modalDelete')
-              }}
-              changeName={() => {
-                setOpenModal(true)
-                setModalName('modalPack')
-              }}
-            />
-          ) : (
-            <ActionsButton showBtn={false} learnHandler={() => navigateToCards(elem._id)} />
-          )}
+          <ActionsButton
+            showBtn={userId === elem.user_id}
+            learnHandler={() => navigateToCards(elem._id)}
+            deleteHandler={() => {
+              setOpenModal(true)
+              setModalName('modalDelete')
+            }}
+            changeName={() => {
+              setOpenModal(true)
+              setModalName('modalPack')
+            }}
+          />
         </div>
       </td>
       {modalName !== '' && (

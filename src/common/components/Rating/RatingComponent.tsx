@@ -16,15 +16,13 @@ export const RatingComponent = (props: PropsType) => {
   }
 
   return (
-    <div>
-      <Rating
-        disabled={props.disabled}
-        name="Rating"
-        value={props.valueRating}
-        defaultValue={0}
-        precision={0.1}
-        onChange={(event, newValue) => changeRating(newValue)}
-      />
-    </div>
+    <Rating
+      disabled={props.disabled}
+      name="Rating"
+      value={props.valueRating}
+      defaultValue={0}
+      precision={0.1}
+      onChange={(event, newValue) => changeRating(newValue)}
+    />
   )
 }
