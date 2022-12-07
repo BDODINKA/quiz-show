@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import { Navigate } from 'react-router-dom'
 
+import { ReactComponent as LogOutSvg } from '../../assets/svg/logoutBtnProfile.svg'
 import { ArrowBackTo } from '../../common/components/ArrowBackTo/ArrowBackTo'
 import { EditableSpan } from '../../common/components/EditableSpan/EditableSpan'
 import { InputTypeFile } from '../../common/components/InputTypeFile/InputTypeFile'
@@ -12,7 +13,7 @@ import { selectorProfile, selectorStatus } from '../../common/selectors/selector
 import { useAppDispatch } from '../../utils/hooks/useAppDispatch'
 import { useAppSelector } from '../../utils/hooks/useAppSelector'
 
-import style from './profile.module.css'
+import style from './profile.module.scss'
 import { LogOutTC, UpdateUserProfile } from './profileReducer'
 
 export const Profile = () => {
@@ -43,36 +44,45 @@ export const Profile = () => {
   }
 
   return (
-    <Wrapper className={style.container}>
-      <ArrowBackTo />
-      <div className={style.card}>
-        <h2 className={style.title}>Personal Information</h2>
-        <div className={style.avaGroup}>
-          <InputTypeFile
-            type={'file'}
-            className={style.ava}
-            defaultImg={profile.avatar ? profile.avatar : image}
-            uploadImage={changeAva}
+    <main>
+      <Wrapper className={style.container}>
+        <ArrowBackTo />
+      </Wrapper>
+      <Wrapper className={style.card_container}>
+        <div className={style.card}>
+          <h2 className={style.title}>Personal Information</h2>
+          <div className={style.avaGroup}>
+            <InputTypeFile
+              type={'file'}
+              className={style.ava}
+              classNameBtn={style.avaBtn}
+              hiddenBtn={true}
+              defaultImg={profile.avatar ? profile.avatar : image}
+              uploadImage={changeAva}
+            />
+          </div>
+          <EditableSpan
+            titleBtn={'save'}
+            text={profile.name}
+            classNameInput={style.input}
+            classNameSpan={style.span}
+            classNameBtn={style.saveBtn}
+            placeholder={'NickName'}
+            classPlaceholder={style.placeholder}
+            changeBtn={true}
+            changedText={name => changeName(name)}
           />
+          <p className={style.email}>{profile.email}</p>
+          <SuperButton
+            className={style.btn}
+            onClick={goToLogout}
+            title={'Log out'}
+            disabled={status === 'progress'}
+          >
+            <LogOutSvg className={style.logoBtn} />
+          </SuperButton>
         </div>
-        <EditableSpan
-          titleBtn={'save'}
-          text={profile.name}
-          classNameInput={style.input}
-          classNameSpan={style.span}
-          classNameBtn={style.saveBtn}
-          placeholder={'NickName'}
-          classPlaceholder={style.placeholder}
-          changedText={name => changeName(name)}
-        />
-        <p className={style.email}>{profile.email}</p>
-        <SuperButton
-          onClick={goToLogout}
-          className={style.btn}
-          title={'Log out'}
-          disabled={status === 'progress'}
-        />
-      </div>
-    </Wrapper>
+      </Wrapper>
+    </main>
   )
 }

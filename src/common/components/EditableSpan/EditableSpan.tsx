@@ -7,6 +7,7 @@ import React, {
 
 import { Formik } from 'formik'
 
+import { ReactComponent as PencilBtn } from '../../../assets/svg/pencilProfile.svg'
 import { validateField } from '../../constants/validate'
 import style from '../Modal/ModalCard/ModalCard.module.scss'
 import { SuperButton } from '../SuperButton/SuperButton'
@@ -20,6 +21,7 @@ type PropsType = {
   classPlaceholder?: string
   titleBtn?: string
   changedText?: (text: string) => void
+  changeBtn?: boolean
 } & DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> &
   DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
 
@@ -84,12 +86,14 @@ export const EditableSpan = (props: PropsType) => {
       </Formik>
     </>
   ) : (
-    <span
-      className={classNameSpan}
-      onDoubleClick={() => editModeHandler(true)}
-      onTouchStart={() => countTouchHandler(touchCount)}
-    >
-      {text}
-    </span>
+    <div className={classNameSpan}>
+      <span
+        onDoubleClick={() => editModeHandler(true)}
+        onTouchStart={() => countTouchHandler(touchCount)}
+      >
+        {text}
+      </span>
+      <PencilBtn onDoubleClick={() => editModeHandler(true)} className={style.pencilBtn} />
+    </div>
   )
 }

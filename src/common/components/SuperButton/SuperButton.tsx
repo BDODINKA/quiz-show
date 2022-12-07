@@ -10,11 +10,13 @@ type DefaultButtonPropsType = DetailedHTMLProps<
 type SuperButtonPropsType = DefaultButtonPropsType & {
   red?: boolean
   title?: string
+  children?: React.ReactNode
 }
 
 export const SuperButton: React.FC<SuperButtonPropsType> = ({
   red,
   className,
+  children,
   title,
   ...restProps
 }) => {
@@ -22,6 +24,7 @@ export const SuperButton: React.FC<SuperButtonPropsType> = ({
 
   return (
     <button className={finalClassName} {...restProps}>
+      {children && children}
       {title}
     </button>
   )

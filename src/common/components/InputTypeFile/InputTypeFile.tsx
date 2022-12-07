@@ -1,6 +1,7 @@
 import React, { ChangeEvent, DetailedHTMLProps, InputHTMLAttributes, useRef, useState } from 'react'
 
 import defaultImage from '../../../assets/img/defaultImage.jpg'
+import { ReactComponent as AddBtn } from '../../../assets/svg/addProfileAva.svg'
 
 import style from './InputTypeFile.module.scss'
 
@@ -71,7 +72,6 @@ export const InputTypeFile: React.FC<InputTypeFilePropsType> = ({
     alert('Кривая картинка')
   }
 
-  //const finalSpanClassName = `${spanClassName ? style.error && spanClassName : ''}`
   const finalInputClassName = `${
     className ? style.superInput && className : error && style.error__input
   }`
@@ -83,18 +83,18 @@ export const InputTypeFile: React.FC<InputTypeFilePropsType> = ({
     <div className={style.container}>
       <div className={style.input__header}>
         <h4 className={style.input__title}>{title}</h4>
-        {!hiddenBtn && (
-          <label style={{ height: '20px', width: '100px', background: 'transparent' }}>
-            <input
-              type={type}
-              onChange={uploadHandler}
-              style={{ display: 'none' }}
-              ref={inputRef}
-              value={''}
-            />
-            <span className={finalBtnClassName}>Upload Image</span>
-          </label>
-        )}
+
+        <label>
+          <input
+            type={type}
+            onChange={uploadHandler}
+            style={{ display: 'none' }}
+            ref={inputRef}
+            value={''}
+          />
+          {!hiddenBtn && <span className={finalBtnClassName}>Upload Image</span>}
+          <AddBtn className={finalBtnClassName} />
+        </label>
       </div>
       <img
         src={isImageBroken ? defaultImage : defaultImg}

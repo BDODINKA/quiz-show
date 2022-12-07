@@ -1,0 +1,148 @@
+@import '../../_variables';
+@import '../../_mixins.scss';
+@import '../../_templates';
+
+.container {
+  display: flex;
+  justify-content: flex-start;
+  padding-top: 24px;
+}
+.card_container {
+  padding-top: 36px;
+  justify-content: center;
+  .card {
+    width: 413px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 33px;
+    background: $color-light;
+    border-radius: 2px;
+    box-shadow: $box-shadow-secondary;
+    @include media-mw($break-xs) {
+      min-width: 300px;
+      padding: 0 10px;
+    }
+    .title {
+      padding-top: 27px;
+      @include font-S-W-lH-(22px, 600, 27px);
+      color: $color-dark;
+      text-align: center;
+    }
+    .avaGroup {
+      padding-top: 30px;
+      > div {
+        position: relative;
+
+        .avaBtn {
+          position: absolute;
+          bottom: 0;
+          left: 55%;
+        }
+        > img {
+          width: 96px;
+          height: 96px;
+          border-radius: 50%;
+        }
+      }
+    }
+
+    > form {
+      position: relative;
+      width: 100%;
+
+      .saveBtn {
+        position: absolute;
+        top: 0;
+        right: 0;
+        cursor: pointer;
+        width: 52px;
+        height: 24px;
+        font-size: 12px;
+        line-height: 24px;
+        color: $color-light;
+        background: $color-primary;
+        border: none;
+        border-radius: 2px;
+        &:hover {
+          color: $color-primary;
+          background: $bg-secondary;
+          border: none;
+          border-radius: 2px;
+          outline: none;
+          box-shadow: $box-shadow-primary;
+        }
+      }
+    }
+  }
+  .span {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding-top: 17px;
+    @include font-S-W-lH-(20px, 500, 24px);
+    color: $color-dark;
+  }
+  .input {
+    width: 100%;
+    height: 28px;
+    font-weight: 500;
+    font-style: normal;
+    line-height: 24px;
+    color: $color-dark;
+    border: none;
+    outline: none;
+    appearance: none;
+    border-bottom: 1.58px solid rgba(0, 0, 0, 0.2);
+  }
+  .placeholder {
+    width: 100%;
+    padding-top: 36px;
+    font-size: 13px;
+    line-height: 20px;
+    color: $color-dark;
+    opacity: 0.5;
+  }
+  .email {
+    padding-top: 14px;
+    line-height: 24px;
+    color: $color-dark;
+    opacity: 0.5;
+  }
+  .btn {
+    margin: 29px 0 36px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 127px;
+    height: 36px;
+    font-weight: 500;
+    line-height: 20px;
+    color: $color-dark;
+    opacity: 0.8;
+    background: $bg-secondary;
+    border: none;
+    border-radius: 30px;
+    outline: none;
+    box-shadow: $box-shadow-secondary, inset $box-shadow-four;
+    cursor: pointer;
+    .logoBtn {
+      padding-right: 10px;
+      stroke: $color-dark;
+    }
+    &:hover {
+      color: $color-primary;
+      box-shadow: $box-shadow-primary, inset $box-shadow-four;
+      > svg {
+        stroke: $color-primary;
+      }
+    }
+    &:disabled {
+      color: $color-dark;
+      box-shadow: $box-shadow-secondary, inset $box-shadow-four;
+    }
+  }
+}
