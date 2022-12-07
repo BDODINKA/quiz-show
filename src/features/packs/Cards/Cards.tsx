@@ -177,7 +177,7 @@ export const Cards = () => {
           />
         </>
       ) : (
-        <Wrapper>
+        <Wrapper className={style.notFound}>
           <h3>Cards not found</h3>
         </Wrapper>
       )}
