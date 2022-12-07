@@ -5,6 +5,7 @@
 .container {
   display: flex;
   justify-content: flex-start;
+  padding-top: 36px;
   @include media-mw($break-sm) {
     padding-top: 30px;
     gap: 10px;
