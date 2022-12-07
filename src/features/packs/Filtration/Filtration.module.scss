@@ -6,10 +6,14 @@
   justify-content: space-between;
   flex-basis: 100%;
   flex-wrap: wrap;
+  padding-top: 34px;
   .title {
-    @include font-S-W-lH-($font-secondary, 500, 17px);
+    @include font-S-W-lH-($font-secondary, 600, 17px);
   }
   .boxSearch {
+    > h4 {
+      @include font-S-W-lH-($font-secondary, 600, 17px);
+    }
     > input {
       &:focus {
         outline: none;
@@ -78,6 +82,7 @@
 
   @include media-mw($break-lg) {
     gap: 10px;
+
     .boxSearch {
       flex-basis: 100%;
       > input {
@@ -86,6 +91,8 @@
     }
   }
   @include media-mw($break-sm) {
+    padding-top: 14px;
+
     .boxPacks,
     .range {
       flex-basis: 100%;

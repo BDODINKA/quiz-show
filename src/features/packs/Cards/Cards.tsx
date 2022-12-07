@@ -4,12 +4,12 @@ import { Navigate, useNavigate, useParams } from 'react-router-dom'
 
 import { AddAndUpdateCardType } from '../../../api/cardAPI'
 import { CardsPackAddType } from '../../../api/cardPacksAPI'
+import { ReactComponent as ResetBtn } from '../../../assets/svg/resetBtn.svg'
 import { ArrowBackTo } from '../../../common/components/ArrowBackTo/ArrowBackTo'
 import { ModalMain } from '../../../common/components/Modal/ModalMain'
 import { ModalsAll } from '../../../common/components/Modal/ModalsAll'
 import { Pagination } from '../../../common/components/Pagination/Pagination'
 import { Search } from '../../../common/components/Search/Search'
-import { SuperButton } from '../../../common/components/SuperButton/SuperButton'
 import { Wrapper } from '../../../common/components/Wrapper/Wrapper'
 import { PATH } from '../../../common/routes/const-routes'
 import {
@@ -150,12 +150,12 @@ export const Cards = () => {
           setOpenModalHandler()
         }}
       />
+      <Wrapper className={style.searchBlock}>
+        <Search onSearchChange={onSearchChange} value={searchValue} className={style.search} />
+        <ResetBtn onClick={clearSearchHandler} className={style.searchBtn} />
+      </Wrapper>
       {cards && cards.length ? (
         <>
-          <Wrapper className={style.searchBlock}>
-            <Search onSearchChange={onSearchChange} value={searchValue} className={style.search} />
-            <SuperButton onClick={clearSearchHandler} title="X" className={style.searchBtn} />
-          </Wrapper>
           <TableHeadCards
             cards={cards}
             userId={profileId}

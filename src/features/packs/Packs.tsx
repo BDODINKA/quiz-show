@@ -30,7 +30,6 @@ import {
   getPacksTC,
   updatePackTC,
 } from './Packs-reducer'
-import style from './Packs.module.css'
 import { TableHeadPacks } from './Table/TableHeadPacks'
 import { TitleBlockTable } from './TitleBlockTable/TitleBlockTable'
 
@@ -93,48 +92,46 @@ export const Packs = () => {
   if (!isLogin) return <Navigate to={PATH.LOGIN_PAGE} />
 
   return (
-    <main className={style.main}>
-      <>
-        <TitleBlockTable
-          titlePack="Packs list"
-          titleButton="Add new pack"
-          onClick={setOpenModalHandler}
-        />
-        <Filtration
-          user_id={profileId}
-          initialValueSlider={InitValueRangeSlider}
-          paramsId={params.user_id}
-        />
-        <TableHeadPacks
-          packs={cardPacks}
-          userId={profileId}
-          sort={setLastUpdate}
-          deleteHandler={id => deleteMyPack(id)}
-          navigateToCards={cardId => navigateToCards(cardId)}
-          changeFieldName={(pack, cardId) => changeFieldName(pack, cardId)}
-        />
+    <main>
+      <TitleBlockTable
+        titlePack="Packs list"
+        titleButton="Add new pack"
+        onClick={setOpenModalHandler}
+      />
+      <Filtration
+        user_id={profileId}
+        initialValueSlider={InitValueRangeSlider}
+        paramsId={params.user_id}
+      />
+      <TableHeadPacks
+        packs={cardPacks}
+        userId={profileId}
+        sort={setLastUpdate}
+        deleteHandler={id => deleteMyPack(id)}
+        navigateToCards={cardId => navigateToCards(cardId)}
+        changeFieldName={(pack, cardId) => changeFieldName(pack, cardId)}
+      />
 
-        <Pagination
-          pageCount={params.pageCount}
-          currentPage={params.page}
-          setPage={value => setPage(value)}
-          setPageCount={value => setPageCount(value)}
-          totalCount={totalCount as number}
-          maxPages={maxPaginationPage}
-        />
-        {modalName !== '' && (
-          <ModalMain open={openModal} setOpenModal={setOpenModal}>
-            <ModalsAll
-              title={{ pack: 'Add New Pack' }}
-              setOpenModal={setOpenModal}
-              onSubmitPack={pack => addNewPack(pack)}
-              text={''}
-              deckCover={''}
-              nameModal={modalName}
-            />
-          </ModalMain>
-        )}
-      </>
+      <Pagination
+        pageCount={params.pageCount}
+        currentPage={params.page}
+        setPage={value => setPage(value)}
+        setPageCount={value => setPageCount(value)}
+        totalCount={totalCount as number}
+        maxPages={maxPaginationPage}
+      />
+      {modalName !== '' && (
+        <ModalMain open={openModal} setOpenModal={setOpenModal}>
+          <ModalsAll
+            title={{ pack: 'Add New Pack' }}
+            setOpenModal={setOpenModal}
+            onSubmitPack={pack => addNewPack(pack)}
+            text={''}
+            deckCover={''}
+            nameModal={modalName}
+          />
+        </ModalMain>
+      )}
     </main>
   )
 }

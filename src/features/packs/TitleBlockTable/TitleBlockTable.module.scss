@@ -5,7 +5,6 @@
 .container {
   justify-content: space-between;
   padding-top: 36px;
-  padding-bottom: 34px;
   .title {
     display: flex;
     align-items: center;
@@ -116,7 +115,6 @@
   }
   @include media-mw($break-sm) {
     padding-top: 16px;
-    padding-bottom: 14px;
     .title {
       font-size: $font-primary;
     }

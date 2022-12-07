@@ -1,27 +1,46 @@
 @import '../../../_variables';
+@import '../../../_mixins';
 
 .main {
-  width: 100vw;
   .arrow {
     padding-top: 24px;
     max-width: $width-container;
   }
   .searchBlock {
+    padding-top: 34px;
     display: flex;
     flex-wrap: wrap;
-    height: 62px;
     align-content: flex-end;
-
-    > span {
+    > h4 {
       flex-basis: 100%;
     }
     > input {
+      &:focus {
+        outline: none;
+        box-shadow: $box-shadow-primary;
+      }
+    }
+    .search {
       flex-grow: 1;
+      flex-basis: 85%;
     }
     .searchBtn {
-      width: 36px;
-      height: 36px;
+      cursor: pointer;
+      width: 34px;
+      height: 34px;
       flex-grow: 0;
+      border: 1px solid $border-third;
+      fill: $color-dark;
+      &:hover {
+        fill: $color-primary;
+        border-radius: 0 2px 2px 0;
+        box-shadow: $box-shadow-primary;
+      }
+    }
+  }
+  @include media-mw($break-sm) {
+    .searchBlock {
+      padding-top: 14px;
     }
   }
 }
