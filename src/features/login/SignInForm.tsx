@@ -50,9 +50,6 @@ export const SignInForm = () => {
                 {...formik.getFieldProps('email')}
                 spanClassName={style.spanError}
               />
-              {/* {formik.touched.email && formik.errors.email ? (
-                <div className={style.error__message}>{formik.errors.email}</div>
-              ) : null}*/}
             </div>
             <div className={style.input__block}>
               <label className={style.input__title} htmlFor="password">
@@ -98,7 +95,7 @@ export const SignInForm = () => {
                 disabled={status === 'progress'}
               />
             </div>
-            <div className={style.have_account}>Already have an account?</div>
+            <div className={style.have__account}>Already have an account?</div>
           </form>
         )}
       </Formik>

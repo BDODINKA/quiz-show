@@ -2,7 +2,7 @@
 @import '../../_mixins';
 @import '../../_templates';
 
-.login__container {
+.signUp__container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,7 +10,9 @@
   padding-top: 60px;
 }
 
-.button__sign_in_form {
+
+
+.button__sign_up_form {
   cursor: pointer;
 
   width: 84.02%;
@@ -51,6 +53,7 @@
   &_block {
     display: flex;
     flex-direction: column;
+    padding-top: 40px;
 
     margin: 0;
   }
@@ -76,8 +79,7 @@
   text-align: center;
 }
 
-.input__block,
-.checkbox__block {
+.input__block {
   display: flex;
   flex-direction: column;
 
@@ -99,8 +101,7 @@
 
 .input__email,
 .password__input,
-.password__block,
-.checkbox__block {
+.password__block {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -145,26 +146,6 @@
   }
 }
 
-.checkbox__block {
-  border-bottom: none;
-}
-
-.rememberMe {
-  margin-left: 15px;
-
-  @include font-S-W-lH-(14px, 500, 17px);
-}
-
-.forgot_password {
-  display: flex;
-  justify-content: flex-end;
-
-  padding: 29px 38px 69px 0;
-
-  @include font-S-W-lH-(14px, 500, 17px);
-  text-decoration: none;
-}
-
 .have__account {
   @include font-S-W-lH-(14px, 600, 24px);
   padding-top: 39px;
@@ -174,11 +155,8 @@
   color: $color-dark;
   opacity: 0.5;
 }
-.checkbox{
-  width: 18px;
-  height: 18px;
-}
-.button__sign_up {
+
+.button__sign_in {
   @include font-S-W-lH-(16px, 600, 24px);
   font-size: 16px;
   font-weight: 600;
@@ -187,34 +165,10 @@
   color: $color-primary;
   text-align: center;
   text-decoration-line: underline;
+  padding: 11px 0 42px 0;
   &_form_block {
     padding: 20px 0 42px;
 
     text-align: center;
   }
 }
-
-/*.input_email:-webkit-autofill,
-.input_email:-webkit-autofill:hover,
-.input_email:-webkit-autofill:focus,
-.input_email:-webkit-autofill:active .input_password:-webkit-autofill,
-.input_password:-webkit-autofill:hover,
-.input_password:-webkit-autofill:focus,
-.input_password:-webkit-autofill:active {
-  font-family: 'Montserrat', 'sans-serif';
-  font-size: 16px;
-  font-weight: 400;
-  font-style: normal;
-  line-height: 24px;
-  color: $color-dark;
-
-  opacity: 0.5;
-  background: $color-light !important;
-  border: none;
-  border-bottom: 1.51px solid $color-dark;
-  border-radius: 0;
-  outline: none;
-  box-shadow: 0 0 0 30px $color-light inset !important;
-
-  appearance: none;
-}*/

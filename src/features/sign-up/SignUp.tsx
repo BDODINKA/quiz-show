@@ -7,7 +7,7 @@ import { PATH } from '../../common/routes/const-routes'
 import { selectorSignUp } from '../../common/selectors/selectors'
 import { useAppSelector } from '../../utils/hooks/useAppSelector'
 
-import s from './signUp.module.css'
+import style from './signUp.module.scss'
 import { SignUpForm } from './SignUpForm'
 
 export const SignUp = () => {
@@ -17,7 +17,7 @@ export const SignUp = () => {
   if (signUp) navigate(PATH.LOGIN_PAGE)
 
   return (
-    <Wrapper className={s.signUp_container}>
+    <Wrapper className={style.signUp__container}>
       <SignUpForm />
     </Wrapper>
   )

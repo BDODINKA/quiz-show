@@ -13,7 +13,7 @@ import { selectorStatus } from '../../common/selectors/selectors'
 import { useAppDispatch } from '../../utils/hooks/useAppDispatch'
 import { useAppSelector } from '../../utils/hooks/useAppSelector'
 
-import s from './/signUp.module.css'
+import style from './/signUp.module.scss'
 import { signUpTC } from './signUpReducer'
 
 export const SignUpForm = () => {
@@ -33,8 +33,8 @@ export const SignUpForm = () => {
   })
 
   return (
-    <div className={s.form_container}>
-      <div className={s.title_form}>Sign Up</div>
+    <div className={style.form__container}>
+      <div className={style.form__title}>Sign Up</div>
       <Formik
         initialValues={{
           email: '',
@@ -48,35 +48,33 @@ export const SignUpForm = () => {
       >
         {formik => {
           return (
-            <form className={s.form_block} onSubmit={formik.handleSubmit}>
-              <div className={s.input_block}>
-                <label className={s.title_input} htmlFor="email">
+            <form className={style.form__block} onSubmit={formik.handleSubmit}>
+              <div className={style.input__block}>
+                <label className={style.input__title} htmlFor="email">
                   Email
                 </label>
                 <SuperInput
-                  className={s.input_email}
+                  className={style.input__email}
                   id="email"
                   type="email"
+                  error={formik.touched && formik.errors.email}
                   {...formik.getFieldProps('email')}
+                  spanClassName={style.spanError}
                 />
-                {formik.touched.email && formik.errors.email ? (
-                  <div className={s.error_message}>{formik.errors.email}</div>
-                ) : null}
               </div>
-              <div className={s.input_block}>
-                <label className={s.title_input} htmlFor="password">
+              <div className={style.input__block}>
+                <label className={style.input__title} htmlFor="password">
                   Password
                 </label>
-                <div className={s.password_block}>
-                  <SuperInput
-                    className={s.input_password}
+                {/* <SuperInput
+                    className={style.password__input}
                     id="password"
                     type={passShown ? 'password' : 'text'}
                     {...formik.getFieldProps('password')}
                   />
                   <span onClick={() => setPassShown(!passShown)}>
                     <img
-                      className={s.visible_password}
+                      className={style.visible_password}
                       src={!passShown ? show_password : hide_password}
                       alt="password"
                     />
@@ -87,15 +85,30 @@ export const SignUpForm = () => {
                   <span className="error" style={{ color: 'red' }}>
                     {formik.errors.password}
                   </span>
-                ) : null}
+                ) : null}*/}
+                <SuperInput
+                  className={style.password__input}
+                  id="password"
+                  type={passShown ? 'password' : 'text'}
+                  error={formik.touched && formik.errors.password}
+                  {...formik.getFieldProps('password')}
+                  spanClassName={style.spanError}
+                />
+                <span className={style.password__visible} onClick={() => setPassShown(!passShown)}>
+                  <img
+                    className={style.password__visible_image}
+                    src={!passShown ? show_password : hide_password}
+                    alt="password"
+                  />
+                </span>
               </div>
-              <div className={s.input_block}>
-                <label className={s.title_input} htmlFor="password">
+
+              <div className={style.input__block}>
+                <label className={style.input__title} htmlFor="password">
                   Confirm password
                 </label>
-                <div className={s.password_block}>
-                  <SuperInput
-                    className={s.input_password}
+                {/* <SuperInput
+                    className={style.input_password}
                     id="confirmPassword"
                     type={confPassShown ? 'password' : 'text'}
                     onBlur={formik.handleBlur}
@@ -104,7 +117,7 @@ export const SignUpForm = () => {
                   />
                   <span onClick={() => setConfPassShown(!confPassShown)}>
                     <img
-                      className={s.visible_password}
+                      className={style.visible_password}
                       src={!confPassShown ? show_password : hide_password}
                       alt="password"
                     />
@@ -113,17 +126,36 @@ export const SignUpForm = () => {
 
                 <span className="error" style={{ color: 'red' }}>
                   {formik.errors.confirmPassword}
+                </span>*/}
+
+                <SuperInput
+                  className={style.password__input}
+                  id="confirmPassword"
+                  type={confPassShown ? 'password' : 'text'}
+                  error={formik.errors.confirmPassword}
+                  {...formik.getFieldProps('confirmPassword')}
+                  spanClassName={style.spanError}
+                />
+                <span
+                  className={style.password__visible}
+                  onClick={() => setConfPassShown(!confPassShown)}
+                >
+                  <img
+                    className={style.password__visible_image}
+                    src={!confPassShown ? show_password : hide_password}
+                    alt="password"
+                  />
                 </span>
               </div>
-              <div className={s.button_signUp_form_block}>
+              <div className={style.button__sign_up_form_block}>
                 <SuperButton
                   type="submit"
-                  className={s.button_signUp_form}
+                  className={style.button__sign_up_form}
                   title={'Sign Up'}
                   disabled={status === 'progress'}
                 ></SuperButton>
-                <span className={s.have_account}>Already have an account?</span>
-                <NavLink to={PATH.LOGIN_PAGE} className={s.link}>
+                <span className={style.have__account}>Already have an account?</span>
+                <NavLink to={PATH.LOGIN_PAGE} className={style.button__sign_in}>
                   Sign In
                 </NavLink>
               </div>
