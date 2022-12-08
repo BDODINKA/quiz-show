@@ -2,7 +2,7 @@ import React from 'react'
 
 import { SuperButton } from '../../../../common/components/SuperButton/SuperButton'
 
-import style from './Question.module.css'
+import style from './Question.module.scss'
 
 type PropsType = {
   children?: React.ReactNode
@@ -20,32 +20,25 @@ export const Question = (props: PropsType) => {
     props.nextCardHandler && props.nextCardHandler()
   }
 
-  return props.children ? (
-    <div className={style.box}>
+  return (
+    <div className={style.container}>
       <div className={style.question}>
         <strong>Question:</strong>
         {props.questionImg ? (
-          <img src={props.questionImg} alt="" style={{ width: '100px', height: '100px' }} />
+          <img src={props.questionImg} alt="" className={style.img} />
         ) : (
-          <span>{props.question}</span>
+          <p>{props.question}</p>
         )}
       </div>
-      <div className={style.attempts}>{`Количество попыток ответов на вопрос: ${10}`}</div>
-      {props.children}
-      <SuperButton title={'Next'} className={style.btn} onClick={nextCardHandler} />
-    </div>
-  ) : (
-    <div className={style.box}>
-      <div className={style.question}>
-        <strong>Question:</strong>
-        {props.questionImg ? (
-          <img src={props.questionImg} alt="" style={{ width: '100px', height: '100px' }} />
-        ) : (
-          <span>{props.question}</span>
-        )}
-      </div>
-      <div className={style.attempts}>{`Количество попыток ответов на вопрос: ${10}`}</div>
-      <SuperButton title={'Show answer'} className={style.btn} onClick={showAnswerHandler} />
+      <p className={style.attempts}>{`Количество попыток ответов на вопрос: ${10}`}</p>
+      {props.children ? (
+        <>
+          {props.children}
+          <SuperButton title={'Next'} className={style.btn} onClick={nextCardHandler} />
+        </>
+      ) : (
+        <SuperButton title={'Show answer'} className={style.btn} onClick={showAnswerHandler} />
+      )}
     </div>
   )
 }

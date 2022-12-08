@@ -2,7 +2,7 @@ import React, { ChangeEvent } from 'react'
 
 import { SuperCheckbox } from '../../../../common/components/SuperCheckbox/SuperCheckbox'
 
-import style from './Answer.module.css'
+import style from './Answer.module.scss'
 
 type PropsType = {
   onChangeRadio?: (value: number) => void
@@ -16,11 +16,11 @@ export const Answer = (props: PropsType) => {
   }
 
   return (
-    <div>
+    <div className={style.container}>
       <div className={style.title}>
         <strong>{`Answer:`}</strong>
         {props.answerImg ? (
-          <img src={props.answerImg} alt="" style={{ width: '100px', height: '100px' }} />
+          <img src={props.answerImg} alt="" className={style.img} />
         ) : (
           <p> {props.answer}</p>
         )}
