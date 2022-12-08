@@ -71,8 +71,6 @@ export const ModalCard = (props: PropsType) => {
       }}
     >
       {formik => {
-        console.log('log', formik.errors)
-
         return (
           <div className={style.modal}>
             <div className={style.form}>
@@ -108,7 +106,6 @@ export const ModalCard = (props: PropsType) => {
                           title="Answer:"
                           type={'file'}
                           {...formik.getFieldProps('answerImage')}
-                          // error={formik.touched && formik.errors.answerImage}
                           error={formik.errors.answerImage}
                           spanClassName={style.spanError}
                           uploadImage={setAnswerImage}

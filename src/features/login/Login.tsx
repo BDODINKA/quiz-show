@@ -7,7 +7,7 @@ import { PATH } from '../../common/routes/const-routes'
 import { selectorIsLogin } from '../../common/selectors/selectors'
 import { useAppSelector } from '../../utils/hooks/useAppSelector'
 
-import s from './login.module.css'
+import s from './login.module.scss'
 import { SignInForm } from './SignInForm'
 
 export const Login = () => {
@@ -23,7 +23,7 @@ export const Login = () => {
   }, [isLoggedIn])
 
   return (
-    <Wrapper className={s.login_container}>
+    <Wrapper className={s.login__container}>
       <SignInForm />
     </Wrapper>
   )
