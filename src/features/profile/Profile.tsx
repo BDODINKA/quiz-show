@@ -34,7 +34,7 @@ export const Profile = () => {
 
   const changeAva = (ava: string) => {
     setImage(ava)
-    if (image && profile) {
+    if (ava && profile) {
       dispatch(UpdateUserProfile({ name: profile.name, avatar: ava }))
     }
   }
