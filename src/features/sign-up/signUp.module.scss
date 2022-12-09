@@ -46,9 +46,7 @@
     color: $color-primary;
 
     background-color: $color-light;
-    border: none;
-    border-radius: 30px;
-    box-shadow: $box-shadow-third, inset $box-shadow-four;
+    box-shadow: $box-shadow-primary, inset $box-shadow-four;
   }
   &_block {
     display: flex;
@@ -68,6 +66,12 @@
   background: $color-light;
   border-radius: 2px;
   box-shadow: $box-shadow-five, $box-shadow-six;
+  @include media-mw($break-xs) {
+    width: 380px;
+  }
+  @include media-mw($break-s) {
+    width: 310px;
+  }
 }
 
 .form__title {
@@ -128,8 +132,6 @@
   display: block;
   align-items: center;
 
-  padding-bottom: 20px;
-
   width: 20px;
   position: absolute;
   right: 15px;
@@ -139,8 +141,6 @@
 
     display: block;
     align-items: center;
-
-    padding-bottom: 20px;
 
     width: 20px;
   }

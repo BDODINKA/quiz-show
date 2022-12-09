@@ -25,9 +25,19 @@
   background: $color-primary;
   border: none;
   border-radius: 30px;
-  box-shadow: $box-shadow-third, inset $box-shadow-four;
+
 
   align-self: center;
+
+  font-size: $font-primary;
+  font-weight: 500;
+
+
+  background-color: $color-primary;
+
+  box-shadow: $box-shadow-primary;
+
+
   &:disabled,
   &:disabled:hover {
     cursor: auto;
@@ -44,9 +54,7 @@
     color: $color-primary;
 
     background-color: $color-light;
-    border: none;
-    border-radius: 30px;
-    box-shadow: $box-shadow-third, inset $box-shadow-four;
+    box-shadow: $box-shadow-primary, inset $box-shadow-four;
   }
   &_block {
     display: flex;
@@ -133,8 +141,6 @@
   display: block;
   align-items: center;
 
-  padding-bottom: 20px;
-
   width: 20px;
   position: absolute;
   right: 15px;
@@ -144,8 +150,6 @@
 
     display: block;
     align-items: center;
-
-    padding-bottom: 20px;
 
     width: 20px;
   }
