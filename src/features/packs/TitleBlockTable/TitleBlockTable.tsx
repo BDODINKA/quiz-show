@@ -60,7 +60,7 @@ export const TitleBlockTable: React.FC<PropsType> = ({
           {dropMenu && <ImgBtn onClick={open} className={style.btnImg} />}
         </div>
         {openMenu && (
-          <DropDownMenu closeMenu={() => setOpenMenu(!openMenu)} className={style.drop}>
+          <DropDownMenu onMouseLeave={() => setOpenMenu(!openMenu)} className={style.drop}>
             <ul className={style.menu}>
               <li onClick={deleteHandler}>
                 <DeleteBtn />

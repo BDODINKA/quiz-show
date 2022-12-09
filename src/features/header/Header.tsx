@@ -52,7 +52,7 @@ export const Header = () => {
             )}
 
             {openMenu && (
-              <DropDownMenu closeMenu={() => setOpenMenu(!openMenu)} className={style.drop}>
+              <DropDownMenu onMouseLeave={() => setOpenMenu(!openMenu)} className={style.drop}>
                 <HeaderMenu closeMenu={() => setOpenMenu(!openMenu)} className={style.menu} />
               </DropDownMenu>
             )}

@@ -1,14 +1,14 @@
 import React from 'react'
 
 type PropsType = {
-  closeMenu: () => void
   children: React.ReactNode
-  className: string
-}
+} & React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>
 
 export const DropDownMenu = (props: PropsType) => {
+  const { onClick, onMouseLeave, className } = props
+
   return (
-    <nav onMouseLeave={() => props.closeMenu()} className={props.className}>
+    <nav onMouseLeave={onMouseLeave} onClick={onClick} className={className}>
       {props.children}
     </nav>
   )
