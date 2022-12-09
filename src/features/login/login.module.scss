@@ -65,6 +65,12 @@
   background: $color-light;
   border-radius: 2px;
   box-shadow: $box-shadow-five, $box-shadow-six;
+  @include media-mw($break-xs) {
+    width: 380px;
+  }
+  @include media-mw($break-s) {
+    width: 310px;
+  }
 }
 
 .form__title {
@@ -163,6 +169,9 @@
 
   @include font-S-W-lH-(14px, 500, 17px);
   text-decoration: none;
+  @include media-mw($break-xs) {
+    padding: 20px 38px 20px 0;
+  }
 }
 
 .have__account {
