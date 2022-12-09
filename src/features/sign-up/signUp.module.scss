@@ -1,0 +1,174 @@
+@import '../../_variables';
+@import '../../_mixins';
+@import '../../_templates';
+
+.signUp__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding-top: 60px;
+}
+
+
+
+.button__sign_up_form {
+  cursor: pointer;
+
+  width: 84.02%;
+  height: 36px;
+
+  font-family: $font-primary;
+  @include font-S-W-lH-(16px, 500, 20px);
+  font-style: normal;
+  color: $color-light;
+  text-align: center;
+
+  background: $color-primary;
+  border: none;
+  border-radius: 30px;
+  box-shadow: $box-shadow-third, inset $box-shadow-four;
+
+  align-self: center;
+  &:disabled,
+  &:disabled:hover {
+    cursor: auto;
+
+    color: $color-primary;
+
+    background-color: #f1f1f1;
+    border: none;
+    border-radius: 30px;
+    box-shadow: none;
+  }
+  &:active,
+  &:hover {
+    color: $color-primary;
+
+    background-color: $color-light;
+    border: none;
+    border-radius: 30px;
+    box-shadow: $box-shadow-third, inset $box-shadow-four;
+  }
+  &_block {
+    display: flex;
+    flex-direction: column;
+    padding-top: 40px;
+
+    margin: 0;
+  }
+}
+
+.form__container {
+  display: flex;
+  flex-direction: column;
+
+  width: 413px;
+
+  background: $color-light;
+  border-radius: 2px;
+  box-shadow: $box-shadow-five, $box-shadow-six;
+}
+
+.form__title {
+  padding: 35px 0 41px;
+
+  font-family: $font-primary;
+  @include font-S-W-lH-(26px, 600, 32px);
+  font-weight: bold;
+  text-align: center;
+}
+
+.input__block {
+  display: flex;
+  flex-direction: column;
+
+  width: 80%;
+  margin-left: 10%;
+}
+.input__block {
+  padding-bottom: 4px;
+  position: relative;
+}
+
+.input__title,
+.have__account {
+  font-family: $font-primary;
+  @include font-S-W-lH-(13px, 400, 20px);
+  color: $color-dark;
+  opacity: 0.5;
+}
+
+.input__email,
+.password__input,
+.password__block {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  height: 20px;
+  @include font-S-W-lH-(14px, 500, 17px);
+
+  border: none;
+  border-bottom: 2px solid #c0bfbf;
+  outline: none;
+}
+
+
+.spanError {
+  height: 20px;
+  display: flex;
+  font-size: 16px;
+  color: $error;
+}
+
+.password__visible {
+  cursor: pointer;
+
+  display: block;
+  align-items: center;
+
+  padding-bottom: 20px;
+
+  width: 20px;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  &_image {
+    cursor: pointer;
+
+    display: block;
+    align-items: center;
+
+    padding-bottom: 20px;
+
+    width: 20px;
+  }
+}
+
+.have__account {
+  @include font-S-W-lH-(14px, 600, 24px);
+  padding-top: 39px;
+
+  font-weight: 600;
+  text-align: center;
+  color: $color-dark;
+  opacity: 0.5;
+}
+
+.button__sign_in {
+  @include font-S-W-lH-(16px, 600, 24px);
+  font-size: 16px;
+  font-weight: 600;
+  font-style: normal;
+  line-height: 24px;
+  color: $color-primary;
+  text-align: center;
+  text-decoration-line: underline;
+  padding: 11px 0 42px 0;
+  &_form_block {
+    padding: 20px 0 42px;
+
+    text-align: center;
+  }
+}
