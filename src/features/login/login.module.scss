@@ -34,7 +34,7 @@
 
     color: $color-primary;
 
-    background-color: #f1f1f1;
+    background-color: $bg-third;
     border: none;
     border-radius: 30px;
     box-shadow: none;
@@ -180,10 +180,7 @@
 }
 .button__sign_up {
   @include font-S-W-lH-(16px, 600, 24px);
-  font-size: 16px;
-  font-weight: 600;
   font-style: normal;
-  line-height: 24px;
   color: $color-primary;
   text-align: center;
   text-decoration-line: underline;
@@ -193,28 +190,3 @@
     text-align: center;
   }
 }
-
-/*.input_email:-webkit-autofill,
-.input_email:-webkit-autofill:hover,
-.input_email:-webkit-autofill:focus,
-.input_email:-webkit-autofill:active .input_password:-webkit-autofill,
-.input_password:-webkit-autofill:hover,
-.input_password:-webkit-autofill:focus,
-.input_password:-webkit-autofill:active {
-  font-family: 'Montserrat', 'sans-serif';
-  font-size: 16px;
-  font-weight: 400;
-  font-style: normal;
-  line-height: 24px;
-  color: $color-dark;
-
-  opacity: 0.5;
-  background: $color-light !important;
-  border: none;
-  border-bottom: 1.51px solid $color-dark;
-  border-radius: 0;
-  outline: none;
-  box-shadow: 0 0 0 30px $color-light inset !important;
-
-  appearance: none;
-}*/
