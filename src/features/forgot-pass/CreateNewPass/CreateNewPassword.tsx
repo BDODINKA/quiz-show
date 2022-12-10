@@ -17,8 +17,10 @@ export const CreateNewPassword = () => {
   if (status === 'success') return <Navigate to={PATH.LOGIN_PAGE} />
 
   return (
-    <Wrapper className={style.container}>
-      <CreateNewPasswordForm status={status} token={token} />
-    </Wrapper>
+    <main>
+      <Wrapper className={style.container}>
+        <CreateNewPasswordForm status={status} token={token} />
+      </Wrapper>
+    </main>
   )
 }
