@@ -73,6 +73,10 @@
             outline: none;
           }
         }
+        > img {
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
         > svg {
           cursor: pointer;
           width: 16px;

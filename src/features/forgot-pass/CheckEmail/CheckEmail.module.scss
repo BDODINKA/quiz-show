@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
+@import '../../../_variables';
+@import '../../../_mixins';
+@import '../../../_templates';
 
 .container {
   display: flex;
@@ -22,13 +24,8 @@
 .title {
   margin: 0;
   padding: 35px 0 29px;
-
-  font-family: 'Montserrat', sans-serif;
-  font-size: 26px;
-  font-weight: 600;
-  font-style: normal;
-  line-height: 32px;
-  color: #000000;
+  @include font-S-W-lH-(26px, 600, 32px);
+  color: $color-dark;
 }
 .logo {
   width: 108px;
@@ -37,17 +34,11 @@
   background: url('../../../assets/svg/CheckEmailLogo.svg') no-repeat center;
 }
 .description {
-  margin: 0;
   padding: 31px 0 41px;
-
-  font-family: 'Montserrat', sans-serif;
   font-size: 14px;
-  font-weight: 400;
-  font-style: normal;
   line-height: 24px;
-  color: #000000;
+  color: $color-dark;
   text-align: center;
-
   opacity: 0.5;
 }
 .btn {
@@ -56,15 +47,12 @@
   width: 84.02%;
   height: 36px;
 
-  font-family: 'Montserrat', sans-serif;
-  font-size: 16px;
   font-weight: 500;
-  font-style: normal;
   line-height: 20px;
-  color: #ffffff;
+  color: $color-light;
   text-align: center;
 
-  background: #366eff;
+  background: $color-primary;
   border: none;
   border-radius: 30px;
   box-shadow: 0 4px 18px rgba(54, 110, 255, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3);
