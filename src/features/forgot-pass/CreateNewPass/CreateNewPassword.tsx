@@ -7,7 +7,7 @@ import { PATH } from '../../../common/routes/const-routes'
 import { selectorStatus } from '../../../common/selectors/selectors'
 import { useAppSelector } from '../../../utils/hooks/useAppSelector'
 
-import style from './CreateNewPassword.module.css'
+import style from './CreateNewPassword.module.scss'
 import CreateNewPasswordForm from './CreateNewPasswordForm'
 
 export const CreateNewPassword = () => {
@@ -17,7 +17,7 @@ export const CreateNewPassword = () => {
   if (status === 'success') return <Navigate to={PATH.LOGIN_PAGE} />
 
   return (
-    <main>
+    <main className={style.main}>
       <Wrapper className={style.container}>
         <CreateNewPasswordForm status={status} token={token} />
       </Wrapper>
