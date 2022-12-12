@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 
+import { ReactComponent as Eyes } from '../../../assets/svg/eyes.svg'
+import { ReactComponent as HiddenEyes } from '../../../assets/svg/eyes_close.svg'
 import { SnackBarType } from '../../../common/components/CustomSnackBar/CustomAlertSnackBar'
 import { SuperButton } from '../../../common/components/SuperButton/SuperButton'
 import { SuperInput } from '../../../common/components/SuperInputText/SuperInput'
@@ -10,7 +12,7 @@ import { Nullable } from '../../../types/Nullable'
 import { useAppDispatch } from '../../../utils/hooks/useAppDispatch'
 import { SendNewPasswordFormTC } from '../forgot-password.reducer'
 
-import style from './CreateNewPassword.module.css'
+import style from './CreateNewPassword.module.scss'
 
 type PropsType = {
   status: Nullable<SnackBarType>
@@ -23,7 +25,6 @@ const CreateNewPasswordForm = (props: PropsType) => {
   const { token, status } = props
 
   const typeInput = showPass ? 'text' : 'password'
-  const classInputType = showPass ? style.logo : style.logoActive
 
   const showPassClick = (value: boolean) => {
     setShowPass(value)
@@ -46,16 +47,23 @@ const CreateNewPasswordForm = (props: PropsType) => {
       {formik => (
         <form onSubmit={formik.handleSubmit} className={style.card}>
           <h2 className={style.title}>Create new password</h2>
-          <SuperInput
-            type={typeInput}
-            placeholder={'Password'}
-            {...formik.getFieldProps('password')}
-            error={formik.touched && formik.errors.password}
-            disabled={status === 'progress'}
-            className={style.input}
-            spanClassName={style.spanError}
-          />
-          <div className={classInputType} onClick={() => showPassClick(!showPass)}></div>
+          <div className={style.input_block}>
+            <SuperInput
+              type={typeInput}
+              placeholder={'Password'}
+              {...formik.getFieldProps('password')}
+              error={formik.touched && formik.errors.password}
+              disabled={status === 'progress'}
+              className={style.input}
+              spanClassName={style.spanError}
+            />
+            {!showPass ? (
+              <Eyes onClick={() => showPassClick(!showPass)} className={style.eyes} />
+            ) : (
+              <HiddenEyes onClick={() => showPassClick(!showPass)} className={style.eyes} />
+            )}
+          </div>
+
           <p className={style.description}>
             Create new password and we will send you further instructions to email
           </p>

@@ -32,26 +32,21 @@ export const LearnCard = (props: PropsType) => {
   }
 
   return (
-    <div>
-      {showAnswer ? (
-        <Question
-          nextCardHandler={nextCard}
-          question={props.question}
-          questionImg={props.questionImg}
-        >
+    <>
+      <Question
+        nextCardHandler={nextCard}
+        question={props.question}
+        questionImg={props.questionImg}
+        showAnswer={showAnswerHandler}
+      >
+        {showAnswer && (
           <Answer
             onChangeRadio={value => onChangeAnswer(value)}
             answer={props.answer}
             answerImg={props.answerImg}
           />
-        </Question>
-      ) : (
-        <Question
-          showAnswer={showAnswerHandler}
-          question={props.question}
-          questionImg={props.questionImg}
-        />
-      )}
-    </div>
+        )}
+      </Question>
+    </>
   )
 }

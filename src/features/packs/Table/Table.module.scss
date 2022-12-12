@@ -73,9 +73,18 @@
             outline: none;
           }
         }
+        > img {
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
         > svg {
           cursor: pointer;
           width: 16px;
+        }
+        > p {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
       }
       .rating {

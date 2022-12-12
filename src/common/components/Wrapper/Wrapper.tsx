@@ -4,11 +4,15 @@ import style from './Wrapper.module.scss'
 
 type PropsType = {
   children: React.ReactNode
-  className?: string
-}
+} & React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>
 
 export const Wrapper = (props: PropsType) => {
-  const className = props.className ? `${props.className} ${style.container}` : `${style.container}`
+  const { className, onMouseLeave } = props
+  const finalClassName = props.className ? `${className} ${style.container}` : `${style.container}`
 
-  return <section className={className}>{props.children}</section>
+  return (
+    <section className={finalClassName} onMouseLeave={onMouseLeave}>
+      {props.children}
+    </section>
+  )
 }

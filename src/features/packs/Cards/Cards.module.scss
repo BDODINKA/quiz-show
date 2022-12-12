@@ -38,6 +38,10 @@
       }
     }
   }
+  .notFound {
+    padding-top: 20px;
+    justify-content: center;
+  }
   @include media-mw($break-sm) {
     .searchBlock {
       padding-top: 14px;

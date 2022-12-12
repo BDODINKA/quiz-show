@@ -14,10 +14,9 @@ import {
 import { useAppDispatch } from '../../../utils/hooks/useAppDispatch'
 import { useAppSelector } from '../../../utils/hooks/useAppSelector'
 import { getCardsTC } from '../Cards/cards-reducer'
-import style from '../TitleBlockTable/TitleBlockTable.module.scss'
 
 import { getCardTC } from './learn-reducer'
-import styles from './Learn.module.css'
+import style from './Learn.module.scss'
 import { LearnCard } from './LearnCard/LearnCard'
 
 export const Learn = () => {
@@ -52,22 +51,26 @@ export const Learn = () => {
   if (!isLogin) return <Navigate to={PATH.LOGIN_PAGE} />
 
   return (
-    <Wrapper className={style.packs_list_container}>
-      <ArrowBackTo />
+    <main>
       {card ? (
-        <div className={styles.box}>
-          <div className={styles.title}>
+        <>
+          <Wrapper className={style.arrow}>
+            <ArrowBackTo />
+          </Wrapper>
+          <Wrapper className={style.title}>
             <h2>{`Learn ${packName}`}</h2>
-          </div>
-          <LearnCard
-            question={card.question}
-            answer={card.answer}
-            nextCard={nextCard}
-            questionImg={card.questionImg}
-            answerImg={card.answerImg}
-          />
-        </div>
+          </Wrapper>
+          <Wrapper className={style.card}>
+            <LearnCard
+              question={card.question}
+              answer={card.answer}
+              nextCard={nextCard}
+              questionImg={card.questionImg}
+              answerImg={card.answerImg}
+            />
+          </Wrapper>
+        </>
       ) : null}
-    </Wrapper>
+    </main>
   )
 }

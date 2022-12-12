@@ -1,0 +1,72 @@
+@import '../../../_variables';
+@import '../../../_mixins';
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding-top: 60px;
+  .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    max-width: 413px;
+    padding-bottom: 48px;
+
+    background: #ffffff;
+    border-radius: 2px;
+    box-shadow: $box-shadow-secondary;
+  }
+  .title {
+    padding: 35px 0 29px;
+    @include font-S-W-lH-(26px, 600, 32px);
+    color: $color-dark;
+  }
+  .logo {
+    width: 108px;
+    height: 108px;
+    fill: $color-light;
+    stroke: $color-primary;
+  }
+  .description {
+    padding: 31px 0 41px;
+    font-size: 14px;
+    line-height: 24px;
+    color: $color-dark;
+    text-align: center;
+    opacity: 0.5;
+  }
+  .btn {
+    cursor: pointer;
+
+    width: 84.02%;
+    height: 36px;
+
+    font-weight: 500;
+    line-height: 20px;
+    color: $color-light;
+    text-align: center;
+
+    background: $color-primary;
+    border: none;
+    border-radius: 30px;
+    box-shadow: $box-shadow-primary, inset $box-shadow-four;
+
+    &:disabled {
+      color: $color-primary;
+      background-color: $color-light;
+      border: none;
+      border-radius: 30px;
+      box-shadow: none;
+    }
+    &:hover {
+      color: $color-primary;
+      background-color: $bg-primary;
+      border: none;
+      border-radius: 30px;
+      box-shadow: $box-shadow-primary, inset $box-shadow-four;
+    }
+  }
+}

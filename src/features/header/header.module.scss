@@ -56,8 +56,6 @@
     .drop {
       position: absolute;
       top: 53px;
-      left: 50%;
-
       width: 122px;
       height: 104px;
       border-radius: 10px;
@@ -123,7 +121,7 @@
   @include media-mw($break-sm) {
     .container {
       .drop {
-        left: 30%;
+        left: -25%;
         @include media-mw($break-xs) {
           left: -200%;
         }

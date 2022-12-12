@@ -29,9 +29,6 @@ export const Pagination = (props: PropsType) => {
 
   const maxPages = Math.ceil(props.totalCount / props.pageCount)
 
-  console.log(maxPages)
-  console.log(pagesObj.totalPages)
-
   useEffect(() => {
     setPagesObj(
       getPaginationPage({
@@ -60,7 +57,7 @@ export const Pagination = (props: PropsType) => {
   if (!pagesObj.totalPages || pagesObj.totalPages.length === 0) return null
 
   return (
-    <Wrapper className={style.container}>
+    <Wrapper className={style.container} onMouseLeave={() => setOpen(false)}>
       <PaginationArrowBtn
         arrow={'prev'}
         setPage={() => setPage(props.currentPage - 1)}
@@ -69,7 +66,7 @@ export const Pagination = (props: PropsType) => {
       <div className={style.block__pages}>
         {pagesObj.totalPages.map((page, i) => (
           <PaginationNumBtn
-            setOpen={() => setOpen(!open)}
+            setOpen={value => setOpen(value)}
             key={page}
             setPage={page => setPage(page)}
             page={pagesObj.totalPages.length - 1 === i ? maxPages : page}

@@ -92,8 +92,11 @@ export const InputTypeFile: React.FC<InputTypeFilePropsType> = ({
             ref={inputRef}
             value={''}
           />
-          {!hiddenBtn && <span className={finalBtnClassName}>Upload Image</span>}
-          <AddBtn className={finalBtnClassName} />
+          {!hiddenBtn ? (
+            <span className={finalBtnClassName}>Upload Image</span>
+          ) : (
+            <AddBtn className={finalBtnClassName} />
+          )}
         </label>
       </div>
       <img

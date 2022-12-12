@@ -1,0 +1,75 @@
+@import '../../../../_variables.scss';
+@import '../../../../_mixins.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  max-width: 439px;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 33px 48px;
+  background: $color-light;
+  border-radius: 2px;
+  box-shadow: $box-shadow-secondary;
+  word-break: break-word;
+
+  .question {
+    display: flex;
+    gap: 4px;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    > strong {
+      white-space: nowrap;
+    }
+    .img {
+      max-width: 280px;
+    }
+  }
+  .attempts {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    padding-top: 13px;
+    font-size: 14px;
+    line-height: 24px;
+    color: $color-dark;
+    opacity: 0.5;
+  }
+  .btn {
+    margin-top: 29px;
+    cursor: pointer;
+    width: 373px;
+    height: 36px;
+
+    font-weight: 500;
+    line-height: 20px;
+    color: $color-light;
+    text-align: center;
+    text-shadow: $box-shadow-secondary;
+
+    background: $color-primary;
+    border: none;
+    border-radius: 30px;
+    box-shadow: $box-shadow-primary, inset $box-shadow-four;
+    &:hover {
+      color: $color-primary;
+
+      background-color: $color-light;
+      border: none;
+      border-radius: 30px;
+      box-shadow: $box-shadow-primary, inset $box-shadow-four;
+    }
+  }
+}
+@include media-mw($break-xs) {
+  .container {
+    padding: 30px 16px 48px;
+    .btn {
+      width: 280px;
+    }
+    .img {
+      width: 200px;
+    }
+  }
+}
