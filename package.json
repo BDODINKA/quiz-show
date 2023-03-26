@@ -1,6 +1,6 @@
 {
-  "name": "cards",
-  "homepage": "https://BDODINKA.github.io/cards",
+  "name": "quiz-show",
+  "homepage": "https://BDODINKA.github.io/quiz-show",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
